@@ -35,7 +35,7 @@ SMISplan - стандартный трекер задач (issue tracker), сд�
 
 * CSS3
 
-* Material UI
+* Ant Design ~~Material UI~~
 
 * axios
 
@@ -55,7 +55,7 @@ SMISplan - стандартный трекер задач (issue tracker), сд�
 <br>`npm start`
 
 * Готовый результат на gh pages
-<br>[SMISplan](https://ilyasy.github.io/smisplan2/)
+<br>[SMISplan](https://ilyasy.github.io/smisplan-typescript/)
 
 -----
 **Автор: Сычугов Илья**
