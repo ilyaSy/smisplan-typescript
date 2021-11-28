@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { TApiAction } from "../../types/TApiAction";
+import TApiAction from "../../types/TApiAction";
 
 const defaultHeaders: HeadersInit = {
   "Content-type": "application/json",

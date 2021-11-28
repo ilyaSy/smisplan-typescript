@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from "react";
 import { notification } from 'antd';
-import { INotification } from "../types/INotification"
+import INotification from "../types/INotification"
 
 interface INotificationProvider {
   showNotification: (action: INotification) => void;
@@ -8,7 +8,7 @@ interface INotificationProvider {
 
 const NotificationContext = React.createContext<INotificationProvider>({} as INotificationProvider);
 
-export const useNotificationContext = () => {
+const useNotificationContext = () => {
   const context = useContext(NotificationContext);
   return context;
 }
@@ -30,3 +30,5 @@ export const NotificationContextProvider: React.FC = ({children}) => {
     </NotificationContext.Provider>
   )
 }
+
+export default useNotificationContext;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {TUser} from "../types/TUser";
+import TUser from "../types/TUser";
 
 interface IUserContextProvider {
   user: TUser | null;

@@ -1,4 +1,4 @@
-export type TApiAction = {
+type TApiAction = {
   type: string,
   method?: "GET" | "POST" | "DELETE" | "PATCH",
   url: string,
@@ -7,3 +7,5 @@ export type TApiAction = {
   },
   body?: any
 };
+
+export default TApiAction;
