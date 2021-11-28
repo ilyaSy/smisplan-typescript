@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Typography } from "antd";
 import useNotificationContext from "./context/NotificationContext";
 import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
+import Content from "./components/Content/Content";
 
 const { Title } = Typography;
 
@@ -26,7 +26,7 @@ const App: React.FC = () => {
   return (
     <>
       <Header />
-      <Main />
+      <Content />
       <Title level={5}>Hello world!</Title>
     </>    
   );
