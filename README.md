@@ -27,6 +27,8 @@ SMISplan - стандартный трекер задач (issue tracker), сд�
 ## Основные технологии
 * React
 
+* Redux (+ Thunk)
+
 * Javascript
 
 * TypeScript
@@ -37,7 +39,7 @@ SMISplan - стандартный трекер задач (issue tracker), сд�
 
 * Ant Design ~~Material UI~~
 
-* axios
+* Axios
 
 * axios-mock-adapter (для имитации API)
 
