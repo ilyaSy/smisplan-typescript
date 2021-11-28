@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Typography } from "antd";
-import useNotificationContext from "./context/NotificationContext";
+import showNotification from "./utils/showNotification";
 import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
 import LoadingComponent from "./components/UI/LoadingComponent";
@@ -8,8 +8,6 @@ import LoadingComponent from "./components/UI/LoadingComponent";
 const { Title } = Typography;
 
 const App: React.FC = () => {
-  const { showNotification } = useNotificationContext();
-  
   useEffect(() => {
     showNotification({
       type: "info",
@@ -22,13 +20,14 @@ const App: React.FC = () => {
       message: "Тестирование использования оповещений",
       description: "Оповещения запихнуты в контекст"
     });
-  }, [showNotification]);
+  }, []);
 
   return (
     <>
       <Header />
       <Content />
       <LoadingComponent />
+
       <Title level={1}>Hello world!</Title>
     </>    
   );
