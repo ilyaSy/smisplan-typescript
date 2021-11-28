@@ -10,21 +10,25 @@ const Calendar = lazy(() => import('../Calendar/Calendar'));
 
 const Content: React.FC = () => {
   return (
-    <>
+    // <>
       <Routes >
-        <Route path="calendar">
-          <Suspense fallback={<SuspenseFallback type="loading" />}>
-            <Calendar />
-          </Suspense>
-        </Route>
+        <Route path="calendar"
+          element={
+            <Suspense fallback={<SuspenseFallback type="loading" />}>
+              <Calendar />
+            </Suspense>
+          }
+        />
 
-        <Route path="*">
-          <Suspense fallback={<SuspenseFallback type="loading" />}>
-            <DataTable />
-          </Suspense>
-        </Route>
+        <Route path="*"
+          element={
+            <Suspense fallback={<SuspenseFallback type="loading" />}>
+              <DataTable />
+            </Suspense>
+          }
+        />
       </Routes >
-    </>
+    // </>
   );
 }
 

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import TUser from "../types/TUser";
 
 interface IUserContextProvider {
-  user: TUser | null;
+  user: TUser | undefined;
   setUser: (user: TUser) => void;
 }
 
 export const UserContext = React.createContext<IUserContextProvider>({} as IUserContextProvider);
 
 export const UserContextProvider: React.FC = ({children}) => {
-  const [user, setUser] = useState<TUser | null>(null);
+  const [user, setUser] = useState<TUser>();
 
   return (
     <UserContext.Provider value={{

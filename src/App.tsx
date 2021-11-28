@@ -3,6 +3,7 @@ import { Typography } from "antd";
 import useNotificationContext from "./context/NotificationContext";
 import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
+import LoadingComponent from "./components/UI/LoadingComponent";
 
 const { Title } = Typography;
 
@@ -27,7 +28,8 @@ const App: React.FC = () => {
     <>
       <Header />
       <Content />
-      <Title level={5}>Hello world!</Title>
+      <LoadingComponent />
+      <Title level={1}>Hello world!</Title>
     </>    
   );
 }
