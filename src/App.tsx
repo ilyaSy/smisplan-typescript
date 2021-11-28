@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Typography } from "antd";
-import { UserContextProvider } from "./context/UserContext";
+import { useNotificationContext } from "./context/NotificationContext";
 
 const { Title } = Typography;
 
 const App: React.FC = () => {
+  const { showNotification } = useNotificationContext();
+  
+  useEffect(() => {
+    showNotification({
+      type: "info",
+      message: "Тестирование использования оповещений",
+      description: "Оповещения запихнуты в контекст"
+    });
+  
+    showNotification({
+      type: "success",
+      message: "Тестирование использования оповещений",
+      description: "Оповещения запихнуты в контекст"
+    });
+  }, [showNotification]);
+
   return (
-    <UserContextProvider>
-      <Title level={2}> 
-        Hello world!
-      </Title>
-    </UserContextProvider>
+    <Title level={2}> 
+      Hello world!
+    </Title>
   );
 }
 

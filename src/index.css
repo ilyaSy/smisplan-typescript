@@ -10,7 +10,7 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', 'OpenSans';
+  font-family: 'OpenSans', 'Roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
