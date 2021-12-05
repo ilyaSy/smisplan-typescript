@@ -4,6 +4,7 @@ import showNotification from "./utils/showNotification";
 import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
 import LoadingComponent from "./components/UI/LoadingComponent";
+import classes from './App.module.scss';
 
 const { Title } = Typography;
 
@@ -23,14 +24,14 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div className={classes.main}>
       <Header />
       <Content />
-      
-      <LoadingComponent />
 
-      <Title level={1}>Hello world!</Title>
-    </>    
+      {/* <LoadingComponent />
+
+      <Title level={1}>Hello world!</Title> */}
+    </div>    
   );
 }
 

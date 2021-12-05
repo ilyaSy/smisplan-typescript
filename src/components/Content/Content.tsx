@@ -4,14 +4,14 @@ import { Routes, Route } from 'react-router-dom';
 // import Calendar from '../Calendar/Calendar';
 import Sidebar from '../Sidebar/Sidebar';
 import SuspenseFallback from '../UI/SuspenseFallback';
-import classes from './Main.module.scss';
+import classes from './Content.module.scss';
 
 const DataTable = lazy(() => import('../DataTable/DataTable'));
 const Calendar = lazy(() => import('../Calendar/Calendar'));
 
 const Content: React.FC = () => {
   return (
-    <>
+    <main className={classes.content}>
       <Sidebar />
       <Routes >
         <Route path="calendar"
@@ -30,7 +30,7 @@ const Content: React.FC = () => {
           }
         />
       </Routes >
-    </>
+    </main>
   );
 }
 
