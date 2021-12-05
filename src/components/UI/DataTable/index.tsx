@@ -1,4 +1,4 @@
-import { ConfigProvider, Table, Space } from 'antd';
+import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 import DataTableEditableRow from '../DataTableEditableRow';
 import DataTableEditableCell from '../DataTableEditableCell';
@@ -11,11 +11,14 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
+    key: 'name',
     editable: true,
+    sorter: sortData('name'),
   },
   {
     title: 'Age',
     dataIndex: 'age',
+    key: 'age',
     sorter: sortData('age'),
     filters: [
       {
@@ -32,6 +35,7 @@ const columns = [
   {
     title: 'Address',
     dataIndex: 'address',
+    key: 'address',
     filters: [
       {
         text: 'London',
@@ -50,19 +54,17 @@ const columns = [
     dataIndex: 'action',
     sorter: true,
     render: () => (
-      <Space size="middle">
-        <a>Delete</a>
-      </Space>
+      <p>йа кнопко</p>
     ),
   },
 ];
 
 const data: any[] = [];
-for (let i = 0; i <= 1000; i++) {
+for (let i = 1; i <= 1000; i++) {
   data.push({
     key: i,
-    name: 'John Brown',
-    age: `${i}2`,
+    name: `John Brown ${i}`,
+    age: parseInt(`${i}2`),
     address: `New York No. ${i} Lake Park`,
     description: i < 5 ? `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.` : null,
   });
