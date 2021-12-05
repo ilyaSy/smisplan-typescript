@@ -26,6 +26,7 @@ const App: React.FC = () => {
     <>
       <Header />
       <Content />
+      
       <LoadingComponent />
 
       <Title level={1}>Hello world!</Title>

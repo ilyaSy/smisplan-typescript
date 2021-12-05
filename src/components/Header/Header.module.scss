@@ -1,0 +1,16 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  & .navigation {
+    width: 100%;
+  }
+
+  & .user {}
+
+  & .logout {
+    background-color: white;
+    color: #001529;
+  }
+}

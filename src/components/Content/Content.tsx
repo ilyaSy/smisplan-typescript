@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // import DataTable from '../DataTable/DataTable';
 // import Calendar from '../Calendar/Calendar';
+import Sidebar from '../Sidebar/Sidebar';
 import SuspenseFallback from '../UI/SuspenseFallback';
 import classes from './Main.module.scss';
 
@@ -10,7 +11,8 @@ const Calendar = lazy(() => import('../Calendar/Calendar'));
 
 const Content: React.FC = () => {
   return (
-    // <>
+    <>
+      <Sidebar />
       <Routes >
         <Route path="calendar"
           element={
@@ -28,7 +30,7 @@ const Content: React.FC = () => {
           }
         />
       </Routes >
-    // </>
+    </>
   );
 }
 
