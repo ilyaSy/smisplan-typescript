@@ -13,3 +13,15 @@
   margin-top: 10px !important;
   padding-top: 10px !important;
 }
+
+.add-icon {
+  transition: all .3s ease-in-out !important;
+
+  &:hover {
+    transform: rotate(90deg);
+  }
+}
+
+.add-icon:hover {
+  
+}

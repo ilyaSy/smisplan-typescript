@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
           title="Добавить"
           className="tooltip"
         >
-          <PlusCircleTwoTone style={{fontSize: "30px"}} twoToneColor="#52c41a" />
+          <PlusCircleTwoTone className={classes["add-icon"]} style={{fontSize: "30px"}} twoToneColor="#52c41a" />
         </Tooltip>
       </Menu.Item>
 
