@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Typography } from "antd";
+// import { Typography } from "antd";
 import showNotification from "./utils/showNotification";
 import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
-import LoadingComponent from "./components/UI/LoadingComponent";
+// import LoadingComponent from "./components/UI/LoadingComponent";
 import classes from './App.module.scss';
 
-const { Title } = Typography;
+// const { Title } = Typography;
 
 const App: React.FC = () => {
   useEffect(() => {

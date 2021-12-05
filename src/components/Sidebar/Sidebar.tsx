@@ -4,7 +4,6 @@ import {
   PrinterOutlined,
   SettingOutlined,
   EyeInvisibleOutlined,
-  // PlusCircleFilled,
   PlusCircleTwoTone
 } from '@ant-design/icons';
 import classes from './Sidebar.module.scss';
