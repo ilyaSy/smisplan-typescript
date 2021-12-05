@@ -15,10 +15,10 @@
 }
 
 .add-icon {
-  transition: all .3s ease-in-out !important;
+  transition: all 1s ease-in-out !important;
 
   &:hover {
-    transform: rotate(90deg);
+    transform: rotate(360deg);
   }
 }
 

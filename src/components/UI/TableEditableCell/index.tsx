@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext } from 'react';
 import { Form, Input } from 'antd';
-import { EditableContext } from '../DataTableEditableRow';
-import classes from './DataTableEditableCell.module.scss';
+import { EditableContext } from '../TableEditableRow';
+import classes from './TableEditableCell.module.scss';
 
 interface Item {
   key: string;

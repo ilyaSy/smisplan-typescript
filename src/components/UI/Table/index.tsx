@@ -1,18 +1,19 @@
 import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
-import DataTableEditableRow from '../DataTableEditableRow';
-import DataTableEditableCell from '../DataTableEditableCell';
-import dataTableExpandableRow from '../dataTableExpandableRow';
+import TableEditableRow from '../TableEditableRow';
+import TableEditableCell from '../TableEditableCell';
+import TableExpandableRow from '../TableExpandableRow';
+import TableFilterIcon from '../TableFilterIcon';
 import filterData from '../../../utils/filterData';
 import sortData from '../../../utils/sortData';
-import classes from './DataTable.module.scss';
+import classes from './Table.module.scss';
 
 const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    editable: true,
+    isInlineEditable: true,
     sorter: sortData('name'),
   },
   {
@@ -76,13 +77,17 @@ const DataTable: React.FC = () => {
   }
   
   const tableColumns = columns.map(column => {
-    if (!column.editable) return column;
-    
-    return {
+    return !column.isInlineEditable
+      ? {
+        ...column, 
+        filterIcon: TableFilterIcon,
+      }
+    : {
       ...column,
+      filterIcon: TableFilterIcon,
       onCell: (record: any) => ({
         record,
-        editable: column.editable,
+        editable: column.isInlineEditable,
         dataIndex: column.dataIndex,
         title: column.title,
         handleSave: handleSave,
@@ -97,15 +102,16 @@ const DataTable: React.FC = () => {
         columns={ tableColumns }  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         components={{
           body: {
-            row: DataTableEditableRow,
-            cell: DataTableEditableCell,
+            row: TableEditableRow,
+            cell: TableEditableCell,
           },
         }}
         rowClassName={() => 'editable-row'}
         bordered={ false }
         loading={ false }
         size='large'
-        expandable={ dataTableExpandableRow('description') }
+        expandable={ TableExpandableRow('description') }
+        // expandIcon
         sticky={ true }
         pagination={{ position: ["topRight"] }}
         className={ classes.table }

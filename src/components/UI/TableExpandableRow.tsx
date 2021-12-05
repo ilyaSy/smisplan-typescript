@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { TData } from '../../types/TData';
 
-const dataTableExpandableRow = (key: keyof TData) => {
+const TableExpandableRow = (key: keyof TData) => {
   return {
     rowExpandable: (record: TData): boolean => !!record[key],
     expandedRowRender: (record: TData): ReactElement => {
@@ -10,4 +10,4 @@ const dataTableExpandableRow = (key: keyof TData) => {
   }
 };
 
-export default dataTableExpandableRow;
+export default TableExpandableRow;

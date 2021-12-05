@@ -6,7 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import SuspenseFallback from '../UI/SuspenseFallback';
 import classes from './Content.module.scss';
 
-const DataTable = lazy(() => import('../UI/DataTable'));
+const DataTable = lazy(() => import('../DataTable'));
 const Calendar = lazy(() => import('../Calendar/Calendar'));
 
 const Content: React.FC = () => {
