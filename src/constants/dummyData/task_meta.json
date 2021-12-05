@@ -1,0 +1,212 @@
+{
+  "data": [
+    {
+      "priority": {
+        "isInlineEditable": "false",
+        "showInTable": "true",
+        "isEditable": "true",
+        "value": "Приоритет",
+        "validValues": {
+          "simple": {
+            "value": "Низкий",
+            "id": "simple"
+          },
+          "medium": {
+            "value": "Средний",
+            "id": "medium"
+          },
+          "hard": {
+            "value": "Высокий",
+            "id": "hard"
+          }
+        },
+        "isFilter": "true",
+        "hasFullTextLink": "false",
+        "showInTableMobile": "false",
+        "tableIndex": 6,
+        "id": "priority",
+        "type": "select",
+        "defaultValue": "simple"
+      }
+    },
+    {
+      "status": {
+        "isInlineEditable": "false",
+        "showInTable": "true",
+        "isEditable": "true",
+        "value": "Статус",
+        "validValues": {
+          "postponed": {
+            "value": "Отложена",
+            "id": "postponed"
+          },
+          "done": {
+            "value": "Выполнена",
+            "id": "done"
+          },
+          "accepted": {
+            "value": "Принята",
+            "id": "accepted"
+          },
+          "new": {
+            "value": "Новая",
+            "id": "new"
+          },
+          "work": {
+            "value": "В работе",
+            "id": "work"
+          }
+        },
+        "isFilter": "true",
+        "hasFullTextLink": "false",
+        "showInTableMobile": "false",
+        "tableIndex": 7,
+        "id": "status",
+        "type": "select",
+        "defaultValue": "new"
+      }
+    },
+    {
+      "project": {
+        "isInlineEditable": "false",
+        "showInTable": "true",
+        "isEditable": "true",
+        "value": "Проект",
+        "validValues": "",
+        "isFilter": "false",
+        "hasFullTextLink": "false",
+        "isGroup": "true",
+        "tableIndex": 2,
+        "id": "project",
+        "type": "select",
+        "defaultValue": "otdel"
+      }
+    },
+    {
+      "dateEnd": {
+        "isInlineEditable": "false",
+        "showInTable": "true",
+        "isEditable": "true",
+        "value": "Срок",
+        "validValues": "",
+        "isFilter": "true",
+        "hasFullTextLink": "false",
+        "tableIndex": 10,
+        "id": "dateEnd",
+        "type": "date",
+        "defaultValue": ""
+      }
+    },
+    {
+      "description": {
+        "isInlineEditable": "false",
+        "showInTable": "false",
+        "isEditable": "true",
+        "value": "Описание",
+        "validValues": "",
+        "isFilter": "false",
+        "hasFullTextLink": "false",
+        "tableIndex": 4,
+        "id": "description",
+        "type": "fulltext",
+        "defaultValue": ""
+      }
+    },
+    {
+      "developer": {
+        "isInlineEditable": "false",
+        "showInTable": "true",
+        "isEditable": "true",
+        "value": "Ответственный",
+        "validValues": "",
+        "isFilter": "false",
+        "hasFullTextLink": "false",
+        "isGroup": "true",
+        "addMenuIndex": "2",
+        "tableIndex": 8,
+        "id": "developer",
+        "type": "select",
+        "defaultValue": ""
+      }
+    },
+    {
+      "dateStart": {
+        "isInlineEditable": "false",
+        "showInTable": "false",
+        "isEditable": "true",
+        "value": "Начало работы",
+        "validValues": "",
+        "isFilter": "true",
+        "hasFullTextLink": "false",
+        "tableIndex": 9,
+        "id": "dateStart",
+        "type": "date",
+        "defaultValue": "date"
+      }
+    },
+    {
+      "title": {
+        "isInlineEditable": "true",
+        "showInTable": "true",
+        "isEditable": "true",
+        "value": "Название",
+        "validValues": "",
+        "isFilter": "false",
+        "hasFullTextLink": "true",
+        "addMenuIndex": "1",
+        "tableIndex": 3,
+        "id": "title",
+        "type": "string",
+        "defaultValue": ""
+      }
+    },
+    {
+      "id": {
+        "isInlineEditable": "false",
+        "showInTable": "true",
+        "isEditable": "false",
+        "value": "ID",
+        "validValues": "",
+        "isFilter": "false",
+        "hasFullTextLink": "false",
+        "tableIndex": 1,
+        "id": "id",
+        "type": "int",
+        "defaultValue": ""
+      }
+    },
+    {
+      "result": {
+        "isInlineEditable": "false",
+        "showInTable": "false",
+        "isEditable": "true",
+        "value": "Результат",
+        "validValues": "",
+        "isFilter": "false",
+        "tableIndex": 5,
+        "id": "result",
+        "type": "string",
+        "defaultValue": "empty"
+      }
+    },
+    {
+      "specificParameters": {
+        "hasEditMenu": "true",
+        "hasDeleteButton": "true",
+        "defaultSortField": "id",
+        "defaultSortDirection": "desc",
+        "hasQuestions": "false",
+        "hasSetStatusMenu": "true",
+        "hasGoToDiscussion": "true",
+        "hasTitleRow": "false",
+        "addMenuTitle": "Новая задача",
+        "hasAddMenu": "true",
+        "hasDoneButton": "true",
+        "tableName": "Задачи",
+        "hasSublistData": "false",
+        "haveDiscussion": "true",
+        "mainValue": "title"
+      }
+    }
+  ]
+}

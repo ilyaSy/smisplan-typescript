@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "value": "Отдел",
+      "id": "otdel"
+    },
+    {
+      "value": "Проект1",
+      "id": "project1"
+    },
+    {
+      "value": "Проект2",
+      "id": "project2"
+    },
+    {
+      "value": "Проект3",
+      "id": "project3"
+    },
+    {
+      "value": "Проект4",
+      "id": "project4"
+    }
+  ]
+}

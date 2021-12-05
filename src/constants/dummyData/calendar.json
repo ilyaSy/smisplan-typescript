@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "responsible": "pushkin",
+      "status": "done",
+      "time": "14:30:00",
+      "date": "2021-08-30",
+      "description": "Написание стихов в текущем году",
+      "participants": "pushkin,tsvetaeva,akhmatova",
+      "type": "zoom",
+      "id": "1",
+      "mainTable": "task",
+      "idTask": "1",
+      "theme": "Написание стихов",
+      "result": ""
+    }
+  ]
+}

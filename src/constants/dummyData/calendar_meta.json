@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "date": {
+        "value": "Дата",
+        "type": "date",
+        "id": "date"
+      }
+    },
+    {
+      "time": {
+        "value": "Время",
+        "type": "time",
+        "id": "time"
+      }
+    },
+    {
+      "description": {
+        "value": "Описание",
+        "type": "string",
+        "id": "description"
+      }
+    },
+    {
+      "specificParameters": {
+        "hasEditMenu": "false",
+        "hasDeleteButton": "false",
+        "defaultSortField": "date",
+        "defaultSortDirection": "desc",
+        "hasTitleRow": "false",
+        "hasDoneButton": "false",
+        "hasAddMenu": "false",
+        "hasSpecNotes": "false"
+      }
+    }
+  ]
+}
