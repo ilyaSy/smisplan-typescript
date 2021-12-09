@@ -1,4 +1,4 @@
-import { ConfigProvider, Dropdown, Table } from 'antd';
+import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
 import TableEditableCell from '../TableEditableCell';
@@ -69,7 +69,7 @@ for (let i = 1; i <= 1000; i++) {
   
   data.push({
     ...dataItem,
-    action: <DropdownMenu dataItem={dataItem} />
+    action: <DropdownMenu key={`action-menu-${dataItem.key}`} dataItem={dataItem} title='Меню действий'/>
   });
 }
 
