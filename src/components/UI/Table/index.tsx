@@ -1,4 +1,4 @@
-import { ConfigProvider, Table } from 'antd';
+import { ConfigProvider, Dropdown, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
 import TableEditableCell from '../TableEditableCell';
@@ -6,6 +6,7 @@ import TableExpandableRow from '../TableExpandableRow';
 import TableFilterIcon from '../TableFilterIcon';
 import filterData from '../../../utils/filterData';
 import sortData from '../../../utils/sortData';
+import DropdownMenu from '../DropdownMenu';
 import classes from './Table.module.scss';
 
 const columns = [
@@ -53,21 +54,22 @@ const columns = [
     title: 'Action',
     key: 'action',
     dataIndex: 'action',
-    sorter: true,
-    render: () => (
-      <p>йа кнопко</p>
-    ),
   },
 ];
 
 const data: any[] = [];
 for (let i = 1; i <= 1000; i++) {
-  data.push({
+  const dataItem = {
     key: i,
     name: `John Brown ${i}`,
     age: parseInt(`${i}2`),
     address: `New York No. ${i} Lake Park`,
     description: i < 5 ? `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.` : null,
+  };
+  
+  data.push({
+    ...dataItem,
+    action: <DropdownMenu dataItem={dataItem} />
   });
 }
 

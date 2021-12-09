@@ -37,7 +37,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
         <Form.Item
           label='Username'
           name='username'
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: true, message: 'Поле должно быть корректно заполнено!' }]}
         >
           <Input />
         </Form.Item>
@@ -45,7 +45,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
         <Form.Item
           label='Password'
           name='password'
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: 'Поле должно быть корректно заполнено!' }]}
         >
           <Input.Password />
         </Form.Item>
