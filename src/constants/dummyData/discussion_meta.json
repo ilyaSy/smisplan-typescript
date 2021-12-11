@@ -7,20 +7,20 @@
       "title": "Статус",
       "validValues": [
         {
-          "text": "Перенесено",
-          "value": "postponed"
+          "text": "Запланировано",
+          "value": "new"
         },
         {
           "text": "Проведено",
           "value": "done"
         },
         {
-          "text": "Отменено",
-          "value": "rejected"
+          "text": "Перенесено",
+          "value": "postponed"
         },
         {
-          "text": "Запланировано",
-          "value": "new"
+          "text": "Отменено",
+          "value": "rejected"
         }
       ],
       "isFilter": true,
@@ -165,10 +165,6 @@
       "title": "Формат",
       "validValues": [
         {
-          "text": "Выездное",
-          "value": "offsite"
-        },
-        {
           "text": "Отдел",
           "value": "otdel"
         },
@@ -177,12 +173,16 @@
           "value": "zoom"
         },
         {
+          "text": "Отдел+zoom",
+          "value": "mixed"
+        },
+        {
           "text": "Заочное",
           "value": "offline"
         },
         {
-          "text": "Отдел+zoom",
-          "value": "mixed"
+          "text": "Выездное",
+          "value": "offsite"
         }
       ],
       "isFilter": true,

@@ -6,16 +6,16 @@
       "isEditable": false,
       "validValues": [
         {
-          "text": "Выполнена",
-          "value": "done"
-        },
-        {
           "text": "Не согласована",
           "value": "new"
         },
         {
           "text": "В работе",
           "value": "work"
+        },
+        {
+          "text": "Выполнена",
+          "value": "done"
         }
       ],
       "title": "Статус новый",
@@ -148,16 +148,16 @@
       "isEditable": false,
       "validValues": [
         {
-          "text": "Удаление",
-          "value": "del"
-        },
-        {
           "text": "Добавление",
           "value": "put"
         },
         {
           "text": "Изменение",
           "value": "upd"
+        },
+        {
+          "text": "Удаление",
+          "value": "del"
         }
       ],
       "title": "Действие",
@@ -176,16 +176,16 @@
       "isEditable": false,
       "validValues": [
         {
-          "text": "Выполнена",
-          "value": "done"
-        },
-        {
           "text": "Не согласована",
           "value": "new"
         },
         {
           "text": "В работе",
           "value": "work"
+        },
+        {
+          "text": "Выполнена",
+          "value": "done"
         }
       ],
       "title": "Статус старый",

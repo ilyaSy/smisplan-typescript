@@ -36,24 +36,24 @@
       "title": "Статус",
       "validValues": [
         {
-          "text": "Отложена",
-          "value": "postponed"
-        },
-        {
-          "text": "Выполнена",
-          "value": "done"
+        "text": "Новая",
+          "value": "new"
         },
         {
           "text": "Принята",
           "value": "accepted"
         },
         {
-          "text": "Новая",
-          "value": "new"
-        },
-        {
           "text": "В работе",
           "value": "work"
+        },
+        {
+          "text": "Выполнена",
+          "value": "done"
+        },
+        {
+          "text": "Отложена",
+          "value": "postponed"
         }
       ],
       "isFilter": true,
