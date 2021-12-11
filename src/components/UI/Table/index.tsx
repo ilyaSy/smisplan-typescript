@@ -6,14 +6,16 @@ import TableExpandableRow from '../TableExpandableRow';
 import TableFilterIcon from '../TableFilterIcon';
 import DropdownMenu from '../DropdownMenu';
 import { TData } from '../../../types/TData';
+import { TTableParameters } from '../../../types/TTableSpecificParameters';
 import classes from './Table.module.scss';
 
 type TTableProps = {
   data: TData[],
-  columns: TData[]
+  columns: TData[],
+  tableParameters: TTableParameters
 };
 
-const DataTable: React.FC<TTableProps> = ({ data, columns }) => {
+const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) => {
   const sourceData = data.map((dataItem) => {
     return {
       ...dataItem,
@@ -44,9 +46,6 @@ const DataTable: React.FC<TTableProps> = ({ data, columns }) => {
   const handleSave = (row: any) => {
     console.log(row);
   }
-    
-  console.log(sourceData);
-  console.log(tableColumns);
   
   return (
     <ConfigProvider locale={ruRU}>

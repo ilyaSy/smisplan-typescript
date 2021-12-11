@@ -7,26 +7,27 @@ import { dataGetAction } from '../../storages/actions/data';
 import metadataGetAction from '../../storages/actions/metadata';
 import Table from '../UI/Table';
 import LoadingComponent from '../UI/LoadingComponent';
-// import filterData from '../../utils/filterData';
-// import sortData from '../../utils/sortData';
-// import mapStringToBoolean from '../../utils/mapStringToBoolean';
 import mapMetadataToColumns from '../../utils/mapMetadataToColumns';
 import { TData } from '../../types/TData';
+import { TTableParameters } from '../../types/TTableSpecificParameters';
+import getTableParameters from '../../utils/getTableParameters';
 import classes from './DataTable.module.scss';
 
 const { Title } = Typography;
 
 const DataTable: React.FC = () => {
   const [columns, setColumns] = useState<TData[] | null>([]);
+  const [tableParameters, setTableParameters] = useState<TTableParameters | null>(null);
+  
   const dispatch = useDispatch()
+  
   const { data, isError: isErrorData, isLoading: isLoadingData } = useDataSelector();
   const { data: metadata, isError: isErrorMetadata, isLoading: isLoadingMetadata } = useMetadataSelector();
-  console.log(data);
-  console.log(metadata);
 
   useEffect(() => {
     if (metadata) {
-      setColumns(mapMetadataToColumns(metadata))
+      setColumns(mapMetadataToColumns(metadata));
+      setTableParameters(getTableParameters(metadata));
     }
   }, [metadata]);
 
@@ -46,7 +47,8 @@ const DataTable: React.FC = () => {
           <Title level={3}>Ошибка получения данных</Title>
         </div>
       ) : (
-        data && columns && <Table data={data} columns={columns}/>
+        data && columns && tableParameters &&
+          <Table data={data} columns={columns} tableParameters={tableParameters}/>
       )
     )
   )

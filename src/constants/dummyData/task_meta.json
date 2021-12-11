@@ -203,7 +203,7 @@
       "hasDoneButton": true,
       "tableName": "Задачи",
       "hasSublistData": false,
-      "haveDiscussion": true,
+      "hasDiscussion": true,
       "mainValue": "title"
     }
   }

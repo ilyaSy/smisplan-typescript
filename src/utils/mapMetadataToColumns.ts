@@ -9,17 +9,13 @@ type TMapMetadataToColumns = (
 
 const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
   const columns = metadata
+    .filter((c) => Object.values(c)[0] !== 'specificParameters')
     .map((c) => {
       const metadataColumn = Object.values(c)[0];
       const column: TData = {
-        title: metadataColumn.title,
+        ...metadataColumn,
         dataIndex: metadataColumn.id,
         key: metadataColumn.id,
-        tableIndex: metadataColumn.tableIndex,
-        isInlineEditable: metadataColumn.isInlineEditable,
-        isEditable: metadataColumn.isEditable,
-        showInTable: metadataColumn.showInTable,
-        type: metadataColumn.type,
         sorter: sortData(metadataColumn.id),
       }
 
@@ -41,8 +37,6 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
     showInTable: true,
     type: 'action'
   });
-
-  console.log(columns);
 
   return columns;
 }
