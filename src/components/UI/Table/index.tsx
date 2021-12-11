@@ -7,7 +7,13 @@ import TableFilterIcon from '../TableFilterIcon';
 import filterData from '../../../utils/filterData';
 import sortData from '../../../utils/sortData';
 import DropdownMenu from '../DropdownMenu';
+import { TData } from '../../../types/TData';
 import classes from './Table.module.scss';
+
+type TTableProps = {
+  data: TData[],
+  columns: TData[]
+};
 
 const columns = [
   {
@@ -57,23 +63,30 @@ const columns = [
   },
 ];
 
-const data: any[] = [];
-for (let i = 1; i <= 1000; i++) {
-  const dataItem = {
-    key: i,
-    name: `John Brown ${i}`,
-    age: parseInt(`${i}2`),
-    address: `New York No. ${i} Lake Park`,
-    description: i < 5 ? `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.` : null,
-  };
+// const data: any[] = [];
+// for (let i = 1; i <= 1000; i++) {
+//   const dataItem = {
+//     key: i,
+//     name: `John Brown ${i}`,
+//     age: parseInt(`${i}2`),
+//     address: `New York No. ${i} Lake Park`,
+//     description: i < 5 ? `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.` : null,
+//   };
   
-  data.push({
-    ...dataItem,
-    action: <DropdownMenu key={`action-menu-${dataItem.key}`} dataItem={dataItem} title='Меню действий'/>
-  });
-}
+//   data.push({
+//     ...dataItem,
+//     action: <DropdownMenu key={`action-menu-${dataItem.key}`} dataItem={dataItem} title='Меню действий'/>
+//   });
+// }
 
-const DataTable: React.FC = () => {
+const DataTable: React.FC<TTableProps> = ({ data, columns }) => {
+  const sourceData = data.map((dataItem) => {
+    return {
+      ...dataItem,
+      action: <DropdownMenu key={`action-menu-${dataItem.key}`} dataItem={dataItem} title='Меню действий'/>
+    }
+  })
+
   const handleSave = (row: any) => {
     console.log(row);
   }
@@ -100,7 +113,7 @@ const DataTable: React.FC = () => {
   return (
     <ConfigProvider locale={ruRU}>
       <Table
-        dataSource={ data }       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        dataSource={ sourceData }       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         columns={ tableColumns }  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         components={{
           body: {

@@ -7,7 +7,7 @@ import {
   PlusCircleTwoTone,
 } from '@ant-design/icons';
 import DataAddModal from '../Modals/DataAddModal';
-import showConfirmModal from '../Modals/ConfirmModal';
+// import showConfirmModal from '../Modals/ConfirmModal';
 import classes from './Sidebar.module.scss';
 
 const Sidebar: React.FC = () => {

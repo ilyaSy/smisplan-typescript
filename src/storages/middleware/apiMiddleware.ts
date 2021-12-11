@@ -1,19 +1,21 @@
 import axios from "axios";
-import { Dispatch } from "redux";
-import TApiAction from "../../types/TApiAction";
+import { Middleware } from "redux";
 
 const defaultHeaders: HeadersInit = {
   "Content-type": "application/json",
 };
 
-export const apiMiddleware = (action: TApiAction) => {
-  const { type, method = "GET", url, body, headers = defaultHeaders } = action;
+export const apiMiddleware: Middleware = 
+  () => 
+  (dispatch) => 
+  async (action: any) => {
+    const { type, method = "GET", url, body, headers = defaultHeaders } = action;
+    console.log(action, type);
+    
+    if (!/REQUEST/.test(type)) {
+      return dispatch(action);
+    }
 
-  if (!/REQUEST/.test(type)) {
-    return (dispatch: Dispatch) => dispatch(action);
-  }
-
-  return async (dispatch: Dispatch) => {
     dispatch({type: type + '_LOADING'});
 
     try {
@@ -29,4 +31,3 @@ export const apiMiddleware = (action: TApiAction) => {
       dispatch({type: type + '_ERROR', payload: error});
     }
   }
-}

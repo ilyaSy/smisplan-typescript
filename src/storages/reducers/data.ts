@@ -1,8 +1,8 @@
-import TApiReducerData from '../../types/TApiReducer';
-import showNotification from '../../utils/showNotification';
-import IFetchError from '../../types/IFetchError';
 import { Reducer } from 'redux';
+import TApiReducerData from '../../types/TApiReducer';
+import IFetchError from '../../types/IFetchError';
 import TReduxData from '../../types/TReduxData';
+import showNotification from '../../utils/showNotification';
 
 const initialState: TReduxData = {
   isLoading: false,
@@ -14,13 +14,13 @@ const dataReducer: Reducer = (state = initialState, action: TApiReducerData) => 
   const { type, payload } = action;
   switch (type) {
     case 'DATA_REQUEST_LOADING':
-      return dataReducerLoading();;
+      return dataReducerLoading();
 
     case 'DATA_REQUEST_RESPONSE':
       return dataReducerResponse(payload);
 
     case 'DATA_REQUEST_ERROR':
-      return dataReducerError(payload);;
+      return dataReducerError(payload);
       
     default:
       return {...state};

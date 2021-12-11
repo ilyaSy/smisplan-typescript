@@ -1,40 +1,38 @@
-{
-  "data": [
-    {
-      "value": "Пушкин",
-      "id": "pushkin"
-    },
-    {
-      "value": "Есенин",
-      "id": "esenin"
-    },
-    {
-      "value": "Лермонтов",
-      "id": "lermontov"
-    },
-    {
-      "value": "Ахматова",
-      "id": "akhmatova"
-    },
-    {
-      "value": "Булгаков",
-      "id": "bulgakov"
-    },
-    {
-      "value": "Цветаева",
-      "id": "tsvetaeva"
-    },
-    {
-      "value": "Чаадаев",
-      "id": "chaadaev"
-    },
-    {
-      "value": "Горький",
-      "id": "gorkiy"
-    },
-    {
-      "value": "Каренина",
-      "id": "Karenina"
-    }
-  ]
-}
+[
+  {
+    "value": "Пушкин",
+    "id": "pushkin"
+  },
+  {
+    "value": "Есенин",
+    "id": "esenin"
+  },
+  {
+    "value": "Лермонтов",
+    "id": "lermontov"
+  },
+  {
+    "value": "Ахматова",
+    "id": "akhmatova"
+  },
+  {
+    "value": "Булгаков",
+    "id": "bulgakov"
+  },
+  {
+    "value": "Цветаева",
+    "id": "tsvetaeva"
+  },
+  {
+    "value": "Чаадаев",
+    "id": "chaadaev"
+  },
+  {
+    "value": "Горький",
+    "id": "gorkiy"
+  },
+  {
+    "value": "Каренина",
+    "id": "Karenina"
+  }
+]

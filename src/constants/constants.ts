@@ -7,5 +7,5 @@ export const modes = [
 
 export const mainModes = modes.filter((e) => e.realData).map((e) => e.id);
 
-export const urlApi = '/smisplan2/cgi/api-smisplan-getInfo.pl';
+export const urlApi = '/smisplan-typescript/cgi';
 export const TEST = true;

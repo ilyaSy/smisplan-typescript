@@ -20,7 +20,9 @@ const Header: React.FC = () => {
         >
           {
             modes.map((mode) => (
-              <Menu.Item key={mode.id}><NavLink to={`/${mode.id}`}>{mode.value}</NavLink></Menu.Item>
+              <Menu.Item key={mode.id}>
+                <NavLink to={`/${mode.id}`}>{mode.value}</NavLink>
+              </Menu.Item>
             ))
           }
         </Menu>

@@ -1,21 +1,19 @@
-{
-  "data": [
-    {
-      "responsible": "pushkin",
-      "status": "done",
-      "value": "Написание стихов в текущем году",
-      "time": "16:55:00",
-      "week": "2020.3",
-      "date": "2020-07-21",
-      "mainQuestions": "Кто планирует выпускать сборники стихов и когда",
-      "participants": "pushkin,tsvetaeva,akhmatova",
-      "type": "zoom",
-      "mainTable": "task",
-      "id": "1",
-      "idTask": "1",
-      "videoConf": "",
-      "result": "Обсудили кто и когда будет выпускать сборники стихов: Цветаева в октябре, Ахматов в ноябре",
-      "theme": "Написание стихов в текущем году"
-    }
-  ]
-}
+[
+  {
+    "responsible": "pushkin",
+    "status": "done",
+    "value": "Написание стихов в текущем году",
+    "time": "16:55:00",
+    "week": "2020.3",
+    "date": "2020-07-21",
+    "mainQuestions": "Кто планирует выпускать сборники стихов и когда",
+    "participants": "pushkin,tsvetaeva,akhmatova",
+    "type": "zoom",
+    "mainTable": "task",
+    "id": "1",
+    "idTask": "1",
+    "videoConf": "",
+    "result": "Обсудили кто и когда будет выпускать сборники стихов: Цветаева в октябре, Ахматов в ноябре",
+    "theme": "Написание стихов в текущем году"
+  }
+]
