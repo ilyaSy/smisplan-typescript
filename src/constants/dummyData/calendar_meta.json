@@ -1,35 +1,35 @@
 [
   {
     "date": {
-      "value": "Дата",
+      "title": "Дата",
       "type": "date",
       "id": "date"
     }
   },
   {
     "time": {
-      "value": "Время",
+      "title": "Время",
       "type": "time",
       "id": "time"
     }
   },
   {
     "description": {
-      "value": "Описание",
+      "title": "Описание",
       "type": "string",
       "id": "description"
     }
   },
   {
     "specificParameters": {
-      "hasEditMenu": "false",
-      "hasDeleteButton": "false",
+      "hasEditMenu": false,
+      "hasDeleteButton": false,
       "defaultSortField": "date",
       "defaultSortDirection": "desc",
-      "hasTitleRow": "false",
-      "hasDoneButton": "false",
-      "hasAddMenu": "false",
-      "hasSpecNotes": "false"
+      "hasTitleRow": false,
+      "hasDoneButton": false,
+      "hasAddMenu": false,
+      "hasSpecNotes": false
     }
   }
 ]

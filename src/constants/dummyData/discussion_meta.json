@@ -1,30 +1,30 @@
 [
   {
     "status": {
-      "isInlineEditable": "false",
-      "showInTable": "true",
-      "isEditable": "true",
-      "value": "Статус",
-      "validValues": {
-        "postponed": {
-          "value": "Перенесено",
-          "id": "postponed"
+      "isInlineEditable": false,
+      "showInTable": true,
+      "isEditable": true,
+      "title": "Статус",
+      "validValues": [
+        {
+          "text": "Перенесено",
+          "value": "postponed"
         },
-        "done": {
-          "value": "Проведено",
-          "id": "done"
+        {
+          "text": "Проведено",
+          "value": "done"
         },
-        "rejected": {
-          "value": "Отменено",
-          "id": "rejected"
+        {
+          "text": "Отменено",
+          "value": "rejected"
         },
-        "new": {
-          "value": "Запланировано",
-          "id": "new"
+        {
+          "text": "Запланировано",
+          "value": "new"
         }
-      },
-      "isFilter": "true",
-      "showInTableMobile": "false",
+      ],
+      "isFilter": true,
+      "showInTableMobile": false,
       "tableIndex": 11,
       "id": "status",
       "type": "select",
@@ -33,12 +33,12 @@
   },
   {
     "time": {
-      "isInlineEditable": "false",
-      "showInTable": "true",
-      "isEditable": "true",
-      "value": "Время",
+      "isInlineEditable": false,
+      "showInTable": true,
+      "isEditable": true,
+      "title": "Время",
       "validValues": "",
-      "isFilter": "false",
+      "isFilter": false,
       "addMenuIndex": "4",
       "tableIndex": 3,
       "id": "time",
@@ -48,13 +48,13 @@
   },
   {
     "date": {
-      "isInlineEditable": "false",
-      "showInTable": "true",
-      "isEditable": "true",
-      "value": "Дата",
+      "isInlineEditable": false,
+      "showInTable": true,
+      "isEditable": true,
+      "title": "Дата",
       "validValues": "",
-      "isFilter": "true",
-      "isGroup": "true",
+      "isFilter": true,
+      "isGroup": true,
       "addMenuIndex": "3",
       "tableIndex": 2,
       "id": "date",
@@ -64,14 +64,14 @@
   },
   {
     "participants": {
-      "isInlineEditable": "false",
-      "showInTable": "true",
-      "isEditable": "true",
+      "isInlineEditable": false,
+      "showInTable": true,
+      "isEditable": true,
       "initialValue": "object:data,field:developer",
-      "value": "Участники",
+      "title": "Участники",
       "validValues": "",
-      "isFilter": "false",
-      "isSelectCreatable": "true",
+      "isFilter": false,
+      "isSelectCreatable": true,
       "tableIndex": 9,
       "id": "participants",
       "type": "multi-select",
@@ -81,12 +81,12 @@
   },
   {
     "mainTable": {
-      "isInlineEditable": "false",
-      "showInTable": "false",
-      "isEditable": "false",
-      "value": "Тип обсуждения",
+      "isInlineEditable": false,
+      "showInTable": false,
+      "isEditable": false,
+      "title": "Тип обсуждения",
       "validValues": "",
-      "isFilter": "false",
+      "isFilter": false,
       "tableIndex": 10,
       "id": "mainTable",
       "type": "string",
@@ -95,14 +95,14 @@
   },
   {
     "theme": {
-      "isInlineEditable": "true",
-      "showInTable": "true",
-      "isEditable": "true",
-      "value": "Тема",
+      "isInlineEditable": true,
+      "showInTable": true,
+      "isEditable": true,
+      "title": "Тема",
       "validValues": "",
-      "isFilter": "true",
-      "hasFullTextLink": "true",
-      "isGroup": "true",
+      "isFilter": true,
+      "hasFullTextLink": true,
+      "isGroup": true,
       "addMenuIndex": "1",
       "tableIndex": 5,
       "id": "theme",
@@ -112,12 +112,12 @@
   },
   {
     "responsible": {
-      "isInlineEditable": "false",
-      "showInTable": "true",
-      "isEditable": "true",
-      "value": "Ответственный",
+      "isInlineEditable": false,
+      "showInTable": true,
+      "isEditable": true,
+      "title": "Ответственный",
       "validValues": "",
-      "isFilter": "true",
+      "isFilter": true,
       "addMenuIndex": "2",
       "tableIndex": 8,
       "id": "responsible",
@@ -128,29 +128,29 @@
   },
   {
     "week": {
-      "isInlineEditable": "false",
-      "showInTable": "false",
-      "isEditable": "false",
-      "value": "неделя",
+      "isInlineEditable": false,
+      "showInTable": false,
+      "isEditable": false,
+      "title": "неделя",
       "validValues": "",
-      "isFilter": "false",
-      "isGroup": "true",
+      "isFilter": false,
+      "isGroup": true,
       "tableIndex": 13,
       "id": "week",
       "type": "string",
-      "defaultValue": "false"
+      "defaultValue": false
     }
   },
   {
     "mainQuestions": {
-      "isInlineEditable": "false",
-      "showInTable": "false",
-      "isEditable": "true",
-      "value": "Основные вопросы",
+      "isInlineEditable": false,
+      "showInTable": false,
+      "isEditable": true,
+      "title": "Основные вопросы",
       "validValues": "",
-      "isFilter": "false",
-      "hasFullTextLink": "false",
-      "isGroup": "false",
+      "isFilter": false,
+      "hasFullTextLink": false,
+      "isGroup": false,
       "tableIndex": 6,
       "id": "mainQuestions",
       "type": "string",
@@ -159,35 +159,35 @@
   },
   {
     "type": {
-      "isInlineEditable": "false",
-      "showInTable": "true",
-      "isEditable": "true",
-      "value": "Формат",
-      "validValues": {
-        "offsite": {
-          "value": "Выездное",
-          "id": "offsite"
+      "isInlineEditable": false,
+      "showInTable": true,
+      "isEditable": true,
+      "title": "Формат",
+      "validValues": [
+        {
+          "text": "Выездное",
+          "value": "offsite"
         },
-        "otdel": {
-          "value": "Отдел",
-          "id": "otdel"
+        {
+          "text": "Отдел",
+          "value": "otdel"
         },
-        "zoom": {
-          "value": "Zoom",
-          "id": "zoom"
+        {
+          "text": "Zoom",
+          "value": "zoom"
         },
-        "offline": {
-          "value": "Заочное",
-          "id": "offline"
+        {
+          "text": "Заочное",
+          "value": "offline"
         },
-        "mixed": {
-          "value": "Отдел+zoom",
-          "id": "mixed"
+        {
+          "text": "Отдел+zoom",
+          "value": "mixed"
         }
-      },
-      "isFilter": "true",
-      "isSelectCreatable": "true",
-      "showInTableMobile": "false",
+      ],
+      "isFilter": true,
+      "isSelectCreatable": true,
+      "showInTableMobile": false,
       "tableIndex": 12,
       "id": "type",
       "type": "select",
@@ -196,14 +196,14 @@
   },
   {
     "videoConf": {
-      "isInlineEditable": "false",
-      "showInTable": "false",
-      "isEditable": "true",
-      "value": "Видеоконференция",
+      "isInlineEditable": false,
+      "showInTable": false,
+      "isEditable": true,
+      "title": "Видеоконференция",
       "validValues": "",
-      "isFilter": "false",
-      "hasFullTextLink": "false",
-      "isGroup": "false",
+      "isFilter": false,
+      "hasFullTextLink": false,
+      "isGroup": false,
       "tableIndex": 13,
       "id": "videoConf",
       "type": "string",
@@ -212,12 +212,12 @@
   },
   {
     "idTask": {
-      "isInlineEditable": "false",
-      "showInTable": "false",
-      "isEditable": "false",
-      "value": "ID задачи",
+      "isInlineEditable": false,
+      "showInTable": false,
+      "isEditable": false,
+      "title": "ID задачи",
       "validValues": "",
-      "isFilter": "false",
+      "isFilter": false,
       "tableIndex": 4,
       "id": "idTask",
       "type": "int",
@@ -226,12 +226,12 @@
   },
   {
     "id": {
-      "isInlineEditable": "false",
-      "showInTable": "false",
-      "isEditable": "false",
-      "value": "ID",
+      "isInlineEditable": false,
+      "showInTable": false,
+      "isEditable": false,
+      "title": "ID",
       "validValues": "",
-      "isFilter": "false",
+      "isFilter": false,
       "tableIndex": 1,
       "id": "id",
       "type": "int",
@@ -240,13 +240,13 @@
   },
   {
     "result": {
-      "isInlineEditable": "false",
-      "showInTable": "false",
-      "isEditable": "true",
-      "value": "Результат",
+      "isInlineEditable": false,
+      "showInTable": false,
+      "isEditable": true,
+      "title": "Результат",
       "validValues": "",
-      "isFilter": "false",
-      "hasFileUploader": "true",
+      "isFilter": false,
+      "hasFileUploader": true,
       "tableIndex": 7,
       "id": "result",
       "type": "fulltext",
@@ -255,20 +255,20 @@
   },
   {
     "specificParameters": {
-      "hasEditMenu": "true",
-      "hasDeleteButton": "true",
-      "hasEditMenuSaveAsNew": "true",
-      "hasNotificationButton": "true",
+      "hasEditMenu": true,
+      "hasDeleteButton": true,
+      "hasEditMenuSaveAsNew": true,
+      "hasNotificationButton": true,
       "defaultSortField": "week,date,time",
       "defaultSortDirection": "desc,asc,asc",
-      "hasQuestions": "false",
-      "hasSetStatusMenu": "true",
+      "hasQuestions": false,
+      "hasSetStatusMenu": true,
       "defaultGroupField": "week",
-      "hasTitleRow": "false",
-      "hasAddMenu": "true",
-      "hasDoneButton": "false",
+      "hasTitleRow": false,
+      "hasAddMenu": true,
+      "hasDoneButton": false,
       "tableName": "Обсуждения",
-      "hasSublistData": "true",
+      "hasSublistData": true,
       "mainValue": "theme",
       "addMenuTitle": "Новое совещание"
     }

@@ -1,26 +1,26 @@
 [
   {
     "status_new": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
-      "validValues": {
-        "done": {
-          "value": "Выполнена",
-          "id": "done"
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
+      "validValues": [
+        {
+          "text": "Выполнена",
+          "value": "done"
         },
-        "new": {
-          "value": "Не согласована",
-          "id": "new"
+        {
+          "text": "Не согласована",
+          "value": "new"
         },
-        "work": {
-          "value": "В работе",
-          "id": "work"
+        {
+          "text": "В работе",
+          "value": "work"
         }
-      },
-      "value": "Статус новый",
-      "isFilter": "true",
-      "hasFullTextLink": "false",
+      ],
+      "title": "Статус новый",
+      "isFilter": true,
+      "hasFullTextLink": false,
       "tableIndex": 10,
       "id": "status_new",
       "type": "select",
@@ -29,13 +29,13 @@
   },
   {
     "dt": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
       "validValues": "",
-      "value": "Время изменений",
-      "isFilter": "true",
-      "hasFullTextLink": "false",
+      "title": "Время изменений",
+      "isFilter": true,
+      "hasFullTextLink": false,
       "tableIndex": 11,
       "id": "dt",
       "type": "datetime",
@@ -44,13 +44,13 @@
   },
   {
     "change_all": {
-      "showInTable": "false",
-      "isInlineEditable": "false",
-      "isEditable": "false",
+      "showInTable": false,
+      "isInlineEditable": false,
+      "isEditable": false,
       "validValues": "",
-      "value": "Все изменения",
-      "isFilter": "false",
-      "hasFullTextLink": "false",
+      "title": "Все изменения",
+      "isFilter": false,
+      "hasFullTextLink": false,
       "tableIndex": 8,
       "id": "change_all",
       "type": "fulltext",
@@ -59,13 +59,13 @@
   },
   {
     "developer": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
       "validValues": "",
-      "value": "Ответственный",
-      "isFilter": "false",
-      "hasFullTextLink": "false",
+      "title": "Ответственный",
+      "isFilter": false,
+      "hasFullTextLink": false,
       "tableIndex": 6,
       "id": "developer",
       "type": "select",
@@ -74,13 +74,13 @@
   },
   {
     "task_id": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
       "validValues": "",
-      "value": "ID задачи",
-      "isFilter": "false",
-      "hasFullTextLink": "false",
+      "title": "ID задачи",
+      "isFilter": false,
+      "hasFullTextLink": false,
       "tableIndex": 3,
       "id": "task_id",
       "type": "int",
@@ -89,22 +89,22 @@
   },
   {
     "mainTable": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
-      "validValues": {
-        "task": {
-          "value": "Задачи",
-          "id": "task"
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
+      "validValues": [
+        {
+          "text": "Задачи",
+          "value": "task"
         },
-        "discussion": {
-          "value": "Обсуждения",
-          "id": "discussion"
+        {
+          "text": "Обсуждения",
+          "value": "discussion"
         }
-      },
-      "value": "Таблица",
-      "isFilter": "true",
-      "hasFullTextLink": "false",
+      ],
+      "title": "Таблица",
+      "isFilter": true,
+      "hasFullTextLink": false,
       "tableIndex": 4,
       "id": "mainTable",
       "type": "select",
@@ -113,13 +113,13 @@
   },
   {
     "theme": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
       "validValues": "",
-      "value": "Тема",
-      "isFilter": "false",
-      "hasFullTextLink": "true",
+      "title": "Тема",
+      "isFilter": false,
+      "hasFullTextLink": true,
       "tableIndex": 7,
       "id": "theme",
       "type": "string",
@@ -128,13 +128,13 @@
   },
   {
     "project": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
       "validValues": "",
-      "value": "Проект",
-      "isFilter": "false",
-      "hasFullTextLink": "false",
+      "title": "Проект",
+      "isFilter": false,
+      "hasFullTextLink": false,
       "tableIndex": 5,
       "id": "project",
       "type": "select",
@@ -143,26 +143,26 @@
   },
   {
     "event": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
-      "validValues": {
-        "del": {
-          "value": "Удаление",
-          "id": "del"
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
+      "validValues": [
+        {
+          "text": "Удаление",
+          "value": "del"
         },
-        "put": {
-          "value": "Добавление",
-          "id": "put"
+        {
+          "text": "Добавление",
+          "value": "put"
         },
-        "upd": {
-          "value": "Изменение",
-          "id": "upd"
+        {
+          "text": "Изменение",
+          "value": "upd"
         }
-      },
-      "value": "Действие",
-      "isFilter": "true",
-      "hasFullTextLink": "false",
+      ],
+      "title": "Действие",
+      "isFilter": true,
+      "hasFullTextLink": false,
       "tableIndex": 2,
       "id": "event",
       "type": "select",
@@ -171,26 +171,26 @@
   },
   {
     "status_old": {
-      "showInTable": "false",
-      "isInlineEditable": "false",
-      "isEditable": "false",
-      "validValues": {
-        "done": {
-          "value": "Выполнена",
-          "id": "done"
+      "showInTable": false,
+      "isInlineEditable": false,
+      "isEditable": false,
+      "validValues": [
+        {
+          "text": "Выполнена",
+          "value": "done"
         },
-        "new": {
-          "value": "Не согласована",
-          "id": "new"
+        {
+          "text": "Не согласована",
+          "value": "new"
         },
-        "work": {
-          "value": "В работе",
-          "id": "work"
+        {
+          "text": "В работе",
+          "value": "work"
         }
-      },
-      "value": "Статус старый",
-      "isFilter": "true",
-      "hasFullTextLink": "false",
+      ],
+      "title": "Статус старый",
+      "isFilter": true,
+      "hasFullTextLink": false,
       "tableIndex": 9,
       "id": "status_old",
       "type": "select",
@@ -199,13 +199,13 @@
   },
   {
     "id": {
-      "showInTable": "true",
-      "isInlineEditable": "false",
-      "isEditable": "false",
+      "showInTable": true,
+      "isInlineEditable": false,
+      "isEditable": false,
       "validValues": "",
-      "value": "ID",
-      "isFilter": "false",
-      "hasFullTextLink": "false",
+      "title": "ID",
+      "isFilter": false,
+      "hasFullTextLink": false,
       "tableIndex": 1,
       "id": "id",
       "type": "int",
@@ -214,15 +214,15 @@
   },
   {
     "specificParameters": {
-      "hasEditMenu": "false",
-      "hasDeleteButton": "false",
+      "hasEditMenu": false,
+      "hasDeleteButton": false,
       "defaultSortField": "dt",
       "defaultSortDirection": "desc",
-      "hasTitleRow": "false",
+      "hasTitleRow": false,
       "tableName": "Изменения",
-      "hasDoneButton": "false",
-      "hasAddMenu": "false",
-      "hasSpecNotes": "false"
+      "hasDoneButton": false,
+      "hasAddMenu": false,
+      "hasSpecNotes": false
     }
   }
 ]

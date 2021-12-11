@@ -1,22 +1,22 @@
 [
   {
-    "value": "Отдел",
-    "id": "otdel"
+    "text": "Отдел",
+    "value": "otdel"
   },
   {
-    "value": "Проект1",
-    "id": "project1"
+    "text": "Проект1",
+    "value": "project1"
   },
   {
-    "value": "Проект2",
-    "id": "project2"
+    "text": "Проект2",
+    "value": "project2"
   },
   {
-    "value": "Проект3",
-    "id": "project3"
+    "text": "Проект3",
+    "value": "project3"
   },
   {
-    "value": "Проект4",
-    "id": "project4"
+    "text": "Проект4",
+    "value": "project4"
   }
 ]
