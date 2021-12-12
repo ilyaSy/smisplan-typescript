@@ -5,12 +5,12 @@ import useDataSelector from '../../storages/selectors/data';
 import useMetadataSelector from '../../storages/selectors/metadata';
 import { dataGetAction } from '../../storages/actions/data';
 import metadataGetAction from '../../storages/actions/metadata';
+import mapMetadataToColumns from '../../utils/mapMetadataToColumns';
+import getTableParameters from '../../utils/getTableParameters';
+import { TData } from '../../types/TData';
+import { TTableParameters } from '../../types/TTableParameters';
 import Table from '../UI/Table';
 import LoadingComponent from '../UI/LoadingComponent';
-import mapMetadataToColumns from '../../utils/mapMetadataToColumns';
-import { TData } from '../../types/TData';
-import { TTableParameters } from '../../types/TTableSpecificParameters';
-import getTableParameters from '../../utils/getTableParameters';
 import classes from './DataTable.module.scss';
 
 const { Title } = Typography;

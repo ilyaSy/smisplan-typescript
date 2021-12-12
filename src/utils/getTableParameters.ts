@@ -1,11 +1,11 @@
-import { TTableParameters } from '../types/TTableSpecificParameters';
+import { TTableParameters } from '../types/TTableParameters';
 
 type TGetTableParameters = (
   metadata: Record<string, any>[]
 ) => TTableParameters
 
 const getTableParameters: TGetTableParameters = (metadata) => {
-  return metadata.filter((c) => Object.values(c)[0] === 'specificParameters') as unknown as TTableParameters;
+  return (metadata.find((c) => Object.keys(c)[0] === 'specificParameters') as Record<string, any>).specificParameters;
 }
 
 export default getTableParameters;
