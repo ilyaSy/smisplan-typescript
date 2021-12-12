@@ -10,7 +10,7 @@ export const apiMiddleware: Middleware =
   (dispatch) => 
   async (action: any) => {
     const { type, method = "GET", url, body, headers = defaultHeaders } = action;
-    console.log(action, type);
+    // console.log(action, type);
     
     if (!/REQUEST/.test(type)) {
       return dispatch(action);

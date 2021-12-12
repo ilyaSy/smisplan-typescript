@@ -90,7 +90,7 @@ const menu = (dataItem: TData, tableParameters: TTableParameters) => {
     });
   }
 
-  return <DropdownMenu actions={actions} />
+  return <DropdownMenu menuItems={actions} />
 };
 
 const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) => {

@@ -2,41 +2,41 @@ import { Menu } from 'antd';
 import { TDropdownMenu } from '../../../types/TDropdownMenu';
 import classes from './DropdownMenu.module.scss';
 
-const DropdownMenu: React.FC<{actions: TDropdownMenu[]}> = ({ actions }) => {
+const DropdownMenu: React.FC<{menuItems: TDropdownMenu[]}> = ({ menuItems }) => {
   return (
     <Menu>
       {
-        actions.map((action, index) => (
-          action.type === 'divider' ? (
+        menuItems.map((menuItem, index) => (
+          menuItem.type === 'divider' ? (
             <Menu.Divider key={`divider-${index}`}/>
           ) : (
-            action.type === 'submenu' ? (
+            menuItem.type === 'submenu' ? (
               <Menu.SubMenu
-                key={action.key}
-                title={action.title}
+                key={menuItem.key}
+                title={menuItem.title}
                 className={classes['dropdown-menu']}
               >
                 {
-                  action.items && action.items.map((subaction) => (
+                  menuItem.items && menuItem.items.map((subMenuItem) => (
                     <Menu.Item
-                      key={subaction.key}
-                      onClick={subaction.onClick}
-                      icon={subaction.icon}
+                      key={subMenuItem.key}
+                      onClick={subMenuItem.onClick}
+                      icon={subMenuItem.icon}
                       className={classes['dropdown-menu']}
                     >
-                      {subaction.title}
+                      {subMenuItem.title}
                     </Menu.Item>
                   ))
                 }
               </Menu.SubMenu>
             ) : (
               <Menu.Item
-                key={action.key}
-                onClick={action.onClick}
-                icon={action.icon}
+                key={menuItem.key}
+                onClick={menuItem.onClick}
+                icon={menuItem.icon}
                 className={classes['dropdown-menu']}
               >
-                {action.title}
+                {menuItem.title}
               </Menu.Item>
             ))
           )
