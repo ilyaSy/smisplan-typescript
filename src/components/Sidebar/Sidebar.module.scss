@@ -1,27 +1,23 @@
 .sidebar {
   width: 60px;
   height: 100%;
-}
 
-.menu-item {
-  margin-top: 10px !important;
-  padding-top: 10px !important;
-  padding-bottom: 40px !important;
-}
-
-.menu-submenu {
-  margin-top: 10px !important;
-  padding-top: 10px !important;
-}
-
-.add-icon {
-  transition: all 1s ease-in-out !important;
-
-  &:hover {
-    transform: rotate(360deg);
+  &__menu-item {
+    margin-top: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 40px !important;
   }
-}
 
-.add-icon:hover {
+  &__menu-submenu {
+    margin-top: 10px !important;
+    padding-top: 10px !important;
+  }
+
+  &__add-icon {
+    transition: all 1s ease-in-out !important;
   
+    &:hover {
+      transform: rotate(360deg);
+    }
+  }
 }

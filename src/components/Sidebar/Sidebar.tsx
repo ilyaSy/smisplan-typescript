@@ -36,10 +36,10 @@ const Sidebar: React.FC = () => {
         onClose={() => setSidebarAction('')}
       />
 
-      <Menu.Item key='addData' className={classes['menu-item']}>
+      <Menu.Item key='addData' className={classes['sidebar__menu-item']}>
         <Tooltip placement='bottomLeft' title='Добавить' className='tooltip'>
           <PlusCircleTwoTone
-            className={classes['add-icon']}
+            className={classes['sidebar__add-icon']}
             style={{ fontSize: '30px' }}
             twoToneColor='#52c41a'
             onClick={handleAddData}
@@ -47,7 +47,7 @@ const Sidebar: React.FC = () => {
         </Tooltip>
       </Menu.Item>
 
-      <Menu.Item key='printPDF' className={classes['menu-item']}>
+      <Menu.Item key='printPDF' className={classes['sidebar__menu-item']}>
         <Tooltip
           placement='bottomLeft'
           title='Печать в PDF'
@@ -58,7 +58,7 @@ const Sidebar: React.FC = () => {
       </Menu.Item>
 
       <Menu.SubMenu key='settings'
-        className={classes['menu-submenu']}
+        className={classes['sidebar__menu-submenu']}
         icon={<SettingOutlined style={{ fontSize: '30px' }} />}
       >
         <Menu.Item>Цветовая тема</Menu.Item>
@@ -66,7 +66,7 @@ const Sidebar: React.FC = () => {
         <Menu.Item>Инструкция</Menu.Item>
       </Menu.SubMenu>
 
-      <Menu.Item key='resetFilters' className={classes['menu-item']}>
+      <Menu.Item key='resetFilters' className={classes['sidebar__menu-item']}>
         <Tooltip
           placement='bottomLeft'
           title='Сбросить все фильтры'
