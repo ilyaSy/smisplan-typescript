@@ -8,7 +8,7 @@ const DropdownMenu: React.FC<{actions: TDropdownMenu[]}> = ({ actions }) => {
       {
         actions.map((action, index) => (
           action.type === 'divider' ? (
-            <Menu.Divider/>
+            <Menu.Divider key={`divider-${index}`}/>
           ) : (
             action.type === 'submenu' ? (
               <Menu.SubMenu

@@ -54,13 +54,13 @@ const menu = (dataItem: TData, tableParameters: TTableParameters) => {
       title: 'Изменить статус',
       items: [
         {
-          key: `action-menu-${dataItem.key}-status1`,
+          key: `action-menu-${dataItem.key}-status-1`,
           title: 'Статус 1',
           icon: <></>,
           onClick: handleMenuClick(dataItem),
         },
         {
-          key: `action-menu-${dataItem.key}-status2`,
+          key: `action-menu-${dataItem.key}-status-2`,
           title: 'Статус 2',
           icon: <></>,
           onClick: handleMenuClick(dataItem),
