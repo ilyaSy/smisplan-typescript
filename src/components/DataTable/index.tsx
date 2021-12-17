@@ -12,6 +12,7 @@ import { TTableParameters } from '../../types/TTableParameters';
 import Table from '../UI/Table';
 import LoadingComponent from '../UI/LoadingComponent';
 import classes from './DataTable.module.scss';
+import useGetTablename from '../../utils/hooks/useGetTablename';
 
 const { Title } = Typography;
 
@@ -20,21 +21,24 @@ const DataTable: React.FC = () => {
   const [tableParameters, setTableParameters] = useState<TTableParameters | null>(null);
   
   const dispatch = useDispatch()
+
+  const tablename = useGetTablename();
   
   const { data, isError: isErrorData, isLoading: isLoadingData } = useDataSelector();
   const { data: metadata, isError: isErrorMetadata, isLoading: isLoadingMetadata } = useMetadataSelector();
 
   useEffect(() => {
     if (metadata) {
+      console.log(getTableParameters(metadata));
       setColumns(mapMetadataToColumns(metadata));
       setTableParameters(getTableParameters(metadata));
     }
   }, [metadata]);
 
   useEffect(() => {
-    dispatch(dataGetAction());
-    dispatch(metadataGetAction());
-  }, [dispatch]);
+    dispatch(dataGetAction(tablename));
+    dispatch(metadataGetAction(tablename));
+  }, [dispatch, tablename]);
 
   return (
     isLoadingData || isLoadingMetadata ? (

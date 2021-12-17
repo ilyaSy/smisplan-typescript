@@ -2,39 +2,42 @@ import { urlApi } from "../../constants/constants"
 import TApiAction from "../../types/TApiAction"
 import TApiActionBody from "../../types/TApiActionBody"
 
-const url = `${urlApi}/task/`;
 const type = 'DATA_REQUEST';
 
-export const dataGetAction: () => TApiAction = () => {
+export const dataGetAction: (tablename: string) => TApiAction = (tablename) => {
   return {
     type,
-    url,
+    url: `${urlApi}/${tablename}/`,
     method: "GET"
   }
 }
 
-export const dataDeleteAction: (body: TApiActionBody) => TApiAction = (body) => {
-  return {
-    type,
-    url,
-    method: "DELETE",
-    body,
-  }
+export const dataDeleteAction: 
+  (tablename: string, body: TApiActionBody) => TApiAction = 
+  (tablename, body) => {
+    return {
+      type,
+      url: `${urlApi}/${tablename}/`,
+      method: "DELETE",
+      body,
+    }
 }
 
-export const dataAddAction: (body: TApiActionBody) => TApiAction = (body) => {
-  return {
-    type,
-    url,
-    method: "POST",
-    body,
-  }
+export const dataAddAction: 
+  (tablename: string, body: TApiActionBody) => TApiAction = 
+  (tablename, body) => {
+    return {
+      type,
+      url: `${urlApi}/${tablename}/`,
+      method: "POST",
+      body,
+    }
 }
 
-export const dataUpdateAction: (body: TApiActionBody) => TApiAction = (body) => {
+export const dataUpdateAction: (tablename: string, body: TApiActionBody) => TApiAction = (tablename, body) => {
   return {
     type,
-    url: "",
+    url: `${urlApi}/${tablename}/`,
     method: "PATCH",
     body,
   }

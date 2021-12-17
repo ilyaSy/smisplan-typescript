@@ -9,9 +9,8 @@ type TMapMetadataToColumns = (
 
 const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
   const columns = metadata
-    .filter((c) => Object.values(c)[0] !== 'specificParameters')
-    .map((c) => {
-      const metadataColumn = Object.values(c)[0];
+    .filter((c) => c.id !== 'specificParameters')
+    .map((metadataColumn) => {
       const column: TData = {
         ...metadataColumn,
         dataIndex: metadataColumn.id,

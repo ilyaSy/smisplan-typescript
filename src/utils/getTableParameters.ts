@@ -5,7 +5,7 @@ type TGetTableParameters = (
 ) => TTableParameters
 
 const getTableParameters: TGetTableParameters = (metadata) => {
-  return (metadata.find((c) => Object.keys(c)[0] === 'specificParameters') as Record<string, any>).specificParameters;
+  return metadata.find((c) => c.id === 'specificParameters') as TTableParameters;
 }
 
 export default getTableParameters;

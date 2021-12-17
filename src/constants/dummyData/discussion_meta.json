@@ -1,276 +1,247 @@
 [
   {
-    "status": {
-      "isInlineEditable": false,
-      "showInTable": true,
-      "isEditable": true,
-      "title": "Статус",
-      "validValues": [
-        {
-          "text": "Запланировано",
-          "value": "new"
-        },
-        {
-          "text": "Проведено",
-          "value": "done"
-        },
-        {
-          "text": "Перенесено",
-          "value": "postponed"
-        },
-        {
-          "text": "Отменено",
-          "value": "rejected"
-        }
-      ],
-      "isFilter": true,
-      "showInTableMobile": false,
-      "tableIndex": 11,
-      "id": "status",
-      "type": "select",
-      "defaultValue": "new"
-    }
+    "isInlineEditable": false,
+    "showInTable": true,
+    "isEditable": true,
+    "title": "Статус",
+    "validValues": [
+      {
+        "text": "Запланировано",
+        "value": "new"
+      },
+      {
+        "text": "Проведено",
+        "value": "done"
+      },
+      {
+        "text": "Перенесено",
+        "value": "postponed"
+      },
+      {
+        "text": "Отменено",
+        "value": "rejected"
+      }
+    ],
+    "isFilter": true,
+    "showInTableMobile": false,
+    "tableIndex": 11,
+    "id": "status",
+    "type": "select",
+    "defaultValue": "new"
   },
   {
-    "time": {
-      "isInlineEditable": false,
-      "showInTable": true,
-      "isEditable": true,
-      "title": "Время",
-      "validValues": "",
-      "isFilter": false,
-      "addMenuIndex": "4",
-      "tableIndex": 3,
-      "id": "time",
-      "type": "time",
-      "defaultValue": ""
-    }
+    "isInlineEditable": false,
+    "showInTable": true,
+    "isEditable": true,
+    "title": "Время",
+    "validValues": "",
+    "isFilter": false,
+    "addMenuIndex": "4",
+    "tableIndex": 3,
+    "id": "time",
+    "type": "time",
+    "defaultValue": ""
   },
   {
-    "date": {
-      "isInlineEditable": false,
-      "showInTable": true,
-      "isEditable": true,
-      "title": "Дата",
-      "validValues": "",
-      "isFilter": true,
-      "isGroup": true,
-      "addMenuIndex": "3",
-      "tableIndex": 2,
-      "id": "date",
-      "type": "date",
-      "defaultValue": ""
-    }
+    "isInlineEditable": false,
+    "showInTable": true,
+    "isEditable": true,
+    "title": "Дата",
+    "validValues": "",
+    "isFilter": true,
+    "isGroup": true,
+    "addMenuIndex": "3",
+    "tableIndex": 2,
+    "id": "date",
+    "type": "date",
+    "defaultValue": ""
   },
   {
-    "participants": {
-      "isInlineEditable": false,
-      "showInTable": true,
-      "isEditable": true,
-      "initialValue": "object:data,field:developer",
-      "title": "Участники",
-      "validValues": "",
-      "isFilter": false,
-      "isSelectCreatable": true,
-      "tableIndex": 9,
-      "id": "participants",
-      "type": "multi-select",
-      "defaultValue": "",
-      "vocabulary": "developer"
-    }
+    "isInlineEditable": false,
+    "showInTable": true,
+    "isEditable": true,
+    "initialValue": "object:data,field:developer",
+    "title": "Участники",
+    "validValues": "",
+    "isFilter": false,
+    "isSelectCreatable": true,
+    "tableIndex": 9,
+    "id": "participants",
+    "type": "multi-select",
+    "defaultValue": "",
+    "vocabulary": "developer"
   },
   {
-    "mainTable": {
-      "isInlineEditable": false,
-      "showInTable": false,
-      "isEditable": false,
-      "title": "Тип обсуждения",
-      "validValues": "",
-      "isFilter": false,
-      "tableIndex": 10,
-      "id": "mainTable",
-      "type": "string",
-      "defaultValue": "object:meta,field:dataTableName"
-    }
+    "isInlineEditable": false,
+    "showInTable": false,
+    "isEditable": false,
+    "title": "Тип обсуждения",
+    "validValues": "",
+    "isFilter": false,
+    "tableIndex": 10,
+    "id": "mainTable",
+    "type": "string",
+    "defaultValue": "object:meta,field:dataTableName"
   },
   {
-    "theme": {
-      "isInlineEditable": true,
-      "showInTable": true,
-      "isEditable": true,
-      "title": "Тема",
-      "validValues": "",
-      "isFilter": true,
-      "hasFullTextLink": true,
-      "isGroup": true,
-      "addMenuIndex": "1",
-      "tableIndex": 5,
-      "id": "theme",
-      "type": "string",
-      "defaultValue": "object:data,field:value"
-    }
+    "isInlineEditable": true,
+    "showInTable": true,
+    "isEditable": true,
+    "title": "Тема",
+    "validValues": "",
+    "isFilter": true,
+    "hasFullTextLink": true,
+    "isGroup": true,
+    "addMenuIndex": "1",
+    "tableIndex": 5,
+    "id": "theme",
+    "type": "string",
+    "defaultValue": "object:data,field:value"
   },
   {
-    "responsible": {
-      "isInlineEditable": false,
-      "showInTable": true,
-      "isEditable": true,
-      "title": "Ответственный",
-      "validValues": "",
-      "isFilter": true,
-      "addMenuIndex": "2",
-      "tableIndex": 8,
-      "id": "responsible",
-      "type": "select",
-      "defaultValue": "",
-      "vocabulary": "developer"
-    }
+    "isInlineEditable": false,
+    "showInTable": true,
+    "isEditable": true,
+    "title": "Ответственный",
+    "validValues": "",
+    "isFilter": true,
+    "addMenuIndex": "2",
+    "tableIndex": 8,
+    "id": "responsible",
+    "type": "select",
+    "defaultValue": "",
+    "vocabulary": "developer"
   },
   {
-    "week": {
-      "isInlineEditable": false,
-      "showInTable": false,
-      "isEditable": false,
-      "title": "неделя",
-      "validValues": "",
-      "isFilter": false,
-      "isGroup": true,
-      "tableIndex": 13,
-      "id": "week",
-      "type": "string",
-      "defaultValue": false
-    }
+    "isInlineEditable": false,
+    "showInTable": false,
+    "isEditable": false,
+    "title": "неделя",
+    "validValues": "",
+    "isFilter": false,
+    "isGroup": true,
+    "tableIndex": 13,
+    "id": "week",
+    "type": "string",
+    "defaultValue": false
   },
   {
-    "mainQuestions": {
-      "isInlineEditable": false,
-      "showInTable": false,
-      "isEditable": true,
-      "title": "Основные вопросы",
-      "validValues": "",
-      "isFilter": false,
-      "hasFullTextLink": false,
-      "isGroup": false,
-      "tableIndex": 6,
-      "id": "mainQuestions",
-      "type": "string",
-      "defaultValue": " "
-    }
+    "isInlineEditable": false,
+    "showInTable": false,
+    "isEditable": true,
+    "title": "Основные вопросы",
+    "validValues": "",
+    "isFilter": false,
+    "hasFullTextLink": false,
+    "isGroup": false,
+    "tableIndex": 6,
+    "id": "mainQuestions",
+    "type": "string",
+    "defaultValue": " "
   },
   {
-    "type": {
-      "isInlineEditable": false,
-      "showInTable": true,
-      "isEditable": true,
-      "title": "Формат",
-      "validValues": [
-        {
-          "text": "Отдел",
-          "value": "otdel"
-        },
-        {
-          "text": "Zoom",
-          "value": "zoom"
-        },
-        {
-          "text": "Отдел+zoom",
-          "value": "mixed"
-        },
-        {
-          "text": "Заочное",
-          "value": "offline"
-        },
-        {
-          "text": "Выездное",
-          "value": "offsite"
-        }
-      ],
-      "isFilter": true,
-      "isSelectCreatable": true,
-      "showInTableMobile": false,
-      "tableIndex": 12,
-      "id": "type",
-      "type": "select",
-      "defaultValue": "otdel"
-    }
+    "isInlineEditable": false,
+    "showInTable": true,
+    "isEditable": true,
+    "title": "Формат",
+    "validValues": [
+      {
+        "text": "Отдел",
+        "value": "otdel"
+      },
+      {
+        "text": "Zoom",
+        "value": "zoom"
+      },
+      {
+        "text": "Отдел+zoom",
+        "value": "mixed"
+      },
+      {
+        "text": "Заочное",
+        "value": "offline"
+      },
+      {
+        "text": "Выездное",
+        "value": "offsite"
+      }
+    ],
+    "isFilter": true,
+    "isSelectCreatable": true,
+    "showInTableMobile": false,
+    "tableIndex": 12,
+    "id": "type",
+    "type": "select",
+    "defaultValue": "otdel"
   },
   {
-    "videoConf": {
-      "isInlineEditable": false,
-      "showInTable": false,
-      "isEditable": true,
-      "title": "Видеоконференция",
-      "validValues": "",
-      "isFilter": false,
-      "hasFullTextLink": false,
-      "isGroup": false,
-      "tableIndex": 13,
-      "id": "videoConf",
-      "type": "string",
-      "defaultValue": " "
-    }
+    "isInlineEditable": false,
+    "showInTable": false,
+    "isEditable": true,
+    "title": "Видеоконференция",
+    "validValues": "",
+    "isFilter": false,
+    "hasFullTextLink": false,
+    "isGroup": false,
+    "tableIndex": 13,
+    "id": "videoConf",
+    "type": "string",
+    "defaultValue": " "
   },
   {
-    "idTask": {
-      "isInlineEditable": false,
-      "showInTable": false,
-      "isEditable": false,
-      "title": "ID задачи",
-      "validValues": "",
-      "isFilter": false,
-      "tableIndex": 4,
-      "id": "idTask",
-      "type": "int",
-      "defaultValue": "object:data,field:id"
-    }
+    "isInlineEditable": false,
+    "showInTable": false,
+    "isEditable": false,
+    "title": "ID задачи",
+    "validValues": "",
+    "isFilter": false,
+    "tableIndex": 4,
+    "id": "idTask",
+    "type": "number",
+    "defaultValue": "object:data,field:id"
   },
   {
-    "id": {
-      "isInlineEditable": false,
-      "showInTable": false,
-      "isEditable": false,
-      "title": "ID",
-      "validValues": "",
-      "isFilter": false,
-      "tableIndex": 1,
-      "id": "id",
-      "type": "int",
-      "defaultValue": ""
-    }
+    "isInlineEditable": false,
+    "showInTable": false,
+    "isEditable": false,
+    "title": "ID",
+    "validValues": "",
+    "isFilter": false,
+    "tableIndex": 1,
+    "id": "id",
+    "type": "number",
+    "defaultValue": ""
   },
   {
-    "result": {
-      "isInlineEditable": false,
-      "showInTable": false,
-      "isEditable": true,
-      "title": "Результат",
-      "validValues": "",
-      "isFilter": false,
-      "hasFileUploader": true,
-      "tableIndex": 7,
-      "id": "result",
-      "type": "fulltext",
-      "defaultValue": "empty"
-    }
+    "isInlineEditable": false,
+    "showInTable": false,
+    "isEditable": true,
+    "title": "Результат",
+    "validValues": "",
+    "isFilter": false,
+    "hasFileUploader": true,
+    "tableIndex": 7,
+    "id": "result",
+    "type": "fulltext",
+    "defaultValue": "empty"
   },
   {
-    "specificParameters": {
-      "hasEditMenu": true,
-      "hasDeleteButton": true,
-      "hasEditMenuSaveAsNew": true,
-      "hasNotificationButton": true,
-      "defaultSortField": "week,date,time",
-      "defaultSortDirection": "desc,asc,asc",
-      "hasQuestions": false,
-      "hasSetStatusMenu": true,
-      "defaultGroupField": "week",
-      "hasTitleRow": false,
-      "hasAddMenu": true,
-      "hasDoneButton": false,
-      "tableName": "Обсуждения",
-      "hasSublistData": true,
-      "mainValue": "theme",
-      "addMenuTitle": "Новое совещание"
-    }
+    "id": "specificParameters",
+    "hasEditMenu": true,
+    "hasDeleteButton": true,
+    "hasEditMenuSaveAsNew": true,
+    "hasNotificationButton": true,
+    "defaultSortField": "week,date,time",
+    "defaultSortDirection": "desc,asc,asc",
+    "hasQuestions": false,
+    "hasSetStatusMenu": true,
+    "defaultGroupField": "week",
+    "hasTitleRow": false,
+    "hasAddMenu": true,
+    "hasDoneButton": false,
+    "tableName": "Обсуждения",
+    "hasSublistData": true,
+    "mainValue": "theme",
+    "addMenuTitle": "Новое совещание"
   }
 ]

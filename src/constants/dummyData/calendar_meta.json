@@ -1,35 +1,28 @@
 [
   {
-    "date": {
-      "title": "Дата",
-      "type": "date",
-      "id": "date"
-    }
+    "title": "Дата",
+    "type": "date",
+    "id": "date"
   },
   {
-    "time": {
-      "title": "Время",
-      "type": "time",
-      "id": "time"
-    }
+    "title": "Время",
+    "type": "time",
+    "id": "time"
   },
   {
-    "description": {
-      "title": "Описание",
-      "type": "string",
-      "id": "description"
-    }
+    "title": "Описание",
+    "type": "string",
+    "id": "description"
   },
   {
-    "specificParameters": {
-      "hasEditMenu": false,
-      "hasDeleteButton": false,
-      "defaultSortField": "date",
-      "defaultSortDirection": "desc",
-      "hasTitleRow": false,
-      "hasDoneButton": false,
-      "hasAddMenu": false,
-      "hasSpecNotes": false
-    }
+    "id": "specificParameters",
+    "hasEditMenu": false,
+    "hasDeleteButton": false,
+    "defaultSortField": "date",
+    "defaultSortDirection": "desc",
+    "hasTitleRow": false,
+    "hasDoneButton": false,
+    "hasAddMenu": false,
+    "hasSpecNotes": false
   }
 ]
