@@ -29,7 +29,6 @@ const DataTable: React.FC = () => {
 
   useEffect(() => {
     if (metadata) {
-      console.log(getTableParameters(metadata));
       setColumns(mapMetadataToColumns(metadata));
       setTableParameters(getTableParameters(metadata));
     }

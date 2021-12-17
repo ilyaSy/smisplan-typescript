@@ -1,64 +1,55 @@
 import { Modal, Form, Input, Checkbox } from 'antd';
+// import { useEffect } from 'react';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
 
-const ModalWithForm: React.FC<IModalWithForm> = ({title, isOpen, onOk, onClose, form, formItems}) => {  
+const ModalWithForm: React.FC<IModalWithForm> = ({title, isOpen, handleOk, handleClose, formItems}) => {  
+  const [form] = Form.useForm();
+
+  const onOk = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        handleOk(values);
+      })
+      .catch(console.dir)
+  };
+
   return (
-    <Modal title={title} visible={isOpen} onOk={onOk} onCancel={onClose}>
-      <Form
-        name='basic'
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
-        onFinish={console.log}
-        onFinishFailed={console.log}
-        form={form}
+    isOpen ? (
+      <Modal
+        title={title}
+        visible={isOpen}
+        onOk={onOk}
+        onCancel={handleClose}
+
       >
-        {
-          formItems.map((formItem: IFormItem) => (
-            <Form.Item
-              label={formItem.label}
-              name={formItem.name}
-              rules={formItem.rules}
-            >
-              {
-                ['string', 'number'].includes(formItem.type) && (
-                  <Input />
-                )
-              }
-              {
-                formItem.type === 'string' && (
-                  <Input />
-                )
-              }
-            </Form.Item>
-          ))
-        }
-        {/* <Form.Item
-          label='Username'
-          name='username'
-          rules={[{ required: true, message: 'Поле должно быть корректно заполнено!' }]}
+        <Form
+          name='basic'
+          preserve={false}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          initialValues={{ remember: true }}
+          onFinish={console.log}
+          onFinishFailed={console.log}
+          form={form}
         >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label='Password'
-          name='password'
-          rules={[{ required: true, message: 'Поле должно быть корректно заполнено!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name='remember'
-          valuePropName='checked'
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item> */}
-      </Form>
-    </Modal>
+          {
+            formItems.map((formItem: IFormItem) => (
+              <Form.Item
+                label={formItem.label}
+                name={formItem.name}
+                rules={formItem.rules}
+              >
+                <Input
+                  disabled={formItem.name === 'id'}
+                />
+              </Form.Item>
+            ))
+          }
+        </Form>
+      </Modal>
+    ) : null
   );
 }
 
