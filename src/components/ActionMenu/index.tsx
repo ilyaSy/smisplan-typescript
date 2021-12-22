@@ -90,15 +90,10 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-delete`,
-      // onClick: (e) => {
-      //   handleMenuClick(dataItem)(e);
-      //   handleOpen('deleteItem');
-      // },
       onClick: () => {
         showConfirmModal({
           onOk: () => console.log('Удалить данные'),
           onCancel: () => console.log('Я испугался'),
-          // onFinally: () => setSidebarAction(''),
           description: 'Вы подтверждаете удаление данных ?',
         });
       },
