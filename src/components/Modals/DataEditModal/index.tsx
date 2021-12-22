@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import useMetadataSelector from '../../../storages/selectors/metadata';
-import { IFormItem } from '../../../types/IFormItem';
-import { TData } from '../../../types/TData';
 import getTableParameters from '../../../utils/getTableParameters';
 import ModalWithForm from '../../UI/ModalWithForm/ModalWithForm';
+import { IFormItem } from '../../../types/IFormItem';
+import { TData } from '../../../types/TData';
 
 interface IDataEditModal {
   isOpen: boolean;

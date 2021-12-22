@@ -7,12 +7,12 @@ import { dataGetAction } from '../../storages/actions/data';
 import metadataGetAction from '../../storages/actions/metadata';
 import mapMetadataToColumns from '../../utils/mapMetadataToColumns';
 import getTableParameters from '../../utils/getTableParameters';
-import { TData } from '../../types/TData';
-import { TTableParameters } from '../../types/TTableParameters';
+import useGetTablename from '../../utils/hooks/useGetTablename';
 import Table from '../UI/Table';
 import LoadingComponent from '../UI/LoadingComponent';
+import { TData } from '../../types/TData';
+import { TTableParameters } from '../../types/TTableParameters';
 import classes from './DataTable.module.scss';
-import useGetTablename from '../../utils/hooks/useGetTablename';
 
 const { Title } = Typography;
 

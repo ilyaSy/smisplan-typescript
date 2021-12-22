@@ -1,5 +1,5 @@
-import { Modal, Form, Input, Button } from 'antd';
 // import { useEffect } from 'react';
+import { Modal, Form, Input, Button } from 'antd';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
 

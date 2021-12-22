@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import useMetadataSelector from '../../../storages/selectors/metadata';
+import ModalWithForm from '../../UI/ModalWithForm/ModalWithForm';
+import getTableParameters from '../../../utils/getTableParameters';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
-import getTableParameters from '../../../utils/getTableParameters';
-import ModalWithForm from '../../UI/ModalWithForm/ModalWithForm';
 
 interface IDataAddModal {
   isOpen: boolean;
