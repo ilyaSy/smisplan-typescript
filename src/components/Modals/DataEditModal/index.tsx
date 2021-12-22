@@ -5,15 +5,15 @@ import { TData } from '../../../types/TData';
 import getTableParameters from '../../../utils/getTableParameters';
 import ModalWithForm from '../../UI/ModalWithForm/ModalWithForm';
 
-interface IDataAddModal {
+interface IDataEditModal {
   isOpen: boolean;
-  onAddHandler: (data: TData) => void;
+  onEditHandler: (data: TData) => void;
   onClose: () => void;
 }
 
-const DataAddModal: React.FC<IDataAddModal> = ({
+const DataEditModal: React.FC<IDataEditModal> = ({
   isOpen,
-  onAddHandler,
+  onEditHandler,
   onClose,
 }) => {
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
@@ -30,7 +30,9 @@ const DataAddModal: React.FC<IDataAddModal> = ({
             label: m.title,
             name: m.id,
             type: m.type,
-            rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : []
+            // rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : [],
+            rules: [],
+            disabled: !m.isEditable,
           }
       }));
     }
@@ -41,7 +43,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
       <ModalWithForm
         title={getTableParameters(metadata).addMenuTitle || 'Добавить'}
         isOpen={isOpen}
-        handleOk={onAddHandler}
+        handleOk={onEditHandler}
         handleClose={onClose}
         formItems={formItems}
       />
@@ -49,4 +51,4 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   );
 };
 
-export default DataAddModal;
+export default DataEditModal;

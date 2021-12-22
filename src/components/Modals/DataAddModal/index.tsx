@@ -30,7 +30,8 @@ const DataAddModal: React.FC<IDataAddModal> = ({
             label: m.title,
             name: m.id,
             type: m.type,
-            rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : []
+            rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : [],
+            disabled: m.id === 'id',
           }
       }));
     }

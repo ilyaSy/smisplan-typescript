@@ -42,7 +42,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({title, isOpen, handleOk, handl
                 rules={formItem.rules}
               >
                 <Input
-                  disabled={formItem.name === 'id'}
+                  disabled={formItem.disabled}
                 />
               </Form.Item>
             ))

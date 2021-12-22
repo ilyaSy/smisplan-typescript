@@ -8,8 +8,12 @@ import {
 import { TData } from '../../types/TData';
 import { TTableParameters } from '../../types/TTableParameters';
 import DropdownMenu from '../UI/DropdownMenu';
+import DataEditModal from '../Modals/DataEditModal';
 import { TDropdownMenu } from '../../types/TDropdownMenu';
 import classes from './ActionMenu.module.scss';
+import { useState } from 'react';
+
+type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
 type TActionMenu = {
   title: string,
@@ -22,14 +26,17 @@ const handleMenuClick = (dataItem: TData) => (e: any) => {
   console.log('data', dataItem);
 };
 
-const menu = (dataItem: TData, tableParameters: TTableParameters) => {
+const menu = (dataItem: TData, tableParameters: TTableParameters, onOpen: (t: TModals) => void) => {
   const actions: TDropdownMenu[] = [];
 
   if (tableParameters.hasDiscussion) {
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-add-discussion`,
-      onClick: handleMenuClick(dataItem),
+      onClick: (e) => {
+        handleMenuClick(dataItem)(e);
+        onOpen('addDiscussion');
+      },
       icon: <CalendarFilled className={classes['action-menu']}/>,
       title: 'Добавить обсуждение',
     });
@@ -40,7 +47,10 @@ const menu = (dataItem: TData, tableParameters: TTableParameters) => {
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-edit`,
-      onClick: handleMenuClick(dataItem),
+      onClick: (e) => {
+        handleMenuClick(dataItem)(e);
+        onOpen('editItem');
+      },
       icon: <EditFilled className={classes['action-menu']} />,
       title: 'Редактировать',
     });
@@ -73,7 +83,10 @@ const menu = (dataItem: TData, tableParameters: TTableParameters) => {
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-delete`,
-      onClick: handleMenuClick(dataItem),
+      onClick: (e) => {
+        handleMenuClick(dataItem)(e);
+        onOpen('deleteItem');
+      },
       icon: <DeleteFilled className={classes['action-menu']} />,
       title: 'Удалить',
     });
@@ -94,16 +107,28 @@ const menu = (dataItem: TData, tableParameters: TTableParameters) => {
 };
 
 const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) => {
+  const [openModal, setOpenModal] = useState<TModals>();
+
+  const handleClose = () => setOpenModal(undefined);
+
   return (
-    <Tooltip
-      placement='topRight'
-      title={title}
-    >
-      <Dropdown.Button
-        overlay={menu(dataItem, tableParameters)}
-        trigger={['click']}
+    <>
+      <DataEditModal
+        isOpen={openModal === 'editItem'}
+        onEditHandler={handleMenuClick}
+        onClose={handleClose}
       />
-    </Tooltip>
+
+      <Tooltip
+        placement='topRight'
+        title={title}
+        >
+        <Dropdown.Button
+          overlay={menu(dataItem, tableParameters, (t: TModals) => { setOpenModal(t) })}
+          trigger={['click']}
+          />
+      </Tooltip>
+    </>
   );
 };
 

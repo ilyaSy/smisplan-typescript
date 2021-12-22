@@ -1,4 +1,5 @@
 export interface IFormItem {
+  disabled: boolean;
   label: string;
   name: string;
   type: 'string' | 'number' | 'date' | 'time' | 'datetime' | 'select';
