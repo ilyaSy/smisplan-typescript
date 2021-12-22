@@ -8,4 +8,5 @@ export interface IModalWithForm {
   handleClose: () => void;
   // form: FormInstance<any>;
   formItems: IFormItem[];
+  additionalButtons: JSX.Element[];
 };

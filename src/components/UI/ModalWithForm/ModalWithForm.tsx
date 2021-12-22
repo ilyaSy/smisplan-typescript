@@ -1,9 +1,16 @@
-import { Modal, Form, Input, Checkbox } from 'antd';
+import { Modal, Form, Input, Button } from 'antd';
 // import { useEffect } from 'react';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
 
-const ModalWithForm: React.FC<IModalWithForm> = ({title, isOpen, handleOk, handleClose, formItems}) => {  
+const ModalWithForm: React.FC<IModalWithForm> = ({
+  title,
+  isOpen,
+  handleOk,
+  handleClose,
+  formItems,
+  additionalButtons
+}) => {  
   const [form] = Form.useForm();
 
   const onOk = () => {
@@ -22,7 +29,11 @@ const ModalWithForm: React.FC<IModalWithForm> = ({title, isOpen, handleOk, handl
         visible={isOpen}
         onOk={onOk}
         onCancel={handleClose}
-
+        footer={[
+          <Button type="primary" danger onClick={handleClose}>Cancel</Button>,
+          ...additionalButtons,
+          <Button type="primary" onClick={onOk}>Ок</Button>,
+        ]}
       >
         <Form
           name='basic'

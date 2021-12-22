@@ -5,13 +5,14 @@ import {
   DeleteFilled,
   EditFilled
 } from '@ant-design/icons';
-import { TData } from '../../types/TData';
-import { TTableParameters } from '../../types/TTableParameters';
 import DropdownMenu from '../UI/DropdownMenu';
 import DataEditModal from '../Modals/DataEditModal';
+import { TData } from '../../types/TData';
+import { TTableParameters } from '../../types/TTableParameters';
 import { TDropdownMenu } from '../../types/TDropdownMenu';
 import classes from './ActionMenu.module.scss';
 import { useState } from 'react';
+import showConfirmModal from '../Modals/ConfirmModal';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -19,14 +20,20 @@ type TActionMenu = {
   title: string,
   dataItem: TData,
   tableParameters: TTableParameters,
-}
+};
+
+interface IMenu {
+  dataItem: TData;
+  tableParameters: TTableParameters;
+  handleOpen: (t: TModals) => void;
+};
 
 const handleMenuClick = (dataItem: TData) => (e: any) => {
   console.log('event', e);
   console.log('data', dataItem);
 };
 
-const menu = (dataItem: TData, tableParameters: TTableParameters, onOpen: (t: TModals) => void) => {
+const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
   const actions: TDropdownMenu[] = [];
 
   if (tableParameters.hasDiscussion) {
@@ -35,7 +42,7 @@ const menu = (dataItem: TData, tableParameters: TTableParameters, onOpen: (t: TM
       key: `action-menu-${dataItem.key}-add-discussion`,
       onClick: (e) => {
         handleMenuClick(dataItem)(e);
-        onOpen('addDiscussion');
+        handleOpen('addDiscussion');
       },
       icon: <CalendarFilled className={classes['action-menu']}/>,
       title: 'Добавить обсуждение',
@@ -49,7 +56,7 @@ const menu = (dataItem: TData, tableParameters: TTableParameters, onOpen: (t: TM
       key: `action-menu-${dataItem.key}-edit`,
       onClick: (e) => {
         handleMenuClick(dataItem)(e);
-        onOpen('editItem');
+        handleOpen('editItem');
       },
       icon: <EditFilled className={classes['action-menu']} />,
       title: 'Редактировать',
@@ -83,9 +90,17 @@ const menu = (dataItem: TData, tableParameters: TTableParameters, onOpen: (t: TM
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-delete`,
-      onClick: (e) => {
-        handleMenuClick(dataItem)(e);
-        onOpen('deleteItem');
+      // onClick: (e) => {
+      //   handleMenuClick(dataItem)(e);
+      //   handleOpen('deleteItem');
+      // },
+      onClick: () => {
+        showConfirmModal({
+          onOk: () => console.log('Удалить данные'),
+          onCancel: () => console.log('Я испугался'),
+          // onFinally: () => setSidebarAction(''),
+          description: 'Вы подтверждаете удаление данных ?',
+        });
       },
       icon: <DeleteFilled className={classes['action-menu']} />,
       title: 'Удалить',
@@ -110,6 +125,9 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
   const [openModal, setOpenModal] = useState<TModals>();
 
   const handleClose = () => setOpenModal(undefined);
+  const handleOpen = (t: TModals) => {
+    setOpenModal(t);
+  }
 
   return (
     <>
@@ -124,7 +142,7 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
         title={title}
         >
         <Dropdown.Button
-          overlay={menu(dataItem, tableParameters, (t: TModals) => { setOpenModal(t) })}
+          overlay={menu({ dataItem, tableParameters, handleOpen })}
           trigger={['click']}
           />
       </Tooltip>

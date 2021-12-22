@@ -45,6 +45,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
         handleOk={onAddHandler}
         handleClose={onClose}
         formItems={formItems}
+        additionalButtons={[]}
       />
     ) : null
   );

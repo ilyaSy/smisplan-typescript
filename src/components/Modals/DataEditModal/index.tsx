@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Button } from 'antd';
 import useMetadataSelector from '../../../storages/selectors/metadata';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
@@ -46,6 +47,9 @@ const DataEditModal: React.FC<IDataEditModal> = ({
         handleOk={onEditHandler}
         handleClose={onClose}
         formItems={formItems}
+        additionalButtons={[
+          <Button onClick={onEditHandler}>Сохранить как новый</Button>
+        ]}
       />
     ) : null
   );
