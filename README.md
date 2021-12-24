@@ -48,7 +48,7 @@ SMISplan - стандартный трекер задач (issue tracker), сд�
 ## Просмотр
 
 * Клонировать репозиторий
-<br>`git clone https://github.com/ilyaSy/smisplan2.git`
+<br>`git clone https://github.com/ilyaSy/smisplan-typescript.git`
 
 * Установить зависимости
 <br>`npm install`
