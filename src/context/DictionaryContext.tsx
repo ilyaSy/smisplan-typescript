@@ -1,16 +1,13 @@
 import axios from "axios";
 import React, { useCallback, useContext, useMemo, useState } from "react";
+import { TDictionary } from "../types/TDictionary";
 
 type TGetDataUrl = { getDataUrl: string };
-type TDictionary = Record<string, string>[] | TGetDataUrl;
+type TMetadataDictionary = Record<string, string>[] | TGetDataUrl;
 
 interface IDictionaryContext {
-  dictionary: {
-    [d: string]: {
-      [k: string]: string
-    }
-  };
-  setDictionary: (parameter: string, parameterDictionary: TDictionary) => void;
+  dictionary: TDictionary;
+  setDictionary: (parameter: string, parameterDictionary: TMetadataDictionary) => void;
 };
 
 const mapDictionaryArrayToObject = (array: Record<string, string>[]): {[k: string]: string} => {
@@ -35,7 +32,7 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
 
   const setDictionary = useCallback((
     parameter: string, 
-    parameterDictionary: TDictionary
+    parameterDictionary: TMetadataDictionary
   ) => {
     if ((parameterDictionary as TGetDataUrl).getDataUrl) {
       const url = (parameterDictionary as TGetDataUrl).getDataUrl;

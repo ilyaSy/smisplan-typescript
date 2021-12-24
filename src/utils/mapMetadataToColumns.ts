@@ -2,12 +2,14 @@ import sortData from './sortData';
 import filterData from './filterData';
 import { TColumn } from '../types/TColumn';
 import { TData } from '../types/TData';
+import { TDictionary } from '../types/TDictionary';
 
 type TMapMetadataToColumns = (
-  metadata: Record<string, any>[]
+  metadata: Record<string, any>[],
+  dictionary: TDictionary
 ) => Record<string, TColumn>[]
 
-const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
+const mapMetadataToColumns: TMapMetadataToColumns = (metadata, dictionary) => {
   const columns = metadata
     .filter((c) => c.id !== 'specificParameters')
     .map((metadataColumn) => {
@@ -20,7 +22,7 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
 
       if (metadataColumn.isFilter && metadataColumn.validValues) {
         column.filters = metadataColumn.validValues;
-        column.onFilter = filterData(metadataColumn.id);
+        column.onFilter = filterData(metadataColumn.id, dictionary);
       }
 
       return column;

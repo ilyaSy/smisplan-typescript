@@ -62,7 +62,9 @@
     "isEditable": true,
     "initialValue": "object:data,field:developer",
     "title": "Участники",
-    "validValues": "",
+    "validValues": {
+      "getDataUrl": "/smisplan-typescript/cgi/developer/"
+    },
     "isFilter": false,
     "isSelectCreatable": true,
     "tableIndex": 9,
@@ -103,7 +105,9 @@
     "showInTable": true,
     "isEditable": true,
     "title": "Ответственный",
-    "validValues": "",
+    "validValues": {
+      "getDataUrl": "/smisplan-typescript/cgi/developer/"
+    },
     "isFilter": true,
     "addMenuIndex": "2",
     "tableIndex": 8,
