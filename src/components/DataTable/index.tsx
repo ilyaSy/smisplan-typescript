@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Typography } from 'antd';
+import { mapValues } from 'lodash';
 import useDataSelector from '../../storages/selectors/data';
 import useMetadataSelector from '../../storages/selectors/metadata';
 import { dataGetAction } from '../../storages/actions/data';
@@ -31,6 +32,10 @@ const DataTable: React.FC = () => {
   const { data: tableData, isError: isErrorData, isLoading: isLoadingData } = useDataSelector();
   const { data: metadata, isError: isErrorMetadata, isLoading: isLoadingMetadata } = useMetadataSelector();
 
+  const mapDictionaryCb = useCallback((value: string, key: string) => {
+    return dictionary[key] && dictionary[key][value] ? dictionary[key][value] : value;
+  }, [dictionary])
+
   useEffect(() => {
     if (tableData) setSourceData(tableData);
   }, [tableData]);
@@ -41,32 +46,16 @@ const DataTable: React.FC = () => {
       setTableParameters(getTableParameters(metadata));
 
       metadata
-        .filter((property) => property.id !== 'specificParameters')
-        .forEach((property) => {
-          if (property.validValues) {
-            setDictionary(property.id, property.validValues);
-          }
-        })
+        .filter((property) => property.validValues)
+        .forEach((property) => setDictionary(property.id, property.validValues))
     }
   }, [metadata, setDictionary]);
 
   useEffect(() => {    
     if (tableData && metadata && Object.keys(dictionary).length) {
-      setSourceData((prev) => {
-        return prev.map((data) => {
-          return Object.fromEntries(
-            Object.entries(data).map(([key, value]) => {
-              const metadataProperty = metadata.find((property) => property.id === key);
-              if (metadataProperty?.validValues && dictionary[key] && dictionary[key][value]) {
-                data[key] = dictionary[key][value]
-              }
-              return [key, data[key]];
-            })
-          )
-        })
-      });
+      setSourceData((prev) => prev.map((data) => mapValues(data, mapDictionaryCb)));
     }
-  }, [tableData, metadata, dictionary]);
+  }, [tableData, metadata, dictionary, mapDictionaryCb]);
 
   useEffect(() => {
     dispatch(dataGetAction(tablename));
