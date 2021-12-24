@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useContext, useMemo, useState } from "react";
 import { TDictionary } from "../types/TDictionary";
+import { TObject } from "../types/TObject";
 
 type TGetDataUrl = { getDataUrl: string };
 type TMetadataDictionary = Record<string, string>[] | TGetDataUrl;
@@ -10,7 +11,7 @@ interface IDictionaryContext {
   setDictionary: (parameter: string, parameterDictionary: TMetadataDictionary) => void;
 };
 
-const mapDictionaryArrayToObject = (array: Record<string, string>[]): {[k: string]: string} => {
+const mapDictionaryArrayToObject = (array: Record<string, string>[]): TObject<string> => {
   return Object.fromEntries(
     array.map((value) => [value.value, value.text])
   )

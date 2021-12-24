@@ -36,8 +36,10 @@ const DataTable: React.FC = () => {
     // return dictionary[key] && dictionary[key][value] ? dictionary[key][value] : value;
     const metadataProperty = metadata?.find((property) => property.id === key);
     if (metadataProperty && metadataProperty.type === 'multi-select' && dictionary[key]){
-      // return value.split(',').map((v) => dictionary[key][v]).join(', ')
-      return value
+      console.log(value);
+      console.log(dictionary[key]);
+      return value.split(',').map((v) => dictionary[key][v]).join(', ')
+      // return value
     } else if (metadataProperty && metadataProperty.type === 'select' && dictionary[key] && dictionary[key][value]) {
       return dictionary[key][value]
     }
@@ -65,7 +67,7 @@ const DataTable: React.FC = () => {
 
   useEffect(() => {    
     if (tableData && metadata && Object.keys(dictionary).length) {
-      setSourceData((prev) => prev.map((data) => mapValues(data, mapDictionaryCb)));
+      setSourceData(() => tableData.map((data) => mapValues(data, mapDictionaryCb)));
     }
   }, [tableData, metadata, dictionary, mapDictionaryCb]);
 

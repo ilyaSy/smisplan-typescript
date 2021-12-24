@@ -5,7 +5,7 @@ import { TData } from '../types/TData';
 import { TDictionary } from '../types/TDictionary';
 
 type TMapMetadataToColumns = (
-  metadata: Record<string, any>[],
+  metadata: TData[],
   dictionary: TDictionary
 ) => Record<string, TColumn>[]
 
@@ -20,8 +20,16 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata, dictionary) => {
         sorter: sortData(metadataColumn.id),
       }
 
-      if (metadataColumn.isFilter && metadataColumn.validValues) {
-        column.filters = metadataColumn.validValues;
+      if (metadataColumn.isFilter && metadataColumn.validValues) {        
+        if (Array.isArray(metadataColumn.validValues)) {
+          column.filters = metadataColumn.validValues;
+        } else if (dictionary[metadataColumn.id]) {
+          column.filters = Object
+            .entries(dictionary[metadataColumn.id])
+            .map(([value, text]) => ({ value, text }))
+            .sort(sortData('text'))
+        }
+        
         column.onFilter = filterData(metadataColumn.id, dictionary);
       }
 
