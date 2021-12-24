@@ -67,7 +67,9 @@
     "type": "select",
     "tableIndex": 2,
     "showInTable": true,
-    "validValues": "",
+    "validValues": {
+      "getDataUrl": "/smisplan-typescript/cgi/project/"
+    },
     "isEditable": true,
     "isInlineEditable": false,
     "isFilter": false,
@@ -106,7 +108,9 @@
     "showInTable": true,
     "isEditable": true,
     "title": "Ответственный",
-    "validValues": "",
+    "validValues": {
+      "getDataUrl": "/smisplan-typescript/cgi/developer/"
+    },
     "isFilter": false,
     "hasFullTextLink": false,
     "isGroup": true,

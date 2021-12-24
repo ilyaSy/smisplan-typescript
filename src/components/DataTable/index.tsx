@@ -13,26 +13,60 @@ import LoadingComponent from '../UI/LoadingComponent';
 import { TData } from '../../types/TData';
 import { TTableParameters } from '../../types/TTableParameters';
 import classes from './DataTable.module.scss';
+import useDictionaryContext from '../../context/DictionaryContext';
 
 const { Title } = Typography;
 
 const DataTable: React.FC = () => {
+  const [sourceData, setSourceData] = useState<TData[]>([]);
   const [columns, setColumns] = useState<TData[] | null>([]);
   const [tableParameters, setTableParameters] = useState<TTableParameters | null>(null);
   
+  const { dictionary, setDictionary } = useDictionaryContext();
+
   const dispatch = useDispatch()
 
   const tablename = useGetTablename();
   
-  const { data, isError: isErrorData, isLoading: isLoadingData } = useDataSelector();
+  const { data: tableData, isError: isErrorData, isLoading: isLoadingData } = useDataSelector();
   const { data: metadata, isError: isErrorMetadata, isLoading: isLoadingMetadata } = useMetadataSelector();
+
+  useEffect(() => {
+    if (tableData) setSourceData(tableData);
+  }, [tableData]);
 
   useEffect(() => {
     if (metadata) {
       setColumns(mapMetadataToColumns(metadata));
       setTableParameters(getTableParameters(metadata));
+
+      metadata
+        .filter((property) => property.id !== 'specificParameters')
+        .forEach((property) => {
+          if (property.validValues) {
+            setDictionary(property.id, property.validValues);
+          }
+        })
     }
-  }, [metadata]);
+  }, [metadata, setDictionary]);
+
+  useEffect(() => {    
+    if (tableData && metadata && Object.keys(dictionary).length) {
+      setSourceData((prev) => {
+        return prev.map((data) => {
+          return Object.fromEntries(
+            Object.entries(data).map(([key, value]) => {
+              const metadataProperty = metadata.find((property) => property.id === key);
+              if (metadataProperty?.validValues && dictionary[key] && dictionary[key][value]) {
+                data[key] = dictionary[key][value]
+              }
+              return [key, data[key]];
+            })
+          )
+        })
+      });
+    }
+  }, [tableData, metadata, dictionary]);
 
   useEffect(() => {
     dispatch(dataGetAction(tablename));
@@ -50,8 +84,8 @@ const DataTable: React.FC = () => {
           <Title level={3}>Ошибка получения данных</Title>
         </div>
       ) : (
-        data && columns && tableParameters &&
-          <Table data={data} columns={columns} tableParameters={tableParameters}/>
+        tableData && columns && tableParameters &&
+          <Table data={sourceData} columns={columns} tableParameters={tableParameters}/>
       )
     )
   )

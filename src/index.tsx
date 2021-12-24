@@ -6,14 +6,17 @@ import { StorageProvider } from './storages/storage';
 import App from './App';
 import './index.css';
 import 'antd/dist/antd.css';
+import { DictionaryContextProvider } from './context/DictionaryContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter >
       <UserContextProvider>
-        <StorageProvider>
-          <App />
-        </StorageProvider>
+        <DictionaryContextProvider>
+          <StorageProvider>
+            <App />
+          </StorageProvider>
+        </DictionaryContextProvider>
       </UserContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
