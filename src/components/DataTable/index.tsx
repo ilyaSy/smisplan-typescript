@@ -33,13 +33,9 @@ const DataTable: React.FC = () => {
   const { data: metadata, isError: isErrorMetadata, isLoading: isLoadingMetadata } = useMetadataSelector();
 
   const mapDictionaryCb = useCallback((value: string, key: string) => {
-    // return dictionary[key] && dictionary[key][value] ? dictionary[key][value] : value;
     const metadataProperty = metadata?.find((property) => property.id === key);
     if (metadataProperty && metadataProperty.type === 'multi-select' && dictionary[key]){
-      console.log(value);
-      console.log(dictionary[key]);
       return value.split(',').map((v) => dictionary[key][v]).join(', ')
-      // return value
     } else if (metadataProperty && metadataProperty.type === 'select' && dictionary[key] && dictionary[key][value]) {
       return dictionary[key][value]
     }

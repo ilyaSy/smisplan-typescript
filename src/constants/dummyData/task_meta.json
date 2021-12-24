@@ -72,7 +72,7 @@
     },
     "isEditable": true,
     "isInlineEditable": false,
-    "isFilter": false,
+    "isFilter": true,
     "hasFullTextLink": false,
     "isGroup": true,
     "defaultValue": "otdel"
@@ -111,7 +111,7 @@
     "validValues": {
       "getDataUrl": "/smisplan-typescript/cgi/developer/"
     },
-    "isFilter": false,
+    "isFilter": true,
     "hasFullTextLink": false,
     "isGroup": true,
     "addMenuIndex": "2",

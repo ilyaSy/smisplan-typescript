@@ -65,7 +65,7 @@
     "validValues": {
       "getDataUrl": "/smisplan-typescript/cgi/developer/"
     },
-    "isFilter": false,
+    "isFilter": true,
     "isSelectCreatable": true,
     "tableIndex": 9,
     "id": "participants",
