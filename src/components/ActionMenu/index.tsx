@@ -130,6 +130,7 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
         isOpen={openModal === 'editItem'}
         onEditHandler={handleMenuClick}
         onClose={handleClose}
+        formData={dataItem}
       />
 
       <Tooltip

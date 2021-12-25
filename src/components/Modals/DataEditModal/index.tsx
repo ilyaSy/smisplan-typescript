@@ -10,12 +10,14 @@ interface IDataEditModal {
   isOpen: boolean;
   onEditHandler: (data: TData) => void;
   onClose: () => void;
+  formData: TData;
 }
 
 const DataEditModal: React.FC<IDataEditModal> = ({
   isOpen,
   onEditHandler,
   onClose,
+  formData
 }) => {
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
 
@@ -43,10 +45,12 @@ const DataEditModal: React.FC<IDataEditModal> = ({
     metadata && !isError && !isLoading ? (
       <ModalWithForm
         title={getTableParameters(metadata).addMenuTitle || 'Добавить'}
+        okButtonTitle='Сохранить'
         isOpen={isOpen}
         handleOk={onEditHandler}
         handleClose={onClose}
         formItems={formItems}
+        initialValues={formData}
         additionalButtons={[
           <Button onClick={onEditHandler}>Сохранить как новый</Button>
         ]}

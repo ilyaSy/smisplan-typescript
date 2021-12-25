@@ -5,11 +5,13 @@ import { IModalWithForm } from '../../../types/IModalWithForm';
 
 const ModalWithForm: React.FC<IModalWithForm> = ({
   title,
+  okButtonTitle = 'Сохранить',
   isOpen,
   handleOk,
   handleClose,
   formItems,
-  additionalButtons
+  additionalButtons,
+  initialValues
 }) => {  
   const [form] = Form.useForm();
 
@@ -30,9 +32,9 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
         onOk={onOk}
         onCancel={handleClose}
         footer={[
-          <Button type="primary" danger onClick={handleClose}>Cancel</Button>,
+          <Button type="primary" danger onClick={handleClose}>Отмена</Button>,
           ...additionalButtons,
-          <Button type="primary" onClick={onOk}>Ок</Button>,
+          <Button type="primary" onClick={onOk}>{okButtonTitle}</Button>,
         ]}
       >
         <Form
@@ -40,7 +42,8 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
           preserve={false}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
+          // initialValues={{ remember: true }}
+          initialValues={initialValues ? initialValues : {}}
           onFinish={console.log}
           onFinishFailed={console.log}
           form={form}

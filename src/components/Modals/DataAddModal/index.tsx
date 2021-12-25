@@ -41,6 +41,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
     metadata && !isError && !isLoading ? (
       <ModalWithForm
         title={getTableParameters(metadata).addMenuTitle || 'Добавить'}
+        okButtonTitle='Добавить'
         isOpen={isOpen}
         handleOk={onAddHandler}
         handleClose={onClose}
