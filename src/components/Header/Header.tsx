@@ -5,15 +5,17 @@ import { modes } from '../../constants/constants';
 import { UserContext } from '../../context/UserContext';
 import classes from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
+import useGetTablename from '../../utils/hooks/useGetTablename';
 
 const Header: React.FC = () => {
+  const mode = useGetTablename()
   const userContext = useContext(UserContext);
 
   return (
     <header className={classes.header}>
       <nav className={classes.navigation}>
         <Menu
-          defaultSelectedKeys={[modes[0].id]}
+          selectedKeys={[mode]}
           mode='horizontal'
           theme='dark'
           inlineCollapsed={false}
