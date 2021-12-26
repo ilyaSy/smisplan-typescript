@@ -28,8 +28,7 @@ interface IMenu {
   handleOpen: (t: TModals) => void;
 };
 
-const handleMenuClick = (dataItem: TData) => (e: any) => {
-  console.log('event', e);
+const handleMenuClick = (dataItem: TData) => {
   console.log('data', dataItem);
 };
 
@@ -41,7 +40,8 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
       type: 'item',
       key: `action-menu-${dataItem.key}-add-discussion`,
       onClick: (e) => {
-        handleMenuClick(dataItem)(e);
+        console.log(e);
+        handleMenuClick(dataItem);
         handleOpen('addDiscussion');
       },
       icon: <CalendarFilled className={classes['action-menu']}/>,
@@ -55,7 +55,8 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
       type: 'item',
       key: `action-menu-${dataItem.key}-edit`,
       onClick: (e) => {
-        handleMenuClick(dataItem)(e);
+        console.log(e);
+        handleMenuClick(dataItem);
         handleOpen('editItem');
       },
       icon: <EditFilled className={classes['action-menu']} />,
@@ -67,20 +68,20 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
     actions.push({
       type: 'submenu',
       key: `action-menu-${dataItem.key}-status`,
-      onClick: handleMenuClick(dataItem),
+      onClick: handleMenuClick,
       title: 'Изменить статус',
       items: [
         {
           key: `action-menu-${dataItem.key}-status-1`,
           title: 'Статус 1',
           icon: <></>,
-          onClick: handleMenuClick(dataItem),
+          onClick: handleMenuClick,
         },
         {
           key: `action-menu-${dataItem.key}-status-2`,
           title: 'Статус 2',
           icon: <></>,
-          onClick: handleMenuClick(dataItem),
+          onClick: handleMenuClick,
         },
       ]
     });
@@ -107,7 +108,7 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-notify`,
-      onClick: handleMenuClick(dataItem),
+      onClick: handleMenuClick,
       icon: <BellOutlined className={classes['action-menu']} />,
       title: 'Отправить уведомление',
     });

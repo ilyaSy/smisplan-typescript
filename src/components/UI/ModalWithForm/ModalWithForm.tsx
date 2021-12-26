@@ -1,10 +1,8 @@
-// import { useEffect } from 'react';
 import { Modal, Form, Input, Button, DatePicker, TimePicker, Select } from 'antd';
 import useDictionaryContext from '../../../context/DictionaryContext';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
 import moment from 'moment';
-import { useEffect } from 'react';
 
 const ModalWithForm: React.FC<IModalWithForm> = ({
   title,
@@ -21,42 +19,36 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
   const { dictionary } = useDictionaryContext();
 
   const onOk = () => {
-    console.log('Form submit');
-
     form
       .validateFields()
       .then((values) => {
-        console.log(values);
-        console.log(handleOk.toString())
+        formItems.forEach((formItem) => {
+          switch (formItem.type) {
+            case 'date':
+              values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD');
+              break;
+
+            case 'time':
+              values[formItem.name] = moment(values[formItem.name]).format('HH:mm:ss');
+              break;
+
+            case 'datetime':
+              values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD HH:mm:ss');
+              break;
+
+            case 'multi-select':
+              values[formItem.name] = values[formItem.name].join(',');
+              break;
+
+            default:
+              break; 
+          }
+        })
 
         handleOk(values);
       })
       .catch(console.log)
   };
-
-  useEffect(() => {
-    if (formItems && initialValues) {
-      formItems.forEach((formItem) => {
-        switch (formItem.type) {
-          case 'date':
-          case 'datetime':
-            initialValues[formItem.name] = moment(new Date(initialValues[formItem.name]))
-            break;
-          
-          case 'time':
-            initialValues[formItem.name] = moment(new Date('1970-01-01 '+ initialValues[formItem.name]))
-            break;
-
-          case 'multi-select':
-            initialValues[formItem.name] = initialValues[formItem.name].split(/, ?/)
-            break;
-
-          default:
-            break;
-        }
-      })
-    }
-  }, [formItems, initialValues]);
 
   return (
     isOpen ? (
@@ -89,9 +81,6 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                 name={formItem.name}
                 rules={formItem.rules}
               >
-                {/* <Input
-                  disabled={formItem.disabled}
-                /> */}
                 {
                   (formItem.type === 'string' || formItem.type === 'number')
                   ? (
@@ -110,31 +99,31 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                     <Select
                       disabled={formItem.disabled}
                       allowClear
-                      // filterSort={}
+                      filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
                       mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
                       showSearch
-                      options={Object.entries(dictionary[formItem.name]).map(([text, value]) => (
-                        { value, text }
+                      options={Object.entries(dictionary[formItem.name]).map(([value, label]) => (
+                        { value, label }
                       ))}
                     />
                   ) : 
                   formItem.type === 'date' ? (
                     <DatePicker
-                      disabled={formItem.disabled}
                       format="YYYY-MM-DD"
+                      disabled={formItem.disabled}
                     />
                   ) :
                   formItem.type === 'datetime' ? (
                     <DatePicker
+                      format="YYYY-MM-DD HH:mm:ss"
                       disabled={formItem.disabled}
                       showTime
-                      format="YYYY-MM-DD HH:mm:ss"
                     />
                   ) : 
                   formItem.type === 'time' ? (
                     <TimePicker
-                      disabled={formItem.disabled}
                       format="HH:mm:ss"
+                      disabled={formItem.disabled}
                     />
                   ) : null
                 }
