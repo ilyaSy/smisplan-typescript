@@ -16,7 +16,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   onAddHandler,
   onClose,
 }) => {
-  console.log()
+  console.log('this is a test message')
 
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
 
