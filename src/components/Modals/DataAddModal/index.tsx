@@ -16,6 +16,8 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   onAddHandler,
   onClose,
 }) => {
+  console.log()
+
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
 
   const { data: metadata, isError, isLoading } = useMetadataSelector();

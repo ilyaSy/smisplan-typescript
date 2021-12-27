@@ -13,7 +13,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
   formItems,
   additionalButtons,
   initialValues
-}) => {  
+}) => {
   const [form] = Form.useForm();
 
   const { dictionary } = useDictionaryContext();
@@ -41,7 +41,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
               break;
 
             default:
-              break; 
+              break;
           }
         })
 
@@ -87,14 +87,14 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                     <Input
                       disabled={formItem.disabled}
                     />
-                  ) : 
+                  ) :
                   formItem.type === 'fulltext'
                   ? (
                     <Input.TextArea
-                      disabled={formItem.disabled}                      
+                      disabled={formItem.disabled}
                     />
-                  ) : 
-                  (formItem.type === 'select' || formItem.type === 'multi-select') 
+                  ) :
+                  (formItem.type === 'select' || formItem.type === 'multi-select')
                   ? (
                     <Select
                       disabled={formItem.disabled}
@@ -106,7 +106,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                         { value, label }
                       ))}
                     />
-                  ) : 
+                  ) :
                   formItem.type === 'date' ? (
                     <DatePicker
                       format="YYYY-MM-DD"
@@ -119,7 +119,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                       disabled={formItem.disabled}
                       showTime
                     />
-                  ) : 
+                  ) :
                   formItem.type === 'time' ? (
                     <TimePicker
                       format="HH:mm:ss"
