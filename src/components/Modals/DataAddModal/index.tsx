@@ -19,7 +19,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   console.log('this is a test message')
 
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
-
+  console.log('and one more test message');
   const { data: metadata, isError, isLoading } = useMetadataSelector();
   
   useEffect(() => {
