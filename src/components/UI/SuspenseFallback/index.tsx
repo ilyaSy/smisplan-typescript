@@ -1,12 +1,12 @@
 import React from 'react';
 // import { TableRow, TableCell } from '@material-ui/core';
-import LoadingComponent from './LoadingComponent';
+import LoadingComponent from '../LoadingComponent';
 
 type TSuspenseFallback = {
-  type: 'loading' | 'textNode' | 'row';
+  type: 'loading' | 'textNode';
 };
 
-const SuspenseFallback: React.FC<TSuspenseFallback> = ({ type }) => {
+const Index: React.FC<TSuspenseFallback> = ({ type }) => {
   return (
     <>
       {type === 'loading' && <LoadingComponent />}
@@ -20,4 +20,4 @@ const SuspenseFallback: React.FC<TSuspenseFallback> = ({ type }) => {
   );
 };
 
-export default React.memo(SuspenseFallback);
+export default React.memo(Index);
