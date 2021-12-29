@@ -3,6 +3,7 @@ import useDictionaryContext from '../../../context/DictionaryContext';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
 import moment from 'moment';
+import React from "react";
 
 const ModalWithForm: React.FC<IModalWithForm> = ({
   title,

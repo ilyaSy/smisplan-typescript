@@ -32,18 +32,39 @@ const dummyData = [
 ];
 
 describe('DropdownMenu', () => {
-  test('render test dropdown menu', async () => {
-    const { getByText } = render(<DropdownMenu menuItems={dummyData} />);
-
-    fireEvent.mouseOver(getByText('submenu'));
-
-    await waitFor(() => {
-      getByText('submenuItem1');
-    })
+  test('Render items', async () => {
+    render(<DropdownMenu menuItems={dummyData} />);
 
     expect(screen.getAllByRole('menuitem')[0].firstChild).toHaveTextContent('item');
+    expect(screen.getByText('submenu')).toBeInTheDocument();
+    expect(screen.getByRole('menu').children[2]).toHaveClass('ant-menu-item-divider');
+
+    fireEvent.mouseOver(screen.getByRole('menu').children[2]);
+    await waitFor(() => {
+      screen.getByText('item')
+    });
+  });
+
+  test('Triggering on click', async () => {
+    render(<DropdownMenu menuItems={dummyData} />);
+
+    fireEvent.click(screen.getByText('item'));
+    await waitFor(() => {
+      screen.getByText('item')
+    });
+
+    expect(dummyData[0].onClick).toHaveBeenCalled();
+  });
+
+  test('Render submenu', async () => {
+    render(<DropdownMenu menuItems={dummyData} />);
+
+    fireEvent.mouseOver(screen.getByText('submenu'));
+    await waitFor(() => {
+      screen.getByText('submenuItem1');
+    })
+
     expect(screen.getByText('submenuItem1')).toBeInTheDocument();
     expect(screen.getByText('submenuItem2')).toBeInTheDocument();
-    expect(screen.getByRole('menu').children[2]).toHaveClass('ant-menu-item-divider');
   });
 });
