@@ -1,15 +1,23 @@
 import { MenuClickEventHandler } from 'rc-menu/lib/interface';
 
-export type TDropdownMenu = {
-  type: 'item' | 'submenu' | 'divider',
-  key?: string,
-  items?: {
+type TDropdownMenuItem = {
+  type: 'item',
+  title: string,
+  key: string,
+  onClick: MenuClickEventHandler,
+  icon?: JSX.Element
+}
+
+export type TDropdownMenu =
+  TDropdownMenuItem
+  | {
+    type: 'divider'
+    key: string,
+  }
+  | {
+    type: 'submenu',
+    title: string,
     key?: string,
-    onClick?: MenuClickEventHandler,
-    icon?: any,
-    title?: string
-  }[],
-  onClick?: MenuClickEventHandler,
-  icon?: JSX.Element,
-  title?: string
-};
+    icon?: JSX.Element,
+    items: Omit<TDropdownMenuItem, 'type'>[]
+  };

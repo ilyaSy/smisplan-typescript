@@ -26,7 +26,7 @@ interface IMenu {
   dataItem: TData;
   tableParameters: TTableParameters;
   handleOpen: (t: TModals) => void;
-};
+}
 
 const handleMenuClick = (dataItem: TData) => {
   console.log('data', dataItem);
@@ -47,7 +47,7 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
       icon: <CalendarFilled className={classes['action-menu']}/>,
       title: 'Добавить обсуждение',
     });
-    actions.push({ type: 'divider' });
+    actions.push({ type: 'divider', key: 'divider-discussion' });
   }
 
   if (tableParameters.hasEditMenu) {
@@ -68,7 +68,6 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
     actions.push({
       type: 'submenu',
       key: `action-menu-${dataItem.key}-status`,
-      onClick: handleMenuClick,
       title: 'Изменить статус',
       items: [
         {
@@ -104,7 +103,7 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
   }
 
   if (tableParameters.hasNotificationButton) {
-    actions.push({ type: 'divider' });
+    actions.push({ type: 'divider', key: 'divider-notification' });
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-notify`,
