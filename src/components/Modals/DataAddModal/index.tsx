@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useMetadataSelector from '../../../storages/selectors/metadata';
-import ModalWithForm from '../../UI/ModalWithForm/ModalWithForm';
+import ModalWithForm from '../../UI/ModalWithForm';
 import getTableParameters from '../../../utils/getTableParameters';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';

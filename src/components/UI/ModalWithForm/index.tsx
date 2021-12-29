@@ -59,9 +59,9 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
         onOk={onOk}
         onCancel={handleClose}
         footer={[
-          <Button type="primary" danger onClick={handleClose}>Отмена</Button>,
+          <Button key='ModalWithForm-cancel-button' type="primary" danger onClick={handleClose}>Отмена</Button>,
           ...additionalButtons,
-          <Button type="primary" onClick={onOk}>{okButtonTitle}</Button>,
+          <Button key='ModalWithForm-ok-button' type="primary" onClick={onOk}>{okButtonTitle}</Button>,
         ]}
       >
         <Form

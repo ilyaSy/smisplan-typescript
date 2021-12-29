@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import useMetadataSelector from '../../../storages/selectors/metadata';
 import getTableParameters from '../../../utils/getTableParameters';
-import ModalWithForm from '../../UI/ModalWithForm/ModalWithForm';
+import ModalWithForm from '../../UI/ModalWithForm';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
 import moment from 'moment';
