@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import useMetadataSelector from '../../../storages/selectors/metadata';
 import getTableParameters from '../../../utils/getTableParameters';
@@ -29,8 +29,6 @@ const DataEditModal: React.FC<IDataEditModal> = ({
 
   useEffect(() => {
     if (formItems && formData) {
-      console.log()
-
       setInitialValues(
         Object.fromEntries(formItems.map((formItem) => {
           const inverseDictionary = invert(dictionary[formItem.name]);
@@ -54,7 +52,7 @@ const DataEditModal: React.FC<IDataEditModal> = ({
     
               default:
                 return [formItem.name, formData[formItem.name]]
-            };
+            }
           }
           return [formItem.name, formData[formItem.name]];
         }))

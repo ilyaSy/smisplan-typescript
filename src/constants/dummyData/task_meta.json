@@ -170,7 +170,7 @@
     "tableIndex": 5,
     "id": "result",
     "type": "string",
-    "defaultValue": "empty"
+    "defaultValue": ""
   },
   {
     "id": "specificParameters",

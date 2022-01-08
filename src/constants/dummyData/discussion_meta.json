@@ -83,7 +83,7 @@
     "tableIndex": 10,
     "id": "mainTable",
     "type": "string",
-    "defaultValue": "object:meta,field:dataTableName"
+    "defaultValue": ""
   },
   {
     "isInlineEditable": true,
@@ -98,7 +98,7 @@
     "tableIndex": 5,
     "id": "theme",
     "type": "string",
-    "defaultValue": "object:data,field:value"
+    "defaultValue": ""
   },
   {
     "isInlineEditable": false,
@@ -141,7 +141,7 @@
     "tableIndex": 6,
     "id": "mainQuestions",
     "type": "string",
-    "defaultValue": " "
+    "defaultValue": ""
   },
   {
     "isInlineEditable": false,
@@ -190,7 +190,7 @@
     "tableIndex": 13,
     "id": "videoConf",
     "type": "string",
-    "defaultValue": " "
+    "defaultValue": ""
   },
   {
     "isInlineEditable": false,
@@ -202,7 +202,7 @@
     "tableIndex": 4,
     "id": "idTask",
     "type": "number",
-    "defaultValue": "object:data,field:id"
+    "defaultValue": ""
   },
   {
     "isInlineEditable": false,
@@ -227,7 +227,7 @@
     "tableIndex": 7,
     "id": "result",
     "type": "fulltext",
-    "defaultValue": "empty"
+    "defaultValue": ""
   },
   {
     "id": "specificParameters",

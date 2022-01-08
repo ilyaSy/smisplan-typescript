@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useMetadataSelector from '../../../storages/selectors/metadata';
 import ModalWithForm from '../../UI/ModalWithForm';
 import getTableParameters from '../../../utils/getTableParameters';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
+import moment from "moment";
 
 interface IDataAddModal {
   isOpen: boolean;
@@ -17,9 +18,43 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   onClose,
 }) => {
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
+  const [initialValues, setInitialValues] = useState<TData>({});
 
   const { data: metadata, isError, isLoading } = useMetadataSelector();
-  
+
+  useEffect(() => {
+    if (formItems && metadata) {
+      setInitialValues(
+        Object.fromEntries(formItems.map((formItem) => {
+          // const inverseDictionary = invert(dictionary[formItem.name]);
+          const formItemMetadata = metadata.find(({id}) => id === formItem.name);
+
+          if (formItemMetadata && formItemMetadata.defaultValue) {
+            switch (formItem.type) {
+              case 'date':
+              case 'datetime':
+              case 'time':
+                return [formItem.name, moment(new Date())]
+
+              case 'select':
+                return [formItem.name, formItemMetadata.defaultValue]
+
+              case 'multi-select':
+                return [
+                  formItem.name,
+                  formItemMetadata.defaultValue.split(/, ?/)
+                ]
+
+              default:
+                return [formItem.name, formItemMetadata.defaultValue]
+            }
+          }
+          return [formItem.name, undefined];
+        }))
+      )
+    }
+  }, [metadata, formItems]);
+
   useEffect(() => {
     if (metadata) {
       setFormItems(metadata
@@ -46,6 +81,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
         handleOk={onAddHandler}
         handleClose={onClose}
         formItems={formItems}
+        initialValues={initialValues}
         additionalButtons={[]}
       />
     ) : null
