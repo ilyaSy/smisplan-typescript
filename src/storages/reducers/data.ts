@@ -14,21 +14,18 @@ const initialState: TReduxData = {
 
 const dataReducer: Reducer = (state = initialState, action: TApiReducerData) => {
   const { type, payload, method } = action;
+
+  console.log({ type, payload, method })
+
   switch (type) {
     case 'DATA_REQUEST_LOADING':
       return dataReducerLoading(state);
 
     case 'DATA_REQUEST_RESPONSE':
-      const result = crudReduxDataUpdater(method as THtmlMethod, state.data, payload);
-      // const resultData = crudReduxDataUpdater(method as THtmlMethod, state, result.data);
-
-      console.log('RESULT');
-      console.log(result);
-
-      return dataReducerResponse(result);
+      return dataReducerResponse(method as THtmlMethod, state, payload);
 
     case 'DATA_REQUEST_ERROR':
-      return dataReducerError(payload);
+      return dataReducerError(state, payload);
       
     default:
       return {...state};
@@ -39,11 +36,13 @@ const dataReducerLoading: (state: TReduxData) => TReduxData = (state) => {
   return {
     isLoading: true,
     isError: false,
-    data: state.data ? [...state.data] : null,
+    data: state.data,
   }
 };
 
-const dataReducerError: (error: IFetchError) => TReduxData = (error) => {
+const dataReducerError:
+  (state: TReduxData, error: IFetchError) => TReduxData =
+  (state, error) => {
   showNotification({
     type: 'error',
     message: 'Ошибка при загрузке данных',
@@ -53,14 +52,16 @@ const dataReducerError: (error: IFetchError) => TReduxData = (error) => {
   return {
     isLoading: false,
     isError: true,
-    data: null
+    data: state.data,
   }
 };
 
-const dataReducerResponse: (payload: any) => TReduxData = (payload) => {
+const dataReducerResponse:
+  (method: THtmlMethod, state: TReduxData, payload: any) => TReduxData =
+  (method, state, payload) => {
   return {
     isLoading: false,
-    data: payload,
+    data: crudReduxDataUpdater(method, state.data, payload),
     isError: false
   }
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Typography } from 'antd';
 import { mapValues } from 'lodash';
@@ -78,7 +78,7 @@ const DataTable: React.FC = () => {
         <LoadingComponent />
       </div>
     ) : (
-      isErrorData || isErrorMetadata ? (
+      (isErrorData || isErrorMetadata) && !tableData ? (
         <div className={classes.center}>
           <Title level={3}>Ошибка получения данных</Title>
         </div>

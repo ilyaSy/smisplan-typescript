@@ -1,6 +1,8 @@
+import { THtmlMethod } from "./THtmlMethod";
+
 type TApiAction = {
   type: string,
-  method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
+  method?: THtmlMethod,
   url: string,
   headers?: {
     [key: string]: string,

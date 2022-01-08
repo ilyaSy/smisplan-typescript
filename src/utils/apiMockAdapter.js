@@ -65,8 +65,8 @@ export default function setMockAdapter() {
   mock.onGet(`${urlApi}/event/`).reply(200, data.event);
 
   // put data
-  // mock.onPut(`${urlApi}/task/`).reply(200, { status: 'OK', error: '', data: { id: 777 } });
   mock.onPut(`${urlApi}/task/`).reply(replyPostWithOK);
+  // mock.onPut(`${urlApi}/task/`).reply(404);
 
   mock.onPut(`${urlApi}/discussion/`).reply(200, { status: 'OK', error: '', data: { id: 777 } });
 

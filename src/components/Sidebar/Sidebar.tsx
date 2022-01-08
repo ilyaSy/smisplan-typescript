@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Menu, Tooltip } from 'antd';
 import {
@@ -12,6 +12,7 @@ import DataAddModal from '../Modals/DataAddModal';
 import {dataAddAction} from "../../storages/actions/data";
 import classes from './Sidebar.module.scss';
 import useGetTablename from "../../utils/hooks/useGetTablename";
+import useDataSelector from "../../storages/selectors/data";
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,19 +20,19 @@ const Sidebar: React.FC = () => {
 
   const tablename = useGetTablename();
 
+  const {isError: isErrorData, isLoading: isLoadingData} = useDataSelector();
+
   const handleAddData = () => {
     setSidebarAction('addData');
-    // showConfirmModal({
-    //   onOk: () => console.log('Добавить данные'),
-    //   onCancel: () => console.log('Удалить данные'),
-    //   onFinally: () => setSidebarAction(''),
-    //   description: 'Добавление данных!',
-    // });
   };
 
   const handleCloseModal = () => {
     setSidebarAction('');
   }
+
+  useEffect(() => {
+    if (!isErrorData && !isLoadingData) handleCloseModal();
+  }, [isErrorData, isLoadingData])
 
   return (
     <Menu
@@ -44,7 +45,6 @@ const Sidebar: React.FC = () => {
         isOpen={sidebarAction === 'addData'}
         onAddHandler={(data) => {
           dispatch(dataAddAction(tablename, data));
-          handleCloseModal();
         }}
         onClose={handleCloseModal}
       />
