@@ -1,4 +1,5 @@
 import React, { memo, useState } from 'react';
+import { useDispatch } from "react-redux";
 import { Menu, Tooltip } from 'antd';
 import {
   PrinterOutlined,
@@ -8,10 +9,15 @@ import {
 } from '@ant-design/icons';
 import DataAddModal from '../Modals/DataAddModal';
 // import showConfirmModal from '../Modals/ConfirmModal';
+import {dataAddAction} from "../../storages/actions/data";
 import classes from './Sidebar.module.scss';
+import useGetTablename from "../../utils/hooks/useGetTablename";
 
 const Sidebar: React.FC = () => {
+  const dispatch = useDispatch();
   const [sidebarAction, setSidebarAction] = useState<string>('');
+
+  const tablename = useGetTablename();
 
   const handleAddData = () => {
     setSidebarAction('addData');
@@ -23,6 +29,10 @@ const Sidebar: React.FC = () => {
     // });
   };
 
+  const handleCloseModal = () => {
+    setSidebarAction('');
+  }
+
   return (
     <Menu
       mode='vertical'
@@ -32,8 +42,11 @@ const Sidebar: React.FC = () => {
     >
       <DataAddModal
         isOpen={sidebarAction === 'addData'}
-        onAddHandler={console.dir}
-        onClose={() => setSidebarAction('')}
+        onAddHandler={(data) => {
+          dispatch(dataAddAction(tablename, data));
+          handleCloseModal();
+        }}
+        onClose={handleCloseModal}
       />
 
       <Menu.Item key='addData' className={classes['sidebar__menu-item']}>

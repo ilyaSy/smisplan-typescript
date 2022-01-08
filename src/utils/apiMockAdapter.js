@@ -32,6 +32,12 @@ data.event = require('../constants/dummyData/event.json');
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
 
+const replyPostWithOK = (mockResponseConfig) => {
+  const body = JSON.parse(mockResponseConfig.data);
+  // return [200, { status: 'OK', error: '', data: { id: 777, ...body}}]
+  return [200, { id: 777, ...body}]
+}
+
 export default function setMockAdapter() {
   // get basic information
   mock.onGet(`${urlApi}/user/`).reply(200, user);
@@ -59,7 +65,8 @@ export default function setMockAdapter() {
   mock.onGet(`${urlApi}/event/`).reply(200, data.event);
 
   // put data
-  mock.onPut(`${urlApi}/task/`).reply(200, { status: 'OK', error: '', data: { id: 777 } });
+  // mock.onPut(`${urlApi}/task/`).reply(200, { status: 'OK', error: '', data: { id: 777 } });
+  mock.onPut(`${urlApi}/task/`).reply(replyPostWithOK);
 
   mock.onPut(`${urlApi}/discussion/`).reply(200, { status: 'OK', error: '', data: { id: 777 } });
 

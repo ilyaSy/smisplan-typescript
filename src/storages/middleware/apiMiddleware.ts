@@ -26,7 +26,9 @@ export const apiMiddleware: Middleware =
         headers,
       });
 
-      dispatch({type: type + '_RESPONSE', payload: response.data});
+      console.log(JSON.stringify(body))
+
+      dispatch({type: type + '_RESPONSE', payload: response.data, method});
     } catch (error) {
       dispatch({type: type + '_ERROR', payload: error});
     }

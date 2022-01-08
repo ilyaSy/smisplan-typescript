@@ -3,6 +3,8 @@ import TApiReducerData from '../../types/TApiReducer';
 import IFetchError from '../../types/IFetchError';
 import TReduxData from '../../types/TReduxData';
 import showNotification from '../../utils/showNotification';
+import { crudReduxDataUpdater } from "../../utils/crudReduxUpdater";
+import { THtmlMethod } from "../../types/THtmlMethod";
 
 const initialState: TReduxData = {
   isLoading: false,
@@ -11,13 +13,19 @@ const initialState: TReduxData = {
 };
 
 const dataReducer: Reducer = (state = initialState, action: TApiReducerData) => {
-  const { type, payload } = action;
+  const { type, payload, method } = action;
   switch (type) {
     case 'DATA_REQUEST_LOADING':
-      return dataReducerLoading();
+      return dataReducerLoading(state);
 
     case 'DATA_REQUEST_RESPONSE':
-      return dataReducerResponse(payload);
+      const result = crudReduxDataUpdater(method as THtmlMethod, state.data, payload);
+      // const resultData = crudReduxDataUpdater(method as THtmlMethod, state, result.data);
+
+      console.log('RESULT');
+      console.log(result);
+
+      return dataReducerResponse(result);
 
     case 'DATA_REQUEST_ERROR':
       return dataReducerError(payload);
@@ -27,11 +35,11 @@ const dataReducer: Reducer = (state = initialState, action: TApiReducerData) => 
   }
 };
 
-const dataReducerLoading: () => TReduxData = () => {
+const dataReducerLoading: (state: TReduxData) => TReduxData = (state) => {
   return {
     isLoading: true,
     isError: false,
-    data: null
+    data: state.data ? [...state.data] : null,
   }
 };
 
@@ -49,10 +57,10 @@ const dataReducerError: (error: IFetchError) => TReduxData = (error) => {
   }
 };
 
-const dataReducerResponse: (sourceData: any) => TReduxData = (sourceData) => {
+const dataReducerResponse: (payload: any) => TReduxData = (payload) => {
   return {
     isLoading: false,
-    data: sourceData,
+    data: payload,
     isError: false
   }
 }

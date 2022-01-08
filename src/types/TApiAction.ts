@@ -1,6 +1,6 @@
 type TApiAction = {
   type: string,
-  method?: "GET" | "POST" | "DELETE" | "PATCH",
+  method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
   url: string,
   headers?: {
     [key: string]: string,

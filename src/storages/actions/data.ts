@@ -29,7 +29,7 @@ export const dataAddAction:
     return {
       type,
       url: `${urlApi}/${tablename}/`,
-      method: "POST",
+      method: "PUT",
       body,
     }
 }
