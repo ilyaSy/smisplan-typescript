@@ -32,10 +32,26 @@ data.event = require('../constants/dummyData/event.json');
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
 
-const replyPostWithOK = (mockResponseConfig) => {
+const dataCounter = (mode) => {
+  const START_COUNT = {
+    task: data.task.length,
+    discussion: data.discussion.length,
+  }
+  let counter = START_COUNT[mode];
+
+  const increase = () => ++counter;
+
+  return increase;
+}
+
+const dataCount = {
+  task: dataCounter("task"),
+  discussion: dataCounter("discussion"),
+};
+
+const replyPostWithOK = (mode) => (mockResponseConfig) => {
   const body = JSON.parse(mockResponseConfig.data);
-  // return [200, { status: 'OK', error: '', data: { id: 777, ...body}}]
-  return [200, { id: 777, ...body}]
+  return [200, { id: dataCount[mode](), ...body}]
 }
 
 export default function setMockAdapter() {
@@ -65,7 +81,7 @@ export default function setMockAdapter() {
   mock.onGet(`${urlApi}/event/`).reply(200, data.event);
 
   // put data
-  mock.onPut(`${urlApi}/task/`).reply(replyPostWithOK);
+  mock.onPut(`${urlApi}/task/`).reply(replyPostWithOK("task"));
   // mock.onPut(`${urlApi}/task/`).reply(404);
 
   mock.onPut(`${urlApi}/discussion/`).reply(200, { status: 'OK', error: '', data: { id: 777 } });
