@@ -5,10 +5,6 @@ import { TData } from "../types/TData";
 export const crudReduxDataUpdater:
   (method: THtmlMethod, stateData: TReduxData["data"], data: TData | TData[] | null) => TReduxData["data"] =
   (method, stateData, data) => {
-    console.log(data);
-    console.log(stateData);
-    console.log(method);
-
     switch (method) {
       case "POST":
       case "PUT":

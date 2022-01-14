@@ -14,7 +14,7 @@ import classes from './ActionMenu.module.scss';
 import { useState } from 'react';
 import showConfirmModal from '../Modals/ConfirmModal';
 import { useDispatch } from 'react-redux';
-import { dataUpdateAction } from '../../storages/actions/data';
+import { dataDeleteAction, dataUpdateAction } from '../../storages/actions/data';
 import useGetTablename from '../../utils/hooks/useGetTablename';
 import TActionBody from '../../types/TApiActionBody';
 
@@ -30,13 +30,14 @@ interface IMenu {
   dataItem: TData;
   tableParameters: TTableParameters;
   handleOpen: (t: TModals) => void;
+  handleDelete: (data: TActionBody) => void;
 }
 
 const handleMenuClick = (dataItem: TData) => {
   console.log('data', dataItem);
 };
 
-const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
+const menu = ({ dataItem, tableParameters, handleOpen, handleDelete }: IMenu) => {
   const actions: TDropdownMenu[] = [];
 
   if (tableParameters.hasDiscussion) {
@@ -96,8 +97,8 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
       key: `action-menu-${dataItem.key}-delete`,
       onClick: () => {
         showConfirmModal({
-          onOk: () => console.log('Удалить данные'),
-          onCancel: () => console.log('Я испугался'),
+          onOk: () => handleDelete(dataItem),
+          onCancel: () => console.log(''),
           description: 'Вы подтверждаете удаление данных ?',
         });
       },
@@ -130,9 +131,13 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
     setOpenModal(t);
   }
 
-  const handleEditData = (data: TActionBody) => {
+  const handleEdit = (data: TActionBody) => {
     dispatch(dataUpdateAction(tablename, data));
   };
+
+  const handleDelete = (data: TActionBody) => {
+    dispatch(dataDeleteAction(tablename, data));
+  }
 
   const dispatch = useDispatch();
 
@@ -140,7 +145,7 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
     <>
       <DataEditModal
         isOpen={openModal === 'editItem'}
-        onEditHandler={handleEditData}
+        onEditHandler={handleEdit}
         onClose={handleClose}
         formData={dataItem}
       />
@@ -150,7 +155,7 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
         title={title}
         >
         <Dropdown.Button
-          overlay={menu({ dataItem, tableParameters, handleOpen })}
+          overlay={menu({ dataItem, tableParameters, handleOpen, handleDelete })}
           trigger={['click']}
           />
       </Tooltip>

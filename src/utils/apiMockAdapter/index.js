@@ -76,13 +76,12 @@ export default function setMockAdapter() {
   mock.onPut(`${urlApi}/discussion/`).reply(200, { status: 'OK', error: '', data: { id: 777 } });
 
   // patch data
-  // mock.onPatch(`${urlApi}/task/`).reply(200, { status: 'OK', error: '', data: {} });
   mock.onPatch(`${urlApi}/task/`).reply(replyPostWithOK("task"));
 
   mock.onPatch(`${urlApi}/discussion/`).reply(200, { status: 'OK', error: '', data: {} });
 
   // delete data
-  mock.onDelete(`${urlApi}/task/`).reply(200, { status: 'OK', error: '' });
+  mock.onDelete(`${urlApi}/task/`).reply(replyPostWithOK("task"));
 
   mock.onDelete(`${urlApi}/discussion/`).reply(200, { status: 'OK', error: '' });
 
