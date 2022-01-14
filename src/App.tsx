@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <div className={classes.main}>
       <Header />
       <Content />
-    </div>    
+    </div>
   );
 }
 

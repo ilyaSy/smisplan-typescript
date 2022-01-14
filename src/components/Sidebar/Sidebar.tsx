@@ -79,7 +79,7 @@ const Sidebar: React.FC = () => {
         <Menu.Item>Инструкция</Menu.Item>
       </Menu.SubMenu>
 
-      <Menu.Item key='resetFilters' className={classes['sidebar__menu-item']}>
+      {/* <Menu.Item key='resetFilters' className={classes['sidebar__menu-item']}>
         <Tooltip
           placement='bottomLeft'
           title='Сбросить все фильтры'
@@ -87,7 +87,7 @@ const Sidebar: React.FC = () => {
         >
           <EyeInvisibleOutlined style={{ fontSize: '30px' }} />
         </Tooltip>
-      </Menu.Item>
+      </Menu.Item> */}
     </Menu>
   );
 };

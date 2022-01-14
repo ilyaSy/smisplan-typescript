@@ -1,9 +1,11 @@
 .sidebar {
   width: 60px;
   height: 100%;
+  padding-right: 0px !important;
 
   &__menu-item {
     margin-top: 10px !important;
+    padding-right: 0px !important;
     padding-top: 10px !important;
     padding-bottom: 40px !important;
   }
@@ -13,9 +15,14 @@
     padding-top: 10px !important;
   }
 
+  &__menu-submenu > div {
+    text-overflow: unset !important;
+    padding-right: 0px !important;
+  }
+
   &__add-icon {
     transition: all 1s ease-in-out !important;
-  
+
     &:hover {
       transform: rotate(360deg);
     }

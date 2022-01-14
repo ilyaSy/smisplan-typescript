@@ -1,10 +1,11 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { urlApi } from '../constants/constants';
+import { urlApi } from '../../constants/constants';
+import { dataCounterFactory } from './utils';
 
-const user = require('../constants/dummyData/user.json');
-const developers = require('../constants/dummyData/developers.json');
-const projects = require('../constants/dummyData/projects.json');
+const user = require('../../constants/dummyData/user.json');
+const developers = require('../../constants/dummyData/developers.json');
+const projects = require('../../constants/dummyData/projects.json');
 
 const metaData = {
   task: null,
@@ -13,10 +14,10 @@ const metaData = {
   event: null,
 };
 
-metaData.task = require('../constants/dummyData/task_meta.json');
-metaData.discussion = require('../constants/dummyData/discussion_meta.json');
-metaData.calendar = require('../constants/dummyData/calendar_meta.json');
-metaData.event = require('../constants/dummyData/event_meta.json');
+metaData.task = require('../../constants/dummyData/task_meta.json');
+metaData.discussion = require('../../constants/dummyData/discussion_meta.json');
+metaData.calendar = require('../../constants/dummyData/calendar_meta.json');
+metaData.event = require('../../constants/dummyData/event_meta.json');
 
 const data = {
   task: null,
@@ -25,28 +26,16 @@ const data = {
   event: null,
 };
 
-data.task = require('../constants/dummyData/task.json');
-data.discussion = require('../constants/dummyData/discussion.json');
-data.calendar = require('../constants/dummyData/calendar.json');
-data.event = require('../constants/dummyData/event.json');
+data.task = require('../../constants/dummyData/task.json');
+data.discussion = require('../../constants/dummyData/discussion.json');
+data.calendar = require('../../constants/dummyData/calendar.json');
+data.event = require('../../constants/dummyData/event.json');
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
 
-const dataCounter = (mode) => {
-  const START_COUNT = {
-    task: data.task.length,
-    discussion: data.discussion.length,
-  }
-  let counter = START_COUNT[mode];
-
-  const increase = () => ++counter;
-
-  return increase;
-}
-
 const dataCount = {
-  task: dataCounter("task"),
-  discussion: dataCounter("discussion"),
+  task: dataCounterFactory(data, "task"),
+  discussion: dataCounterFactory(data, "discussion"),
 };
 
 const replyPostWithOK = (mode) => (mockResponseConfig) => {
