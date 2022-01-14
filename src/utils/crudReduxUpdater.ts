@@ -5,26 +5,30 @@ import { TData } from "../types/TData";
 export const crudReduxDataUpdater:
   (method: THtmlMethod, stateData: TReduxData["data"], data: TData | TData[] | null) => TReduxData["data"] =
   (method, stateData, data) => {
-  switch (method) {
-    case "POST":
-    case "PUT":
-      return stateData && data
-        ? [ ...stateData, data]
-        : []
+    console.log(data);
+    console.log(stateData);
+    console.log(method);
 
-    case "PATCH":
-      return stateData && data
-        ? [ stateData.map((d) => d.id === (data as TData).id ? data : d) ]
-        : []
+    switch (method) {
+      case "POST":
+      case "PUT":
+        return stateData && data
+          ? [ ...stateData, data]
+          : []
 
-    case "DELETE":
-      return stateData && data
-        ? stateData.filter(({id}) => id !== (data as TData).id)
-        : []
+      case "PATCH":
+        return stateData && data
+          ? [ ...stateData.map((d) => d.id === (data as TData).id ? data : d) ]
+          : []
 
-    default:
-      return data
-        ? [...(data as TData[])]
-        : []
-  }
-};
+      case "DELETE":
+        return stateData && data
+          ? stateData.filter(({id}) => id !== (data as TData).id)
+          : []
+
+      default:
+        return data
+          ? [...(data as TData[])]
+          : []
+    }
+  };

@@ -1,5 +1,5 @@
 import { Dropdown, Tooltip } from 'antd';
-import { 
+import {
   CalendarFilled,
   BellOutlined,
   DeleteFilled,
@@ -13,6 +13,10 @@ import { TDropdownMenu } from '../../types/TDropdownMenu';
 import classes from './ActionMenu.module.scss';
 import { useState } from 'react';
 import showConfirmModal from '../Modals/ConfirmModal';
+import { useDispatch } from 'react-redux';
+import { dataUpdateAction } from '../../storages/actions/data';
+import useGetTablename from '../../utils/hooks/useGetTablename';
+import TActionBody from '../../types/TApiActionBody';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -119,16 +123,24 @@ const menu = ({ dataItem, tableParameters, handleOpen }: IMenu) => {
 const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) => {
   const [openModal, setOpenModal] = useState<TModals>();
 
+  const tablename = useGetTablename();
+
   const handleClose = () => setOpenModal(undefined);
   const handleOpen = (t: TModals) => {
     setOpenModal(t);
   }
 
+  const handleEditData = (data: TActionBody) => {
+    dispatch(dataUpdateAction(tablename, data));
+  };
+
+  const dispatch = useDispatch();
+
   return (
     <>
       <DataEditModal
         isOpen={openModal === 'editItem'}
-        onEditHandler={handleMenuClick}
+        onEditHandler={handleEditData}
         onClose={handleClose}
         formData={dataItem}
       />
