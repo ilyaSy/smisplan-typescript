@@ -19,49 +19,60 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
 
   const { dictionary } = useDictionaryContext();
 
-  const onOk = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        formItems.forEach((formItem) => {
-          switch (formItem.type) {
-            case 'date':
-              values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD');
-              break;
+  const onOk =
+    (callback: Function) =>
+    () => {
+      form
+        .validateFields()
+        .then((values) => {
+          formItems.forEach((formItem) => {
+            switch (formItem.type) {
+              case 'date':
+                values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD');
+                break;
 
-            case 'time':
-              values[formItem.name] = moment(values[formItem.name]).format('HH:mm:ss');
-              break;
+              case 'time':
+                values[formItem.name] = moment(values[formItem.name]).format('HH:mm:ss');
+                break;
 
-            case 'datetime':
-              values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD HH:mm:ss');
-              break;
+              case 'datetime':
+                values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD HH:mm:ss');
+                break;
 
-            case 'multi-select':
-              values[formItem.name] = values[formItem.name].join(',');
-              break;
+              case 'multi-select':
+                values[formItem.name] = values[formItem.name].join(',');
+                break;
 
-            default:
-              break;
-          }
+              default:
+                break;
+            }
+          })
+
+          callback(values);
         })
-
-        handleOk(values);
-      })
-      .catch(console.log)
-  };
+        .catch(console.log)
+    };
 
   return (
     isOpen ? (
       <Modal
         title={title}
         visible={isOpen}
-        onOk={onOk}
+        onOk={onOk(handleOk)}
         onCancel={handleClose}
         footer={[
           <Button key='ModalWithForm-cancel-button' type="primary" danger onClick={handleClose}>Отмена</Button>,
-          ...additionalButtons,
-          <Button key='ModalWithForm-ok-button' type="primary" onClick={onOk}>{okButtonTitle}</Button>,
+
+          additionalButtons.map(({title, onClick}) => (
+            <Button
+              key={`ModalWithForm-${title}-button`}
+              onClick={onOk(onClick)}
+            >
+              {title}
+            </Button>
+          )),
+
+          <Button key='ModalWithForm-ok-button' type="primary" onClick={onOk(handleOk)}>{okButtonTitle}</Button>,
         ]}
       >
         <Form

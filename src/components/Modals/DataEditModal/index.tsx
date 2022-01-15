@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
 import useMetadataSelector from '../../../storages/selectors/metadata';
 import getTableParameters from '../../../utils/getTableParameters';
 import ModalWithForm from '../../UI/ModalWithForm';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
+import { TButton } from '../../../types/TButton';
 import moment from 'moment';
 import { invert } from 'lodash';
 import useDictionaryContext from '../../../context/DictionaryContext';
@@ -12,6 +12,7 @@ import useDictionaryContext from '../../../context/DictionaryContext';
 interface IDataEditModal {
   isOpen: boolean;
   onEditHandler: (data: TData) => void;
+  onAddHandler?: (data: TData) => void;
   onClose: () => void;
   formData: TData;
 }
@@ -19,6 +20,7 @@ interface IDataEditModal {
 const DataEditModal: React.FC<IDataEditModal> = ({
   isOpen,
   onEditHandler,
+  onAddHandler,
   onClose,
   formData
 }) => {
@@ -37,19 +39,19 @@ const DataEditModal: React.FC<IDataEditModal> = ({
               case 'date':
               case 'datetime':
                 return [formItem.name, moment(new Date(formData[formItem.name]))]
-              
+
               case 'time':
                 return [formItem.name, moment(new Date('1970-01-01 '+ formData[formItem.name]))]
-  
+
               case 'select':
                 return [formItem.name, inverseDictionary[formData[formItem.name]]]
-    
+
               case 'multi-select':
                 return [
                   formItem.name,
                   formData[formItem.name].split(/, ?/).map((v: string) => inverseDictionary[v])
                 ]
-    
+
               default:
                 return [formItem.name, formData[formItem.name]]
             }
@@ -61,7 +63,7 @@ const DataEditModal: React.FC<IDataEditModal> = ({
   }, [formData, formItems, dictionary]);
 
   const { data: metadata, isError, isLoading } = useMetadataSelector();
-  
+
   useEffect(() => {
     if (metadata) {
       setFormItems(metadata
@@ -91,7 +93,10 @@ const DataEditModal: React.FC<IDataEditModal> = ({
         formItems={formItems}
         initialValues={initialValues}
         additionalButtons={[
-          <Button onClick={onEditHandler}>Сохранить как новый</Button>
+          {
+            onClick: onAddHandler,
+            title: 'Сохранить как новый'
+          } as TButton
         ]}
       />
     ) : null
