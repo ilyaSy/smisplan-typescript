@@ -20,7 +20,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
   const { dictionary } = useDictionaryContext();
 
   const onOk =
-    (callback: Function) =>
+    (callback: (values: any) => void) =>
     () => {
       form
         .validateFields()
