@@ -7,7 +7,7 @@ import SuspenseFallback from '../UI/SuspenseFallback';
 import classes from './Content.module.scss';
 
 const DataTable = lazy(() => import('../DataTable'));
-const Calendar = lazy(() => import('../Calendar/Calendar'));
+const DataCalendar = lazy(() => import('../DataCalendar'));
 
 const Content: React.FC = () => {
   const location = useLocation();
@@ -24,7 +24,7 @@ const Content: React.FC = () => {
         <Route path="calendar"
           element={
             <Suspense fallback={<SuspenseFallback type="loading" />}>
-              <Calendar />
+              <DataCalendar />
             </Suspense>
           }
         />

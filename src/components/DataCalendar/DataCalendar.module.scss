@@ -1,0 +1,16 @@
+.detailed-event-info-row {
+  --head-col-width: 110px;
+
+  width: 100% !important;
+  flex-flow: row;
+
+  & > .detailed-event-info-headcol {
+    width: var(--head-col-width) !important;
+    margin-right: 20px;
+    font-weight: bold !important;
+  }
+
+  & > .detailed-event-info-col {
+    width: calc(100% - var(--head-col-width) - 20px);
+  }
+}
