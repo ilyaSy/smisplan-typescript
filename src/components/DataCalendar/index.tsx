@@ -13,7 +13,8 @@ import classes from './DataCalendar.module.scss';
 
 moment.locale('ru');
 
-interface IDataCalendar {}
+interface IDataCalendar {
+}
 
 const DataCalendar: React.FC<IDataCalendar> = () => {
   const [dates, setDates] = useState<TData[]>([]);
