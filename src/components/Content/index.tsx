@@ -24,7 +24,7 @@ const Content: React.FC = () => {
         <Route path="calendar"
           element={
             <Suspense fallback={<SuspenseFallback type="loading" />}>
-              <DataCalendar />
+              <DataCalendar mode='discussion'/>
             </Suspense>
           }
         />

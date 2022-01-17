@@ -14,14 +14,15 @@ import classes from './DataCalendar.module.scss';
 moment.locale('ru');
 
 interface IDataCalendar {
+  mode: string,
 }
 
-const DataCalendar: React.FC<IDataCalendar> = () => {
+const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
   const [dates, setDates] = useState<TData[]>([]);
   const {
     data, isErrorData, isLoadingData,
     isLoadingMetadata, isErrorMetadata
-  } = useGetDataMeta('discussion');
+  } = useGetDataMeta(mode);
 
   useEffect(() => {
     if (data && data.length) {
