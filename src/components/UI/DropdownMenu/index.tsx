@@ -15,7 +15,6 @@ const DropdownMenu: React.FC<{menuItems: TDropdownMenu[]}> = ({ menuItems }) => 
               <Menu.SubMenu
                 key={menuItem.key}
                 title={menuItem.title}
-                // className={classes['dropdown-menu']}
               >
                 {
                   menuItem.items && menuItem.items.map((subMenuItem) => (
@@ -23,7 +22,6 @@ const DropdownMenu: React.FC<{menuItems: TDropdownMenu[]}> = ({ menuItems }) => 
                       key={subMenuItem.key}
                       onClick={subMenuItem.onClick}
                       icon={subMenuItem.icon}
-                      // className={classes['dropdown-menu']}
                     >
                       {subMenuItem.title}
                     </Menu.Item>
@@ -35,7 +33,6 @@ const DropdownMenu: React.FC<{menuItems: TDropdownMenu[]}> = ({ menuItems }) => 
                 key={menuItem.key}
                 onClick={menuItem.onClick}
                 icon={menuItem.icon}
-                // className={classes['dropdown-menu']}
               >
                 {menuItem.title}
               </Menu.Item>
