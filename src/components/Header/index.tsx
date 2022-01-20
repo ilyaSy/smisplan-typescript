@@ -30,7 +30,12 @@ const Header: React.FC = () => {
         </Menu>
       </nav>
 
-      <Menu theme='dark' mode='horizontal'>
+      <Menu
+        mode='horizontal'
+        theme='dark'
+        inlineCollapsed={false}
+        className={classes['header-login']}
+      >
         <Menu.SubMenu
           icon={<UserOutlined />}
           title={userContext.user?.name}

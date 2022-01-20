@@ -1,7 +1,5 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-// import DataTable from '../DataTable/DataTable';
-// import Calendar from '../Calendar/Calendar';
 import Sidebar from '../Sidebar/Sidebar';
 import SuspenseFallback from '../UI/SuspenseFallback';
 import classes from './Content.module.scss';
