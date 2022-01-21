@@ -1,9 +1,9 @@
+import React from "react";
 import { Modal, Form, Input, Button, DatePicker, TimePicker, Select } from 'antd';
 import useDictionaryContext from '../../../context/DictionaryContext';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
-import moment from 'moment';
-import React from "react";
+import { convertDataItem } from '../../../utils/convertDataItem';
 
 const ModalWithForm: React.FC<IModalWithForm> = ({
   title,
@@ -25,28 +25,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
       form
         .validateFields()
         .then((values) => {
-          formItems.forEach((formItem) => {
-            switch (formItem.type) {
-              case 'date':
-                values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD');
-                break;
-
-              case 'time':
-                values[formItem.name] = moment(values[formItem.name]).format('HH:mm:ss');
-                break;
-
-              case 'datetime':
-                values[formItem.name] = moment(values[formItem.name]).format('YYYY-MM-DD HH:mm:ss');
-                break;
-
-              case 'multi-select':
-                values[formItem.name] = values[formItem.name].join(',');
-                break;
-
-              default:
-                break;
-            }
-          })
+          values = convertDataItem(dictionary, values, formItems, 'form');
 
           callback(values);
         })

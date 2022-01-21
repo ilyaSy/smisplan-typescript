@@ -7,11 +7,13 @@ import { TDropdownMenu } from "../../types/TDropdownMenu";
 import { TTableParameters } from "../../types/TTableParameters";
 import classes from './ActionMenu.module.scss';
 import { TDictionary } from '../../types/TDictionary';
+import { convertDataItem } from '../../utils/convertDataItem';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
 interface IMenu {
   dataItem: TData;
+  metadata: TData[] | null;
   tableParameters: TTableParameters;
   handleOpen: (t: TModals) => void;
   handleEdit: (data: TActionBody) => void;
@@ -28,6 +30,7 @@ const handleDummyClick = () => {
 
 export const createActions = ({
     dataItem,
+    metadata,
     tableParameters,
     handleOpen,
     handleEdit,
@@ -64,18 +67,22 @@ export const createActions = ({
     });
   }
 
-  if (tableParameters.hasSetStatusMenu) {
+  if (tableParameters.hasSetStatusMenu && metadata) {
     actions.push({
       type: 'submenu',
       key: `action-menu-${dataItem.key}-status`,
       title: 'Изменить статус',
       items: Object.entries(dictionary?.status).map(([statusKey, statusValue]) => {
+        const values = convertDataItem(dictionary, dataItem, metadata, 'table');
+
         return ({
           key: `action-menu-status-${statusKey}`,
           title: statusValue,
           onClick: () => {
-            dataItem.status = statusKey;
-            handleEdit(dataItem);
+            // dataItem.status = statusKey;
+            // handleEdit(dataItem);
+            values.status = statusKey;
+            handleEdit(values);
           },
         })
       })

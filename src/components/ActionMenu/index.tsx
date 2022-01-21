@@ -10,6 +10,7 @@ import useGetTablename from '../../utils/hooks/useGetTablename';
 import { createActions } from './createActions';
 import DropdownMenu from '../UI/DropdownMenu';
 import useDictionaryContext from '../../context/DictionaryContext';
+import useMetadataSelector from '../../storages/selectors/metadata';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -25,6 +26,7 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
   const [openModal, setOpenModal] = useState<TModals>();
 
   const tablename = useGetTablename();
+  const { data: metadata } = useMetadataSelector();
 
   const handleClose = () => setOpenModal(undefined);
   const handleOpen = (t: TModals) => {
@@ -43,6 +45,7 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
   const actions = createActions({
     dataItem,
     dictionary,
+    metadata,
     tableParameters,
     handleOpen,
     handleDelete,
