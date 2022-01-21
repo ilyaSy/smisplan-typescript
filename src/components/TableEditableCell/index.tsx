@@ -54,7 +54,7 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
     form.setFieldsValue({ [dataIndex]: record[dataIndex] });
   };
 
-  const handleSave = async () => {
+  const save = async () => {
     try {
       const values = await form.validateFields();
 
@@ -75,7 +75,7 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
     children={children}
     dataIndex={dataIndex}
     record={record}
-    handleSave={handleSave}
+    handleSave={save}
     handleToggleEdit={handleToggleEdit}
     inputRef={inputRef}
     {...restProps}

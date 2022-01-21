@@ -1,7 +1,7 @@
 import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
-import TableEditableCell from '../../TableEditableCell';
+import DataTableEditableCell from '../../TableEditableCell';
 import TableExpandableRow from '../TableExpandableRow';
 import TableFilterIcon from '../TableFilterIcon';
 import ActionMenu from '../../ActionMenu';
@@ -42,15 +42,10 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
               editable: column.isInlineEditable,
               dataIndex: column.dataIndex,
               title: column.title,
-              handleSave: handleSave,
             }),
           };
       }
     )
-
-  const handleSave = (row: any) => {
-    console.log(row);
-  }
 
   return (
     <ConfigProvider locale={ruRU}>
@@ -60,7 +55,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
         components={{
           body: {
             row: TableEditableRow,
-            cell: TableEditableCell,
+            cell: DataTableEditableCell,
           },
         }}
         rowClassName={() => 'editable-row'}
