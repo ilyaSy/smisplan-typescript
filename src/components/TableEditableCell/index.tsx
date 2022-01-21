@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Form, Input } from 'antd';
+import { Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { EditableContext } from '../UI/TableEditableRow';
 import { convertDataItem } from '../../utils/convertDataItem';
@@ -7,7 +7,7 @@ import useGetTablename from '../../utils/hooks/useGetTablename';
 import useDictionaryContext from '../../context/DictionaryContext';
 import { dataUpdateAction } from '../../storages/actions/data';
 import useMetadataSelector from '../../storages/selectors/metadata';
-import classes from './TableEditableCell.module.scss';
+import TableEditableCell from '../UI/TableEditableCell';
 
 interface Item {
   key: string;
@@ -25,7 +25,7 @@ interface EditableCellProps {
   handleSave: (record: Item) => void;
 }
 
-const TableEditableCell: React.FC<EditableCellProps> = ({
+const DataTableEditableCell: React.FC<EditableCellProps> = ({
   title,
   editable,
   children,
@@ -68,38 +68,18 @@ const TableEditableCell: React.FC<EditableCellProps> = ({
     }
   };
 
-  let childNode = children;
-
-  if (editable) {
-    childNode = editing ? (
-      <Form.Item
-        style={{ margin: 0 }}
-        name={ dataIndex }
-        rules={[
-          {
-            required: true,
-            message: `${title} is required.`,
-          },
-        ]}
-      >
-        <Input
-          ref={inputRef}
-          onPressEnter={save}
-          onBlur={save}
-        />
-      </Form.Item>
-    ) : (
-      <div
-        className={classes["editable-cell-value-wrap"]}
-        style={{ paddingRight: 24 }}
-        onClick={handleToggleEdit}
-      >
-        {children}
-      </div>
-    );
-  }
-
-  return <td {...restProps}>{childNode}</td>;
+  return <TableEditableCell
+    title={title}
+    editing={editing}
+    editable={editable}
+    children={children}
+    dataIndex={dataIndex}
+    record={record}
+    handleSave={save}
+    handleToggleEdit={handleToggleEdit}
+    inputRef={inputRef}
+    {...restProps}
+  />
 };
 
-export default TableEditableCell;
+export default DataTableEditableCell;
