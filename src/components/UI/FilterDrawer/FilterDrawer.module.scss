@@ -5,3 +5,12 @@
   height: 43px;
   border-radius: 50%;
 }
+
+.reset-filter-button {
+  margin-left: 30px;
+  border: 1px solid white;
+
+  &:hover {
+    border: 1px solid #40a9ff;
+  }
+}
