@@ -1,4 +1,5 @@
-import { ConfigProvider, Table } from 'antd';
+import { Button, ConfigProvider, Table, Tooltip } from 'antd';
+import { FilterOutlined, FilterFilled } from '@ant-design/icons';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
 import DataTableEditableCell from '../../TableEditableCell';
@@ -8,6 +9,7 @@ import ActionMenu from '../../ActionMenu';
 import { TData } from '../../../types/TData';
 import { TTableParameters } from '../../../types/TTableParameters';
 import classes from './Table.module.scss';
+import { useFilterDrawer } from '../FilterDrawer';
 
 type TTableProps = {
   data: TData[],
@@ -47,11 +49,16 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       }
     )
 
+  const [FilterButton, Filter] = useFilterDrawer();
+
   return (
     <ConfigProvider locale={ruRU}>
+      {Filter}
+
       <Table
         dataSource={ sourceData }
         columns={ tableColumns }
+        title={FilterButton}
         components={{
           body: {
             row: TableEditableRow,
