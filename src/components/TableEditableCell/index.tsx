@@ -22,7 +22,7 @@ interface EditableCellProps {
   children: React.ReactNode;
   dataIndex: keyof Item;
   record: Item;
-  handleSave: (record: Item) => void;
+  // handleSave: (record: Item) => void;
 }
 
 const DataTableEditableCell: React.FC<EditableCellProps> = ({
@@ -31,7 +31,7 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
   children,
   dataIndex,
   record,
-  handleSave,
+  // handleSave,
   ...restProps
 }) => {
   const { dictionary } = useDictionaryContext();
@@ -54,7 +54,7 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
     form.setFieldsValue({ [dataIndex]: record[dataIndex] });
   };
 
-  const save = async () => {
+  const handleSave = async () => {
     try {
       const values = await form.validateFields();
 
@@ -75,7 +75,7 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
     children={children}
     dataIndex={dataIndex}
     record={record}
-    handleSave={save}
+    handleSave={handleSave}
     handleToggleEdit={handleToggleEdit}
     inputRef={inputRef}
     {...restProps}
