@@ -9,6 +9,7 @@ import { dataAddAction, dataDeleteAction, dataUpdateAction } from '../../storage
 import useGetTablename from '../../utils/hooks/useGetTablename';
 import { createActions } from './createActions';
 import DropdownMenu from '../UI/DropdownMenu';
+import useDictionaryContext from '../../context/DictionaryContext';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -19,6 +20,8 @@ type TActionMenu = {
 };
 
 const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) => {
+  const { dictionary } = useDictionaryContext();
+
   const [openModal, setOpenModal] = useState<TModals>();
 
   const tablename = useGetTablename();
@@ -32,14 +35,19 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
   const handleDelete = (data: TActionBody) => dispatch(dataDeleteAction(tablename, data));
   const handleAdd = (data: TActionBody) => {
     delete data.id;
-    console.log(data);
-
     dispatch(dataAddAction(tablename, data));
   }
 
   const dispatch = useDispatch();
 
-  const actions = createActions({ dataItem, tableParameters, handleOpen, handleDelete });
+  const actions = createActions({
+    dataItem,
+    dictionary,
+    tableParameters,
+    handleOpen,
+    handleDelete,
+    handleEdit
+  });
 
   return (
     <>
