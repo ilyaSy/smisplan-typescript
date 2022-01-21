@@ -38,7 +38,7 @@ export const convertDataItem: TConvertDataItem = (dictionary, data, metadata, mo
           case 'multi-select':
             return [
               name,
-              data[name].split(', ').map((d: string) => invertDictionary[d]).join(',')
+              data[name]?.split(', ')?.map((d: string) => invertDictionary[d])?.join(',')
             ]
         }
       }

@@ -1,6 +1,12 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext, ReactElement } from 'react';
 import { Form, Input } from 'antd';
-import { EditableContext } from '../TableEditableRow';
+import { useDispatch } from 'react-redux';
+import { EditableContext } from '../UI/TableEditableRow';
+import { convertDataItem } from '../../utils/convertDataItem';
+import useGetTablename from '../../utils/hooks/useGetTablename';
+import useDictionaryContext from '../../context/DictionaryContext';
+import { dataUpdateAction } from '../../storages/actions/data';
+import useMetadataSelector from '../../storages/selectors/metadata';
 import classes from './TableEditableCell.module.scss';
 
 interface Item {
@@ -19,7 +25,7 @@ interface EditableCellProps {
   handleSave: (record: Item) => void;
 }
 
-const DataTableEditableCell: React.FC<EditableCellProps> = ({
+const TableEditableCell: React.FC<EditableCellProps> = ({
   title,
   editable,
   children,
@@ -28,9 +34,14 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
   handleSave,
   ...restProps
 }) => {
+  const { dictionary } = useDictionaryContext();
+  const {data: metadata} = useMetadataSelector();
+  const tablename = useGetTablename();
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<Input>(null);
   const form = useContext(EditableContext)!;
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (editing) {
@@ -48,7 +59,10 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
       const values = await form.validateFields();
 
       toggleEdit();
-      handleSave({ ...record, ...values });
+      if (metadata) {
+        const data = { ...record, ...values };
+        dispatch(dataUpdateAction(tablename, convertDataItem(dictionary, data, metadata, 'table')));
+      }
     } catch (errInfo) {
       console.log('Save failed:', errInfo);
     }
@@ -80,4 +94,4 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
   return <td {...restProps}>{childNode}</td>;
 };
 
-export default DataTableEditableCell;
+export default TableEditableCell;
