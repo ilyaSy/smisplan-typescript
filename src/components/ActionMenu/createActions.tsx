@@ -79,8 +79,6 @@ export const createActions = ({
           key: `action-menu-status-${statusKey}`,
           title: statusValue,
           onClick: () => {
-            // dataItem.status = statusKey;
-            // handleEdit(dataItem);
             values.status = statusKey;
             handleEdit(values);
           },
