@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext, ReactElement } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { EditableContext } from '../UI/TableEditableRow';
@@ -49,7 +49,7 @@ const TableEditableCell: React.FC<EditableCellProps> = ({
     }
   }, [editing]);
 
-  const toggleEdit = () => {
+  const handleToggleEdit = () => {
     setEditing(!editing);
     form.setFieldsValue({ [dataIndex]: record[dataIndex] });
   };
@@ -58,7 +58,7 @@ const TableEditableCell: React.FC<EditableCellProps> = ({
     try {
       const values = await form.validateFields();
 
-      toggleEdit();
+      handleToggleEdit();
       if (metadata) {
         const data = { ...record, ...values };
         dispatch(dataUpdateAction(tablename, convertDataItem(dictionary, data, metadata, 'table')));
@@ -82,10 +82,18 @@ const TableEditableCell: React.FC<EditableCellProps> = ({
           },
         ]}
       >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+        <Input
+          ref={inputRef}
+          onPressEnter={save}
+          onBlur={save}
+        />
       </Form.Item>
     ) : (
-      <div className={classes["editable-cell-value-wrap"]} style={{ paddingRight: 24 }} onClick={toggleEdit}>
+      <div
+        className={classes["editable-cell-value-wrap"]}
+        style={{ paddingRight: 24 }}
+        onClick={handleToggleEdit}
+      >
         {children}
       </div>
     );
