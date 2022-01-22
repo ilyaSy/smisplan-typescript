@@ -3,8 +3,8 @@ import React, { useCallback, useContext, useMemo, useState } from "react";
 import { TDictionary } from "../types/TDictionary";
 import { TObject } from "../types/TObject";
 
-type TGetDataUrl = { getDataUrl: string };
-type TMetadataDictionary = Record<string, string>[] | TGetDataUrl;
+export type TGetDataUrl = { getDataUrl: string };
+export type TMetadataDictionary = Record<string, string>[] | TGetDataUrl;
 
 interface IDictionaryContext {
   dictionary: TDictionary;

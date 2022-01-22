@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import moment from "moment";
 import ModalWithForm from '../../UI/ModalWithForm';
-// import useMetadataSelector from '../../../storages/selectors/metadata';
 import getTableParameters from '../../../utils/getTableParameters';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
-import metadataGetAction from '../../../storages/actions/metadata';
-import { defaultHeaders } from '../../../storages/middleware/apiMiddleware';
-import useGetTablename from '../../../utils/hooks/useGetTablename';
+import { TDictionary } from '../../../types/TDictionary';
+// import useGetTablename from '../../../utils/hooks/useGetTablename';
+import { useGetMetaDictionary } from '../../../utils/hooks/useGetMetaDictionary';
+import useMetadataSelector from '../../../storages/selectors/metadata';
+import useDictionaryContext from '../../../context/DictionaryContext';
 
 interface IDataAddModal {
   isOpen: boolean;
@@ -26,31 +26,34 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
   const [initialValues, setInitialValues] = useState<TData>({});
   const [metadata, setMetadata] = useState<TData[] | null>(null);
+  const [dictionary, setDictionary] = useState<TDictionary | null>(null);
 
-  const tablename = useGetTablename();
+  // const tablename = useGetTablename();
+
+  // const { metadata, dictionary } = useGetMetaDictionary(modalTablename || tablename);
+  const { metadata: modalTableMetadata, dictionary: modalTableDictionary } = useGetMetaDictionary(modalTablename);
+  const { data: contextMetadata } = useMetadataSelector();
+  const { dictionary: contextDictionary } = useDictionaryContext();
 
   useEffect(() => {
-    const metadataAction = metadataGetAction(modalTablename || tablename);
-    console.log(metadataAction);
-
-    axios.request({
-      method: metadataAction.method,
-      url: metadataAction.url,
-      headers: defaultHeaders as any,
-    })
-      .then((response: any) => {
-        console.log(response.data);
-        setMetadata(response.data);
-      })
-  }, [modalTablename, tablename]);
-
-  // const { data: metadata, isError, isLoading } = useMetadataSelector();
+    if (modalTableMetadata && modalTableDictionary) {
+      setMetadata(modalTableMetadata);
+      setDictionary(modalTableDictionary);
+    } else if (contextMetadata && contextDictionary) {
+      setMetadata(contextMetadata);
+      setDictionary(contextDictionary);
+    }
+  }, [
+    modalTableMetadata,
+    modalTableDictionary,
+    contextMetadata,
+    contextDictionary
+  ]);
 
   useEffect(() => {
     if (formItems && metadata) {
       setInitialValues(
         Object.fromEntries(formItems.map((formItem) => {
-          // const inverseDictionary = invert(dictionary[formItem.name]);
           const formItemMetadata = metadata.find(({id}) => id === formItem.name);
 
           if (formItemMetadata && formItemMetadata.defaultValue) {
@@ -97,7 +100,6 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   }, [ metadata ]);
 
   return (
-    // metadata && !isError && !isLoading ? (
     metadata ? (
       <ModalWithForm
         title={getTableParameters(metadata).addMenuTitle || 'Добавить'}
@@ -108,6 +110,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
         formItems={formItems}
         initialValues={initialValues}
         additionalButtons={[]}
+        modalDictionary={dictionary}
       />
     ) : null
   );

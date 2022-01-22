@@ -70,17 +70,14 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
           dispatch(dataAddAction(tablename, data));
         }}
         onClose={handleClose}
-        // modalTablename='discussion'
+        modalTablename='discussion'
       />
 
-      <Tooltip
-        placement='topRight'
-        title={title}
-        >
-          <Dropdown.Button
-            overlay={ <DropdownMenu menuItems={actions} /> }
-            trigger={['click']}
-          />
+      <Tooltip placement='topRight' title={title}>
+        <Dropdown.Button
+          overlay={<DropdownMenu menuItems={actions} />}
+          trigger={['click']}
+        />
       </Tooltip>
     </>
   );

@@ -1,6 +1,7 @@
 import { IFormItem } from "./IFormItem";
 import { TButton } from "./TButton";
 import { TData } from "./TData";
+import { TDictionary } from "./TDictionary";
 
 export interface IModalWithForm {
   title: string;
@@ -12,4 +13,5 @@ export interface IModalWithForm {
   // additionalButtons: JSX.Element[];
   additionalButtons: TButton[];
   initialValues?: TData;
+  modalDictionary?: TDictionary | null;
 };

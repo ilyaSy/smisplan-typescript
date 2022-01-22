@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Form, Input, Button, DatePicker, TimePicker, Select } from 'antd';
 import useDictionaryContext from '../../../context/DictionaryContext';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
 import { convertDataItem } from '../../../utils/convertDataItem';
+import { TDictionary } from "../../../types/TDictionary";
 
 const ModalWithForm: React.FC<IModalWithForm> = ({
   title,
@@ -13,11 +14,17 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
   handleClose,
   formItems,
   additionalButtons,
-  initialValues
+  initialValues,
+  modalDictionary
 }) => {
   const [form] = Form.useForm();
 
-  const { dictionary } = useDictionaryContext();
+  const { dictionary: contextDictionary } = useDictionaryContext();
+  const [dictionary, setDictionary] = useState<TDictionary | null>(null);
+
+  useEffect(() => {
+    setDictionary(modalDictionary || contextDictionary);
+  }, [contextDictionary, modalDictionary])
 
   const onOk =
     (callback: (values: any) => void) =>
@@ -25,9 +32,11 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
       form
         .validateFields()
         .then((values) => {
-          values = convertDataItem(dictionary, values, formItems, 'form');
+          if (dictionary) {
+            values = convertDataItem(dictionary, values, formItems, 'form');
 
-          callback(values);
+            callback(values);
+          }
         })
         .catch(console.log)
     };
@@ -93,9 +102,15 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                       filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
                       mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
                       showSearch
-                      options={Object.entries(dictionary[formItem.name]).map(([value, label]) => (
-                        { value, label }
-                      ))}
+                      // options={Object.entries(dictionary[formItem.name]).map(([value, label]) => (
+                      options={
+                        dictionary
+                          ? Object.entries(dictionary[formItem.name])
+                              .map(([value, label]) => (
+                                { value, label }
+                              ))
+                          : []
+                      }
                     />
                   ) :
                   formItem.type === 'date' ? (
