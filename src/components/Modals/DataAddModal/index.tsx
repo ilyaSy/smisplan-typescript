@@ -1,26 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import useMetadataSelector from '../../../storages/selectors/metadata';
+import axios from 'axios';
+import moment from "moment";
 import ModalWithForm from '../../UI/ModalWithForm';
+// import useMetadataSelector from '../../../storages/selectors/metadata';
 import getTableParameters from '../../../utils/getTableParameters';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
-import moment from "moment";
+import metadataGetAction from '../../../storages/actions/metadata';
+import { defaultHeaders } from '../../../storages/middleware/apiMiddleware';
+import useGetTablename from '../../../utils/hooks/useGetTablename';
 
 interface IDataAddModal {
   isOpen: boolean;
   onAddHandler: (data: TData) => void;
   onClose: () => void;
+  modalTablename?: string;
 }
 
 const DataAddModal: React.FC<IDataAddModal> = ({
   isOpen,
   onAddHandler,
   onClose,
+  modalTablename,
 }) => {
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
   const [initialValues, setInitialValues] = useState<TData>({});
+  const [metadata, setMetadata] = useState<TData[] | null>(null);
 
-  const { data: metadata, isError, isLoading } = useMetadataSelector();
+  const tablename = useGetTablename();
+
+  useEffect(() => {
+    const metadataAction = metadataGetAction(modalTablename || tablename);
+    console.log(metadataAction);
+
+    axios.request({
+      method: metadataAction.method,
+      url: metadataAction.url,
+      headers: defaultHeaders as any,
+    })
+      .then((response: any) => {
+        console.log(response.data);
+        setMetadata(response.data);
+      })
+  }, [modalTablename, tablename]);
+
+  // const { data: metadata, isError, isLoading } = useMetadataSelector();
 
   useEffect(() => {
     if (formItems && metadata) {
@@ -73,7 +97,8 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   }, [ metadata ]);
 
   return (
-    metadata && !isError && !isLoading ? (
+    // metadata && !isError && !isLoading ? (
+    metadata ? (
       <ModalWithForm
         title={getTableParameters(metadata).addMenuTitle || 'Добавить'}
         okButtonTitle='Добавить'

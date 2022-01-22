@@ -27,22 +27,20 @@ const useDictionaryContext = () => {
 export const DictionaryContextProvider: React.FC = ({children}) => {
   const [dict, setDict] = useState<IDictionaryContext["dictionary"]>({});
 
-  const dictionary = useMemo(() => {
-    return dict;
-  }, [dict]);
+  const dictionary = useMemo(() => dict, [dict]);
 
   const setDictionary = useCallback((
-    parameter: string, 
+    parameter: string,
     parameterDictionary: TMetadataDictionary
   ) => {
     if ((parameterDictionary as TGetDataUrl).getDataUrl) {
       const url = (parameterDictionary as TGetDataUrl).getDataUrl;
-      
+
       axios.get(url)
         .then((response) => {
           setDict((prev) => {
             return {
-              ...prev, 
+              ...prev,
               [parameter]: mapDictionaryArrayToObject(response.data as Record<string, string>[])
             }
           });
@@ -51,7 +49,7 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
     } else {
       setDict((prev) => {
         return {
-          ...prev, 
+          ...prev,
           [parameter]: mapDictionaryArrayToObject(parameterDictionary as Record<string, string>[])
         }
       });
@@ -61,7 +59,7 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
   return (
     <DictionaryContext.Provider value={{
       dictionary,
-      setDictionary 
+      setDictionary
     }}>
       {children}
     </DictionaryContext.Provider>

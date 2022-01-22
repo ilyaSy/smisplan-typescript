@@ -4,11 +4,9 @@ import { Menu, Tooltip } from 'antd';
 import {
   PrinterOutlined,
   SettingOutlined,
-  // EyeInvisibleOutlined,
   PlusCircleTwoTone,
 } from '@ant-design/icons';
 import DataAddModal from '../Modals/DataAddModal';
-// import showConfirmModal from '../Modals/ConfirmModal';
 import {dataAddAction} from "../../storages/actions/data";
 import classes from './Sidebar.module.scss';
 import useGetTablename from "../../utils/hooks/useGetTablename";
@@ -22,13 +20,9 @@ const Sidebar: React.FC = () => {
 
   const {isError: isErrorData, isLoading: isLoadingData} = useDataSelector();
 
-  const handleAddData = () => {
-    setSidebarAction('addData');
-  };
+  const handleAddData = () => setSidebarAction('addData');
 
-  const handleCloseModal = () => {
-    setSidebarAction('');
-  }
+  const handleCloseModal = () => setSidebarAction('');
 
   useEffect(() => {
     if (!isErrorData && !isLoadingData) handleCloseModal();

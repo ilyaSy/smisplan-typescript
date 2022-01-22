@@ -40,13 +40,14 @@ export const createActions = ({
   const actions: TDropdownMenu[] = [];
 
   if (tableParameters.hasDiscussion) {
+    const handleOpenAddDiscussion = () => {
+      handleOpen('addDiscussion');
+    }
+
     actions.push({
       type: 'item',
       key: `action-menu-${dataItem.key}-add-discussion`,
-      onClick: () => {
-        // handleDummyClick();
-        handleOpen('addDiscussion');
-      },
+      onClick: handleOpenAddDiscussion,
       icon: <CalendarFilled className={classes['action-menu']}/>,
       title: 'Добавить обсуждение',
     });

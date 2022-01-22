@@ -11,6 +11,7 @@ import { createActions } from './createActions';
 import DropdownMenu from '../UI/DropdownMenu';
 import useDictionaryContext from '../../context/DictionaryContext';
 import useMetadataSelector from '../../storages/selectors/metadata';
+import DataAddModal from '../Modals/DataAddModal';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -61,6 +62,15 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
 
         onClose={handleClose}
         formData={dataItem}
+      />
+
+      <DataAddModal
+        isOpen={openModal === 'addDiscussion'}
+        onAddHandler={(data) => {
+          dispatch(dataAddAction(tablename, data));
+        }}
+        onClose={handleClose}
+        // modalTablename='discussion'
       />
 
       <Tooltip
