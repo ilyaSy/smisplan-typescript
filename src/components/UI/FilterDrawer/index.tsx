@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from "react"
 import { Button, Drawer, Tooltip, Form, Input, Select, DatePicker, TimePicker, Col, Row } from "antd";
 import { FilterOutlined, FilterFilled } from '@ant-design/icons';
-import { PanelRender } from "rc-table/lib/interface";
 import { TData } from "../../../types/TData";
 import { IFormItem } from "../../../types/IFormItem";
 import classes from './FilterDrawer.module.scss';
@@ -11,7 +10,7 @@ type TUseFilterDrawer = (
   tableColumns: TData[],
   sourceData: TData[],
 ) => {
-  FilterButtons: PanelRender<TData>,
+  FilterButtons: JSX.Element,
   Filter: JSX.Element,
   filterData: TData[] | undefined,
 };
@@ -40,8 +39,20 @@ export const useFilterDrawer: TUseFilterDrawer = (tableColumns, sourceData) => {
     form.resetFields();
   }, [sourceData, form]);
 
-  const FilterButtons = useCallback<PanelRender<TData>>(() => (
-    <>
+  const submitFilter = useCallback((values: any) => {
+    setVisibleResetButton(false);
+    setFilterData(sourceData.filter((data: TData) => {
+      return Object.keys(data).reduce((acc, key) => {
+        const value = dictionary[key] ? dictionary[key][values[key]] : values[key];
+        if (value) setVisibleResetButton(true);
+        return acc && (!value || (value && data[key] && data[key] === value))
+      }, true)
+    }))
+    closeFilter();
+  }, [dictionary, sourceData, closeFilter]);
+
+  const FilterButtons = useMemo<JSX.Element>(() => (
+    <div>
       <Tooltip
         placement='topRight'
         title='Показать фильтры'
@@ -64,7 +75,7 @@ export const useFilterDrawer: TUseFilterDrawer = (tableColumns, sourceData) => {
       >
         Сбросить фильтры
       </Button>
-    </>
+    </div>
   ), [openFilter, resetFilter, visibleResetButton]);
 
   const Filter = useMemo(() => (
@@ -80,16 +91,7 @@ export const useFilterDrawer: TUseFilterDrawer = (tableColumns, sourceData) => {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         // initialValues={initialValues ? initialValues : {}}
-        onFinish={(values: any) => {
-          setVisibleResetButton(false);
-          setFilterData(sourceData.filter((data: TData) => {
-            return Object.keys(data).reduce((acc, key) => {
-              const value = dictionary[key] ? dictionary[key][values[key]] : values[key];
-              if (value) setVisibleResetButton(true);
-              return acc && (!value || (value && data[key] && data[key] === value))
-            }, true)
-          }))
-        }}
+        onFinish={submitFilter}
         onFinishFailed={console.log}
         form={form}
       >
@@ -155,10 +157,10 @@ export const useFilterDrawer: TUseFilterDrawer = (tableColumns, sourceData) => {
     form,
     dictionary,
     tableColumns,
-    sourceData,
     visible,
     closeFilter,
     resetFilter,
+    submitFilter,
   ]);
 
   return {
