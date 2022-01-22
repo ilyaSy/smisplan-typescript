@@ -11,7 +11,7 @@ type TUseFilterDrawer = (
   sourceData: TData[],
 ) => {
   FilterButtons: JSX.Element,
-  Filter: JSX.Element,
+  FilterPanel: JSX.Element,
   filterData: TData[] | undefined,
 };
 
@@ -78,7 +78,7 @@ export const useFilterDrawer: TUseFilterDrawer = (tableColumns, sourceData) => {
     </div>
   ), [openFilter, resetFilter, visibleResetButton]);
 
-  const Filter = useMemo(() => (
+  const FilterPanel = useMemo(() => (
     <Drawer
       title='Фильтры'
       placement="right"
@@ -165,7 +165,7 @@ export const useFilterDrawer: TUseFilterDrawer = (tableColumns, sourceData) => {
 
   return {
     FilterButtons,
-    Filter,
+    FilterPanel,
     filterData: data
   };
 }

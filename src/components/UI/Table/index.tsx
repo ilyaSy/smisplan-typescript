@@ -59,7 +59,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
 
   const {
     FilterButtons,
-    Filter,
+    FilterPanel,
     filterData
   } = useFilterDrawer(tableColumns, sourceData);
 
@@ -89,7 +89,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
 
   return (
     <ConfigProvider locale={ruRU}>
-      {Filter}
+      {FilterPanel}
 
       <Table
         dataSource={ tableData }
