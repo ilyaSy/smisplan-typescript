@@ -41,6 +41,10 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
     dispatch(dataAddAction(tablename, data));
   }
 
+  const handleAddDiscussion = (data: TActionBody) => {
+    dispatch(dataAddAction('discussion', data));
+  }
+
   const dispatch = useDispatch();
 
   const actions = createActions({
@@ -66,11 +70,13 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
 
       <DataAddModal
         isOpen={openModal === 'addDiscussion'}
-        onAddHandler={(data) => {
-          dispatch(dataAddAction(tablename, data));
-        }}
+        onAddHandler={handleAddDiscussion}
         onClose={handleClose}
         modalTablename='discussion'
+        modalInitialValues={{
+          theme: dataItem.text,
+          mainQuestions: dataItem.description
+        }}
       />
 
       <Tooltip placement='topRight' title={title}>

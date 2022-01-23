@@ -15,6 +15,7 @@ interface IDataAddModal {
   onAddHandler: (data: TData) => void;
   onClose: () => void;
   modalTablename?: string;
+  modalInitialValues?: TData;
 }
 
 const DataAddModal: React.FC<IDataAddModal> = ({
@@ -22,6 +23,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   onAddHandler,
   onClose,
   modalTablename,
+  modalInitialValues
 }) => {
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
   const [initialValues, setInitialValues] = useState<TData>({});
@@ -55,8 +57,14 @@ const DataAddModal: React.FC<IDataAddModal> = ({
       setInitialValues(
         Object.fromEntries(formItems.map((formItem) => {
           const formItemMetadata = metadata.find(({id}) => id === formItem.name);
+          const initialValue: string | undefined =
+            modalInitialValues && modalInitialValues[formItem.name]
+              ? modalInitialValues[formItem.name]
+              : formItemMetadata && formItemMetadata.defaultValue
+                ? formItemMetadata.defaultValue
+                : undefined;
 
-          if (formItemMetadata && formItemMetadata.defaultValue) {
+          if (initialValue) {
             switch (formItem.type) {
               case 'date':
               case 'datetime':
@@ -64,23 +72,23 @@ const DataAddModal: React.FC<IDataAddModal> = ({
                 return [formItem.name, moment(new Date())]
 
               case 'select':
-                return [formItem.name, formItemMetadata.defaultValue]
+                return [formItem.name, initialValue]
 
               case 'multi-select':
                 return [
                   formItem.name,
-                  formItemMetadata.defaultValue.split(/, ?/)
+                  initialValue.split(/, ?/)
                 ]
 
               default:
-                return [formItem.name, formItemMetadata.defaultValue]
+                return [formItem.name, initialValue]
             }
           }
           return [formItem.name, undefined];
         }))
       )
     }
-  }, [metadata, formItems]);
+  }, [metadata, formItems, modalInitialValues]);
 
   useEffect(() => {
     if (metadata) {
