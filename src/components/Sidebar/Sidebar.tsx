@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Menu, Tooltip } from 'antd';
 import {
-  PrinterOutlined,
+  // PrinterOutlined,
   SettingOutlined,
   PlusCircleTwoTone,
 } from '@ant-design/icons';
@@ -11,6 +11,7 @@ import {dataAddAction} from "../../storages/actions/data";
 import classes from './Sidebar.module.scss';
 import useGetTablename from "../../utils/hooks/useGetTablename";
 import useDataSelector from "../../storages/selectors/data";
+import { PrintPDF } from '../UI/PrintPDF';
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
@@ -55,13 +56,14 @@ const Sidebar: React.FC = () => {
       </Menu.Item>
 
       <Menu.Item key='printPDF' className={classes['sidebar__menu-item']}>
-        <Tooltip
+        {/* <Tooltip
           placement='bottomLeft'
           title='Печать в PDF'
           className='tooltip'
         >
           <PrinterOutlined style={{ fontSize: '30px' }} />
-        </Tooltip>
+        </Tooltip> */}
+        <PrintPDF />
       </Menu.Item>
 
       <Menu.SubMenu key='settings'
