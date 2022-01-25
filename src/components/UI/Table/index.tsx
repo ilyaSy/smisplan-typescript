@@ -9,7 +9,8 @@ import { TData } from '../../../types/TData';
 import { TTableParameters } from '../../../types/TTableParameters';
 import { useFilterDrawer } from '../FilterDrawer';
 import classes from './Table.module.scss';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { usePrintPDFContext } from '../../../context/PrintPDFContext';
 
 type TTableProps = {
   data: TData[],
@@ -20,9 +21,15 @@ type TTableProps = {
 const PAGE_SIZE = 10;
 
 const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) => {
+  const { setDataPrintRef } = usePrintPDFContext();
+  const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
   const [tableData, setTableData] = useState<TData[]>([]);
+
+  useEffect(() => {
+    if (dataRef) setDataPrintRef(dataRef)
+  }, [setDataPrintRef]);
 
   const sourceData = useMemo(() => {
     return data.map((dataItem, index) => ({
@@ -81,7 +88,13 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
         total={(filterData || []).length}
       />
     </div>
-  ), [FilterButtons, filterData, page, pageSize, handleChangePage]);
+  ), [
+    FilterButtons,
+    filterData,
+    page,
+    pageSize,
+    handleChangePage
+  ]);
 
   useEffect(() => {
     setTableData([...filterData || []].splice(0, pageSize));
@@ -92,6 +105,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       {FilterPanel}
 
       <Table
+        ref={dataRef}
         dataSource={ tableData }
         columns={ tableColumns }
         title={TableTitle}

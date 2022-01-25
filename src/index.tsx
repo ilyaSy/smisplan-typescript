@@ -7,6 +7,7 @@ import App from './App';
 import './index.css';
 import 'antd/dist/antd.css';
 import { DictionaryContextProvider } from './context/DictionaryContext';
+import { PrintPDFContextProvider } from './context/PrintPDFContext';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +15,9 @@ ReactDOM.render(
       <UserContextProvider>
         <DictionaryContextProvider>
           <StorageProvider>
-            <App />
+            <PrintPDFContextProvider>
+              <App />
+            </PrintPDFContextProvider>
           </StorageProvider>
         </DictionaryContextProvider>
       </UserContextProvider>

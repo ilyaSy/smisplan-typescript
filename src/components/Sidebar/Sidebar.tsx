@@ -56,13 +56,6 @@ const Sidebar: React.FC = () => {
       </Menu.Item>
 
       <Menu.Item key='printPDF' className={classes['sidebar__menu-item']}>
-        {/* <Tooltip
-          placement='bottomLeft'
-          title='Печать в PDF'
-          className='tooltip'
-        >
-          <PrinterOutlined style={{ fontSize: '30px' }} />
-        </Tooltip> */}
         <PrintPDF />
       </Menu.Item>
 
