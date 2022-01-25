@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import moment from "moment";
 import ModalWithForm from '../../UI/ModalWithForm';
 import getTableParameters from '../../../utils/getTableParameters';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
 import { TDictionary } from '../../../types/TDictionary';
-// import useGetTablename from '../../../utils/hooks/useGetTablename';
 import { useGetMetaDictionary } from '../../../utils/hooks/useGetMetaDictionary';
 import useMetadataSelector from '../../../storages/selectors/metadata';
 import useDictionaryContext from '../../../context/DictionaryContext';
+import { convertDataItem } from '../../../utils/convertDataItem';
 
 interface IDataAddModal {
   isOpen: boolean;
@@ -30,9 +29,6 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   const [metadata, setMetadata] = useState<TData[] | null>(null);
   const [dictionary, setDictionary] = useState<TDictionary | null>(null);
 
-  // const tablename = useGetTablename();
-
-  // const { metadata, dictionary } = useGetMetaDictionary(modalTablename || tablename);
   const { metadata: modalTableMetadata, dictionary: modalTableDictionary } = useGetMetaDictionary(modalTablename);
   const { data: contextMetadata } = useMetadataSelector();
   const { dictionary: contextDictionary } = useDictionaryContext();
@@ -53,42 +49,15 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   ]);
 
   useEffect(() => {
-    if (formItems && metadata) {
-      setInitialValues(
-        Object.fromEntries(formItems.map((formItem) => {
-          const formItemMetadata = metadata.find(({id}) => id === formItem.name);
-          const initialValue: string | undefined =
-            modalInitialValues && modalInitialValues[formItem.name]
-              ? modalInitialValues[formItem.name]
-              : formItemMetadata && formItemMetadata.defaultValue
-                ? formItemMetadata.defaultValue
-                : undefined;
+    if (formItems && metadata && dictionary) {
+      const defaultData: TData = Object.fromEntries(metadata
+        .filter(({id}) => id !== 'specificValue')
+        .map((d) => [d.id, d.defaultValue]))
+      const initialData = modalInitialValues ? modalInitialValues : defaultData;
 
-          if (initialValue) {
-            switch (formItem.type) {
-              case 'date':
-              case 'datetime':
-              case 'time':
-                return [formItem.name, moment(new Date())]
-
-              case 'select':
-                return [formItem.name, initialValue]
-
-              case 'multi-select':
-                return [
-                  formItem.name,
-                  initialValue.split(/, ?/)
-                ]
-
-              default:
-                return [formItem.name, initialValue]
-            }
-          }
-          return [formItem.name, undefined];
-        }))
-      )
+      setInitialValues(convertDataItem(dictionary, initialData, metadata, 'modalAdd'));
     }
-  }, [metadata, formItems, modalInitialValues]);
+  }, [metadata, formItems, modalInitialValues, dictionary]);
 
   useEffect(() => {
     if (metadata) {

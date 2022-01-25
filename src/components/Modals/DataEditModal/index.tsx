@@ -5,9 +5,8 @@ import ModalWithForm from '../../UI/ModalWithForm';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
 import { TButton } from '../../../types/TButton';
-import moment from 'moment';
-import { invert } from 'lodash';
 import useDictionaryContext from '../../../context/DictionaryContext';
+import { convertDataItem } from '../../../utils/convertDataItem';
 
 interface IDataEditModal {
   isOpen: boolean;
@@ -26,43 +25,16 @@ const DataEditModal: React.FC<IDataEditModal> = ({
 }) => {
   const { dictionary } = useDictionaryContext();
 
+  const { data: metadata, isError, isLoading } = useMetadataSelector();
+
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
   const [initialValues, setInitialValues] = useState<TData>(formData);
 
   useEffect(() => {
-    if (formItems && formData) {
-      setInitialValues(
-        Object.fromEntries(formItems.map((formItem) => {
-          const inverseDictionary = invert(dictionary[formItem.name]);
-          if (formData[formItem.name]) {
-            switch (formItem.type) {
-              case 'date':
-              case 'datetime':
-                return [formItem.name, moment(new Date(formData[formItem.name]))]
-
-              case 'time':
-                return [formItem.name, moment(new Date('1970-01-01 '+ formData[formItem.name]))]
-
-              case 'select':
-                return [formItem.name, inverseDictionary[formData[formItem.name]]]
-
-              case 'multi-select':
-                return [
-                  formItem.name,
-                  formData[formItem.name].split(/, ?/).map((v: string) => inverseDictionary[v])
-                ]
-
-              default:
-                return [formItem.name, formData[formItem.name]]
-            }
-          }
-          return [formItem.name, formData[formItem.name]];
-        }))
-      )
+    if (formItems && formData && metadata) {
+      setInitialValues(convertDataItem(dictionary, formData, metadata, 'modalEdit'));
     }
-  }, [formData, formItems, dictionary]);
-
-  const { data: metadata, isError, isLoading } = useMetadataSelector();
+  }, [formData, formItems, dictionary, metadata]);
 
   useEffect(() => {
     if (metadata) {
