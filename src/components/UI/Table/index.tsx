@@ -21,7 +21,7 @@ type TTableProps = {
 const PAGE_SIZE = 10;
 
 const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) => {
-  const { setDataPrintRef, dataPrintMode } = usePrintPDFContext();
+  const { setDataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
   const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
@@ -30,8 +30,6 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
   useEffect(() => {
     if (dataRef) setDataPrintRef(dataRef)
   }, [setDataPrintRef]);
-
-  console.log(dataPrintMode);
 
   const sourceData = useMemo(() => {
     return data.map((dataItem, index) => ({
@@ -99,8 +97,13 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
   ]);
 
   useEffect(() => {
-    setTableData([...filterData || []].splice(0, pageSize));
-  }, [filterData, pageSize])
+    if (dataPrintMode === 'all') {
+      setTableData([...filterData || []]);
+      setDataPrintMode('print');
+    } else {
+      setTableData([...filterData || []].splice(0, pageSize));
+    }
+  }, [filterData, pageSize, dataPrintMode, setDataPrintMode])
 
   return (
     <ConfigProvider locale={ruRU}>

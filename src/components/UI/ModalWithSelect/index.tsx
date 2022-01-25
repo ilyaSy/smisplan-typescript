@@ -20,7 +20,7 @@ export const useModalWithSelect: TUseModalWithSelect = (title, list, onSubmit) =
 
   const handleToggle = useCallback((mode: boolean) => setIsOpen(mode), [])
 
-  const handleChange = (e: RadioChangeEvent) => {console.log(e); setValue(e.target.value)};
+  const handleChange = (e: RadioChangeEvent) => setValue(e.target.value);
   const handleSubmit = () => onSubmit(value);
   const handleClose = () => handleToggle(false);
 

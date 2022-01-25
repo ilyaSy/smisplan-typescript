@@ -2,26 +2,34 @@ import { useReactToPrint } from 'react-to-print';
 import { Tooltip } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
 import { TPrintMode, usePrintPDFContext } from '../../../context/PrintPDFContext';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useModalWithSelect } from '../ModalWithSelect';
 
 export const PrintPDF: React.FC = () => {
-  const { dataPrintRef, setDataPrintMode } = usePrintPDFContext();
+  const { dataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
 
   const handleOpen = () => toggleOpen(true);
 
   const print = useReactToPrint({
-    content: () => dataPrintRef ? dataPrintRef.current : null,
+    // content: () => dataPrintRef ? dataPrintRef.current : null,
+    content: () => (
+      dataPrintRef
+        ? document.getElementsByClassName('ant-table-container')[0]
+        : null
+    ),
     onAfterPrint: () => {
       setDataPrintMode(undefined)
       toggleOpen(false);
     },
   });
 
+  useEffect(() => {
+    if (['print', 'current'].includes(dataPrintMode as string)) print();
+  }, [print, dataPrintMode]);
+
   const handlePrint = useCallback((mode: TPrintMode) => {
     setDataPrintMode(mode);
-    print();
-  }, [print, setDataPrintMode]);
+  }, [setDataPrintMode]);
 
   const listOptions = useMemo(() => [
     {

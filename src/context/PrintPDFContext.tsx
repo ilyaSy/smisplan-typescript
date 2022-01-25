@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useMemo, useState } from "react";
 
-export type TPrintMode = 'all' | 'current' | undefined;
+export type TPrintMode = 'print' | 'all' | 'current' | undefined;
 
 interface IPrintPDFContext {
   dataPrintMode: TPrintMode;
