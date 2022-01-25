@@ -15,13 +15,13 @@ type TUseModalWithSelect = (
 ];
 
 export const useModalWithSelect: TUseModalWithSelect = (title, list, onSubmit) => {
-  const [ value, setValue ] = useState<string>();
-  const [ isOpen, setIsOpen ] = useState<boolean>(false);
+  const [value, setValue] = useState<TPrintMode>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleToggle = useCallback((mode: boolean) => setIsOpen(mode), [])
 
   const handleChange = (e: RadioChangeEvent) => {console.log(e); setValue(e.target.value)};
-  const handleSubmit = () => onSubmit(value as TPrintMode);
+  const handleSubmit = () => onSubmit(value);
   const handleClose = () => handleToggle(false);
 
   return [

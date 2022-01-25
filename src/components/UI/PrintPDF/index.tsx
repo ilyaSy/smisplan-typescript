@@ -43,8 +43,9 @@ export const PrintPDF: React.FC = () => {
       title='Печать в PDF'
       className='tooltip'
     >
-      <PrinterOutlined onClick={handleOpen} style={{ fontSize: '30px' }}/>
       {ModalPrintSelect}
+
+      <PrinterOutlined onClick={handleOpen} style={{ fontSize: '30px' }}/>
     </Tooltip>
   )
 }
