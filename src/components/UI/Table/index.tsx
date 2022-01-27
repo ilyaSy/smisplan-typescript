@@ -7,7 +7,7 @@ import TableFilterIcon from '../TableFilterIcon';
 import ActionMenu from '../../ActionMenu';
 import { TData } from '../../../types/TData';
 import { TTableParameters } from '../../../types/TTableParameters';
-import { useFilterDrawer } from '../FilterDrawer';
+import { useFilterDrawer } from '../FormDrawer';
 import classes from './Table.module.scss';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePrintPDFContext } from '../../../context/PrintPDFContext';
