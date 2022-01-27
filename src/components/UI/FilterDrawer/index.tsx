@@ -84,6 +84,7 @@ export const useFilterDrawer: TUseFilterDrawer = (tableColumns, sourceData) => {
       placement="right"
       onClose={closeFilter}
       visible={visible}
+      width={430}
     >
       <Form
         name='basic'

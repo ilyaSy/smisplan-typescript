@@ -174,20 +174,19 @@
   },
   {
     "id": "specificParameters",
-    "hasEditMenu": true,
-    "hasDeleteButton": true,
+    "mainValue": "title",
+    "tableName": "Задачи",
     "defaultSortField": "id",
     "defaultSortDirection": "desc",
-    "hasQuestions": false,
+    "addMenuTitle": "Новая задача",
+    "hasTitleRow": false,
+    "hasAddMenu": true,
+    "hasSublistData": false,
+    "hasActionMenu": true,
+    "hasEditMenu": true,
+    "hasDeleteButton": true,
     "hasSetStatusMenu": true,
     "hasGoToDiscussion": true,
-    "hasTitleRow": false,
-    "addMenuTitle": "Новая задача",
-    "hasAddMenu": true,
-    "hasDoneButton": true,
-    "tableName": "Задачи",
-    "hasSublistData": false,
-    "hasDiscussion": true,
-    "mainValue": "title"
+    "hasDiscussion": true
   }
 ]

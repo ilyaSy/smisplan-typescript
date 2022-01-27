@@ -33,9 +33,6 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
     parameter: string,
     parameterDictionary: TMetadataDictionary
   ) => {
-    console.log(parameter);
-    console.log(parameterDictionary);
-
     if ((parameterDictionary as TGetDataUrl).getDataUrl) {
       const url = (parameterDictionary as TGetDataUrl).getDataUrl;
 

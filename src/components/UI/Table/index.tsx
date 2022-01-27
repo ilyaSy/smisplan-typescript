@@ -27,6 +27,8 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
   const [tableData, setTableData] = useState<TData[]>([]);
 
+  const hasActionMenu = tableParameters.hasActionMenu;
+
   useEffect(() => {
     if (dataRef) setDataPrintRef(dataRef)
   }, [setDataPrintRef]);
@@ -35,17 +37,20 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
     return data.map((dataItem, index) => ({
       ...dataItem,
       key: `table-row-${dataItem.id}-${index}`,
-      action: <ActionMenu
-        key={`action-menu-${dataItem.id}-${index}`}
-        title='Меню действий'
-        dataItem={dataItem}
-        tableParameters={tableParameters}
-      />
+      action: hasActionMenu
+      ? <ActionMenu
+          key={`action-menu-${dataItem.id}-${index}`}
+          title='Меню действий'
+          dataItem={dataItem}
+          tableParameters={tableParameters}
+        />
+      : null
     }))
-  }, [data, tableParameters])
+  }, [data, tableParameters, hasActionMenu])
 
   const tableColumns = columns
-    .map(column => {
+    .filter((c) => (hasActionMenu && c.dataIndex === 'action') || c.dataIndex !== 'action')
+    .map((column) => {
       return !column.isInlineEditable
         ? {
             ...column,
@@ -63,6 +68,8 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
           };
       }
     )
+
+  console.log(tableColumns);
 
   const {
     FilterButtons,

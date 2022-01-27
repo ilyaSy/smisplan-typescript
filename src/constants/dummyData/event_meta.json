@@ -196,14 +196,17 @@
   },
   {
     "id": "specificParameters",
-    "hasEditMenu": false,
-    "hasDeleteButton": false,
     "defaultSortField": "dt",
     "defaultSortDirection": "desc",
-    "hasTitleRow": false,
     "tableName": "Изменения",
-    "hasDoneButton": false,
-    "hasAddMenu": false,
-    "hasSpecNotes": false
+    "hasTitleRow": false,
+    "hasAddMenu": true,
+    "hasSublistData": false,
+    "hasActionMenu": false,
+    "hasEditMenu": false,
+    "hasDeleteButton": false,
+    "hasSetStatusMenu": false,
+    "hasGoToDiscussion": false,
+    "hasDiscussion": false
   }
 ]

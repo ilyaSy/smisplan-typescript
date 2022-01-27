@@ -58,34 +58,36 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) =
   });
 
   return (
-    <>
-      <DataEditModal
-        isOpen={openModal === 'editItem'}
-        onEditHandler={handleEdit}
-        onAddHandler={handleAdd}
+    actions.length ? (
+      <>
+        <DataEditModal
+          isOpen={openModal === 'editItem'}
+          onEditHandler={handleEdit}
+          onAddHandler={handleAdd}
 
-        onClose={handleClose}
-        formData={dataItem}
-      />
-
-      <DataAddModal
-        isOpen={openModal === 'addDiscussion'}
-        onAddHandler={handleAddDiscussion}
-        onClose={handleClose}
-        modalTablename='discussion'
-        modalInitialValues={{
-          theme: dataItem.text,
-          mainQuestions: dataItem.description
-        }}
-      />
-
-      <Tooltip placement='topRight' title={title}>
-        <Dropdown.Button
-          overlay={<DropdownMenu menuItems={actions} />}
-          trigger={['click']}
+          onClose={handleClose}
+          formData={dataItem}
         />
-      </Tooltip>
-    </>
+
+        <DataAddModal
+          isOpen={openModal === 'addDiscussion'}
+          onAddHandler={handleAddDiscussion}
+          onClose={handleClose}
+          modalTablename='discussion'
+          modalInitialValues={{
+            theme: dataItem.text,
+            mainQuestions: dataItem.description
+          }}
+        />
+
+        <Tooltip placement='topRight' title={title}>
+          <Dropdown.Button
+            overlay={<DropdownMenu menuItems={actions} />}
+            trigger={['click']}
+          />
+        </Tooltip>
+      </>
+    ) : null
   );
 };
 

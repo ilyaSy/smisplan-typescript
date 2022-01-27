@@ -231,21 +231,21 @@
   },
   {
     "id": "specificParameters",
-    "hasEditMenu": true,
-    "hasDeleteButton": true,
-    "hasEditMenuSaveAsNew": true,
-    "hasNotificationButton": true,
+    "mainValue": "theme",
+    "tableName": "Обсуждения",
     "defaultSortField": "week,date,time",
     "defaultSortDirection": "desc,asc,asc",
-    "hasQuestions": false,
-    "hasSetStatusMenu": true,
+    "addMenuTitle": "Новое совещание",
     "defaultGroupField": "week",
     "hasTitleRow": false,
     "hasAddMenu": true,
-    "hasDoneButton": false,
-    "tableName": "Обсуждения",
-    "hasSublistData": true,
-    "mainValue": "theme",
-    "addMenuTitle": "Новое совещание"
+    "hasSublistData": false,
+    "hasActionMenu": true,
+    "hasEditMenu": true,
+    "hasDeleteButton": true,
+    "hasSetStatusMenu": true,
+    "hasGoToDiscussion": false,
+    "hasDiscussion": true,
+    "hasNotificationButton": true
   }
 ]
