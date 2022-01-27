@@ -31,6 +31,7 @@ export const useModalWithSelect: TUseModalWithSelect = (title, list, onSubmit) =
       onOk={handleSubmit}
       onCancel={handleClose}
       visible={isOpen}
+      okButtonProps={{ disabled: !value }}
     >
       <Radio.Group onChange={handleChange} value={value}>
         <Space direction="vertical">
