@@ -55,7 +55,9 @@
     "showInTable": true,
     "isInlineEditable": false,
     "isEditable": false,
-    "validValues": "",
+    "validValues": {
+      "getDataUrl": "/smisplan-typescript/cgi/developer/"
+    },
     "title": "Ответственный",
     "isFilter": false,
     "hasFullTextLink": false,
@@ -116,7 +118,9 @@
     "showInTable": true,
     "isInlineEditable": false,
     "isEditable": false,
-    "validValues": "",
+    "validValues": {
+      "getDataUrl": "/smisplan-typescript/cgi/project/"
+    },
     "title": "Проект",
     "isFilter": false,
     "hasFullTextLink": false,
@@ -191,6 +195,7 @@
     "defaultValue": ""
   },
   {
+    "id": "specificParameters",
     "hasEditMenu": false,
     "hasDeleteButton": false,
     "defaultSortField": "dt",
