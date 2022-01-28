@@ -1,5 +1,9 @@
 .table {
-  width: calc(100% - 60px)
+  width: calc(100% - 60px);
+
+  & .hidden-pagination {
+    display: none;
+  }
 }
 
 .table-title {

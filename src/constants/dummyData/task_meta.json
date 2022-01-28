@@ -177,7 +177,7 @@
     "mainValue": "title",
     "tableName": "Задачи",
     "defaultSortField": "id",
-    "defaultSortDirection": "desc",
+    "defaultSortDirection": "descend",
     "addMenuTitle": "Новая задача",
     "hasTitleRow": false,
     "hasAddMenu": true,

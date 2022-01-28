@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ConfigProvider, Pagination, Table } from 'antd';
+import { SortOrder } from 'antd/lib/table/interface';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
 import DataTableEditableCell from '../../TableEditableCell';
@@ -26,7 +27,6 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
   const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
-  const [tableData, setTableData] = useState<TData[]>([]);
 
   const hasActionMenu = tableParameters.hasActionMenu;
 
@@ -52,13 +52,21 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
   const tableColumns = columns
     .filter((c) => (hasActionMenu && c.dataIndex === 'action') || c.dataIndex !== 'action')
     .map((column) => {
+      console.log(tableParameters.defaultSortField);
+
       return !column.isInlineEditable
         ? {
             ...column,
+            defaultSortOrder: (column.dataIndex === tableParameters.defaultSortField
+              ? 'descend'
+              : undefined) as SortOrder,
             filterIcon: TableFilterIcon,
-        }
-        : {
+          }
+          : {
             ...column,
+            defaultSortOrder: (column.dataIndex === tableParameters.defaultSortField
+              ? 'descend'
+              : undefined) as SortOrder,
             filterIcon: TableFilterIcon,
             onCell: (record: any) => ({
               record,
@@ -79,8 +87,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
   const handleChangePage = useCallback((nextPage: number, pageSize: number) => {
     setPage(nextPage);
     setPageSize(pageSize);
-    setTableData([...filterData || []].splice((nextPage - 1)*pageSize, pageSize));
-  }, [filterData])
+  }, [])
 
   const TableTitle = useCallback(() => (
     <div className={classes['table-title']}>
@@ -104,10 +111,11 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
 
   useEffect(() => {
     if (dataPrintMode === 'all') {
-      setTableData([...filterData || []]);
+      setPageSize(0);
       setDataPrintMode('print');
+    } else if (dataPrintMode === 'current') {
     } else {
-      setTableData([...filterData || []].splice(0, pageSize));
+      setPageSize(PAGE_SIZE);
     }
   }, [filterData, pageSize, dataPrintMode, setDataPrintMode])
 
@@ -117,10 +125,10 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
 
       <Table
         ref={dataRef}
-        dataSource={ tableData }
+        dataSource={ filterData }
         columns={ tableColumns }
         title={TableTitle}
-        scroll={{x: 'max-content'}}
+        // scroll={{x: 'max-content'}}
         components={{
           body: {
             row: TableEditableRow,
@@ -134,7 +142,13 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
         expandable={ TableExpandableRow('description') }
         // expandIcon
         sticky={ true }
-        pagination={false}
+        pagination={{
+          position: ['topRight'],
+          pageSize: pageSize,
+          current: page,
+          total: filterData.length,
+          className: classes['hidden-pagination']
+        }}
         className={ classes.table }
       />
     </ConfigProvider>

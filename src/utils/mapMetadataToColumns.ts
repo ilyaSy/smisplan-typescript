@@ -14,7 +14,7 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
         ...metadataColumn,
         dataIndex: metadataColumn.id,
         key: metadataColumn.id,
-        sorter: sortData(metadataColumn.id),
+        sorter: sortData(metadataColumn.id, undefined, metadataColumn.type),
       }
 
       return column;

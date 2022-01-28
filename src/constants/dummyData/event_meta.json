@@ -197,7 +197,7 @@
   {
     "id": "specificParameters",
     "defaultSortField": "dt",
-    "defaultSortDirection": "desc",
+    "defaultSortDirection": "descend",
     "tableName": "Изменения",
     "hasTitleRow": false,
     "hasAddMenu": true,

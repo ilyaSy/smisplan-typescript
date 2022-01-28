@@ -1,9 +1,16 @@
 import { TData } from "../types/TData";
+import { TDataTypes } from "../types/TDataTypes";
 
-const sortData = (key: string, direction: "asc" | "desc" = "asc") => (a: TData, b: TData) => {
-  if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
-  if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
-  return 0;
-}
+const sortData =
+  (key: string, direction: "ascend" | "descend" = "ascend", type?: TDataTypes) =>
+  (a: TData, b: TData) =>
+  {
+    const valueA = type && type === 'number' ? +a[key] : a[key];
+    const valueB = type && type === 'number' ? +b[key] : b[key];
+
+    if (valueA < valueB) return direction === "ascend" ? -1 : 1;
+    if (valueA > valueB) return direction === "ascend" ? 1 : -1;
+    return 0;
+  }
 
 export default sortData;

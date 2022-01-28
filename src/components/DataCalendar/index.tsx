@@ -36,7 +36,7 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
   const getDayEventsInfo = (date: any) => {
     const dayEvents = dates
       .filter((event) => moment(event.date).format(DATE_FORMAT_DATE) === date.dateStr)
-      .sort(sortData('time', 'asc'))
+      .sort(sortData('time', 'ascend'))
       .map((event) => ({
         title: moment(event.date).format(DATE_FORMAT_TIME),
         description: event.result,
