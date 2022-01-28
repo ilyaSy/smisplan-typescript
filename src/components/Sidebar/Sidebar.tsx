@@ -64,7 +64,6 @@ const Sidebar: React.FC = () => {
         icon={<SettingOutlined style={{ fontSize: '30px' }} />}
       >
         <Menu.Item>Цветовая тема</Menu.Item>
-        <Menu.Item>Колонки</Menu.Item>
         <Menu.Item>Инструкция</Menu.Item>
       </Menu.SubMenu>
     </Menu>
