@@ -28,7 +28,8 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
     key: 'action',
     isInlineEditable: false,
     showInTable: true,
-    type: 'action'
+    type: 'action',
+    className: 'table-action-column'
   });
 
   return columns;

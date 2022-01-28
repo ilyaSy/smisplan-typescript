@@ -1,7 +1,8 @@
+import React from "react";
 import { Menu } from 'antd';
 import { TDropdownMenu } from '../../../types/TDropdownMenu';
 import classes from './DropdownMenu.module.scss';
-import React from "react";
+import './DropdownMenu.css';
 
 const DropdownMenu: React.FC<{menuItems: TDropdownMenu[]}> = ({ menuItems }) => {
   return (

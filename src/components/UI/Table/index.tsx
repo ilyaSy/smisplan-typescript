@@ -1,3 +1,4 @@
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ConfigProvider, Pagination, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
@@ -8,9 +9,9 @@ import ActionMenu from '../../ActionMenu';
 import { TData } from '../../../types/TData';
 import { TTableParameters } from '../../../types/TTableParameters';
 import { useFilterDrawer } from '../FormDrawer';
-import classes from './Table.module.scss';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { usePrintPDFContext } from '../../../context/PrintPDFContext';
+import classes from './Table.module.scss';
+import './Table.css';
 
 type TTableProps = {
   data: TData[],
@@ -119,6 +120,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
         dataSource={ tableData }
         columns={ tableColumns }
         title={TableTitle}
+        scroll={{x: 'max-content'}}
         components={{
           body: {
             row: TableEditableRow,
@@ -132,7 +134,6 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
         expandable={ TableExpandableRow('description') }
         // expandIcon
         sticky={ true }
-        // pagination={{ position: ["topRight"] }}
         pagination={false}
         className={ classes.table }
       />
