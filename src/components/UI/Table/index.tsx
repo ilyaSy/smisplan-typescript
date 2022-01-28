@@ -9,8 +9,9 @@ import TableFilterIcon from '../TableFilterIcon';
 import ActionMenu from '../../ActionMenu';
 import { TData } from '../../../types/TData';
 import { TTableParameters } from '../../../types/TTableParameters';
-import { useFilterDrawer } from '../FormDrawer';
 import { usePrintPDFContext } from '../../../context/PrintPDFContext';
+import { useFilterDrawer } from '../FilterPanel';
+import { useColumnsDrawer } from '../ColumnsPanel';
 import classes from './Table.module.scss';
 import './Table.css';
 
@@ -89,11 +90,19 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       }
     )
 
+  console.log(tableColumns);
+
   const {
     FilterButtons,
     FilterPanel,
     filterData
   } = useFilterDrawer(tableColumns, sourceData);
+
+  const {
+    ColumnsPanelButtons,
+    ColumnsPanel,
+    columnsData
+  } = useColumnsDrawer(columns);
 
   const handleChangePage = useCallback((nextPage: number, pageSize: number) => {
     setPage(nextPage);
@@ -102,7 +111,11 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
 
   const TableTitle = useCallback(() => (
     <div className={classes['table-title']}>
-      {FilterButtons}
+      <div>
+        {FilterButtons}
+
+        {ColumnsPanelButtons}
+      </div>
 
       <Pagination
         showSizeChanger
@@ -114,6 +127,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
     </div>
   ), [
     FilterButtons,
+    ColumnsPanelButtons,
     filterData,
     page,
     pageSize,
@@ -133,6 +147,8 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
   return (
     <ConfigProvider locale={ruRU}>
       {FilterPanel}
+
+      {ColumnsPanel}
 
       <Table
         ref={dataRef}

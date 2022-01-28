@@ -42,7 +42,11 @@ const DataTable: React.FC = () => {
         </div>
       ) : (
         sourceData && columns && tableParameters &&
-          <Table data={sourceData} columns={columns} tableParameters={tableParameters} />
+          <Table
+            data={sourceData}
+            columns={columns}
+            tableParameters={tableParameters}
+          />
       )
     )
   )
