@@ -4,11 +4,11 @@ import { FormInstance } from 'antd/lib/form';
 
 export const EditableContext = createContext<FormInstance<any> | null>(null);
 
-interface EditableRowProps {
+interface IEditableRowProps {
   id: number;
 }
 
-const DataTableEditableRow: React.FC<EditableRowProps> = ({ id, ...props }) => {
+const DataTableEditableRow: React.FC<IEditableRowProps> = ({ id, ...props }) => {
   const [form] = Form.useForm();
   return (
     <Form form={form} component={false}>

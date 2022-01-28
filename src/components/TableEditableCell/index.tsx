@@ -31,7 +31,6 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
   children,
   dataIndex,
   record,
-  // handleSave,
   ...restProps
 }) => {
   const { dictionary } = useDictionaryContext();
