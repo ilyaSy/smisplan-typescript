@@ -154,6 +154,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
         ref={dataRef}
         dataSource={ filterData }
         columns={ tableColumns }
+        // columns={ columnsData }
         title={TableTitle}
         // scroll={{x: 'max-content'}}
         components={{
