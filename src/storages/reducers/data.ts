@@ -26,7 +26,7 @@ const dataReducer: Reducer = (state = initialState, action: TApiReducerData) => 
 
     case 'DATA_REQUEST_ERROR':
       return dataReducerError(state, payload);
-      
+
     default:
       return {...state};
   }
@@ -37,6 +37,7 @@ const dataReducerLoading: (state: TReduxData) => TReduxData = (state) => {
     isLoading: true,
     isError: false,
     data: state.data,
+    // data: null,
   }
 };
 

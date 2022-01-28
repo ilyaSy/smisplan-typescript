@@ -1,9 +1,11 @@
+import { TSortDirection } from "./TSortDirection";
+
 export type TTableParameters = {
   tableName: string,
   mainValue: string
   addMenuTitle?: string,
-  defaultSortField?: string,
-  defaultSortDirection?: "asc" | "desc",
+  defaultSortField?: string | string[],
+  defaultSortDirection?: TSortDirection | TSortDirection[],
   defaultGroupField?: string,
   hasTitleRow?: boolean,
   hasAddMenu?: boolean,

@@ -14,7 +14,11 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
         ...metadataColumn,
         dataIndex: metadataColumn.id,
         key: metadataColumn.id,
-        sorter: sortData(metadataColumn.id, undefined, metadataColumn.type),
+        // sorter: sortData(metadataColumn.id, undefined, metadataColumn.type),
+        sorter: {
+          compare: sortData(metadataColumn.id, undefined, metadataColumn.type),
+          multiple: 1,
+        },
       }
 
       return column;

@@ -17,7 +17,7 @@ import './Table.css';
 type TTableProps = {
   data: TData[],
   columns: TData[],
-  tableParameters: TTableParameters
+  tableParameters: TTableParameters,
 };
 
 const PAGE_SIZE = 10;
@@ -49,24 +49,35 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
     }))
   }, [data, tableParameters, hasActionMenu])
 
+  const getDefaultSorter = (field: string) => {
+    if (Array.isArray(tableParameters.defaultSortField)) {
+      const index = tableParameters.defaultSortField.indexOf(field);
+
+      return index < 0
+        ? undefined
+        : (tableParameters.defaultSortDirection as string[])[index];
+    }
+    return field === tableParameters.defaultSortField
+      ? tableParameters.defaultSortDirection
+      : undefined;
+  }
+
   const tableColumns = columns
     .filter((c) => (hasActionMenu && c.dataIndex === 'action') || c.dataIndex !== 'action')
     .map((column) => {
-      console.log(tableParameters.defaultSortField);
-
       return !column.isInlineEditable
         ? {
             ...column,
-            defaultSortOrder: (column.dataIndex === tableParameters.defaultSortField
-              ? 'descend'
-              : undefined) as SortOrder,
+            defaultSortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
+            sortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
+            // ellipsis: true,
             filterIcon: TableFilterIcon,
           }
           : {
             ...column,
-            defaultSortOrder: (column.dataIndex === tableParameters.defaultSortField
-              ? 'descend'
-              : undefined) as SortOrder,
+            defaultSortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
+            sortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
+            // ellipsis: true,
             filterIcon: TableFilterIcon,
             onCell: (record: any) => ({
               record,

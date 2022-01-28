@@ -7,8 +7,8 @@ import Table from '../UI/Table';
 import LoadingComponent from '../UI/LoadingComponent';
 import { TData } from '../../types/TData';
 import { TTableParameters } from '../../types/TTableParameters';
-import classes from './DataTable.module.scss';
 import { useGetDataMeta } from '../../utils/hooks/useGetDataMeta';
+import classes from './DataTable.module.scss';
 
 const { Title } = Typography;
 
@@ -42,7 +42,7 @@ const DataTable: React.FC = () => {
         </div>
       ) : (
         sourceData && columns && tableParameters &&
-          <Table data={sourceData} columns={columns} tableParameters={tableParameters}/>
+          <Table data={sourceData} columns={columns} tableParameters={tableParameters} />
       )
     )
   )
