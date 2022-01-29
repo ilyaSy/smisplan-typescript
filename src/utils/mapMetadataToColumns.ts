@@ -4,7 +4,7 @@ import { TData } from '../types/TData';
 
 type TMapMetadataToColumns = (
   metadata: TData[],
-  filterRealColumns: boolean,
+  filterRealColumns?: boolean,
 ) => Record<string, TColumn>[]
 
 const mapMetadataToColumns: TMapMetadataToColumns = (metadata, filterRealColumns = true) => {
