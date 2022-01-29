@@ -90,8 +90,6 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       }
     )
 
-  console.log(tableColumns);
-
   const {
     FilterButtons,
     FilterPanel,
