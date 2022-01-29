@@ -1,3 +1,5 @@
+$column-title-width: 50px;
+
 .table {
   width: calc(100% - 60px);
 
@@ -14,3 +16,21 @@
 .table-title > div:first-child {
   display: flex;
 }
+
+.table-title-row {
+  // width: max-content;
+  // min-width: 50px;
+  min-width: $column-title-width;
+  // min-width: var(--column-title-width);
+}
+
+$max-count: 20;
+@mixin table-title-row-x {
+  @for $i from 1 through $max-count {
+    .table-title-row-#{$i}0 {
+      min-width: $i*10px;
+    }
+  }
+}
+
+@include table-title-row-x;

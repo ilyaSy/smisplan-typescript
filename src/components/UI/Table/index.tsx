@@ -101,7 +101,13 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
     isInlineEditable: false,
     showInTable: true,
     type: 'action',
-    className: 'table-action-column'
+    className: 'table-action-column',
+  })
+
+  tableColumns.forEach((tableColumn) => {
+    if (tableColumn.dataIndex !== 'action') {
+      tableColumn.className = classes[`table-title-row-${Math.ceil(((tableColumn.title?.length ?? 1)*7 + 48)/10)*10}`];
+    }
   })
 
   const {
@@ -159,9 +165,10 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       <Table
         ref={dataRef}
         dataSource={ filterData }
-        columns={ hasActionMenu ? tableColumns : tableColumns }
+        columns={ tableColumns }
         title={TableTitle}
         // scroll={{x: 'max-content'}}
+        tableLayout='auto'
         components={{
           body: {
             row: TableEditableRow,
