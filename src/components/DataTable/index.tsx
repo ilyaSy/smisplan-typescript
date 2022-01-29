@@ -41,7 +41,7 @@ const DataTable: React.FC = () => {
         sourceData && metadata && tableParameters &&
           <Table
             data={sourceData}
-            columns={mapMetadataToColumns(metadata, false)}
+            columns={mapMetadataToColumns(metadata)}
             tableParameters={tableParameters}
           />
       )

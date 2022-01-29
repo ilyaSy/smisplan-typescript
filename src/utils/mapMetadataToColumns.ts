@@ -4,10 +4,9 @@ import { TData } from '../types/TData';
 
 type TMapMetadataToColumns = (
   metadata: TData[],
-  filterRealColumns?: boolean,
 ) => Record<string, TColumn>[]
 
-const mapMetadataToColumns: TMapMetadataToColumns = (metadata, filterRealColumns = true) => {
+const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
   const columns = metadata
     .filter((c) => c.id !== 'specificParameters')
     .map((metadataColumn) => {
@@ -24,7 +23,7 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata, filterRealColumns
       return column;
     })
     .sort((a, b) => a.tableIndex - b.tableIndex)
-    .filter((c: any) => !filterRealColumns || (filterRealColumns && c.showInTable && c.type !== 'fulltext'))
+    // .filter((c: any) => !filterRealColumns || (filterRealColumns && c.showInTable && c.type !== 'fulltext'))
 
   return columns;
 }
