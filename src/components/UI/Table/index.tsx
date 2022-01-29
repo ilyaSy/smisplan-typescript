@@ -17,12 +17,13 @@ import './Table.css';
 
 type TTableProps = {
   data: TData[],
+  columns: TData[],
   tableParameters: TTableParameters,
 };
 
 const PAGE_SIZE = 10;
 
-const DataTable: React.FC<TTableProps> = ({ data, tableParameters }) => {
+const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) => {
   const { setDataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
   const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
@@ -66,7 +67,7 @@ const DataTable: React.FC<TTableProps> = ({ data, tableParameters }) => {
     ColumnsPanelButtons,
     ColumnsPanel,
     columnsData
-  } = useColumnsDrawer();
+  } = useColumnsDrawer(columns);
 
   const tableColumns: TData[] = columnsData
     .map((column) => {
