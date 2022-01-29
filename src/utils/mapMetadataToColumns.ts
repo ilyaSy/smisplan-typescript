@@ -4,9 +4,10 @@ import { TData } from '../types/TData';
 
 type TMapMetadataToColumns = (
   metadata: TData[],
+  filterRealColumns: boolean,
 ) => Record<string, TColumn>[]
 
-const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
+const mapMetadataToColumns: TMapMetadataToColumns = (metadata, filterRealColumns = true) => {
   const columns = metadata
     .filter((c) => c.id !== 'specificParameters')
     .map((metadataColumn) => {
@@ -14,7 +15,6 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
         ...metadataColumn,
         dataIndex: metadataColumn.id,
         key: metadataColumn.id,
-        // sorter: sortData(metadataColumn.id, undefined, metadataColumn.type),
         sorter: {
           compare: sortData(metadataColumn.id, undefined, metadataColumn.type),
           multiple: 1,
@@ -24,17 +24,7 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
       return column;
     })
     .sort((a, b) => a.tableIndex - b.tableIndex)
-    .filter((c: any) => c.showInTable && c.type !== 'fulltext')
-
-  // last column with action menu
-  columns.push({
-    dataIndex: 'action',
-    key: 'action',
-    isInlineEditable: false,
-    showInTable: true,
-    type: 'action',
-    className: 'table-action-column'
-  });
+    .filter((c: any) => !filterRealColumns || (filterRealColumns && c.showInTable && c.type !== 'fulltext'))
 
   return columns;
 }

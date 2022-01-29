@@ -17,13 +17,12 @@ import './Table.css';
 
 type TTableProps = {
   data: TData[],
-  columns: TData[],
   tableParameters: TTableParameters,
 };
 
 const PAGE_SIZE = 10;
 
-const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) => {
+const DataTable: React.FC<TTableProps> = ({ data, tableParameters }) => {
   const { setDataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
   const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
@@ -63,8 +62,13 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       : undefined;
   }
 
-  const tableColumns = columns
-    .filter((c) => (hasActionMenu && c.dataIndex === 'action') || c.dataIndex !== 'action')
+  const {
+    ColumnsPanelButtons,
+    ColumnsPanel,
+    columnsData
+  } = useColumnsDrawer();
+
+  const tableColumns: TData[] = columnsData
     .map((column) => {
       return !column.isInlineEditable
         ? {
@@ -90,17 +94,20 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       }
     )
 
+  if (hasActionMenu) tableColumns.push({
+    dataIndex: 'action',
+    key: 'action',
+    isInlineEditable: false,
+    showInTable: true,
+    type: 'action',
+    className: 'table-action-column'
+  })
+
   const {
     FilterButtons,
     FilterPanel,
     filterData
-  } = useFilterDrawer(tableColumns, sourceData);
-
-  const {
-    ColumnsPanelButtons,
-    ColumnsPanel,
-    columnsData
-  } = useColumnsDrawer(columns);
+  } = useFilterDrawer(columnsData, sourceData);
 
   const handleChangePage = useCallback((nextPage: number, pageSize: number) => {
     setPage(nextPage);
@@ -151,8 +158,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters }) =>
       <Table
         ref={dataRef}
         dataSource={ filterData }
-        columns={ tableColumns }
-        // columns={ columnsData }
+        columns={ hasActionMenu ? tableColumns : tableColumns }
         title={TableTitle}
         // scroll={{x: 'max-content'}}
         components={{
