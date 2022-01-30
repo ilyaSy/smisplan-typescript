@@ -9,9 +9,12 @@ import 'antd/dist/antd.css';
 import { DictionaryContextProvider } from './context/DictionaryContext';
 import { PrintPDFContextProvider } from './context/PrintPDFContext';
 
+// const basename = '/smisplan-typescript/'; /* ! for gh-pages ! */
+const basename: string = '/';
+
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter >
+    <BrowserRouter basename={basename}>
       <UserContextProvider>
         <DictionaryContextProvider>
           <StorageProvider>
