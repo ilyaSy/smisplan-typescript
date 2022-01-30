@@ -1,0 +1,21 @@
+.table-action-column {
+  padding: 0 !important;
+  width: 80px;
+}
+
+/* .ant-table table {
+  width: unset !important;
+  white-space: nowrap;
+} */
+
+/* .table-title-row:nth-child(3) {
+  width: unset;
+} */
+
+/* td.ant-table-cell:nth-of-type(4){
+  width: unset !important;
+}
+
+th.ant-table-cell:nth-of-type(4){
+  width: unset !important;
+} */
