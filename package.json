@@ -2,6 +2,7 @@
   "name": "smisplan-typescript",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://ilyasy.github.io/smisplan-typescript",
   "dependencies": {
     "@date-io/moment": "^2.11.0",
     "@fullcalendar/daygrid": "^5.10.1",
