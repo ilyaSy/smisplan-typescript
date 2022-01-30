@@ -1,0 +1,41 @@
+{
+  "files": {
+    "static/js/0.cbcf7e84.chunk.js": "/static/js/0.cbcf7e84.chunk.js",
+    "static/js/0.cbcf7e84.chunk.js.map": "/static/js/0.cbcf7e84.chunk.js.map",
+    "main.css": "/static/css/main.e0b45bfd.chunk.css",
+    "main.js": "/static/js/main.43178c2d.chunk.js",
+    "main.js.map": "/static/js/main.43178c2d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5b466f97.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5b466f97.js.map",
+    "static/css/3.4dca5ddc.chunk.css": "/static/css/3.4dca5ddc.chunk.css",
+    "static/js/3.3a0aa0b2.chunk.js": "/static/js/3.3a0aa0b2.chunk.js",
+    "static/js/3.3a0aa0b2.chunk.js.map": "/static/js/3.3a0aa0b2.chunk.js.map",
+    "static/js/4.df731bad.chunk.js": "/static/js/4.df731bad.chunk.js",
+    "static/js/4.df731bad.chunk.js.map": "/static/js/4.df731bad.chunk.js.map",
+    "static/css/5.633ee320.chunk.css": "/static/css/5.633ee320.chunk.css",
+    "static/js/5.44a90ce4.chunk.js": "/static/js/5.44a90ce4.chunk.js",
+    "static/js/5.44a90ce4.chunk.js.map": "/static/js/5.44a90ce4.chunk.js.map",
+    "static/css/6.18209593.chunk.css": "/static/css/6.18209593.chunk.css",
+    "static/js/6.3c36b826.chunk.js": "/static/js/6.3c36b826.chunk.js",
+    "static/js/6.3c36b826.chunk.js.map": "/static/js/6.3c36b826.chunk.js.map",
+    "static/css/7.21cc32de.chunk.css": "/static/css/7.21cc32de.chunk.css",
+    "static/js/7.05e1812b.chunk.js": "/static/js/7.05e1812b.chunk.js",
+    "static/js/7.05e1812b.chunk.js.map": "/static/js/7.05e1812b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/3.4dca5ddc.chunk.css.map": "/static/css/3.4dca5ddc.chunk.css.map",
+    "static/css/5.633ee320.chunk.css.map": "/static/css/5.633ee320.chunk.css.map",
+    "static/css/6.18209593.chunk.css.map": "/static/css/6.18209593.chunk.css.map",
+    "static/css/7.21cc32de.chunk.css.map": "/static/css/7.21cc32de.chunk.css.map",
+    "static/css/main.e0b45bfd.chunk.css.map": "/static/css/main.e0b45bfd.chunk.css.map",
+    "static/js/3.3a0aa0b2.chunk.js.LICENSE.txt": "/static/js/3.3a0aa0b2.chunk.js.LICENSE.txt",
+    "static/js/6.3c36b826.chunk.js.LICENSE.txt": "/static/js/6.3c36b826.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/RobotoMono-Medium.e7225269.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5b466f97.js",
+    "static/css/3.4dca5ddc.chunk.css",
+    "static/js/3.3a0aa0b2.chunk.js",
+    "static/css/main.e0b45bfd.chunk.css",
+    "static/js/main.43178c2d.chunk.js"
+  ]
+}
