@@ -33,8 +33,9 @@
     "title": "Статус",
     "validValues": [
       {
-      "text": "Новая",
-        "value": "new"
+        "text": "Новая",
+        "value": "new",
+        "background-color": "#fdffc2"
       },
       {
         "text": "Принята",
@@ -46,7 +47,8 @@
       },
       {
         "text": "Выполнена",
-        "value": "done"
+        "value": "done",
+        "background-color": "#c2ffc4"
       },
       {
         "text": "Отложена",
