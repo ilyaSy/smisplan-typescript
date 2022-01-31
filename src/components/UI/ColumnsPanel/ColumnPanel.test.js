@@ -26,6 +26,7 @@ describe('Select column panel', () => {
     const { result } = renderHook(() => useColumnsDrawer(columns, true));
 
     render( result.current.ColumnsPanel );
+    render( result.current.ColumnsPanelButtons );
 
     columns.forEach((column) => {
       expect(screen.getByTestId(`basic_${column.dataIndex}`)).toBeInTheDocument();
@@ -78,19 +79,10 @@ describe('Select column panel', () => {
 
     await waitForValueToChange(() => result.current.columnsData);
 
-    // console.log(result.current.columnsData);
-
     expect(result.current.columnsData.length).toBe(1);
     expect(result.current.columnsData[0]).toEqual({
       ...columns[1],
       showInTable: true,
     });
-
-    // await waitFor(() => {
-    //   screen.getByTestId(`basic_${columns[0].dataIndex}`);
-    // });
-
-    // expect(screen.getByTestId(`basic_${columns[0].dataIndex}`)).toBeChecked();
-    // expect(screen.getByTestId(`basic_${columns[1].dataIndex}`)).not.toBeChecked();
   });
 });
