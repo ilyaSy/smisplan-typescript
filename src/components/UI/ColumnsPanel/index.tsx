@@ -5,9 +5,9 @@ import { TData } from "../../../types/TData";
 import { IFormItem } from "../../../types/IFormItem";
 import classes from './ColumnsPanel.module.scss';
 
-export const useColumnsDrawer = (metadata: TData[]) => {
+export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = false) => {
   const [columnsData, setColumnsData] = useState<TData[]>([]);
-  const [visible, setVisible] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(initialVisible);
   const [form] = Form.useForm();
 
   useEffect(() => {
