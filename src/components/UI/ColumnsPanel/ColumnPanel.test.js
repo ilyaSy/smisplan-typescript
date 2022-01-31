@@ -22,7 +22,7 @@ const columns = [
 ]
 
 describe('Select column panel', () => {
-  it('Displaying correct', async () => {
+  it('Displaying correctly', async () => {
     const { result } = renderHook(() => useColumnsDrawer(columns, true));
 
     render( result.current.ColumnsPanel );

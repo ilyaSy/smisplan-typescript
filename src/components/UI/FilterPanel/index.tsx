@@ -1,17 +1,29 @@
 import { useCallback, useMemo, useState } from "react"
-import { Button, Drawer, Tooltip, Form, Input, Select, DatePicker, TimePicker, Col, Row } from "antd";
+import {
+  Button,
+  Drawer,
+  Tooltip,
+  Form,
+  Input,
+  Select,
+  DatePicker,
+  TimePicker,
+  Col,
+  Row,
+  Checkbox
+} from "antd";
 import { FilterOutlined, FilterFilled } from '@ant-design/icons';
 import { TData } from "../../../types/TData";
 import { IFormItem } from "../../../types/IFormItem";
 import useDictionaryContext from "../../../context/DictionaryContext";
 import classes from './FilterPanel.module.scss';
 
-export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[]) => {
+export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], initialVisible = false) => {
   const { dictionary } = useDictionaryContext();
 
   const [visibleResetButton, setVisibleResetButton] = useState<boolean>(false);
   const [filterData, setFilterData] = useState<TData[]>();
-  const [visible, setVisible] = useState<boolean>(false);
+  const [visible, setVisible] = useState<boolean>(initialVisible);
   const [form] = Form.useForm();
 
   const openPanel = useCallback((e: any) => {
@@ -92,7 +104,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[]) => {
             .filter((tableColumn) => tableColumn.isFilter)
             .map((tableColumn: TData) => {
               const formItem: IFormItem = {
-                name: tableColumn.id,
+                name: tableColumn.dataIndex,
                 label: tableColumn.title,
                 type: tableColumn.type,
                 disabled: false
@@ -105,11 +117,13 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[]) => {
                   name={formItem.name}
                 >
                   {
-                    (formItem.type === 'string' || formItem.type === 'number') ?
+                    (['string', 'number'].includes(formItem.type)) ?
                       <Input /> :
                     formItem.type === 'fulltext' ?
                       <Input.TextArea /> :
-                    (formItem.type === 'select' || formItem.type === 'multi-select') && dictionary[formItem.name] ? (
+                    formItem.type === 'checkbox' ?
+                      <Checkbox value={true} /> :
+                    (['select', 'multi-select'].includes(formItem.type)) && dictionary[formItem.name] ? (
                       <Select
                         allowClear
                         filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}

@@ -1,4 +1,5 @@
-import {fireEvent, render, screen, waitFor, configure} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, configure } from "@testing-library/react";
+import { DictionaryContextProvider } from "../../../context/DictionaryContext";
 import ModalWithForm from './index';
 
 configure({
@@ -65,12 +66,14 @@ const dummyData = {
 
 describe('ModalWithForm', () => {
   test('Click submit button', async () => {
-    render(<ModalWithForm {...dummyData} />);
+    render(
+      <DictionaryContextProvider>
+        <ModalWithForm {...dummyData} />
+      </DictionaryContextProvider>
+    );
 
     fireEvent.click(screen.getByText(dummyData.okButtonTitle).closest('button'))
-    await waitFor(() => {
-      screen.getByText(dummyData.okButtonTitle);
-    });
+    await screen.findByText(dummyData.okButtonTitle);
 
     expect(dummyData.handleOk).toBeCalled();
   });

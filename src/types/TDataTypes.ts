@@ -6,4 +6,5 @@ export type TDataTypes =
  | 'datetime'
  | 'select'
  | 'multi-select'
+ | 'checkbox'
  | 'fulltext';
