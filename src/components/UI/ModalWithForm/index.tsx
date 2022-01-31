@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Form, Input, Button, DatePicker, TimePicker, Select } from 'antd';
+import { Modal, Form, Input, Button, DatePicker, TimePicker, Select, Checkbox } from 'antd';
 import useDictionaryContext from '../../../context/DictionaryContext';
 import { IFormItem } from '../../../types/IFormItem';
 import { IModalWithForm } from '../../../types/IModalWithForm';
@@ -82,20 +82,13 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                 rules={formItem.rules}
               >
                 {
-                  (formItem.type === 'string' || formItem.type === 'number')
-                  ? (
-                    <Input
-                      disabled={formItem.disabled}
-                    />
-                  ) :
-                  formItem.type === 'fulltext'
-                  ? (
-                    <Input.TextArea
-                      disabled={formItem.disabled}
-                    />
-                  ) :
-                  (formItem.type === 'select' || formItem.type === 'multi-select')
-                  ? (
+                  (['string', 'number'].includes(formItem.type)) ?
+                    <Input disabled={formItem.disabled} /> :
+                  formItem.type === 'fulltext' ?
+                    <Input.TextArea disabled={formItem.disabled} /> :
+                  formItem.type === 'checkbox' ?
+                    <Checkbox disabled={formItem.disabled} /> :
+                  (['select', 'multi-select'].includes(formItem.type)) ? (
                     <Select
                       disabled={formItem.disabled}
                       allowClear
