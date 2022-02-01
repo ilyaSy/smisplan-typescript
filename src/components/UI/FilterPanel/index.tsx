@@ -43,12 +43,21 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   }, [sourceData, form]);
 
   const handleSubmit = useCallback((values: any) => {
+    console.log(values);
+
     setVisibleResetButton(false);
     setFilterData(sourceData.filter((data: TData) => {
       return Object.keys(data).reduce((acc, key) => {
-        const value = dictionary[key] ? dictionary[key][values[key]] : values[key];
+        let value = dictionary && dictionary[key] ? dictionary[key][values[key]] : values[key];
+        if (typeof data[key] === 'number') value = +value;
+        if (typeof data[key] === 'boolean') value = !!value;
         if (value) setVisibleResetButton(true);
-        return acc && (!value || (value && data[key] && data[key] === value))
+        return acc
+          && (
+              (typeof data[key] === 'boolean' && data[key] === value) ||
+              (!value && typeof data[key] !== 'boolean') ||
+              (value && data[key] && data[key] === value)
+            )
       }, true)
     }))
     closePanel();
@@ -96,7 +105,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
         wrapperCol={{ span: 16 }}
         // initialValues={initialValues ? initialValues : {}}
         onFinish={handleSubmit}
-        onFinishFailed={console.log}
+        // onFinishFailed={console.log}
         form={form}
       >
         {

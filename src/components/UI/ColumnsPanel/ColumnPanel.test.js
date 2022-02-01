@@ -22,12 +22,18 @@ const columns = [
 ]
 
 describe('Select column panel', () => {
-  it('Displaying correctly', async () => {
-    const { result } = renderHook(() => useColumnsDrawer(columns, true));
+  let result;
+  let waitForValueToChange = () => {};
+  beforeEach(() => {
+    const hook = renderHook(() => useColumnsDrawer(columns, true));
+    result = hook.result;
+    waitForValueToChange = hook.waitForValueToChange;
 
     render( result.current.ColumnsPanel );
     render( result.current.ColumnsPanelButtons );
+  });
 
+  it('Displaying correctly', async () => {
     columns.forEach((column) => {
       expect(screen.getByTestId(`basic_${column.dataIndex}`)).toBeInTheDocument();
       expect(screen.getByText(column.title)).toBeInTheDocument();
@@ -35,24 +41,16 @@ describe('Select column panel', () => {
   });
 
   it('Displaying initial values correct', () => {
-    const { result } = renderHook(() => useColumnsDrawer(columns, true));
-
-    render( result.current.ColumnsPanel );
-
     expect(screen.getByTestId(`basic_${columns[0].dataIndex}`)).toBeChecked();
     expect(screen.getByTestId(`basic_${columns[1].dataIndex}`)).not.toBeChecked();
   });
 
   it('Reseting default values', async () => {
-    const { result } = renderHook(() => useColumnsDrawer(columns, true));
-
-    render( result.current.ColumnsPanel );
-
-    columns.forEach((column) => {
-      fireEvent.click(screen.getByTestId(`basic_${column.dataIndex}`));
-    })
-
     act(() => {
+      columns.forEach((column) => {
+        fireEvent.click(screen.getByTestId(`basic_${column.dataIndex}`));
+      })
+
       fireEvent.click(screen.getByText('По умолчанию').closest('button'));
     });
 
@@ -65,15 +63,11 @@ describe('Select column panel', () => {
   });
 
   it('Changing displayed columns', async () => {
-    const { result, waitForValueToChange } = renderHook(() => useColumnsDrawer(columns, true));
-
-    render( result.current.ColumnsPanel );
-
-    columns.forEach((column) => {
-      fireEvent.click(screen.getByTestId(`basic_${column.dataIndex}`));
-    })
-
     act(() => {
+      columns.forEach((column) => {
+        fireEvent.click(screen.getByTestId(`basic_${column.dataIndex}`));
+      })
+
       fireEvent.click(screen.getByText('Применить').closest('button'));
     });
 

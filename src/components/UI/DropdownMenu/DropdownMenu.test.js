@@ -32,9 +32,11 @@ const dummyData = [
 ];
 
 describe('DropdownMenu', () => {
-  test('Render items', async () => {
+  beforeEach(() => {
     render(<DropdownMenu menuItems={dummyData} />);
+  });
 
+  test('Render items', async () => {
     expect(screen.getAllByRole('menuitem')[0].firstChild).toHaveTextContent('item');
     expect(screen.getByText('submenu')).toBeInTheDocument();
     expect(screen.getByRole('menu').children[2]).toHaveClass('ant-menu-item-divider');
@@ -46,8 +48,6 @@ describe('DropdownMenu', () => {
   });
 
   test('Triggering on click', async () => {
-    render(<DropdownMenu menuItems={dummyData} />);
-
     fireEvent.click(screen.getByText('item'));
     await waitFor(() => {
       screen.getByText('item')
@@ -57,8 +57,6 @@ describe('DropdownMenu', () => {
   });
 
   test('Render submenu', async () => {
-    render(<DropdownMenu menuItems={dummyData} />);
-
     fireEvent.mouseOver(screen.getByText('submenu'));
     await waitFor(() => {
       screen.getByText('submenuItem1');

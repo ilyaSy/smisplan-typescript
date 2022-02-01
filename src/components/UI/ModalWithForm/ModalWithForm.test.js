@@ -65,13 +65,15 @@ const dummyData = {
 }
 
 describe('ModalWithForm', () => {
-  test('Click submit button', async () => {
+  beforeEach(() => {
     render(
       <DictionaryContextProvider>
         <ModalWithForm {...dummyData} />
       </DictionaryContextProvider>
     );
+  });
 
+  test('Click submit button', async () => {
     fireEvent.click(screen.getByText(dummyData.okButtonTitle).closest('button'))
     await screen.findByText(dummyData.okButtonTitle);
 
@@ -79,8 +81,6 @@ describe('ModalWithForm', () => {
   });
 
   test('Click close button', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     fireEvent.click(screen.getByLabelText('Close'))
       await waitFor(() => {
         screen.getByLabelText('Close');
@@ -90,8 +90,6 @@ describe('ModalWithForm', () => {
   });
 
   test('Click cancel button', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     fireEvent.click(screen.getByText('Отмена').closest('button'))
     await waitFor(() => {
       screen.getByText('Отмена');
@@ -101,38 +99,28 @@ describe('ModalWithForm', () => {
   });
 
   test('String input', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     expect(screen.getByTestId('basic_string')).toBeInTheDocument();
+    expect(screen.getByTestId('basic_string')).toHaveAttribute('type', 'text');
   });
 
   test('Disabled string input', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     expect(screen.getByTestId('basic_disabled')).toHaveAttribute('disabled', '');
   });
 
   test('Number input', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     expect(screen.getByTestId('basic_number')).toBeInTheDocument();
+    expect(screen.getByTestId('basic_number')).toHaveAttribute('type', 'text');
   });
 
   test('Date input', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     expect(screen.getByTestId('basic_date')).toBeInTheDocument();
   });
 
   test('Time input', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     expect(screen.getByTestId('basic_time')).toBeInTheDocument();
   });
 
   test('Fulltext input', async () => {
-    render(<ModalWithForm {...dummyData} />);
-
     expect(screen.getByTestId('basic_fulltext').closest('div').querySelector('textarea')).toBeInTheDocument();
   });
 })
