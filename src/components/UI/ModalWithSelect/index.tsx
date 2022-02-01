@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Modal, Radio, RadioChangeEvent, Space } from 'antd';
 import { TPrintMode } from '../../../context/PrintPDFContext';
 
@@ -9,10 +9,11 @@ type TUseModalWithSelect = (
     optionValue: string,
   }[],
   onSubmit: (value: TPrintMode) => void,
-) => [
-  (mode: boolean) => void,
-  JSX.Element
-];
+) => {
+  toggleOpen: (mode: boolean) => void,
+  ModalPrintSelect: JSX.Element,
+  value: string | number | boolean | undefined
+};
 
 export const useModalWithSelect: TUseModalWithSelect = (title, list, onSubmit) => {
   const [value, setValue] = useState<TPrintMode>();
@@ -21,11 +22,10 @@ export const useModalWithSelect: TUseModalWithSelect = (title, list, onSubmit) =
   const handleToggle = useCallback((mode: boolean) => setIsOpen(mode), [])
 
   const handleChange = (e: RadioChangeEvent) => setValue(e.target.value);
-  const handleSubmit = () => onSubmit(value);
-  const handleClose = () => handleToggle(false);
+  const handleSubmit = useCallback(() => onSubmit(value), [onSubmit, value]);
+  const handleClose = useCallback(() => () => handleToggle(false), [handleToggle]);
 
-  return [
-    handleToggle,
+  const ModalPrintSelect = useMemo(() => (
     <Modal
       title={title}
       onOk={handleSubmit}
@@ -43,5 +43,11 @@ export const useModalWithSelect: TUseModalWithSelect = (title, list, onSubmit) =
         </Space>
       </Radio.Group>
     </Modal>
-  ];
+  ), [title, list, value, isOpen, handleClose, handleSubmit]);
+
+  return {
+    toggleOpen: handleToggle,
+    ModalPrintSelect,
+    value
+  };
 }

@@ -43,7 +43,7 @@ export const PrintPDF: React.FC = () => {
   ], []);
 
   const modalTitle = 'Распечатать все страницы или текущую?';
-  const [toggleOpen, ModalPrintSelect] = useModalWithSelect(modalTitle, listOptions, handlePrint);
+  const {toggleOpen, ModalPrintSelect} = useModalWithSelect(modalTitle, listOptions, handlePrint);
 
   return (
     <Tooltip
