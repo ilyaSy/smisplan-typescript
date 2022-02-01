@@ -10,7 +10,8 @@
     "dateStart": "2021-04-01",
     "id": "3",
     "title": "Будущие стихи",
-    "result": null
+    "result": null,
+    "critical": true
   },
   {
     "priority": "hard",
@@ -23,7 +24,8 @@
     "dateStart": "2021-04-01",
     "id": "2",
     "title": "Я помню чудное мгновенье...",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -36,7 +38,8 @@
     "dateStart": "2021-04-01",
     "id": "1",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -49,7 +52,8 @@
     "dateStart": "2021-04-01",
     "id": "4",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -62,7 +66,8 @@
     "dateStart": "2021-04-01",
     "id": "5",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -75,7 +80,8 @@
     "dateStart": "2021-04-01",
     "id": "6",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -88,7 +94,8 @@
     "dateStart": "2021-04-01",
     "id": "7",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -101,7 +108,8 @@
     "dateStart": "2021-04-01",
     "id": "8",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": true
   },
   {
     "priority": "simple",
@@ -114,7 +122,8 @@
     "dateStart": "2021-04-01",
     "id": "9",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -127,7 +136,8 @@
     "dateStart": "2021-04-01",
     "id": "10",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -140,7 +150,8 @@
     "dateStart": "2021-04-01",
     "id": "11",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   },
   {
     "priority": "simple",
@@ -153,6 +164,7 @@
     "dateStart": "2021-04-01",
     "id": "12",
     "title": "Написание стихов",
-    "result": null
+    "result": null,
+    "critical": false
   }
 ]

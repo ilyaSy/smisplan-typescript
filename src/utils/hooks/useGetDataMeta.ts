@@ -21,7 +21,7 @@ export const useGetDataMeta = (tablename: string) => {
     const metadataProperty = metadata?.find((property) => property.id === key);
     if (metadataProperty && metadataProperty.type === 'multi-select' && dictionary[key]){
       return value.split(',').map((v) => dictionary[key][v]).join(', ')
-    } else if (metadataProperty && metadataProperty.type === 'select' && dictionary[key] && dictionary[key][value]) {
+    } else if (metadataProperty && ['select', 'checkbox'].includes(metadataProperty.type)  && dictionary[key] && dictionary[key][value]) {
       return dictionary[key][value]
     }
     return value;
@@ -35,7 +35,7 @@ export const useGetDataMeta = (tablename: string) => {
   useEffect(() => {
     if (metadata) {
       metadata
-        .filter((property) => ['select', 'multi-select'].includes(property.type))
+        .filter((property) => ['select', 'multi-select', 'checkbox'].includes(property.type))
         .forEach((property) => setDictionary(property.id, property.validValues))
     }
   }, [metadata, setDictionary]);

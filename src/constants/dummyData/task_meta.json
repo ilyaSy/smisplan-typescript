@@ -116,11 +116,34 @@
     "isFilter": true,
     "hasFullTextLink": false,
     "isGroup": true,
-    "addMenuIndex": "2",
+    "addMenuIndex": true,
     "tableIndex": 8,
     "id": "developer",
     "type": "select",
     "defaultValue": ""
+  },
+  {
+    "isInlineEditable": false,
+    "showInTable": true,
+    "isEditable": true,
+    "title": "Критический",
+    "validValues": [
+      {
+        "text": "Да",
+        "value": true
+      },
+      {
+        "text": "Нет",
+        "value": false
+      }
+    ],
+    "isFilter": true,
+    "hasFullTextLink": false,
+    "isGroup": false,
+    "tableIndex": 10,
+    "id": "critical",
+    "type": "checkbox",
+    "defaultValue": false
   },
   {
     "isInlineEditable": false,
