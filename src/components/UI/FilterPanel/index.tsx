@@ -43,8 +43,6 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   }, [sourceData, form]);
 
   const handleSubmit = useCallback((values: any) => {
-    console.log(values);
-
     setVisibleResetButton(false);
     setFilterData(sourceData.filter((data: TData) => {
       return Object.keys(data).reduce((acc, key) => {
@@ -105,7 +103,6 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
         wrapperCol={{ span: 16 }}
         // initialValues={initialValues ? initialValues : {}}
         onFinish={handleSubmit}
-        // onFinishFailed={console.log}
         form={form}
       >
         {
@@ -124,6 +121,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
                   key={formItem.name}
                   label={formItem.label}
                   name={formItem.name}
+                  valuePropName={formItem.type === 'checkbox' ? 'checked' : 'value'}
                 >
                   {
                     (['string', 'number'].includes(formItem.type)) ?

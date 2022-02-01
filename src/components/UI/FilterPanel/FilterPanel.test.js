@@ -175,8 +175,7 @@ describe('Filter panel', () => {
     const checkbox = screen.getByTestId('basic_checkbox');
 
     act(() => {
-      // fireEvent.click(checkbox);
-      fireEvent.change(checkbox, {target: {checked: true, value: true}});
+      fireEvent.click(checkbox);
       fireEvent.click(submitButton);
     });
 
