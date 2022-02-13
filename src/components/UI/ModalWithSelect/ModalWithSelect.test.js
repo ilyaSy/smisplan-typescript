@@ -1,3 +1,4 @@
+import React from 'react';
 import { configure, fireEvent, render, screen } from '@testing-library/react';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useModalWithSelect } from '.';
@@ -21,36 +22,68 @@ const options = {
   onSubmit: jest.fn(),
 }
 
+const selectedOption = 'option2';
+
+const mockUpdateStateValue = jest.fn();
+const originalUseState = (initialState) => jest.requireActual('react').useState(initialState);
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: (initialState) => typeof initialState === 'boolean'
+    ? jest.requireActual('react').useState(initialState)
+    : [initialState, mockUpdateStateValue],
+}))
+
 describe('Modal With Select', () => {
   let result;
-  let waitForValueToChange = () => {};
   beforeEach(() => {
     const hook = renderHook(() => useModalWithSelect(options.title, options.list, options.onSubmit));
     result = hook.result;
-    waitForValueToChange = hook.waitForValueToChange;
-    result.current.toggleOpen(true);
-    render( result.current.ModalPrintSelect );
+    act(() => {
+      result.current.toggleOpen(true);
+      render( result.current.ModalPrintSelect );
+    });
   });
 
-  test('Displaying correctly', () => {
-    expect(screen.getByText('title')).toBeInTheDocument();
+  test('Displaying correctly', async () => {
+    act(() => {
+      result.current.toggleOpen(true);
+      render( result.current.ModalPrintSelect );
+
+      expect(screen.getByText('title')).toBeInTheDocument();
+      expect(screen.getAllByDisplayValue(/option\d/).length).toBe(2);
+    });
   });
+
+  test('Click RADIO causes value to change', async () => {
+    act(() => {
+      result.current.toggleOpen(true);
+      render( result.current.ModalPrintSelect );
+
+      const radio = screen.getByDisplayValue(selectedOption);
+
+      fireEvent.click(radio);
+
+      expect(mockUpdateStateValue).toHaveBeenCalledWith(selectedOption);
+    });
+
+    React.useState = originalUseState;
+  })
 
   test('Click OK', async () => {
-    const radio = screen.getByDisplayValue('option2');
-    const button = screen.getByText('OK').closest('button');
-
     act(() => {
-      // fireEvent.change(radio, { target: { value: 'option2' } })
+      result.current.toggleOpen(true);
+      render( result.current.ModalPrintSelect );
+
+      const radio = screen.getByDisplayValue(selectedOption);
+      const button = screen.getByText('OK').closest('button');
+
       fireEvent.click(radio);
 
       button.disabled = false;
       fireEvent.click(button);
     });
 
-    await waitForValueToChange(() => result.current.value);
-
-    expect(options.onSubmit).toHaveBeenCalledWith('option2');
-    // expect(options.onSubmit).toHaveBeenCalled();
+    expect(result.current.value).toBe(selectedOption);
+    // expect(options.onSubmit).toHaveBeenCalledWith(selectedOption);
   })
 });

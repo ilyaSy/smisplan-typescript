@@ -78,3 +78,5 @@ export default function setMockAdapter() {
   mock.onPost(`${urlApi}/task/`).reply(200, { status: 'OK', error: '' });
   mock.onPost(`${urlApi}/discussion/`).reply(200, { status: 'OK', error: '' });
 }
+
+export const removeMockAdapter = () => mock.restore();
