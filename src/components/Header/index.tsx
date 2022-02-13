@@ -3,12 +3,12 @@ import { Menu } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { modes } from '../../constants/constants';
 import { UserContext } from '../../context/UserContext';
-import classes from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
 import useGetTablename from '../../utils/hooks/useGetTablename';
+import classes from './Header.module.scss';
 
 const Header: React.FC = () => {
-  const mode = useGetTablename()
+  const mode = useGetTablename();
   const userContext = useContext(UserContext);
 
   return (
