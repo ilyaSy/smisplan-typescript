@@ -1,4 +1,4 @@
-import { render, screen, act, fireEvent, waitForElement, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { modes } from '../../constants/constants';
 import { BrowserRouter } from 'react-router-dom';
 import { UserContextProvider } from '../../context/UserContext';
@@ -6,7 +6,6 @@ import Header from '.';
 
 describe('Header', () => {
   test('Displaying user login correctly', async () => {
-    // const loginElement = await waitForElement(() => screen.findByText('Пушкин'));
     render(
       <BrowserRouter>
         <UserContextProvider>
