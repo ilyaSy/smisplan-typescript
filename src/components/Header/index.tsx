@@ -18,7 +18,6 @@ const Header: React.FC = () => {
           selectedKeys={[mode]}
           mode='horizontal'
           theme='dark'
-          inlineCollapsed={false}
         >
           {
             modes.map((mode) => (
@@ -33,14 +32,15 @@ const Header: React.FC = () => {
       <Menu
         mode='horizontal'
         theme='dark'
-        inlineCollapsed={false}
         className={classes['header-login']}
       >
         <Menu.SubMenu
           icon={<UserOutlined />}
           title={userContext.user?.name}
+          key='user-options'
         >
           <Menu.Item
+            key='logout'
             className={classes.logout}
             icon={<LogoutOutlined />}
           >

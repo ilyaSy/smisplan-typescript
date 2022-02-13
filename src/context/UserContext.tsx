@@ -3,22 +3,28 @@ import TUser from "../types/TUser";
 
 interface IUserContextProvider {
   user: TUser | undefined;
-  setUser: (user: TUser) => void;
+  // setUser: (user: TUser) => void;
 }
 
 export const UserContext = React.createContext<IUserContextProvider>({} as IUserContextProvider);
 
 export const UserContextProvider: React.FC = ({children}) => {
-  const [user, setUser] = useState<TUser>({
+  // const [user, setUser] = useState<TUser>({
+  //   email: "puhskin@yandex.ru",
+  //   name: "Пушкин",
+  //   login: "pushkin"
+  // });
+
+  const user: TUser = {
     email: "puhskin@yandex.ru",
     name: "Пушкин",
     login: "pushkin"
-  });
+  };
 
   return (
     <UserContext.Provider value={{
       user,
-      setUser,
+      // setUser,
     }}>
       {children}
     </UserContext.Provider>

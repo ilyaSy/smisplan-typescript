@@ -1,6 +1,6 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar from '../Sidebar';
 import SuspenseFallback from '../UI/SuspenseFallback';
 import classes from './Content.module.scss';
 
