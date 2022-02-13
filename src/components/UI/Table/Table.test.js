@@ -4,24 +4,40 @@ import { StorageProvider } from '../../../storages/storage';
 import { DictionaryContextProvider } from '../../../context/DictionaryContext';
 import { UserContextProvider } from '../../../context/UserContext';
 import { PrintPDFContextProvider } from '../../../context/PrintPDFContext';
-import DataTable from '.';
+import Table from '.';
 
 const columns = [
   {
     dataIndex: 'string',
+    id: 'string',
+    key: 'string',
+    type: 'string',
     title: 'string',
+    defaultValue: '',
     showInTable: true,
     isFilter: true,
-    type: 'string',
+    hasFullTextLink: false,
     isInlineEditable: false,
+    isEditable: true,
+    sorter: jest.fn(),
+    tableIndex: 1,
+    validValues: '',
   },
   {
     dataIndex: 'number',
+    id: 'number',
+    key: 'number',
+    type: 'number',
     title: 'number',
+    defaultValue: '',
     showInTable: false,
     isFilter: true,
-    type: 'number',
+    hasFullTextLink: false,
     isInlineEditable: false,
+    isEditable: true,
+    sorter: jest.fn(),
+    tableIndex: 2,
+    validValues: '',
   },
   // {
   //   dataIndex: 'select',
@@ -39,35 +55,67 @@ const columns = [
   // },
   {
     dataIndex: 'date',
-    title: 'date',
-    showInTable: false,
-    isFilter: true,
+    id: 'date',
+    key: 'date',
     type: 'date',
+    title: 'date',
+    defaultValue: '',
+    showInTable: true,
+    isFilter: true,
+    hasFullTextLink: false,
     isInlineEditable: false,
+    isEditable: true,
+    sorter: jest.fn(),
+    tableIndex: 3,
+    validValues: '',
   },
   {
     dataIndex: 'time',
-    title: 'time',
-    showInTable: false,
-    isFilter: true,
+    id: 'time',
+    key: 'time',
     type: 'time',
+    title: 'time',
+    defaultValue: '',
+    showInTable: true,
+    isFilter: false,
+    hasFullTextLink: false,
     isInlineEditable: false,
+    isEditable: true,
+    sorter: jest.fn(),
+    tableIndex: 4,
+    validValues: '',
   },
   {
     dataIndex: 'checkbox',
-    title: 'checkbox',
-    showInTable: false,
-    isFilter: true,
+    id: 'checkbox',
+    key: 'checkbox',
     type: 'checkbox',
+    title: 'checkbox',
+    defaultValue: '',
+    showInTable: true,
+    isFilter: true,
+    hasFullTextLink: false,
     isInlineEditable: false,
+    isEditable: true,
+    sorter: jest.fn(),
+    tableIndex: 5,
+    validValues: '',
   },
   {
     dataIndex: 'fulltext',
-    title: 'fulltext',
-    showInTable: false,
-    isFilter: true,
+    id: 'fulltext',
+    key: 'fulltext',
     type: 'fulltext',
+    title: 'fulltext',
+    defaultValue: '',
+    showInTable: true,
+    isFilter: true,
+    hasFullTextLink: false,
     isInlineEditable: false,
+    isEditable: true,
+    sorter: jest.fn(),
+    tableIndex: 6,
+    validValues: '',
   }
 ]
 
@@ -108,11 +156,11 @@ const tableParameters = {
   hasTitleRow: false,
   hasAddMenu: true,
   hasSublistData: false,
-  hasActionMenu: true,
+  hasActionMenu: false,
   hasEditMenu: true,
   hasDeleteButton: true,
   hasSetStatusMenu: true,
-  hasGoToDiscussion: true,
+  hasGoToDiscussion: false,
   hasDiscussion: true
 };
 
@@ -120,25 +168,25 @@ describe('Table', () => {
   test('Displaying correctly', async () => {
     render(
       <BrowserRouter>
-        <UserContextProvider>
-          <DictionaryContextProvider>
+        {/* <UserContextProvider> */}
+          {/* <DictionaryContextProvider> */}
             <StorageProvider>
               <PrintPDFContextProvider>
-                <DataTable
+                <Table
                   columns={columns}
                   data={sourceData}
                   tableParameters={tableParameters}
                 />
               </PrintPDFContextProvider>
             </StorageProvider>
-          </DictionaryContextProvider>
-        </UserContextProvider>
+          {/* </DictionaryContextProvider> */}
+        {/* </UserContextProvider> */}
       </BrowserRouter>
     );
 
     await waitFor(() => {
-      screen.debug();
       expect(screen.getByRole('table')).toBeInTheDocument();
+      screen.debug();
     });
   });
 });
