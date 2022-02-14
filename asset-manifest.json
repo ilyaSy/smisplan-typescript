@@ -3,8 +3,8 @@
     "static/js/0.71f5fb49.chunk.js": "/smisplan-typescript/static/js/0.71f5fb49.chunk.js",
     "static/js/0.71f5fb49.chunk.js.map": "/smisplan-typescript/static/js/0.71f5fb49.chunk.js.map",
     "main.css": "/smisplan-typescript/static/css/main.ddefba23.chunk.css",
-    "main.js": "/smisplan-typescript/static/js/main.f08182b1.chunk.js",
-    "main.js.map": "/smisplan-typescript/static/js/main.f08182b1.chunk.js.map",
+    "main.js": "/smisplan-typescript/static/js/main.a88b846e.chunk.js",
+    "main.js.map": "/smisplan-typescript/static/js/main.a88b846e.chunk.js.map",
     "runtime-main.js": "/smisplan-typescript/static/js/runtime-main.b8ef3ece.js",
     "runtime-main.js.map": "/smisplan-typescript/static/js/runtime-main.b8ef3ece.js.map",
     "static/css/3.e87b3c48.chunk.css": "/smisplan-typescript/static/css/3.e87b3c48.chunk.css",
@@ -36,6 +36,6 @@
     "static/css/3.e87b3c48.chunk.css",
     "static/js/3.4c76e79e.chunk.js",
     "static/css/main.ddefba23.chunk.css",
-    "static/js/main.f08182b1.chunk.js"
+    "static/js/main.a88b846e.chunk.js"
   ]
 }
