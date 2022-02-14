@@ -38,7 +38,6 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
   const { dictionary } = useDictionaryContext();
   const {data: metadata} = useMetadataSelector();
   const tablename = useGetTablename();
-  console.log(tablename);
 
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<Input>(null);

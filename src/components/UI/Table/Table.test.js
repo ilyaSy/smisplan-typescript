@@ -15,7 +15,7 @@ const columns = [
     showInTable: true,
     isFilter: true,
     hasFullTextLink: false,
-    isInlineEditable: false,
+    isInlineEditable: true,
     isEditable: true,
     sorter: jest.fn(),
     tableIndex: 1,
@@ -135,7 +135,7 @@ const sourceData = [
     time: '11:00:00',
   },
   {
-    string: 'string4',
+    string: 'string3',
     number: 3,
     checkbox: false,
     fulltext: 'fulltext3',
@@ -163,7 +163,7 @@ const tableParameters = {
 };
 
 describe('Table', () => {
-  test('Displaying correctly header, rows and columns', async () => {
+  test('Displaying correctly: w/o action column', async () => {
     render(
       <BrowserRouter>
         <StorageProvider>
@@ -181,14 +181,102 @@ describe('Table', () => {
     await waitFor(() => {
       const tables = screen.getAllByRole('table');
       expect(tables.length).toBe(2); // table header row and table body are separated in Ant Design
+    });
+  });
 
-      // table header
+  test('Header and columns', async () => {
+    render(
+      <BrowserRouter>
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      const tables = screen.getAllByRole('table');
+
       const cols = tables[0].querySelectorAll('.ant-table-column-title');
       expect(cols.length).toBe(columns.filter((c) => c.showInTable).length);
+    });
+  });
+
+  test('Columnn for expandable rows', async () => {
+    render(
+      <BrowserRouter>
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      const tables = screen.getAllByRole('table');
+
+      expect(tables[0].querySelector('.ant-table-expand-icon-col')).toBeInTheDocument();
+    });
+  });
+
+  test('Rows', async () => {
+    render(
+      <BrowserRouter>
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      const tables = screen.getAllByRole('table');
+
+      const rows = tables[1].querySelectorAll('.ant-table-row');
+      expect(rows.length).toBe(sourceData.length);
+    });
+  });
+
+  test('Show editable cell', async () => {
+    render(
+      <BrowserRouter>
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      const tables = screen.getAllByRole('table');
 
       // table body
       const rows = tables[1].querySelectorAll('.ant-table-row');
-      expect(rows.length).toBe(sourceData.length);
+      // expect(rows.length).toBe(sourceData.length);
+
+      rows.forEach((row) => {
+        expect(row.querySelector('.editable-cell-value-wrap')).toBeInTheDocument();
+      })
     });
   });
 });
