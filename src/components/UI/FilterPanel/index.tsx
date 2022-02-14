@@ -44,20 +44,22 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
 
   const handleSubmit = useCallback((values: any) => {
     setVisibleResetButton(false);
-    setFilterData(sourceData.filter((data: TData) => {
-      return Object.keys(data).reduce((acc, key) => {
-        let value = dictionary && dictionary[key] ? dictionary[key][values[key]] : values[key];
-        if (typeof data[key] === 'number') value = +value;
-        if (typeof data[key] === 'boolean') value = !!value;
-        if (value) setVisibleResetButton(true);
-        return acc
-          && (
-              (typeof data[key] === 'boolean' && data[key] === value) ||
-              (!value && typeof data[key] !== 'boolean') ||
-              (value && data[key] && data[key] === value)
-            )
-      }, true)
-    }))
+    setFilterData(sourceData
+      .filter((data: TData) => {
+        return Object.keys(data).reduce((acc, key) => {
+          let value = dictionary && dictionary[key] ? dictionary[key][values[key]].text : values[key];
+          if (typeof data[key] === 'number') value = +value;
+          if (typeof data[key] === 'boolean') value = !!value;
+          if (value) setVisibleResetButton(true);
+          return acc
+            && (
+                (typeof data[key] === 'boolean' && data[key] === value) ||
+                (!value && typeof data[key] !== 'boolean') ||
+                (value && data[key] && data[key] === value)
+              )
+        }, true)
+      })
+    )
     closePanel();
   }, [dictionary, sourceData, closePanel]);
 
@@ -136,8 +138,8 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
                         filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
                         mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
                         showSearch
-                        options={Object.entries(dictionary[formItem.name]).map(([value, label]) => (
-                          { value, label }
+                        options={Object.entries(dictionary[formItem.name]).map(([value, info]) => (
+                          { value, label: info.text }
                         ))}
                       />
                     ) :

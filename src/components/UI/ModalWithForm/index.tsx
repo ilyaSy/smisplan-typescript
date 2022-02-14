@@ -100,8 +100,8 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                       options={
                         dictionary
                           ? Object.entries(dictionary[formItem.name])
-                              .map(([value, label]) => (
-                                { value, label }
+                              .map(([value, info]) => (
+                                { value, label: info.text }
                               ))
                           : []
                       }

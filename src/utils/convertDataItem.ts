@@ -16,7 +16,12 @@ export const convertDataItem: TConvertDataItem = (dictionary, data, metadata, mo
     .map((m) => {
       const type = m.type;
       const name = mode === 'form' ? m.name : m.id;
-      const invertDictionary = invert(dictionary[name]);
+      let invertDictionary: Record<string, string> = {};
+      if (dictionary[name]) {
+        invertDictionary = invert(
+          Object.fromEntries(Object.entries(dictionary[name]).map(([key, info]) => [key, info.text]))
+        );
+      }
 
       if (data[name]) {
         if (mode === 'form') {

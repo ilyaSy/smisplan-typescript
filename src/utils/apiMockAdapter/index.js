@@ -56,6 +56,7 @@ export default function setMockAdapter() {
   mock.onGet(`${urlApi}/event-meta/`).reply(200, metaData.event);
 
   // get data
+  // mock.onGet(`${urlApi}/task/get-discussions/`).reply(200, data.task);
   mock.onGet(`${urlApi}/task/`).reply(200, data.task);
   mock.onGet(`${urlApi}/discussion/`).reply(200, data.discussion);
   mock.onGet(`${urlApi}/calendar/`).reply(200, data.calendar);

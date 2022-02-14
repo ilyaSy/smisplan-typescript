@@ -8,6 +8,7 @@ import LoadingComponent from '../UI/LoadingComponent';
 import { TTableParameters } from '../../types/TTableParameters';
 import { useGetDataMeta } from '../../utils/hooks/useGetDataMeta';
 import classes from './DataTable.module.scss';
+import useDictionaryContext from '../../context/DictionaryContext';
 
 const { Title } = Typography;
 
@@ -15,6 +16,7 @@ const DataTable: React.FC = () => {
   const [tableParameters, setTableParameters] = useState<TTableParameters | null>(null);
 
   const tablename = useGetTablename();
+  const { dictionary } = useDictionaryContext();
 
   const {
     data: sourceData, isErrorData, isLoadingData,
@@ -44,6 +46,7 @@ const DataTable: React.FC = () => {
             columns={mapMetadataToColumns(metadata)}
             tableParameters={tableParameters}
             tablename={tablename}
+            dictionary={dictionary}
           />
       )
     )

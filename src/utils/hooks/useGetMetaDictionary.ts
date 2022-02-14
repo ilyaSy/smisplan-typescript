@@ -7,10 +7,15 @@ import { TDictionary } from "../../types/TDictionary";
 import { TObject } from "../../types/TObject";
 import { defaultHeaders } from "../../storages/middleware/apiMiddleware";
 import metadataGetAction from "../../storages/actions/metadata";
+import { TDictionaryInfo } from "../../types/TDictionaryInfo";
 
-const mapDictionaryArrayToObject = (array: Record<string, string>[]): TObject<string> => {
+const mapDictionaryArrayToObject = (array: Record<string, TDictionaryInfo>[]): TObject<TDictionaryInfo> => {
   return Object.fromEntries(
-    array.map((value) => [value.value, value.text])
+    array.map((value) => [value.value, {
+      text: value.text,
+      value: value.value,
+      tag: value?.tag
+    }])
   )
 }
 
@@ -39,7 +44,7 @@ export const useGetMetaDictionary = (tablename?: typeof modes[number]['id'] ) =>
                     setDictionary((prev) => {
                       return {
                         ...prev,
-                        [id]: mapDictionaryArrayToObject(dictionaryResponse.data as Record<string, string>[])
+                        [id]: mapDictionaryArrayToObject(dictionaryResponse.data as Record<string, TDictionaryInfo>[])
                       }
                     });
                   })
@@ -48,7 +53,7 @@ export const useGetMetaDictionary = (tablename?: typeof modes[number]['id'] ) =>
                 setDictionary((prev) => {
                   return {
                     ...prev,
-                    [id]: mapDictionaryArrayToObject(validValues as Record<string, string>[])
+                    [id]: mapDictionaryArrayToObject(validValues as Record<string, TDictionaryInfo>[])
                   }
                 });
               }

@@ -1,19 +1,25 @@
 import axios from "axios";
 import React, { useCallback, useContext, useMemo, useState } from "react";
 import { TDictionary } from "../types/TDictionary";
+import { TDictionaryInfo } from "../types/TDictionaryInfo";
 import { TObject } from "../types/TObject";
 
 export type TGetDataUrl = { getDataUrl: string };
-export type TMetadataDictionary = Record<string, string>[] | TGetDataUrl;
+export type TMetadataDictionary = Record<string, TDictionaryInfo>[] | TGetDataUrl;
 
 interface IDictionaryContext {
   dictionary: TDictionary;
   setDictionary: (parameter: string, parameterDictionary: TMetadataDictionary) => void;
 };
 
-const mapDictionaryArrayToObject = (array: Record<string, string>[]): TObject<string> => {
+const mapDictionaryArrayToObject = (array: Record<string, TDictionaryInfo>[]): TObject<TDictionaryInfo> => {
   return Object.fromEntries(
-    array.map((value) => [value.value, value.text])
+    array.map((value) => [value.value, {
+      text: value.text,
+      value: value.value,
+      tag: value?.tag
+    }])
+    // array.map((value) => [value.value, value.text])
   )
 }
 
@@ -41,7 +47,7 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
           setDict((prev) => {
             return {
               ...prev,
-              [parameter]: mapDictionaryArrayToObject(response.data as Record<string, string>[])
+              [parameter]: mapDictionaryArrayToObject(response.data as Record<string, TDictionaryInfo>[])
             }
           });
         })
@@ -50,7 +56,7 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
       setDict((prev) => {
         return {
           ...prev,
-          [parameter]: mapDictionaryArrayToObject(parameterDictionary as Record<string, string>[])
+          [parameter]: mapDictionaryArrayToObject(parameterDictionary as Record<string, TDictionaryInfo>[])
         }
       });
     }

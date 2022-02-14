@@ -73,12 +73,12 @@ export const createActions = ({
       type: 'submenu',
       key: `action-menu-${dataItem.key}-status`,
       title: 'Изменить статус',
-      items: Object.entries(dictionary?.status).map(([statusKey, statusValue]) => {
+      items: Object.entries(dictionary?.status).map(([statusKey, statusInfo]) => {
         const values = convertDataItem(dictionary, dataItem, metadata, 'table');
 
         return ({
           key: `action-menu-status-${statusKey}`,
-          title: statusValue,
+          title: statusInfo.text,
           onClick: () => {
             values.status = statusKey;
             handleEdit(values);

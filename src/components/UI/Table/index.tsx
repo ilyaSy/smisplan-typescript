@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ConfigProvider, Pagination, Table } from 'antd';
+import { ConfigProvider, Pagination, Table, Tag } from 'antd';
+import { invert } from 'lodash';
 import { SortOrder } from 'antd/lib/table/interface';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
@@ -8,6 +9,7 @@ import TableExpandableRow from '../TableExpandableRow';
 import TableFilterIcon from '../TableFilterIcon';
 import ActionMenu from '../../ActionMenu';
 import { TData } from '../../../types/TData';
+import { TDictionary } from '../../../types/TDictionary';
 import { TTableParameters } from '../../../types/TTableParameters';
 import { usePrintPDFContext } from '../../../context/PrintPDFContext';
 import { useFilterDrawer } from '../FilterPanel';
@@ -20,11 +22,12 @@ type TTableProps = {
   columns: TData[],
   tableParameters: TTableParameters,
   tablename: string,
+  dictionary: TDictionary
 };
 
 const PAGE_SIZE = 10;
 
-const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tablename }) => {
+const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tablename, dictionary }) => {
   const { setDataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
   const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
@@ -37,19 +40,21 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
   }, [setDataPrintRef]);
 
   const sourceData = useMemo(() => {
-    return data.map((dataItem, index) => ({
-      ...dataItem,
-      key: `table-row-${dataItem.id}-${index}`,
-      action: hasActionMenu
-      ? <ActionMenu
-          key={`action-menu-${dataItem.id}-${index}`}
-          title='Меню действий'
-          dataItem={dataItem}
-          tableParameters={tableParameters}
-          tablename={tablename}
-        />
-      : null
-    }))
+    return data.map((dataItem, index) => {
+      return {
+        ...dataItem,
+        key: `table-row-${dataItem.id}-${index}`,
+        action: hasActionMenu
+        ? <ActionMenu
+            key={`action-menu-${dataItem.id}-${index}`}
+            title='Меню действий'
+            dataItem={dataItem}
+            tableParameters={tableParameters}
+            tablename={tablename}
+          />
+        : null
+      }
+    })
   }, [data, tableParameters, hasActionMenu, tablename])
 
   const getDefaultSorter = (field: string) => {
@@ -73,19 +78,29 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
 
   const tableColumns: TData[] = columnsData
     .map((column) => {
+      let invertDictionary: Record<string, string> = {};
+      if (dictionary[column.dataIndex]) {
+        invertDictionary = invert(
+          Object.fromEntries(Object.entries(dictionary[column.dataIndex]).map(([key, info]) => [key, info.text]))
+        );
+      }
+
       return !column.isInlineEditable
         ? {
             ...column,
             defaultSortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
             sortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
-            // ellipsis: true,
             filterIcon: TableFilterIcon,
+            render: (text: string, record: TData) => {
+              return column.isTagged
+                ? <Tag color={dictionary[column.dataIndex][invertDictionary[record[column.dataIndex]]]?.tag}>{text}</Tag>
+                : text
+            }
           }
           : {
             ...column,
             defaultSortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
             sortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
-            // ellipsis: true,
             filterIcon: TableFilterIcon,
             onCell: (record: any) => ({
               record,
@@ -93,7 +108,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
               dataIndex: column.dataIndex,
               title: column.title,
             }),
-          };
+          }
       }
     )
 
@@ -166,7 +181,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
       {ColumnsPanel}
 
       <Table
-        // ref={dataRef}
+        ref={dataRef}
         dataSource={ filterData }
         columns={ tableColumns }
         title={TableTitle}

@@ -35,27 +35,31 @@
       {
         "text": "Новая",
         "value": "new",
-        "background-color": "#fdffc2"
+        "tag": "gold"
       },
       {
         "text": "Принята",
-        "value": "accepted"
+        "value": "accepted",
+        "tag": "blue"
       },
       {
         "text": "В работе",
-        "value": "work"
+        "value": "work",
+        "tag": "geekblue"
       },
       {
         "text": "Выполнена",
         "value": "done",
-        "background-color": "#c2ffc4"
+        "tag": "green"
       },
       {
         "text": "Отложена",
-        "value": "postponed"
+        "value": "postponed",
+        "tag": "magenta"
       }
     ],
     "isFilter": true,
+    "isTagged": true,
     "hasFullTextLink": false,
     "showInTableMobile": false,
     "tableIndex": 7,
@@ -130,14 +134,17 @@
     "validValues": [
       {
         "text": "Да",
-        "value": true
+        "value": true,
+        "tag": "red"
       },
       {
         "text": "Нет",
-        "value": false
+        "value": false,
+        "tag": "default"
       }
     ],
     "isFilter": true,
+    "isTagged": true,
     "hasFullTextLink": false,
     "isGroup": false,
     "tableIndex": 10,
