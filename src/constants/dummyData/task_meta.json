@@ -140,7 +140,7 @@
       {
         "text": "Нет",
         "value": false,
-        "tag": "default"
+        "tag": "white"
       }
     ],
     "isFilter": true,

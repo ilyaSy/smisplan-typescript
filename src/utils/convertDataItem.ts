@@ -65,6 +65,13 @@ export const convertDataItem: TConvertDataItem = (dictionary, data, metadata, mo
                 data[name].split(/, ?/).map((d: string) => invertDictionary[d])
               ]
 
+            case 'checkbox':
+              return [
+                name,
+                data[name].toLowerCase() === 'да'
+              ]
+
+
             default:
               return [name, data[name]]
           }

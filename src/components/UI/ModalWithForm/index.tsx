@@ -96,7 +96,6 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                       filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
                       mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
                       showSearch
-                      // options={Object.entries(dictionary[formItem.name]).map(([value, label]) => (
                       options={
                         dictionary
                           ? Object.entries(dictionary[formItem.name])
