@@ -80,6 +80,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                 label={formItem.label}
                 name={formItem.name}
                 rules={formItem.rules}
+                valuePropName={formItem.type === "checkbox" ? "checked" : "value"}
               >
                 {
                   (['string', 'number'].includes(formItem.type)) ?

@@ -55,19 +55,34 @@ SMISplan - стандартный трекер задач (issue tracker), сд�
 
 * Lazy Loading компоненты
 
+## ToDo
+- [x] Unit-тесты
+
+- [ ] "Показать совещания по задаче" как вложенная таблица
+
+- [ ] Адаптив
+
 ## Просмотр
 
 * Клонировать репозиторий
-<br>`git clone https://github.com/ilyaSy/smisplan-typescript.git`
+```
+git clone https://github.com/ilyaSy/smisplan-typescript.git
+```
 
 * Установить зависимости
-<br>`npm install`
+```
+npm install
+```
 
 * Запустить
-<br>`npm start`
+```
+npm start
+```
 
 * Для запуска тестов
-<br>`npm run test`
+```
+npm run test
+```
 
 * Готовый результат на gh pages
 <br>[SMISplan](https://ilyasy.github.io/smisplan-typescript/)
