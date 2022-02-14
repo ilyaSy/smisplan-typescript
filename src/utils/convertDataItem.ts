@@ -71,7 +71,6 @@ export const convertDataItem: TConvertDataItem = (dictionary, data, metadata, mo
                 data[name].toLowerCase() === 'да'
               ]
 
-
             default:
               return [name, data[name]]
           }
