@@ -1,8 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { StorageProvider } from '../../../storages/storage';
-import { DictionaryContextProvider } from '../../../context/DictionaryContext';
-import { UserContextProvider } from '../../../context/UserContext';
 import { PrintPDFContextProvider } from '../../../context/PrintPDFContext';
 import Table from '.';
 
@@ -165,28 +163,32 @@ const tableParameters = {
 };
 
 describe('Table', () => {
-  test('Displaying correctly', async () => {
+  test('Displaying correctly header, rows and columns', async () => {
     render(
       <BrowserRouter>
-        {/* <UserContextProvider> */}
-          {/* <DictionaryContextProvider> */}
-            <StorageProvider>
-              <PrintPDFContextProvider>
-                <Table
-                  columns={columns}
-                  data={sourceData}
-                  tableParameters={tableParameters}
-                />
-              </PrintPDFContextProvider>
-            </StorageProvider>
-          {/* </DictionaryContextProvider> */}
-        {/* </UserContextProvider> */}
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
       </BrowserRouter>
     );
 
     await waitFor(() => {
-      expect(screen.getByRole('table')).toBeInTheDocument();
-      screen.debug();
+      const tables = screen.getAllByRole('table');
+      expect(tables.length).toBe(2); // table header row and table body are separated in Ant Design
+
+      // table header
+      const cols = tables[0].querySelectorAll('.ant-table-column-title');
+      expect(cols.length).toBe(columns.filter((c) => c.showInTable).length);
+
+      // table body
+      const rows = tables[1].querySelectorAll('.ant-table-row');
+      expect(rows.length).toBe(sourceData.length);
     });
   });
 });

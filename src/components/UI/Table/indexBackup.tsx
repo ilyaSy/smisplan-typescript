@@ -159,14 +159,13 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
   }, [filterData, pageSize, dataPrintMode, setDataPrintMode])
 
   return (
-    // <>
     <ConfigProvider locale={ruRU}>
       {FilterPanel}
 
       {ColumnsPanel}
 
       <Table
-        // ref={dataRef}
+        ref={dataRef}
         dataSource={ filterData }
         columns={ tableColumns }
         title={TableTitle}
@@ -175,7 +174,7 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
         components={{
           body: {
             row: TableEditableRow,
-            cell: DataTableEditableCell
+            cell: DataTableEditableCell,
           },
         }}
         rowClassName={() => 'editable-row'}
@@ -195,7 +194,6 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
         className={ classes.table }
       />
     </ConfigProvider>
-    // </>
   );
 }
 

@@ -43,6 +43,7 @@ const DataTable: React.FC = () => {
             data={sourceData}
             columns={mapMetadataToColumns(metadata)}
             tableParameters={tableParameters}
+            tablename={tablename}
           />
       )
     )

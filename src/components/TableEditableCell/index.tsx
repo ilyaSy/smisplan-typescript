@@ -16,13 +16,14 @@ interface Item {
   address: string;
 }
 
-interface EditableCellProps {
+export interface EditableCellProps {
   title: React.ReactNode;
   editable: boolean;
   children: React.ReactNode;
   dataIndex: keyof Item;
   record: Item;
   // handleSave: (record: Item) => void;
+  // tablename: string,
 }
 
 const DataTableEditableCell: React.FC<EditableCellProps> = ({
@@ -31,11 +32,14 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
   children,
   dataIndex,
   record,
+  // tablename,
   ...restProps
 }) => {
   const { dictionary } = useDictionaryContext();
   const {data: metadata} = useMetadataSelector();
   const tablename = useGetTablename();
+  console.log(tablename);
+
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<Input>(null);
   const form = useContext(EditableContext)!;

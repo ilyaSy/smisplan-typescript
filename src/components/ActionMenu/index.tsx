@@ -6,7 +6,6 @@ import { TData } from '../../types/TData';
 import { TTableParameters } from '../../types/TTableParameters';
 import TActionBody from '../../types/TApiActionBody';
 import { dataAddAction, dataDeleteAction, dataUpdateAction } from '../../storages/actions/data';
-import useGetTablename from '../../utils/hooks/useGetTablename';
 import { createActions } from './createActions';
 import DropdownMenu from '../UI/DropdownMenu';
 import useDictionaryContext from '../../context/DictionaryContext';
@@ -19,14 +18,14 @@ type TActionMenu = {
   title: string,
   dataItem: TData,
   tableParameters: TTableParameters,
+  tablename: string,
 };
 
-const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters}) => {
+const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, tablename}) => {
   const { dictionary } = useDictionaryContext();
 
   const [openModal, setOpenModal] = useState<TModals>();
 
-  const tablename = useGetTablename();
   const { data: metadata } = useMetadataSelector();
 
   const handleClose = () => setOpenModal(undefined);
