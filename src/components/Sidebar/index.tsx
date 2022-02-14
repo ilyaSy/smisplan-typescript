@@ -2,7 +2,6 @@ import React, { memo, useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Menu, Tooltip } from 'antd';
 import {
-  // PrinterOutlined,
   SettingOutlined,
   PlusCircleTwoTone,
 } from '@ant-design/icons';

@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { UserContextProvider } from './context/UserContext';
 import { StorageProvider } from './storages/storage';
+import { DictionaryContextProvider } from './context/DictionaryContext';
+import { PrintPDFContextProvider } from './context/PrintPDFContext';
 import App from './App';
 import './index.css';
 import 'antd/dist/antd.css';
-import { DictionaryContextProvider } from './context/DictionaryContext';
-import { PrintPDFContextProvider } from './context/PrintPDFContext';
 
-// const basename = '/smisplan-typescript/'; /* ! for gh-pages ! */
-const basename: string = '/';
+const basename: string = document.location.hostname === 'document.location.hostname'
+  ? '/smisplan-typescript/'
+  : '/';
 
 ReactDOM.render(
   <React.StrictMode>

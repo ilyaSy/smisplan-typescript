@@ -279,4 +279,68 @@ describe('Table', () => {
       })
     });
   });
+
+  test('Filter panel button', async () => {
+    render(
+      <BrowserRouter>
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('filter')).toBeInTheDocument();
+      expect(screen.getByText('Сбросить фильтры')).toBeInTheDocument();
+    });
+  });
+
+  test('Select column panel button', async () => {
+    render(
+      <BrowserRouter>
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('ordered-list')).toBeInTheDocument();
+    });
+  });
+
+  test('Pagination', async () => {
+    const { container } = render(
+      <BrowserRouter>
+        <StorageProvider>
+          <PrintPDFContextProvider>
+            <Table
+              columns={columns}
+              data={sourceData}
+              tableParameters={tableParameters}
+            />
+          </PrintPDFContextProvider>
+        </StorageProvider>
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(container.querySelector('.ant-pagination')).toBeInTheDocument();
+      expect(screen.getAllByTitle('Назад').length).toBeGreaterThan(0);
+      expect(screen.getAllByTitle('Вперед').length).toBeGreaterThan(0);
+      expect(container.querySelectorAll('.ant-pagination-item').length).toBeGreaterThan(1);
+    });
+  });
 });
