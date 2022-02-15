@@ -82,11 +82,7 @@ const DataTable: React.FC<TTableProps> = ({
       : null;
   }
 
-  const {
-    ColumnsPanelButtons,
-    ColumnsPanel,
-    columnsData
-  } = useColumnsDrawer(columns);
+  const { ColumnsPanelButtons, ColumnsPanel, columnsData } = useColumnsDrawer(columns);
 
   let tableColumns: TData[] = columnsData
     .map((column) => {
@@ -126,11 +122,7 @@ const DataTable: React.FC<TTableProps> = ({
   tableColumns = addActionColumnInfo(tableColumns, hasActionMenu);
   tableColumns = updateTableColumnsWidth(tableColumns);
 
-  const {
-    FilterButtons,
-    FilterPanel,
-    filterData
-  } = useFilterDrawer(columnsData, sourceData);
+  const { FilterButtons, FilterPanel, filterData } = useFilterDrawer(columnsData, sourceData);
 
   const handleChangePage = useCallback((nextPage: number, pageSize: number) => {
     setPage(nextPage);
@@ -153,14 +145,7 @@ const DataTable: React.FC<TTableProps> = ({
         total={(filterData || []).length}
       />
     </div>
-  ), [
-    FilterButtons,
-    ColumnsPanelButtons,
-    filterData,
-    page,
-    pageSize,
-    handleChangePage
-  ]);
+  ), [ FilterButtons, ColumnsPanelButtons, filterData, page, pageSize, handleChangePage ]);
 
   useEffect(() => {
     if (dataPrintMode === 'all') {
@@ -180,11 +165,9 @@ const DataTable: React.FC<TTableProps> = ({
 
       <Table
         ref={dataRef}
-        // dataSource={ filterData }
         dataSource={ getTableWithPseudoFields(filterData, tableColumns) }
         columns={ tableColumns }
         title={TableTitle}
-        // scroll={{x: 'max-content'}}
         tableLayout='auto'
         components={{
           body: {
