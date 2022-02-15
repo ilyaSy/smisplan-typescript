@@ -12,7 +12,7 @@ const ModalWithList = ({
   title,
   dataSource = [],
   noDataText = 'Нет данных',
-  avatar,
+  avatar = null,
   width = 600,
 }: IModalWithList) => {
   if (dataSource && dataSource.length) {
@@ -25,9 +25,8 @@ const ModalWithList = ({
             <List.Item>
               <List.Item.Meta
                 avatar={avatar}
-                // avatar={<CarryOutOutlined />}
                 title={item.title}
-                description={item.description.split('\n').map((text) => <div>{text}</div>)}
+                description={item.description.split('\n').map((text, index) => <div key={index}>{text}</div>)}
               />
             </List.Item>
           )}

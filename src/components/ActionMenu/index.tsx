@@ -2,21 +2,18 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dropdown, Tooltip } from 'antd';
 import { CarryOutOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import { urlApi } from '../../constants/constants';
 import { TData } from '../../types/TData';
 import { TTableParameters } from '../../types/TTableParameters';
 import { TActionBody } from '../../types/TApiActionBody';
-import { IFetchError } from '../../types/IFetchError';
 import { useMetadataSelector } from '../../storages/selectors/metadata';
 import { dataAddAction, dataDeleteAction, dataUpdateAction } from '../../storages/actions/data';
 import { createActions } from './createActions';
 import DropdownMenu from '../UI/DropdownMenu';
-import Notification from '../UI/Notification';
 import ModalWithList from '../UI/ModalWithList';
 import DataEditModal from '../Modals/DataEditModal';
 import DataAddModal from '../Modals/DataAddModal';
 import { useDictionaryContext } from '../../context/DictionaryContext';
+import { Api } from '../../utils/Api';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -52,22 +49,14 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, ta
 
   const connectedTablename = 'discussion';
   const handleGetConnectedData = useCallback(async (data: TActionBody) => {
-    try {
-      const response = await axios.get(`${urlApi}/${tablename}/get-${connectedTablename}/${data.id}`);
+    const connectedData = await Api.getConnectedData(tablename, connectedTablename, +data.id);
 
+    if (connectedData) {
       ModalWithList({
         title: 'Обсуждения',
         avatar: <CarryOutOutlined />,
-        dataSource: response.data as {title: string, description: string}[],
+        dataSource: connectedData as {title: string, description: string}[],
         noDataText: 'Ранее обсуждений не проводилось',
-      });
-    } catch (error) {
-      Notification({
-        type: 'error',
-        message: 'Ошибка при загрузке данных',
-        description: (error as IFetchError).message
-          ? (error as IFetchError).message
-          : (error as IFetchError).statusText,
       });
     }
   }, [tablename]);
