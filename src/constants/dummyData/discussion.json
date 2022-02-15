@@ -69,7 +69,7 @@
   },
   {
     "responsible": "pushkin",
-    "status": "done",
+    "status": "new",
     "title": "Написание стихов в текущем году",
     "time": "11:55:00",
     "week": "2022.4",
@@ -103,7 +103,7 @@
   },
   {
     "responsible": "pushkin",
-    "status": "done",
+    "status": "postponed",
     "title": "Написание стихов в текущем году",
     "time": "15:00:00",
     "week": "2022.4",
@@ -120,7 +120,7 @@
   },
   {
     "responsible": "pushkin",
-    "status": "done",
+    "status": "rejected",
     "title": "Написание стихов в текущем году",
     "time": "17:00:00",
     "week": "2022.4",

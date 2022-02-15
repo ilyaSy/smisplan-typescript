@@ -7,22 +7,27 @@
     "validValues": [
       {
         "text": "Запланировано",
-        "value": "new"
+        "value": "new",
+        "tag": "gold"
       },
       {
         "text": "Проведено",
-        "value": "done"
+        "value": "done",
+        "tag": "green"
       },
       {
         "text": "Перенесено",
-        "value": "postponed"
+        "value": "postponed",
+        "tag": "magenta"
       },
       {
         "text": "Отменено",
-        "value": "rejected"
+        "value": "rejected",
+        "tag": "red"
       }
     ],
     "isFilter": true,
+    "isTagged": true,
     "showInTableMobile": false,
     "tableIndex": 11,
     "id": "status",
@@ -36,6 +41,7 @@
     "title": "Время",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "addMenuIndex": "4",
     "tableIndex": 3,
     "id": "time",
@@ -49,6 +55,7 @@
     "title": "Дата",
     "validValues": "",
     "isFilter": true,
+    "isTagged": false,
     "isGroup": true,
     "addMenuIndex": "3",
     "tableIndex": 2,
@@ -66,6 +73,7 @@
       "getDataUrl": "/smisplan-typescript/cgi/developer/"
     },
     "isFilter": true,
+    "isTagged": false,
     "isSelectCreatable": true,
     "tableIndex": 9,
     "id": "participants",
@@ -80,6 +88,7 @@
     "title": "Тип обсуждения",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "tableIndex": 10,
     "id": "mainTable",
     "type": "string",
@@ -92,6 +101,7 @@
     "title": "Тема",
     "validValues": "",
     "isFilter": true,
+    "isTagged": false,
     "hasFullTextLink": true,
     "isGroup": true,
     "addMenuIndex": "1",
@@ -109,6 +119,7 @@
       "getDataUrl": "/smisplan-typescript/cgi/developer/"
     },
     "isFilter": true,
+    "isTagged": false,
     "addMenuIndex": "2",
     "tableIndex": 8,
     "id": "responsible",
@@ -123,6 +134,7 @@
     "title": "неделя",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "isGroup": true,
     "tableIndex": 13,
     "id": "week",
@@ -136,6 +148,7 @@
     "title": "Основные вопросы",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "hasFullTextLink": false,
     "isGroup": false,
     "tableIndex": 6,
@@ -171,6 +184,7 @@
       }
     ],
     "isFilter": true,
+    "isTagged": false,
     "isSelectCreatable": true,
     "showInTableMobile": false,
     "tableIndex": 12,
@@ -185,6 +199,7 @@
     "title": "Видеоконференция",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "hasFullTextLink": false,
     "isGroup": false,
     "tableIndex": 13,
@@ -199,6 +214,7 @@
     "title": "ID задачи",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "tableIndex": 4,
     "id": "idTask",
     "type": "number",
@@ -211,6 +227,7 @@
     "title": "ID",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "tableIndex": 1,
     "id": "id",
     "type": "number",
@@ -223,6 +240,7 @@
     "title": "Результат",
     "validValues": "",
     "isFilter": false,
+    "isTagged": false,
     "hasFileUploader": true,
     "tableIndex": 7,
     "id": "result",

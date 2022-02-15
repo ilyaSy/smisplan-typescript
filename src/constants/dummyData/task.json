@@ -99,7 +99,7 @@
   },
   {
     "priority": "simple",
-    "status": "done",
+    "status": "postponed",
     "project": "otdel",
     "text": "Написание стихов",
     "dateEnd": "2021-04-01",
@@ -127,7 +127,7 @@
   },
   {
     "priority": "simple",
-    "status": "done",
+    "status": "work",
     "project": "otdel",
     "text": "Написание стихов",
     "dateEnd": "2021-04-01",
@@ -137,11 +137,11 @@
     "id": "10",
     "title": "Написание стихов",
     "result": null,
-    "critical": false
+    "critical": true
   },
   {
     "priority": "simple",
-    "status": "done",
+    "status": "accepted",
     "project": "otdel",
     "text": "Написание стихов",
     "dateEnd": "2021-04-01",
@@ -155,7 +155,7 @@
   },
   {
     "priority": "simple",
-    "status": "done",
+    "status": "new",
     "project": "otdel",
     "text": "Написание стихов",
     "dateEnd": "2021-04-01",
@@ -165,6 +165,6 @@
     "id": "12",
     "title": "Написание стихов",
     "result": null,
-    "critical": false
+    "critical": true
   }
 ]
