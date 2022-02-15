@@ -70,7 +70,7 @@ export const convertDataItem: TConvertDataItem = (dictionary, data, metadata, mo
             case 'checkbox':
               return [
                 name,
-                data[name].toLowerCase() === 'да'
+                data[name] && data[name].toLowerCase() === 'да'
               ]
 
             default:
