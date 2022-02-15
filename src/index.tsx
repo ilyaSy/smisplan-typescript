@@ -9,7 +9,7 @@ import App from './App';
 import './index.css';
 import 'antd/dist/antd.css';
 
-const basename: string = document.location.hostname === 'document.location.hostname'
+const basename: string = document.location.hostname === 'ilyasy.github.io'
   ? '/smisplan-typescript/'
   : '/';
 

@@ -9,6 +9,7 @@ export type TMetadataDictionary = Record<string, TDictionaryInfo>[] | TGetDataUr
 
 interface IDictionaryContext {
   dictionary: TDictionary;
+  invertDictionary: TObject<Record<string, string>>;
   setDictionary: (parameter: string, parameterDictionary: TMetadataDictionary) => void;
 };
 
@@ -34,6 +35,14 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
   const [dict, setDict] = useState<IDictionaryContext["dictionary"]>({});
 
   const dictionary = useMemo(() => dict, [dict]);
+  const invertDictionary = useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(dict).map(([property, info]) => {
+        const inverseInfo = Object.fromEntries(Object.entries(info).map(([k, v]) => [v.text, k]))
+        return [property, inverseInfo]
+      })
+    );
+  }, [dict]);
 
   const setDictionary = useCallback((
     parameter: string,
@@ -65,6 +74,7 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
   return (
     <DictionaryContext.Provider value={{
       dictionary,
+      invertDictionary,
       setDictionary
     }}>
       {children}

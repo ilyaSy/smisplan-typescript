@@ -2,9 +2,11 @@ import moment from "moment";
 import { invert } from "lodash";
 import { TData } from "../types/TData"
 import { TDictionary } from "../types/TDictionary"
+// import { TObject } from "../types/TObject";
 
 type TConvertDataItem = (
   dictionary: TDictionary,
+  // invertDictionary: TObject<Record<string, string>>,
   data: TData,
   metadata: TData[],
   mode: 'form' | 'table' | 'modalEdit' | 'modalAdd',

@@ -16,7 +16,7 @@ const DataTable: React.FC = () => {
   const [tableParameters, setTableParameters] = useState<TTableParameters | null>(null);
 
   const tablename = useGetTablename();
-  const { dictionary } = useDictionaryContext();
+  const { dictionary, invertDictionary } = useDictionaryContext();
 
   const {
     data: sourceData, isErrorData, isLoadingData,
@@ -47,6 +47,7 @@ const DataTable: React.FC = () => {
             tableParameters={tableParameters}
             tablename={tablename}
             dictionary={dictionary}
+            invertDictionary={invertDictionary}
           />
       )
     )

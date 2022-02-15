@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ConfigProvider, Pagination, Table, Tag } from 'antd';
-import { invert } from 'lodash';
+// import { invert } from 'lodash';
 import { SortOrder } from 'antd/lib/table/interface';
 import ruRU from 'antd/lib/locale/ru_RU';
 import TableEditableRow from '../TableEditableRow';
@@ -16,6 +16,7 @@ import { useFilterDrawer } from '../FilterPanel';
 import { useColumnsDrawer } from '../ColumnsPanel';
 import classes from './Table.module.scss';
 import './Table.css';
+import { TObject } from '../../../types/TObject';
 
 type TTableProps = {
   data: TData[],
@@ -23,11 +24,19 @@ type TTableProps = {
   tableParameters: TTableParameters,
   tablename: string,
   dictionary: TDictionary
+  invertDictionary: TObject<Record<string, string>>
 };
 
 const PAGE_SIZE = 10;
 
-const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tablename, dictionary }) => {
+const DataTable: React.FC<TTableProps> = ({
+  data,
+  columns,
+  tableParameters,
+  tablename,
+  dictionary,
+  invertDictionary
+}) => {
   const { setDataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
   const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
@@ -78,13 +87,6 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
 
   const tableColumns: TData[] = columnsData
     .map((column) => {
-      let invertDictionary: Record<string, string> = {};
-      if (dictionary[column.dataIndex]) {
-        invertDictionary = invert(
-          Object.fromEntries(Object.entries(dictionary[column.dataIndex]).map(([key, info]) => [key, info.text]))
-        );
-      }
-
       return !column.isInlineEditable
         ? {
             ...column,
@@ -92,8 +94,14 @@ const DataTable: React.FC<TTableProps> = ({ data, columns, tableParameters, tabl
             sortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
             filterIcon: TableFilterIcon,
             render: (text: string, record: TData) => {
+              const columnId = column.dataIndex;
+              const tableValue = record[columnId];
+              const originalValue = invertDictionary[columnId] && invertDictionary[columnId][tableValue]
+                ? invertDictionary[columnId][tableValue]
+                : tableValue;
+
               return column.isTagged
-                ? <Tag color={dictionary[column.dataIndex][invertDictionary[record[column.dataIndex]]]?.tag}>{text}</Tag>
+                ? <Tag color={dictionary[columnId][originalValue]?.tag}>{text}</Tag>
                 : text
             }
           }
