@@ -6,7 +6,12 @@ import './DropdownMenu.css';
 
 const DropdownMenu: React.FC<{menuItems: TDropdownMenu[]}> = ({ menuItems }) => {
   return (
-    <Menu className={classes['dropdown-menu']}>
+    <Menu
+      className={classes['dropdown-menu']}
+      defaultSelectedKeys={[]}
+      selectedKeys={[]}
+      activeKey="something"
+    >
       {
         menuItems.map((menuItem, index) => (
           menuItem.type === 'divider' ? (

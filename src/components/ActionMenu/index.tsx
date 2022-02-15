@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Dropdown, Tooltip } from 'antd';
 import { CarryOutOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { urlApi } from '../../constants/constants';
 import { TData } from '../../types/TData';
 import { TTableParameters } from '../../types/TTableParameters';
 import { TActionBody } from '../../types/TApiActionBody';
@@ -12,11 +13,10 @@ import { dataAddAction, dataDeleteAction, dataUpdateAction } from '../../storage
 import { createActions } from './createActions';
 import DropdownMenu from '../UI/DropdownMenu';
 import Notification from '../UI/Notification';
+import ModalWithList from '../UI/ModalWithList';
 import DataEditModal from '../Modals/DataEditModal';
 import DataAddModal from '../Modals/DataAddModal';
-import { urlApi } from '../../constants/constants';
 import { useDictionaryContext } from '../../context/DictionaryContext';
-import ModalWithList from '../UI/ModalWithList';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
