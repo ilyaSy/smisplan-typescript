@@ -17,6 +17,8 @@ import { useColumnsDrawer } from '../ColumnsPanel';
 import classes from './Table.module.scss';
 import './Table.css';
 import { getTableWithPseudoFields } from '../../../utils/getTableWithPseudoFields';
+import { updateTableColumnsWidth } from '../../../utils/updateTableColumnsWidth';
+import { addActionColumnInfo } from '../../../utils/addActionColumnInfo';
 
 type TTableProps = {
   data: TData[],
@@ -41,6 +43,7 @@ const DataTable: React.FC<TTableProps> = ({
   const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
+  const [defaultSort, setDefaultSort] = useState<boolean>(true);
 
   const hasActionMenu = tableParameters.hasActionMenu;
 
@@ -71,12 +74,12 @@ const DataTable: React.FC<TTableProps> = ({
       const index = tableParameters.defaultSortField.indexOf(field);
 
       return index < 0
-        ? undefined
+        ? null
         : (tableParameters.defaultSortDirection as string[])[index];
     }
     return field === tableParameters.defaultSortField
       ? tableParameters.defaultSortDirection
-      : undefined;
+      : null;
   }
 
   const {
@@ -85,55 +88,43 @@ const DataTable: React.FC<TTableProps> = ({
     columnsData
   } = useColumnsDrawer(columns);
 
-  const tableColumns: TData[] = columnsData
+  let tableColumns: TData[] = columnsData
     .map((column) => {
-      return !column.isInlineEditable
-        ? {
-            ...column,
-            defaultSortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
-            sortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
-            filterIcon: TableFilterIcon,
-            render: (text: string, record: TData) => {
-              const columnId = column.dataIndex;
-              const tableValue = record[columnId];
-              const originalValue = invertDictionary[columnId] && invertDictionary[columnId][tableValue]
-                ? invertDictionary[columnId][tableValue]
-                : tableValue;
+      const tableColumn: TData = {
+        ...column,
+        filterIcon: TableFilterIcon,
+      };
 
-              return column.isTagged
-                ? <Tag color={dictionary[columnId][originalValue]?.tag}>{text}</Tag>
-                : text
-            }
-          }
-          : {
-            ...column,
-            defaultSortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
-            sortOrder: (getDefaultSorter(column.dataIndex)) as SortOrder,
-            filterIcon: TableFilterIcon,
-            onCell: (record: any) => ({
-              record,
-              editable: column.isInlineEditable,
-              dataIndex: column.dataIndex,
-              title: column.title,
-            }),
-          }
+      if (!column.isInlineEditable) {
+        tableColumn.render = (text: string, record: TData) => {
+          const columnId = column.dataIndex;
+          const tableValue = record[columnId];
+          const originalValue = invertDictionary[columnId] && invertDictionary[columnId][tableValue]
+            ? invertDictionary[columnId][tableValue]
+            : tableValue;
+
+          return column.isTagged
+            ? <Tag color={dictionary[columnId][originalValue]?.tag}>{text}</Tag>
+            : text
+        };
+      } else {
+        tableColumn.onCell = (record: any) => ({
+          record,
+          editable: column.isInlineEditable,
+          dataIndex: column.dataIndex,
+          title: column.title,
+        });
+      }
+
+      const sortOrder = (getDefaultSorter(column.dataIndex)) as SortOrder;
+      if (sortOrder && defaultSort) tableColumn.sortOrder = sortOrder;
+
+      return tableColumn;
       }
     )
 
-  if (hasActionMenu) tableColumns.push({
-    dataIndex: 'action',
-    key: 'action',
-    isInlineEditable: false,
-    showInTable: true,
-    type: 'action',
-    className: 'table-action-column',
-  })
-
-  tableColumns.forEach((tableColumn) => {
-    if (tableColumn.dataIndex !== 'action') {
-      tableColumn.className = classes[`table-title-row-${Math.ceil(((tableColumn.title?.length ?? 1)*7 + 48)/10)*10}`];
-    }
-  })
+  tableColumns = addActionColumnInfo(tableColumns, hasActionMenu);
+  tableColumns = updateTableColumnsWidth(tableColumns);
 
   const {
     FilterButtons,
@@ -181,10 +172,7 @@ const DataTable: React.FC<TTableProps> = ({
     }
   }, [filterData, pageSize, dataPrintMode, setDataPrintMode])
 
-  // const { tableSourceData: dataSourceWithPseudoFields } = useGetTableWithPseudoFields(filterData, tableColumns);
-
   return (
-    // <>
     <ConfigProvider locale={ruRU}>
       {FilterPanel}
 
@@ -193,7 +181,6 @@ const DataTable: React.FC<TTableProps> = ({
       <Table
         ref={dataRef}
         // dataSource={ filterData }
-        // dataSource={ dataSourceWithPseudoFields }
         dataSource={ getTableWithPseudoFields(filterData, tableColumns) }
         columns={ tableColumns }
         title={TableTitle}
@@ -220,9 +207,9 @@ const DataTable: React.FC<TTableProps> = ({
           className: classes['hidden-pagination']
         }}
         className={ classes.table }
+        onChange={() => setDefaultSort(false)}
       />
     </ConfigProvider>
-    // </>
   );
 }
 
