@@ -5,9 +5,9 @@ import { TGetDataUrl, TMetadataDictionary } from "../../context/DictionaryContex
 import { TData } from "../../types/TData";
 import { TDictionary } from "../../types/TDictionary";
 import { TObject } from "../../types/TObject";
-import { defaultHeaders } from "../../storages/middleware/apiMiddleware";
-import metadataGetAction from "../../storages/actions/metadata";
 import { TDictionaryInfo } from "../../types/TDictionaryInfo";
+import { defaultHeaders } from "../../storages/middleware/apiMiddleware";
+import { metadataGetAction } from "../../storages/actions/metadata";
 
 const mapDictionaryArrayToObject = (array: Record<string, TDictionaryInfo>[]): TObject<TDictionaryInfo> => {
   return Object.fromEntries(

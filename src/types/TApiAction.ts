@@ -1,6 +1,6 @@
 import { THtmlMethod } from "./THtmlMethod";
 
-type TApiAction = {
+export type TApiAction = {
   type: string,
   method?: THtmlMethod,
   url: string,
@@ -9,5 +9,3 @@ type TApiAction = {
   },
   body?: any
 };
-
-export default TApiAction;

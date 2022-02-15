@@ -1,7 +1,13 @@
 import { Modal } from 'antd';
-import {CalendarFilled, BellOutlined, DeleteFilled, EditFilled} from '@ant-design/icons';
+import {
+  BellOutlined,
+  DeleteFilled,
+  EditFilled,
+  ScheduleOutlined,
+  ScheduleFilled
+} from '@ant-design/icons';
 import showConfirmModal from '../Modals/ConfirmModal';
-import TActionBody from "../../types/TApiActionBody";
+import { TActionBody } from "../../types/TApiActionBody";
 import { TData } from "../../types/TData";
 import { TDropdownMenu } from "../../types/TDropdownMenu";
 import { TTableParameters } from "../../types/TTableParameters";
@@ -19,6 +25,7 @@ interface IMenu {
   handleOpen: (t: TModals) => void;
   handleEdit: (data: TActionBody) => void;
   handleDelete: (data: TActionBody) => void;
+  handleGetConnectedData: (data: TActionBody) => void;
   dictionary: TDictionary;
 }
 
@@ -36,6 +43,7 @@ export const createActions = ({
     handleOpen,
     handleEdit,
     handleDelete,
+    handleGetConnectedData,
     dictionary,
   }: IMenu) => {
   const actions: TDropdownMenu[] = [];
@@ -49,8 +57,16 @@ export const createActions = ({
       type: 'item',
       key: `action-menu-${dataItem.key}-add-discussion`,
       onClick: handleOpenAddDiscussion,
-      icon: <CalendarFilled className={classes['action-menu']}/>,
+      icon: <ScheduleOutlined className={classes['action-menu']}/>,
       title: 'Добавить обсуждение',
+    });
+
+    actions.push({
+      type: 'item',
+      key: `action-menu-${dataItem.key}-show-discussions`,
+      onClick: () => handleGetConnectedData(dataItem),
+      icon: <ScheduleFilled className={classes['action-menu']}/>,
+      title: 'Проведённые обсуждения',
     });
     actions.push({ type: 'divider', key: 'divider-discussion' });
   }

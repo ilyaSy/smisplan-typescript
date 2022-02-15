@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from 'antd';
-import mapMetadataToColumns from '../../utils/mapMetadataToColumns';
-import getTableParameters from '../../utils/getTableParameters';
-import useGetTablename from '../../utils/hooks/useGetTablename';
+import { TTableParameters } from '../../types/TTableParameters';
+import { mapMetadataToColumns } from '../../utils/mapMetadataToColumns';
+import { useGetDataMeta } from '../../utils/hooks/useGetDataMeta';
+import { getTableParameters } from '../../utils/getTableParameters';
+import { useGetTablename } from '../../utils/hooks/useGetTablename';
 import Table from '../UI/Table';
 import LoadingComponent from '../UI/LoadingComponent';
-import { TTableParameters } from '../../types/TTableParameters';
-import { useGetDataMeta } from '../../utils/hooks/useGetDataMeta';
+import { useDictionaryContext } from '../../context/DictionaryContext';
 import classes from './DataTable.module.scss';
-import useDictionaryContext from '../../context/DictionaryContext';
 
 const { Title } = Typography;
 

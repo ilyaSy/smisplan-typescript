@@ -1,5 +1,5 @@
 import {screen, act} from "@testing-library/react";
-import showNotification from "./showNotification";
+import Notification from "../components/UI/Notification";
 import sortData from "./sortData";
 import filterData from "./filterData";
 
@@ -39,7 +39,7 @@ describe('Utils tests', () => {
 
   test('showNotification', () => {
     act(() => {
-      showNotification({
+      Notification({
         description: 'description',
         type: 'info',
         message: 'message'

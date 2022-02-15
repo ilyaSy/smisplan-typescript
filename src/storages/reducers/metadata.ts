@@ -1,8 +1,8 @@
 import { Reducer } from 'redux';
-import TApiReducerData from '../../types/TApiReducer';
-import IFetchError from '../../types/IFetchError';
-import TReduxData from '../../types/TReduxData';
-import showNotification from '../../utils/showNotification';
+import { TApiReducerData } from '../../types/TApiReducer';
+import { IFetchError } from '../../types/IFetchError';
+import { TReduxData } from '../../types/TReduxData';
+import Notification from '../../components/UI/Notification';
 
 const initialState: TReduxData = {
   isLoading: false,
@@ -21,7 +21,7 @@ const metadataReducer: Reducer = (state = initialState, action: TApiReducerData)
 
     case 'METADATA_REQUEST_ERROR':
       return metadataReducerError(payload);;
-      
+
     default:
       return {...state};
   }
@@ -36,7 +36,7 @@ const metadataReducerLoading: () => TReduxData = () => {
 };
 
 const metadataReducerError: (error: IFetchError) => TReduxData = (error) => {
-  showNotification({
+  Notification({
     type: 'error',
     message: 'Ошибка при загрузке данных',
     description: error.message ? error.message : error.statusText,

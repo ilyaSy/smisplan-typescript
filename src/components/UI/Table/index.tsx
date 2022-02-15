@@ -1,22 +1,21 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ConfigProvider, Pagination, Table, Tag } from 'antd';
-// import { invert } from 'lodash';
 import { SortOrder } from 'antd/lib/table/interface';
 import ruRU from 'antd/lib/locale/ru_RU';
+import { TData } from '../../../types/TData';
+import { TDictionary } from '../../../types/TDictionary';
+import { TTableParameters } from '../../../types/TTableParameters';
+import { TObject } from '../../../types/TObject';
 import TableEditableRow from '../TableEditableRow';
 import DataTableEditableCell from '../../TableEditableCell';
 import TableExpandableRow from '../TableExpandableRow';
 import TableFilterIcon from '../TableFilterIcon';
 import ActionMenu from '../../ActionMenu';
-import { TData } from '../../../types/TData';
-import { TDictionary } from '../../../types/TDictionary';
-import { TTableParameters } from '../../../types/TTableParameters';
 import { usePrintPDFContext } from '../../../context/PrintPDFContext';
 import { useFilterDrawer } from '../FilterPanel';
 import { useColumnsDrawer } from '../ColumnsPanel';
 import classes from './Table.module.scss';
 import './Table.css';
-import { TObject } from '../../../types/TObject';
 
 type TTableProps = {
   data: TData[],

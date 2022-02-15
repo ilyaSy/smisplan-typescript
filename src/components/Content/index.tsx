@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import Sidebar from '../Sidebar';
 import SuspenseFallback from '../UI/SuspenseFallback';
+import Sidebar from '../Sidebar';
 import classes from './Content.module.scss';
 
 const DataTable = lazy(() => import('../DataTable'));

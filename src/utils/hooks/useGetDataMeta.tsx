@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { mapValues } from "lodash";
 import { useDispatch } from "react-redux";
-import useDataSelector from "../../storages/selectors/data";
-import useMetadataSelector from "../../storages/selectors/metadata";
+import { useDataSelector } from "../../storages/selectors/data";
+import { useMetadataSelector } from "../../storages/selectors/metadata";
 import { dataGetAction } from "../../storages/actions/data";
-import metadataGetAction from "../../storages/actions/metadata";
-import useDictionaryContext from "../../context/DictionaryContext";
+import { metadataGetAction } from "../../storages/actions/metadata";
+import { useDictionaryContext } from "../../context/DictionaryContext";
 import { TData } from "../../types/TData";
 
 export const useGetDataMeta = (tablename: string) => {

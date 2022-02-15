@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import ModalWithForm from '../../UI/ModalWithForm';
-import getTableParameters from '../../../utils/getTableParameters';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
 import { TDictionary } from '../../../types/TDictionary';
-import { useGetMetaDictionary } from '../../../utils/hooks/useGetMetaDictionary';
-import useMetadataSelector from '../../../storages/selectors/metadata';
-import useDictionaryContext from '../../../context/DictionaryContext';
+import { getTableParameters } from '../../../utils/getTableParameters';
 import { convertDataItem } from '../../../utils/convertDataItem';
+import { useGetMetaDictionary } from '../../../utils/hooks/useGetMetaDictionary';
+import { useMetadataSelector } from '../../../storages/selectors/metadata';
+import { useDictionaryContext } from '../../../context/DictionaryContext';
+import ModalWithForm from '../../UI/ModalWithForm';
 
 interface IDataAddModal {
   isOpen: boolean;

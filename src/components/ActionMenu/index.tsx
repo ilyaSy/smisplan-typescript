@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dropdown, Tooltip } from 'antd';
-import DataEditModal from '../Modals/DataEditModal';
+import { CarryOutOutlined } from '@ant-design/icons';
+import axios from 'axios';
 import { TData } from '../../types/TData';
 import { TTableParameters } from '../../types/TTableParameters';
-import TActionBody from '../../types/TApiActionBody';
+import { TActionBody } from '../../types/TApiActionBody';
+import { IFetchError } from '../../types/IFetchError';
+import { useMetadataSelector } from '../../storages/selectors/metadata';
 import { dataAddAction, dataDeleteAction, dataUpdateAction } from '../../storages/actions/data';
 import { createActions } from './createActions';
 import DropdownMenu from '../UI/DropdownMenu';
-import useDictionaryContext from '../../context/DictionaryContext';
-import useMetadataSelector from '../../storages/selectors/metadata';
+import Notification from '../UI/Notification';
+import DataEditModal from '../Modals/DataEditModal';
 import DataAddModal from '../Modals/DataAddModal';
+import { urlApi } from '../../constants/constants';
+import { useDictionaryContext } from '../../context/DictionaryContext';
+import ModalWithList from '../UI/ModalWithList';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -44,6 +50,28 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, ta
     dispatch(dataAddAction('discussion', data));
   }
 
+  const connectedTablename = 'discussion';
+  const handleGetConnectedData = useCallback(async (data: TActionBody) => {
+    try {
+      const response = await axios.get(`${urlApi}/${tablename}/get-${connectedTablename}/${data.id}`);
+
+      ModalWithList({
+        title: 'Обсуждения',
+        avatar: <CarryOutOutlined />,
+        dataSource: response.data as {title: string, description: string}[],
+        noDataText: 'Ранее обсуждений не проводилось',
+      });
+    } catch (error) {
+      Notification({
+        type: 'error',
+        message: 'Ошибка при загрузке данных',
+        description: (error as IFetchError).message
+          ? (error as IFetchError).message
+          : (error as IFetchError).statusText,
+      });
+    }
+  }, [tablename]);
+
   const dispatch = useDispatch();
 
   const actions = createActions({
@@ -53,7 +81,8 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, ta
     tableParameters,
     handleOpen,
     handleDelete,
-    handleEdit
+    handleEdit,
+    handleGetConnectedData,
   });
 
   return (

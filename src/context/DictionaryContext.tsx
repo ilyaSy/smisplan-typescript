@@ -26,7 +26,7 @@ const mapDictionaryArrayToObject = (array: Record<string, TDictionaryInfo>[]): T
 
 const DictionaryContext = React.createContext<IDictionaryContext>({} as IDictionaryContext);
 
-const useDictionaryContext = () => {
+export const useDictionaryContext = () => {
   const context = useContext(DictionaryContext);
   return context;
 }
@@ -81,5 +81,3 @@ export const DictionaryContextProvider: React.FC = ({children}) => {
     </DictionaryContext.Provider>
   );
 }
-
-export default useDictionaryContext;

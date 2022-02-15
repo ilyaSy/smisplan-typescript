@@ -4,7 +4,7 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { modes } from '../../constants/constants';
 import { UserContext } from '../../context/UserContext';
 import { NavLink } from 'react-router-dom';
-import useGetTablename from '../../utils/hooks/useGetTablename';
+import { useGetTablename } from '../../utils/hooks/useGetTablename';
 import classes from './Header.module.scss';
 
 const Header: React.FC = () => {

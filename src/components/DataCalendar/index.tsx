@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ru';
-import { Col, List, Modal, Row, Typography } from 'antd';
+import { Col, Modal, Row, Typography } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
 import { Calendar } from '../UI/Calendar';
 import LoadingComponent from '../UI/LoadingComponent';
@@ -10,6 +10,7 @@ import sortData from '../../utils/sortData';
 import { TData } from '../../types/TData';
 import { DATE_FORMAT_DATE, DATE_FORMAT_FULLDATE, DATE_FORMAT_TIME } from '../../constants/constants';
 import classes from './DataCalendar.module.scss';
+import ModalWithList from '../UI/ModalWithList';
 
 moment.locale('ru');
 
@@ -34,36 +35,21 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
   }, [data]);
 
   const getDayEventsInfo = (date: any) => {
-    const dayEvents = dates
+    return dates
       .filter((event) => moment(event.date).format(DATE_FORMAT_DATE) === date.dateStr)
       .sort(sortData('time', 'ascend'))
       .map((event) => ({
         title: moment(event.date).format(DATE_FORMAT_TIME),
         description: event.result,
       }))
-
-    return (
-      dayEvents.length ? (
-        <List
-          dataSource={dayEvents}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={<BulbOutlined />}
-                title={item.title}
-                description={item.description}
-              />
-            </List.Item>
-          )}
-        />
-      ) : 'Нет назначенных совещаний'
-    );
-  };
+    }
 
   const handleDayClick = (day: any) => {
-    Modal.info({
+    ModalWithList({
       title: 'Совещания за день',
-      content: getDayEventsInfo(day)
+      avatar: <BulbOutlined />,
+      dataSource: getDayEventsInfo(day),
+      noDataText: 'Нет назначенных совещаний',
     });
   };
 

@@ -6,7 +6,7 @@ type TMapMetadataToColumns = (
   metadata: TData[],
 ) => Record<string, TColumn>[]
 
-const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
+export const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
   const columns = metadata
     .filter((c) => c.id !== 'specificParameters')
     .map((metadataColumn) => {
@@ -27,5 +27,3 @@ const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
 
   return columns;
 }
-
-export default mapMetadataToColumns;

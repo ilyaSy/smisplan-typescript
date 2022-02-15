@@ -1,7 +1,7 @@
 import { notification } from 'antd';
-import INotification from "../types/INotification"
+import { INotification } from "../../types/INotification"
 
-const showNotification = (action: INotification) => {
+const Notification = (action: INotification) => {
   const { type, message, description, duration = 5 } = action;
   notification[type]({
     message: message,
@@ -11,4 +11,4 @@ const showNotification = (action: INotification) => {
   });
 }
 
-export default showNotification;
+export default Notification;

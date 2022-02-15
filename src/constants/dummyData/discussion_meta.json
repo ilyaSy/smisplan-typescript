@@ -263,7 +263,7 @@
     "hasDeleteButton": true,
     "hasSetStatusMenu": true,
     "hasGoToDiscussion": false,
-    "hasDiscussion": true,
+    "hasDiscussion": false,
     "hasNotificationButton": true
   }
 ]

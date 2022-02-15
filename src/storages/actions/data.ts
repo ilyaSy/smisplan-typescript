@@ -1,6 +1,6 @@
-import { urlApi } from "../../constants/constants"
-import TApiAction from "../../types/TApiAction"
-import TApiActionBody from "../../types/TApiActionBody"
+import { urlApi } from "../../constants/constants";
+import { TApiAction } from "../../types/TApiAction";
+import { TActionBody } from "../../types/TApiActionBody";
 
 const type = 'DATA_REQUEST';
 
@@ -12,8 +12,8 @@ export const dataGetAction: (tablename: string) => TApiAction = (tablename) => {
   }
 }
 
-export const dataDeleteAction: 
-  (tablename: string, body: TApiActionBody) => TApiAction = 
+export const dataDeleteAction:
+  (tablename: string, body: TActionBody) => TApiAction =
   (tablename, body) => {
     return {
       type,
@@ -23,8 +23,8 @@ export const dataDeleteAction:
     }
 }
 
-export const dataAddAction: 
-  (tablename: string, body: TApiActionBody) => TApiAction = 
+export const dataAddAction:
+  (tablename: string, body: TActionBody) => TApiAction =
   (tablename, body) => {
     return {
       type,
@@ -34,7 +34,7 @@ export const dataAddAction:
     }
 }
 
-export const dataUpdateAction: (tablename: string, body: TApiActionBody) => TApiAction = (tablename, body) => {
+export const dataUpdateAction: (tablename: string, body: TActionBody) => TApiAction = (tablename, body) => {
   return {
     type,
     url: `${urlApi}/${tablename}/`,

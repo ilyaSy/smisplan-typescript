@@ -7,8 +7,8 @@ import {
 } from '@ant-design/icons';
 import DataAddModal from '../Modals/DataAddModal';
 import {dataAddAction} from "../../storages/actions/data";
-import useGetTablename from "../../utils/hooks/useGetTablename";
-import useDataSelector from "../../storages/selectors/data";
+import { useGetTablename } from "../../utils/hooks/useGetTablename";
+import { useDataSelector } from "../../storages/selectors/data";
 import { PrintPDF } from '../UI/PrintPDF';
 import classes from './Sidebar.module.scss';
 

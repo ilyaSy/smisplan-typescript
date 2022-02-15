@@ -56,11 +56,32 @@ export default function setMockAdapter() {
   mock.onGet(`${urlApi}/event-meta/`).reply(200, metaData.event);
 
   // get data
-  // mock.onGet(`${urlApi}/task/get-discussions/`).reply(200, data.task);
   mock.onGet(`${urlApi}/task/`).reply(200, data.task);
   mock.onGet(`${urlApi}/discussion/`).reply(200, data.discussion);
   mock.onGet(`${urlApi}/calendar/`).reply(200, data.calendar);
   mock.onGet(`${urlApi}/event/`).reply(200, data.event);
+
+  // get data: specific
+  const pathGetTaskDiscussions = new RegExp(`${urlApi}/task/get-discussion/.+`);
+  mock.onGet(pathGetTaskDiscussions).reply((mockRequestConfig) => {
+    const urlArray = mockRequestConfig.url.split('/');
+    const connectedTable = urlArray[urlArray.length - 3];
+    const table = urlArray[urlArray.length - 2].split('-')[1];
+    const id = urlArray[urlArray.length - 1];
+
+    const connectedData = data[table]
+      .filter((d) => d.mainTable === connectedTable)
+      .filter((d) => d.status === 'done')
+      .filter((d) => +d.idTask === +id)
+      .map((d) => {
+        return {
+          title: `${d.date} ${d.time}`,
+          description: `${d.theme}\n${d.result}`
+        };
+      })
+
+    return [200, connectedData]
+  });
 
   // put data
   // mock.onPut(`${urlApi}/task/`).reply(404);

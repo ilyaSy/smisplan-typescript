@@ -1,10 +1,10 @@
 import { Reducer } from 'redux';
-import TApiReducerData from '../../types/TApiReducer';
-import IFetchError from '../../types/IFetchError';
-import TReduxData from '../../types/TReduxData';
-import showNotification from '../../utils/showNotification';
-import { crudReduxDataUpdater } from "../../utils/crudReduxUpdater";
+import { TApiReducerData } from '../../types/TApiReducer';
+import { IFetchError } from '../../types/IFetchError';
+import { TReduxData } from '../../types/TReduxData';
 import { THtmlMethod } from "../../types/THtmlMethod";
+import { crudReduxDataUpdater } from "../../utils/crudReduxUpdater";
+import Notification from '../../components/UI/Notification';
 
 const initialState: TReduxData = {
   isLoading: false,
@@ -44,7 +44,7 @@ const dataReducerLoading: (state: TReduxData) => TReduxData = (state) => {
 const dataReducerError:
   (state: TReduxData, error: IFetchError) => TReduxData =
   (state, error) => {
-  showNotification({
+    Notification({
     type: 'error',
     message: 'Ошибка при загрузке данных',
     description: error.message ? error.message : error.statusText,

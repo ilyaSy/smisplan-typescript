@@ -1,5 +1,5 @@
 import {THtmlMethod} from '../types/THtmlMethod';
-import TReduxData from "../types/TReduxData";
+import { TReduxData } from "../types/TReduxData";
 import { TData } from "../types/TData";
 
 export const crudReduxDataUpdater:

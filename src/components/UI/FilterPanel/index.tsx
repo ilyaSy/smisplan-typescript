@@ -15,7 +15,7 @@ import {
 import { FilterOutlined, FilterFilled } from '@ant-design/icons';
 import { TData } from "../../../types/TData";
 import { IFormItem } from "../../../types/IFormItem";
-import useDictionaryContext from "../../../context/DictionaryContext";
+import { useDictionaryContext } from "../../../context/DictionaryContext";
 import classes from './FilterPanel.module.scss';
 
 export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], initialVisible = false) => {

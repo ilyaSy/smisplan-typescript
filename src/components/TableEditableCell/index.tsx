@@ -3,10 +3,10 @@ import { Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { EditableContext } from '../UI/TableEditableRow';
 import { convertDataItem } from '../../utils/convertDataItem';
-import useGetTablename from '../../utils/hooks/useGetTablename';
-import useDictionaryContext from '../../context/DictionaryContext';
+import { useGetTablename } from '../../utils/hooks/useGetTablename';
+import { useDictionaryContext } from '../../context/DictionaryContext';
 import { dataUpdateAction } from '../../storages/actions/data';
-import useMetadataSelector from '../../storages/selectors/metadata';
+import { useMetadataSelector } from '../../storages/selectors/metadata';
 import TableEditableCell from '../UI/TableEditableCell';
 
 interface Item {

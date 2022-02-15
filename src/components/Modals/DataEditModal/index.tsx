@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import useMetadataSelector from '../../../storages/selectors/metadata';
-import getTableParameters from '../../../utils/getTableParameters';
-import ModalWithForm from '../../UI/ModalWithForm';
+import { useMetadataSelector } from '../../../storages/selectors/metadata';
+import { getTableParameters } from '../../../utils/getTableParameters';
+import { convertDataItem } from '../../../utils/convertDataItem';
 import { IFormItem } from '../../../types/IFormItem';
 import { TData } from '../../../types/TData';
 import { TButton } from '../../../types/TButton';
-import useDictionaryContext from '../../../context/DictionaryContext';
-import { convertDataItem } from '../../../utils/convertDataItem';
+import { useDictionaryContext } from '../../../context/DictionaryContext';
+import ModalWithForm from '../../UI/ModalWithForm';
 
 interface IDataEditModal {
   isOpen: boolean;
