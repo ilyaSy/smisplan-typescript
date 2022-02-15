@@ -8,7 +8,7 @@ import { TTableParameters } from "../../types/TTableParameters";
 import classes from './ActionMenu.module.scss';
 import { TDictionary } from '../../types/TDictionary';
 import { convertDataItem } from '../../utils/convertDataItem';
-import { TObject } from '../../types/TObject';
+// import { TObject } from '../../types/TObject';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
