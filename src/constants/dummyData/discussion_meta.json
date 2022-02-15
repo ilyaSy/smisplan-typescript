@@ -2,6 +2,23 @@
   {
     "isInlineEditable": false,
     "showInTable": true,
+    "isEditable": false,
+    "title": "Дата",
+    "validValues": "",
+    "isFilter": false,
+    "isTagged": false,
+    "hasFullTextLink": false,
+    "isGroup": false,
+    "tableIndex": 2,
+    "id": "prettyDate",
+    "type": "string",
+    "defaultValue": "",
+    "isPseudo": true,
+    "pseudoFieldFormula": "prettyDate"
+  },
+  {
+    "isInlineEditable": false,
+    "showInTable": true,
     "isEditable": true,
     "title": "Статус",
     "validValues": [
@@ -50,7 +67,7 @@
   },
   {
     "isInlineEditable": false,
-    "showInTable": true,
+    "showInTable": false,
     "isEditable": true,
     "title": "Дата",
     "validValues": "",

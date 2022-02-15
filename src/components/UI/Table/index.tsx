@@ -16,6 +16,7 @@ import { useFilterDrawer } from '../FilterPanel';
 import { useColumnsDrawer } from '../ColumnsPanel';
 import classes from './Table.module.scss';
 import './Table.css';
+import { getTableWithPseudoFields } from '../../../utils/getTableWithPseudoFields';
 
 type TTableProps = {
   data: TData[],
@@ -180,6 +181,8 @@ const DataTable: React.FC<TTableProps> = ({
     }
   }, [filterData, pageSize, dataPrintMode, setDataPrintMode])
 
+  // const { tableSourceData: dataSourceWithPseudoFields } = useGetTableWithPseudoFields(filterData, tableColumns);
+
   return (
     // <>
     <ConfigProvider locale={ruRU}>
@@ -189,7 +192,9 @@ const DataTable: React.FC<TTableProps> = ({
 
       <Table
         ref={dataRef}
-        dataSource={ filterData }
+        // dataSource={ filterData }
+        // dataSource={ dataSourceWithPseudoFields }
+        dataSource={ getTableWithPseudoFields(filterData, tableColumns) }
         columns={ tableColumns }
         title={TableTitle}
         // scroll={{x: 'max-content'}}

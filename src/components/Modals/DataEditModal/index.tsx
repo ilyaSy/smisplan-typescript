@@ -40,6 +40,7 @@ const DataEditModal: React.FC<IDataEditModal> = ({
     if (metadata) {
       setFormItems(metadata
         .filter((m) => m.id !== 'specificParameters')
+        .filter((m) => !m.isPseudo)
         .sort((a, b) => a.tableIndex - b.tableIndex)
         .map((m) => {
           return {
