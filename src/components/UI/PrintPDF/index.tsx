@@ -1,8 +1,8 @@
+import { useCallback, useEffect, useMemo } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import { Tooltip } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
 import { TPrintMode, usePrintPDFContext } from '../../../context/PrintPDFContext';
-import { useCallback, useEffect, useMemo } from 'react';
 import { useModalWithSelect } from '../ModalWithSelect';
 
 export const PrintPDF: React.FC = () => {

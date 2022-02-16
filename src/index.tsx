@@ -7,7 +7,7 @@ import { DictionaryContextProvider } from './context/DictionaryContext';
 import { PrintPDFContextProvider } from './context/PrintPDFContext';
 import App from './App';
 import './index.css';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 
 const basename: string = document.location.hostname === 'ilyasy.github.io'
   ? '/smisplan-typescript/'
