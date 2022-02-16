@@ -23,7 +23,7 @@ export const useModalWithSelect: TUseModalWithSelect = (title, list, onSubmit) =
 
   const handleChange = (e: RadioChangeEvent) => setValue(e.target.value);
   const handleSubmit = useCallback(() => onSubmit(value), [onSubmit, value]);
-  const handleClose = useCallback(() => () => handleToggle(false), [handleToggle]);
+  const handleClose = useCallback(() => handleToggle(false), [handleToggle]);
 
   const ModalPrintSelect = useMemo(() => (
     <Modal

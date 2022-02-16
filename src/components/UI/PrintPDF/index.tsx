@@ -11,7 +11,6 @@ export const PrintPDF: React.FC = () => {
   const handleOpen = () => toggleOpen(true);
 
   const print = useReactToPrint({
-    // content: () => dataPrintRef ? dataPrintRef.current : null,
     content: () => (
       dataPrintRef
         ? document.getElementsByClassName('ant-table-container')[0]
