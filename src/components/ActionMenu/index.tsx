@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dropdown, Tooltip } from 'antd';
 import { CarryOutOutlined } from '@ant-design/icons';
@@ -98,10 +98,12 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, ta
         />
 
         <Tooltip placement='topRight' title={title}>
-          <Dropdown.Button
-            overlay={<DropdownMenu menuItems={actions} />}
-            trigger={['click']}
-          />
+          <React.StrictMode> {/* fix for warning from AntDesign in console log */}
+            <Dropdown.Button
+              overlay={<DropdownMenu menuItems={actions} />}
+              trigger={['click']}
+            />
+          </React.StrictMode>
         </Tooltip>
       </>
     ) : null

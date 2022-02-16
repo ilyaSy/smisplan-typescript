@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ConfigProvider, Pagination, Table, Tag } from 'antd';
-import { SortOrder } from 'antd/lib/table/interface';
+import React, { useCallback, useState } from 'react';
+import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
+import { PAGE_SIZE } from '../../../constants/constants';
 import { TData } from '../../../types/TData';
 import { TDictionary } from '../../../types/TDictionary';
 import { TTableParameters } from '../../../types/TTableParameters';
@@ -9,16 +9,15 @@ import { TObject } from '../../../types/TObject';
 import TableEditableRow from '../TableEditableRow';
 import DataTableEditableCell from '../../TableEditableCell';
 import TableExpandableRow from '../TableExpandableRow';
-import TableFilterIcon from '../TableFilterIcon';
-import ActionMenu from '../../ActionMenu';
-import { usePrintPDFContext } from '../../../context/PrintPDFContext';
 import { useFilterDrawer } from '../FilterPanel';
 import { useColumnsDrawer } from '../ColumnsPanel';
+import { getTableWithPseudoFields } from './utils/getTableWithPseudoFields';
+import { useTableTitle } from './hooks/useTableTitle';
+import { useTableColumns } from './hooks/useTableColumns';
+import { useTableSourceData } from './hooks/useTableSourceData';
+import { useTablePrintRef } from './hooks/useTablePrintRef';
 import classes from './Table.module.scss';
 import './Table.css';
-import { getTableWithPseudoFields } from '../../../utils/getTableWithPseudoFields';
-import { updateTableColumnsWidth } from '../../../utils/updateTableColumnsWidth';
-import { addActionColumnInfo } from '../../../utils/addActionColumnInfo';
 
 type TTableProps = {
   data: TData[],
@@ -29,8 +28,6 @@ type TTableProps = {
   invertDictionary: TObject<Record<string, string>>
 };
 
-const PAGE_SIZE = 10;
-
 const DataTable: React.FC<TTableProps> = ({
   data,
   columns,
@@ -39,123 +36,40 @@ const DataTable: React.FC<TTableProps> = ({
   dictionary,
   invertDictionary
 }) => {
-  const { setDataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
-  const dataRef = useRef<HTMLDivElement>(null)
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
   const [defaultSort, setDefaultSort] = useState<boolean>(true);
-
-  const hasActionMenu = tableParameters.hasActionMenu;
-
-  useEffect(() => {
-    if (dataRef) setDataPrintRef(dataRef)
-  }, [setDataPrintRef]);
-
-  const sourceData = useMemo(() => {
-    return data.map((dataItem, index) => {
-      return {
-        ...dataItem,
-        key: `table-row-${dataItem.id}-${index}`,
-        action: hasActionMenu
-        ? <ActionMenu
-            key={`action-menu-${dataItem.id}-${index}`}
-            title='Меню действий'
-            dataItem={dataItem}
-            tableParameters={tableParameters}
-            tablename={tablename}
-          />
-        : null
-      }
-    })
-  }, [data, tableParameters, hasActionMenu, tablename])
-
-  const getDefaultSorter = (field: string) => {
-    if (Array.isArray(tableParameters.defaultSortField)) {
-      const index = tableParameters.defaultSortField.indexOf(field);
-
-      return index < 0
-        ? null
-        : (tableParameters.defaultSortDirection as string[])[index];
-    }
-    return field === tableParameters.defaultSortField
-      ? tableParameters.defaultSortDirection
-      : null;
-  }
-
-  const { ColumnsPanelButtons, ColumnsPanel, columnsData } = useColumnsDrawer(columns);
-
-  let tableColumns: TData[] = columnsData
-    .map((column) => {
-      const tableColumn: TData = {
-        ...column,
-        filterIcon: TableFilterIcon,
-      };
-
-      if (!column.isInlineEditable) {
-        tableColumn.render = (text: string, record: TData) => {
-          const columnId = column.dataIndex;
-          const tableValue = record[columnId];
-          const originalValue = invertDictionary[columnId] && invertDictionary[columnId][tableValue]
-            ? invertDictionary[columnId][tableValue]
-            : tableValue;
-
-          return column.isTagged
-            ? <Tag color={dictionary[columnId][originalValue]?.tag}>{text}</Tag>
-            : text
-        };
-      } else {
-        tableColumn.onCell = (record: any) => ({
-          record,
-          editable: column.isInlineEditable,
-          dataIndex: column.dataIndex,
-          title: column.title,
-        });
-      }
-
-      const sortOrder = (getDefaultSorter(column.dataIndex)) as SortOrder;
-      if (sortOrder && defaultSort) tableColumn.sortOrder = sortOrder;
-
-      return tableColumn;
-      }
-    )
-
-  tableColumns = addActionColumnInfo(tableColumns, hasActionMenu);
-  tableColumns = updateTableColumnsWidth(tableColumns);
-
-  const { FilterButtons, FilterPanel, filterData } = useFilterDrawer(columnsData, sourceData);
 
   const handleChangePage = useCallback((nextPage: number, pageSize: number) => {
     setPage(nextPage);
     setPageSize(pageSize);
   }, [])
 
-  const TableTitle = useCallback(() => (
-    <div className={classes['table-title']}>
-      <div>
-        {FilterButtons}
+  const sourceData = useTableSourceData(data, tablename, tableParameters);
 
-        {ColumnsPanelButtons}
-      </div>
+  const { ColumnsPanelButtons, ColumnsPanel, columnsData } = useColumnsDrawer(columns);
 
-      <Pagination
-        showSizeChanger
-        current={page}
-        pageSize={pageSize}
-        onChange={handleChangePage}
-        total={(filterData || []).length}
-      />
-    </div>
-  ), [ FilterButtons, ColumnsPanelButtons, filterData, page, pageSize, handleChangePage ]);
+  const { FilterPanelButtons, FilterPanel, filterData } = useFilterDrawer(columnsData, sourceData);
 
-  useEffect(() => {
-    if (dataPrintMode === 'all') {
-      setPageSize(0);
-      setDataPrintMode('print');
-    } else if (dataPrintMode === 'current') {
-    } else {
-      setPageSize(PAGE_SIZE);
-    }
-  }, [filterData, pageSize, dataPrintMode, setDataPrintMode])
+  const dataRef = useTablePrintRef({ filterData, pageSize, setPageSize });
+
+  const tableColumns = useTableColumns({
+    dataRef,
+    columns: columnsData,
+    tableParameters,
+    defaultSort,
+    dictionary,
+    invertDictionary
+  });
+
+  const TableTitle = useTableTitle({
+    FilterPanelButtons,
+    ColumnsPanelButtons,
+    filterData,
+    page,
+    pageSize,
+    handleChangePage
+  });
 
   return (
     <ConfigProvider locale={ruRU}>

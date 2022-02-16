@@ -4,15 +4,27 @@
   & .hidden-pagination {
     display: none;
   }
-}
 
-.table-title {
-  display: flex;
-  justify-content: space-between;
-}
+  & .table-header-group-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
 
-.table-title > div:first-child {
-  display: flex;
+  & .table-header-group-button {
+    background-color: transparent;
+    border: 0;
+  }
+
+  & .table-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .table-title > div:first-child {
+    display: flex;
+  }
 }
 
 $max-count: 20;

@@ -13,3 +13,5 @@ export const DATE_FORMAT_TIME = 'HH:mm';
 
 export const urlApi = '/smisplan-typescript/cgi';
 export const TEST = true;
+
+export const PAGE_SIZE = 10;

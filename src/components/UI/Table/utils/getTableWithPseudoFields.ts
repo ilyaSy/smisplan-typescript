@@ -1,4 +1,4 @@
-import { TData } from "../types/TData"
+import { TData } from "../../../../types/TData"
 import moment from "moment";
 import 'moment/locale/ru';
 

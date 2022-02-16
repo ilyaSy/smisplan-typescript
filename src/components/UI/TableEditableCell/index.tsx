@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Tooltip } from 'antd';
 import classes from './TableEditableCell.module.scss';
 
 interface Item {
@@ -54,13 +54,15 @@ const TableEditableCell: React.FC<EditableCellProps> = ({
         />
       </Form.Item>
     ) : (
-      <div
-        className={classes["editable-cell-value-wrap"]}
-        style={{ paddingRight: 24 }}
-        onClick={handleToggleEdit}
-      >
-        {children}
-      </div>
+      <Tooltip title="Редактировать" placement='rightTop'>
+        <div
+          className={classes["editable-cell-value-wrap"]}
+          style={{ paddingRight: 24 }}
+          onClick={handleToggleEdit}
+        >
+          {children}
+        </div>
+      </Tooltip>
     );
   }
 

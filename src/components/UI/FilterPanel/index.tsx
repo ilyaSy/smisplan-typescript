@@ -63,7 +63,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
     closePanel();
   }, [dictionary, sourceData, closePanel]);
 
-  const FilterButtons = useMemo<JSX.Element>(() => (
+  const FilterPanelButtons = useMemo<JSX.Element>(() => (
     <div>
       <Tooltip
         placement='topRight'
@@ -179,7 +179,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   ]);
 
   return {
-    FilterButtons,
+    FilterPanelButtons,
     FilterPanel,
     filterData: data
   };

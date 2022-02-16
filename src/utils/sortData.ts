@@ -1,8 +1,9 @@
+import { SortOrder } from "antd/lib/table/interface";
 import { TData } from "../types/TData";
 import { TDataTypes } from "../types/TDataTypes";
 
 const sortData =
-  (key: string, direction: "ascend" | "descend" = "ascend", type?: TDataTypes) =>
+  (key: string, direction: SortOrder = "ascend", type?: TDataTypes) =>
   (a: TData, b: TData) =>
   {
     const valueA = type && type === 'number' ? +a[key] : a[key];
