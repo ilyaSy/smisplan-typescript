@@ -2,9 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, Drawer, Tooltip, Form, Checkbox } from 'antd';
 import { OrderedListOutlined } from '@ant-design/icons';
 
-import { TData, IFormItem } from 'types';
+import { TData, IFormItem } from 'interfaces';
 
-import classes from './ColumnsPanel.module.scss';
+import classes from './index.module.scss';
 
 export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = false) => {
   const [columnsData, setColumnsData] = useState<TData[]>([]);
@@ -14,9 +14,6 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
   useEffect(() => {
     if (metadata) setColumnsData(metadata);
   }, [metadata]);
-
-  const openPanel = useCallback(() => setVisible(true), []);
-  const closePanel = useCallback(() => setVisible(false), []);
 
   const resetColumns = useCallback(() => {
     setColumnsData(metadata);
@@ -31,8 +28,9 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
       ...columnData,
       showInTable: values[columnData.dataIndex] ?? false,
     })));
-    closePanel();
-  }, [closePanel]);
+
+    setVisible(false);
+  }, []);
 
   const ColumnsPanelButtons = useMemo<JSX.Element>(() => (
     <Tooltip
@@ -40,18 +38,18 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
       title='Выбрать колонки'
     >
       <Button
-        onClick={openPanel}
+        onClick={() => setVisible(true)}
         className={classes['select-columns-button']}
         icon={<OrderedListOutlined style={{ fontSize: '20px' }}/>}
       />
     </Tooltip>
-  ), [openPanel]);
+  ), []);
 
   const ColumnsPanel = useMemo(() => (
     <Drawer
       title='Колонки'
-      placement="right"
-      onClose={closePanel}
+      placement='right'
+      onClose={() => setVisible(false)}
       visible={visible}
       width={250}
     >
@@ -103,7 +101,6 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
     form,
     columnsData,
     visible,
-    closePanel,
     resetColumns,
     handleSubmit,
   ]);

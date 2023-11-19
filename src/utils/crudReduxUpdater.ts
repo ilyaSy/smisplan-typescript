@@ -1,4 +1,4 @@
-import { TReduxData, TData, THtmlMethod } from 'types';
+import { TReduxData, TData, THtmlMethod } from 'interfaces';
 
 export const crudReduxDataUpdater:
 (method: THtmlMethod, stateData: TReduxData['data'], data: TData | TData[] | null) => TReduxData['data'] =

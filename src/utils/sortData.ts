@@ -1,6 +1,6 @@
 import { SortOrder } from 'antd/lib/table/interface';
 
-import { TData, TDataTypes } from 'types';
+import { TData, TDataTypes } from 'interfaces';
 
 export const sortData =
   (key: string, direction: SortOrder = 'ascend', type?: TDataTypes) =>

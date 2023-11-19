@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { IFetchError } from 'types';
+import { IFetchError } from 'interfaces';
 import { mainModes, urlApi } from 'consts';
 import Notification from 'components/UI/Notification';
 

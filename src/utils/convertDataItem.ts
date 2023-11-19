@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { invert } from 'lodash';
 
-import { TData, TDictionary } from 'types';
+import { TData, TDictionary } from 'interfaces';
 // import { TObject } from "../types/TObject";
 
 type TConvertDataItem = (

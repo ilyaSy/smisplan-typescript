@@ -12,7 +12,7 @@ import { dataAddAction } from 'storages/actions/data';
 import { PrintPDF } from 'components/UI/PrintPDF';
 import DataAddModal from 'components/Modals/DataAddModal';
 
-import classes from './Sidebar.module.scss';
+import classes from './index.module.scss';
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();

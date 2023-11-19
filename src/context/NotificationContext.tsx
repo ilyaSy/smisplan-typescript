@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { notification } from 'antd';
 
-import { INotification } from 'types';
+import { INotification } from 'interfaces';
 
 interface INotificationProvider {
   showNotification: (action: INotification) => void;

@@ -1,4 +1,4 @@
-import { TData } from 'types';
+import { TData } from 'interfaces';
 
 export const addActionColumnInfo = (columns: TData[], hasActionMenu?: boolean): TData[] => {
   const tableColumns = [...columns];

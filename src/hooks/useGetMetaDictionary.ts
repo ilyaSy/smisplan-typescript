@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { TGetDataUrl, TMetadataDictionary } from 'context';
-import { TData, TDictionary, TObject, TDictionaryInfo } from 'types';
+import { TData, TDictionary, TObject, TDictionaryInfo } from 'interfaces';
 import { modes } from 'consts';
 import { metadataGetAction } from 'storages/actions/metadata';
 import { defaultHeaders } from 'storages/middleware/apiMiddleware';

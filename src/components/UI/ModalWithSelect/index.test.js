@@ -1,6 +1,7 @@
 import React from 'react';
 import { configure, fireEvent, render, screen } from '@testing-library/react';
 import { renderHook, act } from '@testing-library/react-hooks';
+
 import { useModalWithSelect } from '.';
 
 configure({

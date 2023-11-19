@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Tooltip } from 'antd';
 
-import classes from './TableEditableCell.module.scss';
+import classes from './index.module.scss';
 
 interface Item {
   key: string;
@@ -18,8 +18,8 @@ interface EditableCellProps {
   children: React.ReactNode;
   dataIndex: keyof Item;
   record: Item;
-  handleSave: () => void;
-  handleToggleEdit: () => void;
+  handleSave: VoidFunction;
+  handleToggleEdit: VoidFunction;
 }
 
 const TableEditableCell: React.FC<EditableCellProps> = ({

@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import axios from 'axios';
 
-import { TDictionary, TDictionaryInfo, TObject } from 'types';
+import { TDictionary, TDictionaryInfo, TObject } from 'interfaces';
 
 export type TGetDataUrl = { getDataUrl: string };
 export type TMetadataDictionary = Record<string, TDictionaryInfo>[] | TGetDataUrl;

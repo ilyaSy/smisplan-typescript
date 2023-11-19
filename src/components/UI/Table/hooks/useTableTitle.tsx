@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { Pagination } from 'antd';
 
-import { TData } from 'types';
+import { TData } from 'interfaces';
 
-import classes from '../Table.module.scss';
+import classes from '../index.module.scss';
 
 interface IUseTableTitle {
   FilterPanelButtons: JSX.Element;

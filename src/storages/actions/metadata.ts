@@ -1,4 +1,4 @@
-import { TApiAction } from 'types';
+import { TApiAction } from 'interfaces';
 import { urlApi } from 'consts';
 
 export const metadataGetAction: (tablename: string) => TApiAction =

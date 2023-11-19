@@ -14,10 +14,10 @@ import {
 } from 'antd';
 import { FilterOutlined, FilterFilled } from '@ant-design/icons';
 
-import { TData, IFormItem } from 'types';
+import { TData, IFormItem } from 'interfaces';
 import { useDictionaryContext } from 'context';
 
-import classes from './FilterPanel.module.scss';
+import classes from './index.module.scss';
 
 export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], initialVisible = false) => {
   const { dictionary } = useDictionaryContext();
@@ -26,14 +26,6 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   const [filterData, setFilterData] = useState<TData[]>();
   const [visible, setVisible] = useState<boolean>(initialVisible);
   const [form] = Form.useForm();
-
-  const openPanel = useCallback(() => {
-    setVisible(true);
-  }, []);
-
-  const closePanel = useCallback(() => {
-    setVisible(false);
-  }, []);
 
   const handleReset = useCallback(() => {
     setFilterData(sourceData);
@@ -59,8 +51,9 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
             );
       }, true)),
     );
-    closePanel();
-  }, [dictionary, sourceData, closePanel]);
+
+    setVisible(false);
+  }, [dictionary, sourceData]);
 
   const FilterPanelButtons = useMemo<JSX.Element>(() => (
     <div>
@@ -69,7 +62,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
         title='Показать фильтры'
       >
         <Button
-          onClick={openPanel}
+          onClick={() => setVisible(true)}
           className={classes['filter-button']}
         >
           {
@@ -87,13 +80,13 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
         Сбросить фильтры
       </Button>
     </div>
-  ), [openPanel, handleReset, visibleResetButton]);
+  ), [handleReset, visibleResetButton]);
 
   const FilterPanel = useMemo(() => (
     <Drawer
       title='Фильтры'
       placement="right"
-      onClose={closePanel}
+      onClose={() => setVisible(false)}
       visible={visible}
       width={430}
     >
@@ -172,7 +165,6 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
     dictionary,
     tableColumns,
     visible,
-    closePanel,
     handleReset,
     handleSubmit,
   ]);

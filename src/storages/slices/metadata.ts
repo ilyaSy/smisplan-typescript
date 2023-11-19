@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TApiReducerData, TReduxData } from 'types';
+import { TApiReducerData, TReduxData } from 'interfaces';
 import Notification from 'components/UI/Notification';
 
 const initialState: TReduxData = {

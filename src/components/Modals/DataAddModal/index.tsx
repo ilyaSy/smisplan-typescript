@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { TData, IFormItem, TDictionary } from 'types';
+import { TData, IFormItem, TDictionary } from 'interfaces';
 import { getTableParameters, convertDataItem } from 'utils';
 import { useGetMetaDictionary } from 'hooks';
 import { useDictionaryContext } from 'context';
@@ -10,7 +10,7 @@ import ModalWithForm from 'components/UI/ModalWithForm';
 interface IDataAddModal {
   isOpen: boolean;
   onAddHandler: (data: TData) => void;
-  onClose: () => void;
+  onClose: VoidFunction;
   modalTablename?: string;
   modalInitialValues?: TData;
 }

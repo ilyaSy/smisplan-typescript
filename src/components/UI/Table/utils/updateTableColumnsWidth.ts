@@ -1,6 +1,6 @@
-import { TData } from 'types';
+import { TData } from 'interfaces';
 
-import classes from '../Table.module.scss';
+import classes from '../index.module.scss';
 
 export const updateTableColumnsWidth = (tableColumns: TData[]): TData[] =>
   tableColumns.map((tableColumn) => {

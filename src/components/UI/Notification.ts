@@ -1,6 +1,6 @@
 import { notification } from 'antd';
 
-import { INotification } from 'types';
+import { INotification } from 'interfaces';
 
 const Notification = (action: INotification) => {
   const { type, message, description, duration = 5 } = action;

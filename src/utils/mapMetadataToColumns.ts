@@ -1,4 +1,4 @@
-import { TData, TColumn } from 'types';
+import { TData, TColumn } from 'interfaces';
 import { sortData } from './sortData';
 
 type TMapMetadataToColumns = (

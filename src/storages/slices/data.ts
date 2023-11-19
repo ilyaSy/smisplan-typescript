@@ -1,7 +1,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-import { TApiReducerData, TReduxData, THtmlMethod } from 'types';
+import { TApiReducerData, TReduxData, THtmlMethod } from 'interfaces';
 import { crudReduxDataUpdater } from 'utils';
 import Notification from 'components/UI/Notification';
 

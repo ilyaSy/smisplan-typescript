@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Form, Input, Button, DatePicker, TimePicker, Select, Checkbox } from 'antd';
 
-import { IFormItem, IModalWithForm, TDictionary } from 'types';
+import { IFormItem, IModalWithForm, TDictionary } from 'interfaces';
 import { convertDataItem } from 'utils';
 import { useDictionaryContext } from 'context';
 

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 
-import { TData, TDictionary, TTableParameters, TObject } from 'types';
+import { TData, TDictionary, TTableParameters, TObject } from 'interfaces';
 import { PAGE_SIZE } from 'consts';
 import TableEditableRow from '../TableEditableRow';
 import DataTableEditableCell from '../TableEditableCell';
@@ -15,8 +15,8 @@ import { useTableColumns } from './hooks/useTableColumns';
 import { useTableSourceData } from './hooks/useTableSourceData';
 import { useTablePrintRef } from './hooks/useTablePrintRef';
 
-import classes from './Table.module.scss';
-import './Table.css';
+import classes from './index.module.scss';
+import './index.css';
 
 type TTableProps = {
   data: TData[],

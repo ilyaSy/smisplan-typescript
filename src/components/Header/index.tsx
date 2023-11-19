@@ -7,7 +7,7 @@ import { modes } from 'consts';
 import { useGetTablename } from 'hooks';
 import { UserContext } from 'context';
 
-import classes from './Header.module.scss';
+import classes from './index.module.scss';
 
 const Header: React.FC = () => {
   const mode = useGetTablename();

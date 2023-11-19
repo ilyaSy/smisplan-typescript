@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from 'antd';
 
-import { TTableParameters } from 'types';
+import { TTableParameters } from 'interfaces';
 import { mapMetadataToColumns, getTableParameters } from 'utils';
 import { useGetDataMeta, useGetTablename } from 'hooks';
 import { useDictionaryContext } from 'context/DictionaryContext';
 import { LoadingComponent } from 'components/UI/LoadingComponent';
 import Table from 'components/UI/Table';
 
-import classes from './DataTable.module.scss';
+import classes from './index.module.scss';
 
 const { Title } = Typography;
 

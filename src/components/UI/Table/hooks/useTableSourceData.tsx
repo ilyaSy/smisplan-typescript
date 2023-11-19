@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { TData, TTableParameters } from 'types';
+import { TData, TTableParameters } from 'interfaces';
 import ActionMenu from 'components/ActionMenu';
 
 export const useTableSourceData = (data: TData[], tablename: string, tableParameters: TTableParameters) =>

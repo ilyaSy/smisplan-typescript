@@ -1,7 +1,7 @@
 import moment from 'moment';
 import 'moment/locale/ru';
 
-import { TData } from 'types';
+import { TData } from 'interfaces';
 
 moment.locale('ru');
 

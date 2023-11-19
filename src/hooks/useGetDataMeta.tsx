@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { mapValues } from 'lodash';
 
-import { TData } from 'types';
+import { TData } from 'interfaces';
 import { useDictionaryContext } from 'context';
 import { useMetadataSelector, useDataSelector } from 'storages/selectors';
 import { metadataGetAction } from 'storages/actions/metadata';

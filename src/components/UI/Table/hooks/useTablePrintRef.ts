@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { TData } from 'types';
+import { TData } from 'interfaces';
 import { PAGE_SIZE } from 'consts';
 import { usePrintPDFContext } from 'context';
 

@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-import classes from './LoadingComponent.module.scss';
+import classes from './index.module.scss';
 
 export const LoadingComponent: React.FC = memo(() => (
   <Spin

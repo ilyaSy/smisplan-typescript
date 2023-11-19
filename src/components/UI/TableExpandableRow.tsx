@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { TData } from 'types';
+import { TData } from 'interfaces';
 
 const TableExpandableRow = (key: keyof TData) => ({
   rowExpandable: (record: TData): boolean => Boolean(record[key]),

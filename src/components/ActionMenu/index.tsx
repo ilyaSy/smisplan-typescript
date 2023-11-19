@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Dropdown, Tooltip } from 'antd';
 import { CarryOutOutlined } from '@ant-design/icons';
 
-import { TData, TTableParameters, TActionBody } from 'types';
+import { TData, TTableParameters, TActionBody } from 'interfaces';
 import { Api } from 'utils';
 import { createActions } from './utils';
 import { useMetadataSelector } from 'storages/selectors';

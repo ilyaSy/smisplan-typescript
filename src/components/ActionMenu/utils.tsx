@@ -7,11 +7,11 @@ import {
   ScheduleFilled,
 } from '@ant-design/icons';
 
-import { TTableParameters, TActionBody, TData, TDropdownMenu, TDictionary } from 'types';
+import { TTableParameters, TActionBody, TData, TDropdownMenu, TDictionary } from 'interfaces';
 import { convertDataItem } from 'utils';
 import showConfirmModal from 'components/Modals/ConfirmModal';
 
-import classes from './ActionMenu.module.scss';
+import classes from './index.module.scss';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 

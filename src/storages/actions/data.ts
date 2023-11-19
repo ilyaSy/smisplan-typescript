@@ -1,4 +1,4 @@
-import { TApiAction, TActionBody } from 'types';
+import { TApiAction, TActionBody } from 'interfaces';
 import { urlApi } from 'consts';
 
 const type = 'DATA/REQUEST';

@@ -4,22 +4,23 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { SuspenseFallback } from 'components/UI/SuspenseFallback';
 import Sidebar from 'components/Sidebar';
 
-import classes from './Content.module.scss';
+import classes from './index.module.scss';
 
 const DataTable = lazy(() => import('components/DataTable'));
 const DataCalendar = lazy(() => import('components/DataCalendar'));
 
 const Content: React.FC = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === '/') navigate('/task');
-  }, [location, navigate]);
+    if (pathname === '/') navigate('/task');
+  }, [pathname, navigate]);
 
   return (
     <main className={classes.content}>
       <Sidebar />
+
       <Routes >
         <Route path="calendar"
           element={

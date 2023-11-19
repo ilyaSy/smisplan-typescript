@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { TData, IFormItem, TButton } from 'types';
+import { TData, IFormItem, TButton } from 'interfaces';
 import { getTableParameters, convertDataItem } from 'utils';
 import { useDictionaryContext } from 'context';
 import { useMetadataSelector } from 'storages/selectors';
@@ -10,7 +10,7 @@ interface IDataEditModal {
   isOpen: boolean;
   onEditHandler: (data: TData) => void;
   onAddHandler?: (data: TData) => void;
-  onClose: () => void;
+  onClose: VoidFunction;
   formData: TData;
 }
 

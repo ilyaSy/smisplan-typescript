@@ -8,7 +8,7 @@ export interface IModalWithForm {
   okButtonTitle?: string
   isOpen: boolean;
   handleOk: (values: { [k: string]: string }) => void;
-  handleClose: () => void;
+  handleClose: VoidFunction;
   formItems: IFormItem[];
   // additionalButtons: JSX.Element[];
   additionalButtons: TButton[];

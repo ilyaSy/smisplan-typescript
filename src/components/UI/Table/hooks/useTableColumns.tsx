@@ -3,13 +3,13 @@ import { Button, Tag, Tooltip } from 'antd';
 import { GroupOutlined } from '@ant-design/icons';
 import { SortOrder } from 'antd/lib/table/interface';
 
-import { TData, TTableParameters, TDictionary, TObject } from 'types';
+import { TData, TTableParameters, TDictionary, TObject } from 'interfaces';
 import { updateTableColumnsWidth } from '../utils/updateTableColumnsWidth';
 import { addActionColumnInfo } from '../utils/addActionColumnInfo';
 import { getGroupColumnData } from '../utils/getGroupColumnData';
 import TableFilterIcon from 'components/UI/TableFilterIcon';
 
-import classes from '../Table.module.scss';
+import classes from '../index.module.scss';
 
 interface IUseTableColumns {
   columns: TData[],

@@ -4,7 +4,7 @@ import { BulbOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import 'moment/locale/ru';
 
-import { TData } from 'types';
+import { TData } from 'interfaces';
 import { DATE_FORMAT_DATE, DATE_FORMAT_FULLDATE, DATE_FORMAT_TIME } from 'consts';
 import { sortData } from 'utils';
 import { useGetDataMeta } from 'hooks';
@@ -12,7 +12,7 @@ import { LoadingComponent } from 'components/UI/LoadingComponent';
 import ModalWithList from 'components/UI/ModalWithList';
 import { Calendar } from 'components/UI/Calendar';
 
-import classes from './DataCalendar.module.scss';
+import classes from './index.module.scss';
 
 moment.locale('ru');
 
