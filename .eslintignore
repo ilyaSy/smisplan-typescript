@@ -1,0 +1,4 @@
+/src/api/Api.ts
+/src/lib/**
+*.test.ts
+*.test.tsx
