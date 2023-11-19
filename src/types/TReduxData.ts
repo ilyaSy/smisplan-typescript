@@ -1,4 +1,4 @@
-import { TData } from "./TData";
+import { TData } from './TData';
 
 export type TReduxData = {
   isLoading: boolean,

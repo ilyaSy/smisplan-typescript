@@ -1,9 +1,4 @@
-import { TTableParameters } from '../types/TTableParameters';
+import { TTableParameters } from 'types';
 
-type TGetTableParameters = (
-  metadata: Record<string, any>[]
-) => TTableParameters
-
-export const getTableParameters: TGetTableParameters = (metadata) => {
-  return metadata.find((c) => c.id === 'specificParameters') as TTableParameters;
-}
+export const getTableParameters = (metadata: Record<string, any>[]) =>
+  metadata.find((c) => c.id === 'specificParameters') as TTableParameters;

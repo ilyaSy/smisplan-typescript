@@ -1,4 +1,4 @@
-import { THtmlMethod } from "./THtmlMethod";
+import { THtmlMethod } from './THtmlMethod';
 
 export type TApiAction = {
   type: string,

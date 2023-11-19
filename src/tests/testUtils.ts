@@ -1,5 +1,5 @@
-import { fireEvent } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 
 type TUpdateInputSubmit = (
   input: HTMLElement,
@@ -9,7 +9,7 @@ type TUpdateInputSubmit = (
 
 export const updateInputSubmit: TUpdateInputSubmit = (input, value, submitButton) => {
   act(() => {
-    fireEvent.change(input, {target: { value }});
+    fireEvent.change(input, { target: { value } });
 
     if (submitButton) fireEvent.click(submitButton);
   });

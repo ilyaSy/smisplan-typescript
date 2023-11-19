@@ -4,17 +4,14 @@ import {
   DeleteFilled,
   EditFilled,
   ScheduleOutlined,
-  ScheduleFilled
+  ScheduleFilled,
 } from '@ant-design/icons';
-import showConfirmModal from '../Modals/ConfirmModal';
-import { TActionBody } from "../../types/TApiActionBody";
-import { TData } from "../../types/TData";
-import { TDropdownMenu } from "../../types/TDropdownMenu";
-import { TTableParameters } from "../../types/TTableParameters";
+
+import { TTableParameters, TActionBody, TData, TDropdownMenu, TDictionary } from 'types';
+import { convertDataItem } from 'utils';
+import showConfirmModal from 'components/Modals/ConfirmModal';
+
 import classes from './ActionMenu.module.scss';
-import { TDictionary } from '../../types/TDictionary';
-import { convertDataItem } from '../../utils/convertDataItem';
-// import { TObject } from '../../types/TObject';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -32,26 +29,26 @@ interface IMenu {
 const handleDummyClick = () => {
   Modal.info({
     title: 'Информирование',
-    content: 'Тестовое уведомление было отправлено'
-  })
+    content: 'Тестовое уведомление было отправлено',
+  });
 };
 
 export const createActions = ({
-    dataItem,
-    metadata,
-    tableParameters,
-    handleOpen,
-    handleEdit,
-    handleDelete,
-    handleGetConnectedData,
-    dictionary,
-  }: IMenu) => {
+  dataItem,
+  metadata,
+  tableParameters,
+  handleOpen,
+  handleEdit,
+  handleDelete,
+  handleGetConnectedData,
+  dictionary,
+}: IMenu) => {
   const actions: TDropdownMenu[] = [];
 
   if (tableParameters.hasDiscussion) {
     const handleOpenAddDiscussion = () => {
       handleOpen('addDiscussion');
-    }
+    };
 
     actions.push({
       type: 'item',
@@ -74,7 +71,7 @@ export const createActions = ({
   if (tableParameters.hasEditMenu) {
     const handleOpenEditMenu = () => {
       handleOpen('editItem');
-    }
+    };
 
     actions.push({
       type: 'item',
@@ -100,8 +97,8 @@ export const createActions = ({
             values.status = statusKey;
             handleEdit(values);
           },
-        })
-      })
+        });
+      }),
     });
   }
 
@@ -112,7 +109,7 @@ export const createActions = ({
       onClick: () => {
         showConfirmModal({
           onOk: () => handleDelete(dataItem),
-          onCancel: () => console.log(''),
+          onCancel: () => console.info(''),
           description: 'Вы подтверждаете удаление данных ?',
         });
       },
@@ -133,4 +130,4 @@ export const createActions = ({
   }
 
   return actions;
-}
+};

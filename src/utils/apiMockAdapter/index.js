@@ -1,11 +1,11 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { urlApi } from '../../constants/constants';
+import { urlApi } from 'consts';
 import { dataCounterFactory } from './utils';
 
-const user = require('../../constants/dummyData/user.json');
-const developers = require('../../constants/dummyData/developers.json');
-const projects = require('../../constants/dummyData/projects.json');
+const user = require('consts/dummyData/user.json');
+const developers = require('consts/dummyData/developers.json');
+const projects = require('consts/dummyData/projects.json');
 
 const metaData = {
   task: null,
@@ -14,10 +14,10 @@ const metaData = {
   event: null,
 };
 
-metaData.task = require('../../constants/dummyData/task_meta.json');
-metaData.discussion = require('../../constants/dummyData/discussion_meta.json');
-metaData.calendar = require('../../constants/dummyData/calendar_meta.json');
-metaData.event = require('../../constants/dummyData/event_meta.json');
+metaData.task = require('consts/dummyData/task_meta.json');
+metaData.discussion = require('consts/dummyData/discussion_meta.json');
+metaData.calendar = require('consts/dummyData/calendar_meta.json');
+metaData.event = require('consts/dummyData/event_meta.json');
 
 const data = {
   task: null,
@@ -26,22 +26,23 @@ const data = {
   event: null,
 };
 
-data.task = require('../../constants/dummyData/task.json');
-data.discussion = require('../../constants/dummyData/discussion.json');
-data.calendar = require('../../constants/dummyData/calendar.json');
-data.event = require('../../constants/dummyData/event.json');
+data.task = require('consts/dummyData/task.json');
+data.discussion = require('consts/dummyData/discussion.json');
+data.calendar = require('consts/dummyData/calendar.json');
+data.event = require('consts/dummyData/event.json');
 
 const mock = new MockAdapter(axios, { delayResponse: 100 });
 
 const dataCount = {
-  task: dataCounterFactory(data, "task"),
-  discussion: dataCounterFactory(data, "discussion"),
+  task: dataCounterFactory(data, 'task'),
+  discussion: dataCounterFactory(data, 'discussion'),
 };
 
 const replyPostWithOK = (mode) => (mockResponseConfig) => {
   const body = JSON.parse(mockResponseConfig.data);
-  return [200, { id: dataCount[mode](), ...body}]
-}
+
+  return [200, { id: dataCount[mode](), ...body }];
+};
 
 export default function setMockAdapter() {
   // get basic information
@@ -63,6 +64,7 @@ export default function setMockAdapter() {
 
   // get data: specific
   const pathGetTaskDiscussions = new RegExp(`${urlApi}/task/get-discussion/.+`);
+
   mock.onGet(pathGetTaskDiscussions).reply((mockRequestConfig) => {
     const urlArray = mockRequestConfig.url.split('/');
     const connectedTable = urlArray[urlArray.length - 3];
@@ -73,28 +75,26 @@ export default function setMockAdapter() {
       .filter((d) => d.mainTable === connectedTable)
       .filter((d) => d.status === 'done')
       .filter((d) => +d.idTask === +id)
-      .map((d) => {
-        return {
-          title: `${d.date} ${d.time}`,
-          description: `${d.theme}\n${d.result}`
-        };
-      })
+      .map((d) => ({
+        title: `${d.date} ${d.time}`,
+        description: `${d.theme}\n${d.result}`,
+      }));
 
-    return [200, connectedData]
+    return [200, connectedData];
   });
 
   // put data
   // mock.onPut(`${urlApi}/task/`).reply(404);
-  mock.onPut(`${urlApi}/task/`).reply(replyPostWithOK("task"));
-  mock.onPut(`${urlApi}/discussion/`).reply(replyPostWithOK("discussion"));
+  mock.onPut(`${urlApi}/task/`).reply(replyPostWithOK('task'));
+  mock.onPut(`${urlApi}/discussion/`).reply(replyPostWithOK('discussion'));
 
   // patch data
-  mock.onPatch(`${urlApi}/task/`).reply(replyPostWithOK("task"));
-  mock.onPatch(`${urlApi}/discussion/`).reply(replyPostWithOK("discussion"));
+  mock.onPatch(`${urlApi}/task/`).reply(replyPostWithOK('task'));
+  mock.onPatch(`${urlApi}/discussion/`).reply(replyPostWithOK('discussion'));
 
   // delete data
-  mock.onDelete(`${urlApi}/task/`).reply(replyPostWithOK("task"));
-  mock.onDelete(`${urlApi}/discussion/`).reply(replyPostWithOK("discussion"));
+  mock.onDelete(`${urlApi}/task/`).reply(replyPostWithOK('task'));
+  mock.onDelete(`${urlApi}/discussion/`).reply(replyPostWithOK('discussion'));
 
   // post data
   mock.onPost(`${urlApi}/task/`).reply(200, { status: 'OK', error: '' });

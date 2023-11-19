@@ -1,11 +1,13 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import SuspenseFallback from '../UI/SuspenseFallback';
-import Sidebar from '../Sidebar';
+
+import { SuspenseFallback } from 'components/UI/SuspenseFallback';
+import Sidebar from 'components/Sidebar';
+
 import classes from './Content.module.scss';
 
-const DataTable = lazy(() => import('../DataTable'));
-const DataCalendar = lazy(() => import('../DataCalendar'));
+const DataTable = lazy(() => import('components/DataTable'));
+const DataCalendar = lazy(() => import('components/DataCalendar'));
 
 const Content: React.FC = () => {
   const location = useLocation();
@@ -37,6 +39,6 @@ const Content: React.FC = () => {
       </Routes >
     </main>
   );
-}
+};
 
 export default Content;

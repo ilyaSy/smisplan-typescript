@@ -1,16 +1,19 @@
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { apiMiddleware } from "./middleware/apiMiddleware";
-import reducers from "./reducers";
+import { StateFromReducersMapObject, configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-export const storage = createStore(reducers, composeWithDevTools(applyMiddleware(thunk, apiMiddleware)));
+import { apiMiddleware } from './middleware/apiMiddleware';
+import { dataReducer } from './slices/data';
+import { metadataReducer } from './slices/metadata';
 
-export const StorageProvider: React.FC = ({ children }) => {
-  return (
-    <Provider store={storage}>
-      {children}
-    </Provider>
-  );
-}
+const reducer = { metadataReducer, dataReducer };
+
+const store = configureStore({ reducer, middleware: [thunk, apiMiddleware] });
+
+export type TRootState = StateFromReducersMapObject<typeof reducer>;
+
+export const StorageProvider: React.FC = ({ children }) => (
+  <Provider store={store}>
+    {children}
+  </Provider>
+);

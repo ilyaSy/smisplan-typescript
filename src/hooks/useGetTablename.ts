@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const useGetTablename = () => {
   const [ tablename, setTablename ] = useState<string>('task');
@@ -12,5 +12,5 @@ export const useGetTablename = () => {
     }
   }, [location]);
 
-  return tablename
-}
+  return tablename;
+};

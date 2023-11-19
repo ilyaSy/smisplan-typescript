@@ -1,6 +1,6 @@
 import { configure, render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { StorageProvider } from '../../storages/storage';
+import { StorageProvider } from 'storages/storage';
 import Sidebar from '.';
 
 configure({
@@ -14,11 +14,12 @@ describe('Sidebar', () => {
         <StorageProvider>
           <Sidebar />
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
       const sidebarElements = screen.getAllByRole('menuitem');
+
       expect(sidebarElements.length).toBe(3);
       expect(sidebarElements[0]).toHaveAttribute('data-menu-id', 'rc-menu-uuid-test-addData');
       expect(sidebarElements[1]).toHaveAttribute('data-menu-id', 'rc-menu-uuid-test-printPDF');
@@ -32,7 +33,7 @@ describe('Sidebar', () => {
         <StorageProvider>
           <Sidebar />
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     fireEvent.click(screen.getAllByRole('menuitem')[0]);
@@ -47,7 +48,7 @@ describe('Sidebar', () => {
         <StorageProvider>
           <Sidebar />
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     fireEvent.mouseOver(screen.getAllByRole('menuitem')[2]);

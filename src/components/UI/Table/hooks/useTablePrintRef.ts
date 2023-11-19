@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
-import { PAGE_SIZE } from "../../../../constants/constants";
-import { TData } from "../../../../types/TData";
-import { usePrintPDFContext } from "../../../../context/PrintPDFContext";
+import { useEffect, useRef } from 'react';
+
+import { TData } from 'types';
+import { PAGE_SIZE } from 'consts';
+import { usePrintPDFContext } from 'context';
 
 interface IUseTablePrintRef {
   filterData: TData[],
@@ -14,23 +15,22 @@ export const useTablePrintRef = ({
   pageSize,
   setPageSize,
 }: IUseTablePrintRef) => {
-  const dataRef = useRef<HTMLDivElement>(null)
-  const { setDataPrintRef, setDataPrintMode, dataPrintMode } = usePrintPDFContext();
+  const dataRef = useRef<HTMLDivElement>(null);
+  const { setDataRef, setPrintMode, printMode } = usePrintPDFContext();
 
   useEffect(() => {
-    if (dataRef) setDataPrintRef(dataRef)
-  }, [setDataPrintRef]);
+    if (dataRef) setDataRef(dataRef);
+  }, [setDataRef]);
 
   useEffect(() => {
-    if (dataPrintMode === 'all') {
+    if (printMode === 'all') {
       setPageSize(0);
-      setDataPrintMode('print');
-    } else if (dataPrintMode === 'current') {
-    }
-    else if (pageSize === 0) {
+      setPrintMode('print');
+    } else if (printMode === 'current') {
+    } else if (pageSize === 0) {
       setPageSize(PAGE_SIZE);
     }
-  }, [filterData, setPageSize, pageSize, dataPrintMode, setDataPrintMode])
+  }, [filterData, setPageSize, pageSize, printMode, setPrintMode]);
 
   return dataRef;
-}
+};

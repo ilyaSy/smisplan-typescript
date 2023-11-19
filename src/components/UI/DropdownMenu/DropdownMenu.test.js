@@ -1,5 +1,5 @@
-import {fireEvent, render, screen, waitFor} from "@testing-library/react";
-import DropdownMenu from "./index";
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import DropdownMenu from './index';
 
 const dummyData = [
   {
@@ -22,13 +22,13 @@ const dummyData = [
         title: 'submenuItem2',
         key: 'submenuItem2',
         onClick: jest.fn(),
-      }
-    ]
+      },
+    ],
   },
   {
     type: 'divider',
-    key: 'divider'
-  }
+    key: 'divider',
+  },
 ];
 
 describe('DropdownMenu', () => {
@@ -43,14 +43,14 @@ describe('DropdownMenu', () => {
 
     fireEvent.mouseOver(screen.getByRole('menu').children[2]);
     await waitFor(() => {
-      screen.getByText('item')
+      screen.getByText('item');
     });
   });
 
   test('Triggering on click', async () => {
     fireEvent.click(screen.getByText('item'));
     await waitFor(() => {
-      screen.getByText('item')
+      screen.getByText('item');
     });
 
     expect(dummyData[0].onClick).toHaveBeenCalled();
@@ -60,7 +60,7 @@ describe('DropdownMenu', () => {
     fireEvent.mouseOver(screen.getByText('submenu'));
     await waitFor(() => {
       screen.getByText('submenuItem1');
-    })
+    });
 
     expect(screen.getByText('submenuItem1')).toBeInTheDocument();
     expect(screen.getByText('submenuItem2')).toBeInTheDocument();

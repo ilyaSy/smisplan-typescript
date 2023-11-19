@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useMetadataSelector } from '../../../storages/selectors/metadata';
-import { getTableParameters } from '../../../utils/getTableParameters';
-import { convertDataItem } from '../../../utils/convertDataItem';
-import { IFormItem } from '../../../types/IFormItem';
-import { TData } from '../../../types/TData';
-import { TButton } from '../../../types/TButton';
-import { useDictionaryContext } from '../../../context/DictionaryContext';
-import ModalWithForm from '../../UI/ModalWithForm';
+
+import { TData, IFormItem, TButton } from 'types';
+import { getTableParameters, convertDataItem } from 'utils';
+import { useDictionaryContext } from 'context';
+import { useMetadataSelector } from 'storages/selectors';
+import ModalWithForm from 'components/UI/ModalWithForm';
 
 interface IDataEditModal {
   isOpen: boolean;
@@ -21,7 +19,7 @@ const DataEditModal: React.FC<IDataEditModal> = ({
   onEditHandler,
   onAddHandler,
   onClose,
-  formData
+  formData,
 }) => {
   const { dictionary } = useDictionaryContext();
 
@@ -42,16 +40,14 @@ const DataEditModal: React.FC<IDataEditModal> = ({
         .filter((m) => m.id !== 'specificParameters')
         .filter((m) => !m.isPseudo)
         .sort((a, b) => a.tableIndex - b.tableIndex)
-        .map((m) => {
-          return {
-            label: m.title,
-            name: m.id,
-            type: m.type,
-            // rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : [],
-            rules: [],
-            disabled: !m.isEditable,
-          }
-      }));
+        .map((m) => ({
+          label: m.title,
+          name: m.id,
+          type: m.type,
+          // rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : [],
+          rules: [],
+          disabled: !m.isEditable,
+        })));
     }
   }, [ metadata ]);
 
@@ -68,8 +64,8 @@ const DataEditModal: React.FC<IDataEditModal> = ({
         additionalButtons={[
           {
             onClick: onAddHandler,
-            title: 'Сохранить как новый'
-          } as TButton
+            title: 'Сохранить как новый',
+          } as TButton,
         ]}
       />
     ) : null

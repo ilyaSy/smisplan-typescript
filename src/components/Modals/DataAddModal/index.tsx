@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { IFormItem } from '../../../types/IFormItem';
-import { TData } from '../../../types/TData';
-import { TDictionary } from '../../../types/TDictionary';
-import { getTableParameters } from '../../../utils/getTableParameters';
-import { convertDataItem } from '../../../utils/convertDataItem';
-import { useGetMetaDictionary } from '../../../utils/hooks/useGetMetaDictionary';
-import { useMetadataSelector } from '../../../storages/selectors/metadata';
-import { useDictionaryContext } from '../../../context/DictionaryContext';
-import ModalWithForm from '../../UI/ModalWithForm';
+
+import { TData, IFormItem, TDictionary } from 'types';
+import { getTableParameters, convertDataItem } from 'utils';
+import { useGetMetaDictionary } from 'hooks';
+import { useDictionaryContext } from 'context';
+import { useMetadataSelector } from 'storages/selectors';
+import ModalWithForm from 'components/UI/ModalWithForm';
 
 interface IDataAddModal {
   isOpen: boolean;
@@ -22,7 +20,7 @@ const DataAddModal: React.FC<IDataAddModal> = ({
   onAddHandler,
   onClose,
   modalTablename,
-  modalInitialValues
+  modalInitialValues,
 }) => {
   const [formItems, setFormItems] = useState<IFormItem[]>([]);
   const [initialValues, setInitialValues] = useState<TData>({});
@@ -45,14 +43,14 @@ const DataAddModal: React.FC<IDataAddModal> = ({
     modalTableMetadata,
     modalTableDictionary,
     contextMetadata,
-    contextDictionary
+    contextDictionary,
   ]);
 
   useEffect(() => {
     if (formItems && metadata && dictionary) {
       const defaultData: TData = Object.fromEntries(metadata
-        .filter(({id}) => id !== 'specificValue')
-        .map((d) => [d.id, d.defaultValue]))
+        .filter(({ id }) => id !== 'specificValue')
+        .map((d) => [d.id, d.defaultValue]));
       const initialData = modalInitialValues ? modalInitialValues : defaultData;
 
       setInitialValues(convertDataItem(dictionary, initialData, metadata, 'modalAdd'));
@@ -64,15 +62,13 @@ const DataAddModal: React.FC<IDataAddModal> = ({
       setFormItems(metadata
         .filter((m) => m.id !== 'specificParameters')
         .sort((a, b) => a.tableIndex - b.tableIndex)
-        .map((m) => {
-          return {
-            label: m.title,
-            name: m.id,
-            type: m.type,
-            rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : [],
-            disabled: m.id === 'id',
-          }
-      }));
+        .map((m) => ({
+          label: m.title,
+          name: m.id,
+          type: m.type,
+          rules: m.addMenuIndex ? [{ required: true, message: 'Поле должно быть корректно заполнено!' }] : [],
+          disabled: m.id === 'id',
+        })));
     }
   }, [ metadata ]);
 

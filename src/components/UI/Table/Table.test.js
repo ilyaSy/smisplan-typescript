@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { StorageProvider } from '../../../storages/storage';
-import { PrintPDFContextProvider } from '../../../context/PrintPDFContext';
+import { StorageProvider } from 'storages/storage';
+import { PrintPDFContextProvider } from 'context/PrintPDFContext';
 import Table from '.';
 
 const columns = [
@@ -114,8 +114,8 @@ const columns = [
     sorter: jest.fn(),
     tableIndex: 6,
     validValues: '',
-  }
-]
+  },
+];
 
 const sourceData = [
   {
@@ -145,12 +145,12 @@ const sourceData = [
 ];
 
 const tableParameters = {
-  id: "specificParameters",
-  mainValue: "string",
-  tableName: "Задачи",
-  defaultSortField: "string",
-  defaultSortDirection: "descend",
-  addMenuTitle: "Новая задача",
+  id: 'specificParameters',
+  mainValue: 'string',
+  tableName: 'Задачи',
+  defaultSortField: 'string',
+  defaultSortDirection: 'descend',
+  addMenuTitle: 'Новая задача',
   hasTitleRow: false,
   hasAddMenu: true,
   hasSublistData: false,
@@ -159,7 +159,7 @@ const tableParameters = {
   hasDeleteButton: true,
   hasSetStatusMenu: true,
   hasGoToDiscussion: false,
-  hasDiscussion: true
+  hasDiscussion: true,
 };
 
 describe('Table', () => {
@@ -175,11 +175,12 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
       const tables = screen.getAllByRole('table');
+
       expect(tables.length).toBe(2); // table header row and table body are separated in Ant Design
     });
   });
@@ -196,13 +197,14 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
       const tables = screen.getAllByRole('table');
 
       const cols = tables[0].querySelectorAll('.ant-table-column-title');
+
       expect(cols.length).toBe(columns.filter((c) => c.showInTable).length);
     });
   });
@@ -219,7 +221,7 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
@@ -241,13 +243,14 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
       const tables = screen.getAllByRole('table');
 
       const rows = tables[1].querySelectorAll('.ant-table-row');
+
       expect(rows.length).toBe(sourceData.length);
     });
   });
@@ -264,7 +267,7 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
@@ -276,7 +279,7 @@ describe('Table', () => {
 
       rows.forEach((row) => {
         expect(row.querySelector('.editable-cell-value-wrap')).toBeInTheDocument();
-      })
+      });
     });
   });
 
@@ -292,7 +295,7 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
@@ -313,7 +316,7 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {
@@ -333,7 +336,7 @@ describe('Table', () => {
             />
           </PrintPDFContextProvider>
         </StorageProvider>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => {

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from 'antd';
-import { TTableParameters } from '../../types/TTableParameters';
-import { mapMetadataToColumns } from '../../utils/mapMetadataToColumns';
-import { useGetDataMeta } from '../../utils/hooks/useGetDataMeta';
-import { getTableParameters } from '../../utils/getTableParameters';
-import { useGetTablename } from '../../utils/hooks/useGetTablename';
-import Table from '../UI/Table';
-import LoadingComponent from '../UI/LoadingComponent';
-import { useDictionaryContext } from '../../context/DictionaryContext';
+
+import { TTableParameters } from 'types';
+import { mapMetadataToColumns, getTableParameters } from 'utils';
+import { useGetDataMeta, useGetTablename } from 'hooks';
+import { useDictionaryContext } from 'context/DictionaryContext';
+import { LoadingComponent } from 'components/UI/LoadingComponent';
+import Table from 'components/UI/Table';
+
 import classes from './DataTable.module.scss';
 
 const { Title } = Typography;
@@ -20,7 +20,7 @@ const DataTable: React.FC = () => {
 
   const {
     data: sourceData, isErrorData, isLoadingData,
-    metadata, isErrorMetadata, isLoadingMetadata
+    metadata, isErrorMetadata, isLoadingMetadata,
   } = useGetDataMeta(tablename);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const DataTable: React.FC = () => {
           />
       )
     )
-  )
-}
+  );
+};
 
-export default DataTable
+export default DataTable;

@@ -1,1 +1,1 @@
-export type THtmlMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+export type THtmlMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';

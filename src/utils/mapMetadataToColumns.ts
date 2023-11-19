@@ -1,10 +1,9 @@
-import sortData from './sortData';
-import { TColumn } from '../types/TColumn';
-import { TData } from '../types/TData';
+import { TData, TColumn } from 'types';
+import { sortData } from './sortData';
 
 type TMapMetadataToColumns = (
   metadata: TData[],
-) => Record<string, TColumn>[]
+) => Record<string, TColumn>[];
 
 export const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
   const columns = metadata
@@ -18,12 +17,12 @@ export const mapMetadataToColumns: TMapMetadataToColumns = (metadata) => {
           compare: sortData(metadataColumn.id, undefined, metadataColumn.type),
           multiple: 1,
         },
-      }
+      };
 
       return column;
     })
-    .sort((a, b) => a.tableIndex - b.tableIndex)
+    .sort((a, b) => a.tableIndex - b.tableIndex);
     // .filter((c: any) => !filterRealColumns || (filterRealColumns && c.showInTable && c.type !== 'fulltext'))
 
   return columns;
-}
+};

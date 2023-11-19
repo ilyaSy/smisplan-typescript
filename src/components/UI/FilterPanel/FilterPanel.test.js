@@ -1,7 +1,7 @@
-import {screen, render, configure, fireEvent} from '@testing-library/react';
-import {renderHook, act} from '@testing-library/react-hooks';
+import { screen, render, configure, fireEvent } from '@testing-library/react';
+import { renderHook, act } from '@testing-library/react-hooks';
 import { useFilterDrawer } from '.';
-import { updateInputSubmit } from '../../../tests/testUtils';
+import { updateInputSubmit } from 'tests/testUtils';
 
 configure({
   testIdAttribute: 'id',
@@ -63,8 +63,8 @@ const columns = [
     showInTable: false,
     isFilter: true,
     type: 'fulltext',
-  }
-]
+  },
+];
 
 const sourceData = [
   {
@@ -75,20 +75,22 @@ const sourceData = [
     date: '2022-02-01',
     time: '10:00:00',
   },
-]
+];
 
 describe('Filter panel', () => {
   let result;
   let submitButton;
   let waitForValueToChange = () => {};
+
   beforeEach(() => {
-    const hook = renderHook(() => useFilterDrawer(columns, sourceData, true))
+    const hook = renderHook(() => useFilterDrawer(columns, sourceData, true));
+
     result = hook.result;
     waitForValueToChange = hook.waitForValueToChange;
 
     render(result.current.FilterPanel);
 
-    submitButton = screen.getByText('Применить').closest('button')
+    submitButton = screen.getByText('Применить').closest('button');
   });
 
   it('Displaying correctly', () => {
@@ -145,7 +147,7 @@ describe('Filter panel', () => {
     updateInputSubmit(input, 'no-string', submitButton);
     await waitForValueToChange(() => result.current.filterData);
     expect(result.current.filterData.length).toBe(0);
-  })
+  });
 
   test('Filter data by number', async () => {
     const input = screen.getByTestId('basic_number');
@@ -169,7 +171,7 @@ describe('Filter panel', () => {
     updateInputSubmit(input, 'no-fulltext', submitButton);
     await waitForValueToChange(() => result.current.filterData);
     expect(result.current.filterData.length).toBe(0);
-  })
+  });
 
   test('Filter data by checkbox', async () => {
     const checkbox = screen.getByTestId('basic_checkbox');
@@ -183,5 +185,5 @@ describe('Filter panel', () => {
 
     expect(screen.getByTestId('basic_checkbox').checked).toBe(true);
     expect(result.current.filterData.length).toBe(0);
-  })
+  });
 });

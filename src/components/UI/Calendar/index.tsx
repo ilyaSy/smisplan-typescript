@@ -3,6 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
+
 import './Calendar.css';
 
 const calendarModes = { today: 'Сегодня', month: 'Месяц', week: 'Неделя', day: 'День', list: 'Список' };
@@ -11,10 +12,11 @@ interface ICalendar {
   dates: any[],
   handleDayClick: (event: any) => void,
   handleEventClick: (event: any) => void
-};
+}
 
-export const Calendar: React.FC<ICalendar> = ({dates, handleDayClick, handleEventClick}) => {
+export const Calendar: React.FC<ICalendar> = ({ dates, handleDayClick, handleEventClick }) => {
   let initialView = 'dayGridMonth';
+
   if (/\/calendar\/list/.test(document.location.pathname)) {
     initialView = 'listWeek';
   }
@@ -39,5 +41,5 @@ export const Calendar: React.FC<ICalendar> = ({dates, handleDayClick, handleEven
       }}
       buttonText={calendarModes}
     />
-  )
-}
+  );
+};

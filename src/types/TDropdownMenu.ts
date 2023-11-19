@@ -6,7 +6,7 @@ type TDropdownMenuItem = {
   key: string,
   onClick: MenuClickEventHandler,
   icon?: JSX.Element
-}
+};
 
 export type TDropdownMenu =
   TDropdownMenuItem

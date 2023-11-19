@@ -12,31 +12,34 @@ const options = {
   list: [
     {
       optionTitle: 'option1',
-      optionValue: 'option1'
+      optionValue: 'option1',
     },
     {
       optionTitle: 'option2',
-      optionValue: 'option2'
-    }
+      optionValue: 'option2',
+    },
   ],
   onSubmit: jest.fn(),
-}
+};
 
 const selectedOption = 'option2';
 
 const mockUpdateStateValue = jest.fn();
 const originalUseState = (initialState) => jest.requireActual('react').useState(initialState);
+
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: (initialState) => typeof initialState === 'boolean'
     ? jest.requireActual('react').useState(initialState)
     : [initialState, mockUpdateStateValue],
-}))
+}));
 
 describe('Modal With Select', () => {
   let result;
+
   beforeEach(() => {
     const hook = renderHook(() => useModalWithSelect(options.title, options.list, options.onSubmit));
+
     result = hook.result;
     act(() => {
       result.current.toggleOpen(true);
@@ -67,7 +70,7 @@ describe('Modal With Select', () => {
     });
 
     React.useState = originalUseState;
-  })
+  });
 
   test('Click OK', async () => {
     act(() => {
@@ -85,5 +88,5 @@ describe('Modal With Select', () => {
 
     expect(result.current.value).toBe(selectedOption);
     // expect(options.onSubmit).toHaveBeenCalledWith(selectedOption);
-  })
+  });
 });

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from 'react';
 import {
   Button,
   Drawer,
@@ -10,12 +10,13 @@ import {
   TimePicker,
   Col,
   Row,
-  Checkbox
-} from "antd";
+  Checkbox,
+} from 'antd';
 import { FilterOutlined, FilterFilled } from '@ant-design/icons';
-import { TData } from "../../../types/TData";
-import { IFormItem } from "../../../types/IFormItem";
-import { useDictionaryContext } from "../../../context/DictionaryContext";
+
+import { TData, IFormItem } from 'types';
+import { useDictionaryContext } from 'context';
+
 import classes from './FilterPanel.module.scss';
 
 export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], initialVisible = false) => {
@@ -26,15 +27,13 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   const [visible, setVisible] = useState<boolean>(initialVisible);
   const [form] = Form.useForm();
 
-  const openPanel = useCallback((e: any) => {
+  const openPanel = useCallback(() => {
     setVisible(true);
   }, []);
 
   const closePanel = useCallback(() => {
     setVisible(false);
   }, []);
-
-  const data = useMemo(() => filterData ?? sourceData, [filterData, sourceData]);
 
   const handleReset = useCallback(() => {
     setFilterData(sourceData);
@@ -45,21 +44,21 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   const handleSubmit = useCallback((values: any) => {
     setVisibleResetButton(false);
     setFilterData(sourceData
-      .filter((data: TData) => {
-        return Object.keys(data).reduce((acc, key) => {
-          let value = dictionary && dictionary[key] ? dictionary[key][values[key]].text : values[key];
-          if (typeof data[key] === 'number') value = +value;
-          if (typeof data[key] === 'boolean') value = !!value;
-          if (value) setVisibleResetButton(true);
-          return acc
+      .filter((data: TData) => Object.keys(data).reduce((acc, key) => {
+        let value = dictionary && dictionary[key] ? dictionary[key][values[key]].text : values[key];
+
+        if (typeof data[key] === 'number') value = +value;
+        if (typeof data[key] === 'boolean') value = !!value;
+        if (value) setVisibleResetButton(true);
+
+        return acc
             && (
-                (typeof data[key] === 'boolean' && data[key] === value) ||
+              (typeof data[key] === 'boolean' && data[key] === value) ||
                 (!value && typeof data[key] !== 'boolean') ||
                 (value && data[key] && data[key] === value)
-              )
-        }, true)
-      })
-    )
+            );
+      }, true)),
+    );
     closePanel();
   }, [dictionary, sourceData, closePanel]);
 
@@ -75,15 +74,15 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
         >
           {
             visibleResetButton ?
-            <FilterFilled style={{ fontSize: '20px' }}/> :
-            <FilterOutlined style={{ fontSize: '20px' }}/>
+              <FilterFilled style={{ fontSize: '20px' }}/> :
+              <FilterOutlined style={{ fontSize: '20px' }}/>
           }
         </Button>
       </Tooltip>
       <Button
         onClick={handleReset}
         className={classes['reset-filter-button']}
-        style={{display: visibleResetButton ? 'inline' : 'none'}}
+        style={{ display: visibleResetButton ? 'inline' : 'none' }}
       >
         Сбросить фильтры
       </Button>
@@ -115,8 +114,8 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
                 name: tableColumn.dataIndex,
                 label: tableColumn.title,
                 type: tableColumn.type,
-                disabled: false
-              }
+                disabled: false,
+              };
 
               return (
                 <Form.Item
@@ -128,40 +127,40 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
                   {
                     (['string', 'number'].includes(formItem.type)) ?
                       <Input /> :
-                    formItem.type === 'fulltext' ?
-                      <Input.TextArea /> :
-                    formItem.type === 'checkbox' ?
-                      <Checkbox value={true} /> :
-                    (['select', 'multi-select'].includes(formItem.type)) && dictionary[formItem.name] ? (
-                      <Select
-                        allowClear
-                        filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
-                        mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
-                        showSearch
-                        options={Object.entries(dictionary[formItem.name]).map(([value, info]) => (
-                          { value, label: info.text }
-                        ))}
-                      />
-                    ) :
-                    formItem.type === 'date' ?
-                      <DatePicker format="YYYY-MM-DD" /> :
-                    formItem.type === 'datetime' ?
-                      <DatePicker format="YYYY-MM-DD HH:mm:ss" showTime /> :
-                    formItem.type === 'time' ?
-                      <TimePicker format="HH:mm:ss" /> :
-                    null
+                      formItem.type === 'fulltext' ?
+                        <Input.TextArea /> :
+                        formItem.type === 'checkbox' ?
+                          <Checkbox value={true} /> :
+                          (['select', 'multi-select'].includes(formItem.type)) && dictionary[formItem.name] ? (
+                            <Select
+                              allowClear
+                              filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
+                              mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
+                              showSearch
+                              options={Object.entries(dictionary[formItem.name]).map(([value, info]) => (
+                                { value, label: info.text }
+                              ))}
+                            />
+                          ) :
+                            formItem.type === 'date' ?
+                              <DatePicker format="YYYY-MM-DD" /> :
+                              formItem.type === 'datetime' ?
+                                <DatePicker format="YYYY-MM-DD HH:mm:ss" showTime /> :
+                                formItem.type === 'time' ?
+                                  <TimePicker format="HH:mm:ss" /> :
+                                  null
                   }
                 </Form.Item>
               );
             })
         }
 
-        <Form.Item wrapperCol={{ span: 24 }} style={{marginTop: '50px'}}>
+        <Form.Item wrapperCol={{ span: 24 }} style={{ marginTop: '50px' }}>
           <Row>
             <Col span={12}>
               <Button onClick={handleReset}>Сбросить</Button>
             </Col>
-            <Col span={12} style={{textAlign: 'right'}}>
+            <Col span={12} style={{ textAlign: 'right' }}>
               <Button type="primary" htmlType="submit">Применить</Button>
             </Col>
           </Row>
@@ -181,6 +180,6 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   return {
     FilterPanelButtons,
     FilterPanel,
-    filterData: data
+    filterData: filterData ?? sourceData,
   };
-}
+};

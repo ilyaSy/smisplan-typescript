@@ -15,12 +15,12 @@ const showConfirmModal = ({ onOk, onCancel, onFinally, description, okText }: TC
   const handleOk = () => {
     onOk();
     if (onFinally && typeof onFinally === 'function') onFinally();
-  }
+  };
 
   const handleCancel = () => {
     onCancel();
     if (onFinally && typeof onFinally === 'function') onFinally();
-  }
+  };
 
   confirm({
     title: 'Вы подтверждаете действие ?',
@@ -32,6 +32,6 @@ const showConfirmModal = ({ onOk, onCancel, onFinally, description, okText }: TC
     onOk: handleOk,
     onCancel: handleCancel,
   });
-}
+};
 
 export default showConfirmModal;

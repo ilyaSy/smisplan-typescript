@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import TableEditableRow from '../TableEditableRow';
+import TableEditableRow from 'TableEditableRow';
 import TableEditableCell from '.';
 
 const options = {

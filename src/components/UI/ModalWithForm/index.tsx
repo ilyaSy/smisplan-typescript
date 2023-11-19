@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { Modal, Form, Input, Button, DatePicker, TimePicker, Select, Checkbox } from 'antd';
-import { useDictionaryContext } from '../../../context/DictionaryContext';
-import { IFormItem } from '../../../types/IFormItem';
-import { IModalWithForm } from '../../../types/IModalWithForm';
-import { convertDataItem } from '../../../utils/convertDataItem';
-import { TDictionary } from "../../../types/TDictionary";
+
+import { IFormItem, IModalWithForm, TDictionary } from 'types';
+import { convertDataItem } from 'utils';
+import { useDictionaryContext } from 'context';
 
 const ModalWithForm: React.FC<IModalWithForm> = ({
   title,
@@ -15,7 +14,7 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
   formItems,
   additionalButtons,
   initialValues,
-  modalDictionary
+  modalDictionary,
 }) => {
   const [form] = Form.useForm();
 
@@ -24,22 +23,20 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
 
   useEffect(() => {
     setDictionary(modalDictionary || contextDictionary);
-  }, [contextDictionary, modalDictionary])
+  }, [contextDictionary, modalDictionary]);
 
   const onOk =
     (callback: (values: any) => void) =>
-    () => {
-      form
-        .validateFields()
-        .then((values) => {
-          if (dictionary) {
-            values = convertDataItem(dictionary, values, formItems, 'form');
-
-            callback(values);
-          }
-        })
-        .catch(console.log)
-    };
+      () => {
+        form
+          .validateFields()
+          .then((values) => {
+            if (dictionary) {
+              callback(convertDataItem(dictionary, values, formItems, 'form'));
+            }
+          })
+          .catch(console.info);
+      };
 
   return (
     isOpen ? (
@@ -51,9 +48,9 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
         footer={[
           <Button key='ModalWithForm-cancel-button' type="primary" danger onClick={handleClose}>Отмена</Button>,
 
-          additionalButtons.map(({title, onClick}) => (
+          additionalButtons.map(({ title: buttonTitle, onClick }) => (
             <Button
-              key={`ModalWithForm-${title}-button`}
+              key={`ModalWithForm-${buttonTitle}-button`}
               onClick={onOk(onClick)}
             >
               {title}
@@ -69,8 +66,8 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           initialValues={initialValues ? initialValues : {}}
-          onFinish={console.log}
-          onFinishFailed={console.log}
+          onFinish={console.info}
+          onFinishFailed={console.info}
           form={form}
         >
           {
@@ -80,51 +77,51 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
                 label={formItem.label}
                 name={formItem.name}
                 rules={formItem.rules}
-                valuePropName={formItem.type === "checkbox" ? "checked" : "value"}
+                valuePropName={formItem.type === 'checkbox' ? 'checked' : 'value'}
               >
                 {
                   (['string', 'number'].includes(formItem.type)) ?
                     <Input disabled={formItem.disabled} /> :
-                  formItem.type === 'fulltext' ?
-                    <Input.TextArea disabled={formItem.disabled} /> :
-                  formItem.type === 'checkbox' ?
-                    <Checkbox disabled={formItem.disabled} /> :
-                  (['select', 'multi-select'].includes(formItem.type)) ? (
-                    <Select
-                      disabled={formItem.disabled}
-                      allowClear
-                      filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
-                      mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
-                      showSearch
-                      options={
-                        dictionary
-                          ? Object.entries(dictionary[formItem.name])
-                              .map(([value, info]) => (
-                                { value, label: info.text }
-                              ))
-                          : []
-                      }
-                    />
-                  ) :
-                  formItem.type === 'date' ? (
-                    <DatePicker
-                      format="YYYY-MM-DD"
-                      disabled={formItem.disabled}
-                    />
-                  ) :
-                  formItem.type === 'datetime' ? (
-                    <DatePicker
-                      format="YYYY-MM-DD HH:mm:ss"
-                      disabled={formItem.disabled}
-                      showTime
-                    />
-                  ) :
-                  formItem.type === 'time' ? (
-                    <TimePicker
-                      format="HH:mm:ss"
-                      disabled={formItem.disabled}
-                    />
-                  ) : null
+                    formItem.type === 'fulltext' ?
+                      <Input.TextArea disabled={formItem.disabled} /> :
+                      formItem.type === 'checkbox' ?
+                        <Checkbox disabled={formItem.disabled} /> :
+                        (['select', 'multi-select'].includes(formItem.type)) ? (
+                          <Select
+                            disabled={formItem.disabled}
+                            allowClear
+                            filterOption={(value: string, option) => RegExp(value, 'i').test(`${option?.label}`)}
+                            mode={formItem.type === 'multi-select' ? 'multiple' : undefined}
+                            showSearch
+                            options={
+                              dictionary
+                                ? Object.entries(dictionary[formItem.name])
+                                  .map(([value, info]) => (
+                                    { value, label: info.text }
+                                  ))
+                                : []
+                            }
+                          />
+                        ) :
+                          formItem.type === 'date' ? (
+                            <DatePicker
+                              format="YYYY-MM-DD"
+                              disabled={formItem.disabled}
+                            />
+                          ) :
+                            formItem.type === 'datetime' ? (
+                              <DatePicker
+                                format="YYYY-MM-DD HH:mm:ss"
+                                disabled={formItem.disabled}
+                                showTime
+                              />
+                            ) :
+                              formItem.type === 'time' ? (
+                                <TimePicker
+                                  format="HH:mm:ss"
+                                  disabled={formItem.disabled}
+                                />
+                              ) : null
                 }
               </Form.Item>
             ))
@@ -133,6 +130,6 @@ const ModalWithForm: React.FC<IModalWithForm> = ({
       </Modal>
     ) : null
   );
-}
+};
 
 export default ModalWithForm;

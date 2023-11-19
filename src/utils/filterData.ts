@@ -1,9 +1,6 @@
-import { TData } from "../types/TData";
-import { TDictionary } from "../types/TDictionary";
+import { TData, TDictionary } from 'types';
 
-const filterData =
+export const filterData =
   (key: string, dictionary: TDictionary) =>
-  (value: any, record: TData) =>
-    record[key] === (dictionary[key] ? dictionary[key][value].text : value);
-
-export default filterData;
+    (value: any, record: TData) =>
+      record[key] === (dictionary[key] ? dictionary[key][value].text : value);

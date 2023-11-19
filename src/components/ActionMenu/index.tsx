@@ -2,18 +2,17 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dropdown, Tooltip } from 'antd';
 import { CarryOutOutlined } from '@ant-design/icons';
-import { TData } from '../../types/TData';
-import { TTableParameters } from '../../types/TTableParameters';
-import { TActionBody } from '../../types/TApiActionBody';
-import { useMetadataSelector } from '../../storages/selectors/metadata';
-import { dataAddAction, dataDeleteAction, dataUpdateAction } from '../../storages/actions/data';
-import { createActions } from './createActions';
-import DropdownMenu from '../UI/DropdownMenu';
-import ModalWithList from '../UI/ModalWithList';
-import DataEditModal from '../Modals/DataEditModal';
-import DataAddModal from '../Modals/DataAddModal';
-import { useDictionaryContext } from '../../context/DictionaryContext';
-import { Api } from '../../utils/Api';
+
+import { TData, TTableParameters, TActionBody } from 'types';
+import { Api } from 'utils';
+import { createActions } from './utils';
+import { useMetadataSelector } from 'storages/selectors';
+import { useDictionaryContext } from 'context/DictionaryContext';
+import { dataAddAction, dataDeleteAction, dataUpdateAction } from 'storages/actions/data';
+import DropdownMenu from 'components/UI/DropdownMenu';
+import ModalWithList from 'components/UI/ModalWithList';
+import DataEditModal from 'components/Modals/DataEditModal';
+import DataAddModal from 'components/Modals/DataAddModal';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';
 
@@ -24,8 +23,10 @@ type TActionMenu = {
   tablename: string,
 };
 
-const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, tablename}) => {
+const ActionMenu: React.FC<TActionMenu> = ({ dataItem, title, tableParameters, tablename }) => {
   const { dictionary } = useDictionaryContext();
+
+  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState<TModals>();
 
@@ -34,18 +35,18 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, ta
   const handleClose = () => setOpenModal(undefined);
   const handleOpen = (t: TModals) => {
     setOpenModal(t);
-  }
+  };
 
   const handleEdit = (data: TActionBody) => dispatch(dataUpdateAction(tablename, data));
   const handleDelete = (data: TActionBody) => dispatch(dataDeleteAction(tablename, data));
   const handleAdd = (data: TActionBody) => {
     delete data.id;
     dispatch(dataAddAction(tablename, data));
-  }
+  };
 
   const handleAddDiscussion = (data: TActionBody) => {
     dispatch(dataAddAction('discussion', data));
-  }
+  };
 
   const connectedTablename = 'discussion';
   const handleGetConnectedData = useCallback(async (data: TActionBody) => {
@@ -55,13 +56,11 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, ta
       ModalWithList({
         title: 'Обсуждения',
         avatar: <CarryOutOutlined />,
-        dataSource: connectedData as {title: string, description: string}[],
+        dataSource: connectedData as { title: string, description: string }[],
         noDataText: 'Ранее обсуждений не проводилось',
       });
     }
   }, [tablename]);
-
-  const dispatch = useDispatch();
 
   const actions = createActions({
     dataItem,
@@ -93,7 +92,7 @@ const ActionMenu: React.FC<TActionMenu> = ({dataItem, title, tableParameters, ta
           modalTablename='discussion'
           modalInitialValues={{
             theme: dataItem.text,
-            mainQuestions: dataItem.description
+            mainQuestions: dataItem.description,
           }}
         />
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Tooltip } from 'antd';
+
 import classes from './TableEditableCell.module.scss';
 
 interface Item {
@@ -56,7 +57,7 @@ const TableEditableCell: React.FC<EditableCellProps> = ({
     ) : (
       <Tooltip title="Редактировать" placement='rightTop'>
         <div
-          className={classes["editable-cell-value-wrap"]}
+          className={classes['editable-cell-value-wrap']}
           style={{ paddingRight: 24 }}
           onClick={handleToggleEdit}
         >

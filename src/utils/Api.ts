@@ -1,15 +1,16 @@
-import axios from "axios";
-import { tuple } from "antd/lib/_util/type"
-import { IFetchError } from "../types/IFetchError";
-import { mainModes, urlApi } from "../constants/constants"
-import Notification from "../components/UI/Notification";
+import axios from 'axios';
 
-const ModesType = tuple(...mainModes);
+import { IFetchError } from 'types';
+import { mainModes, urlApi } from 'consts';
+import Notification from 'components/UI/Notification';
+
+type ModesType = (typeof mainModes)[number];
 
 export class Api {
-  public static async getConnectedData (tablename: typeof ModesType[number], connectedTablename: typeof ModesType[number], id: string | number) {
+  public static async getConnectedData(tablename: ModesType, connectedTablename: ModesType, id: string | number) {
     try {
       const result = await axios.get(`${urlApi}/${tablename}/get-${connectedTablename}/${id}`);
+
       return result.data;
     } catch (error) {
       Notification({

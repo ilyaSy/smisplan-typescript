@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Input } from 'antd';
 import { useDispatch } from 'react-redux';
-import { EditableContext } from '../UI/TableEditableRow';
-import { convertDataItem } from '../../utils/convertDataItem';
-import { useGetTablename } from '../../utils/hooks/useGetTablename';
-import { useDictionaryContext } from '../../context/DictionaryContext';
-import { dataUpdateAction } from '../../storages/actions/data';
-import { useMetadataSelector } from '../../storages/selectors/metadata';
-import TableEditableCell from '../UI/TableEditableCell';
+import { Input } from 'antd';
+
+import { convertDataItem } from 'utils';
+import { useGetTablename } from 'hooks';
+import { useDictionaryContext } from 'context';
+import { useMetadataSelector } from 'storages/selectors';
+import { dataUpdateAction } from 'storages/actions/data';
+import { EditableContext } from 'components/UI/TableEditableRow';
+import TableEditableCell from 'components/UI/TableEditableCell';
 
 interface Item {
   key: string;
@@ -36,7 +37,7 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
   ...restProps
 }) => {
   const { dictionary } = useDictionaryContext();
-  const {data: metadata} = useMetadataSelector();
+  const { data: metadata } = useMetadataSelector();
   const tablename = useGetTablename();
 
   const [editing, setEditing] = useState(false);
@@ -63,10 +64,11 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
       handleToggleEdit();
       if (metadata) {
         const data = { ...record, ...values };
+
         dispatch(dataUpdateAction(tablename, convertDataItem(dictionary, data, metadata, 'table')));
       }
     } catch (errInfo) {
-      console.log('Save failed:', errInfo);
+      console.info('Save failed:', errInfo);
     }
   };
 
@@ -81,7 +83,7 @@ const DataTableEditableCell: React.FC<EditableCellProps> = ({
     handleToggleEdit={handleToggleEdit}
     inputRef={inputRef}
     {...restProps}
-  />
+  />;
 };
 
 export default DataTableEditableCell;

@@ -1,10 +1,12 @@
 import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { modes } from '../../constants/constants';
-import { UserContext } from '../../context/UserContext';
-import { NavLink } from 'react-router-dom';
-import { useGetTablename } from '../../utils/hooks/useGetTablename';
+
+import { modes } from 'consts';
+import { useGetTablename } from 'hooks';
+import { UserContext } from 'context';
+
 import classes from './Header.module.scss';
 
 const Header: React.FC = () => {
@@ -20,9 +22,9 @@ const Header: React.FC = () => {
           theme='dark'
         >
           {
-            modes.map((mode) => (
-              <Menu.Item key={mode.id}>
-                <NavLink to={`/${mode.id}`}>{mode.value}</NavLink>
+            modes.map(({ id, value }) => (
+              <Menu.Item key={id}>
+                <NavLink to={`/${id}`}>{value}</NavLink>
               </Menu.Item>
             ))
           }

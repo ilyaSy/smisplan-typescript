@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import 'moment/locale/ru';
 import { Col, Modal, Row, Typography } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
-import { Calendar } from '../UI/Calendar';
-import LoadingComponent from '../UI/LoadingComponent';
-import { useGetDataMeta } from '../../utils/hooks/useGetDataMeta';
-import sortData from '../../utils/sortData';
-import { TData } from '../../types/TData';
-import { DATE_FORMAT_DATE, DATE_FORMAT_FULLDATE, DATE_FORMAT_TIME } from '../../constants/constants';
+import moment from 'moment';
+import 'moment/locale/ru';
+
+import { TData } from 'types';
+import { DATE_FORMAT_DATE, DATE_FORMAT_FULLDATE, DATE_FORMAT_TIME } from 'consts';
+import { sortData } from 'utils';
+import { useGetDataMeta } from 'hooks';
+import { LoadingComponent } from 'components/UI/LoadingComponent';
+import ModalWithList from 'components/UI/ModalWithList';
+import { Calendar } from 'components/UI/Calendar';
+
 import classes from './DataCalendar.module.scss';
-import ModalWithList from '../UI/ModalWithList';
 
 moment.locale('ru');
 
@@ -22,7 +24,7 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
   const [dates, setDates] = useState<TData[]>([]);
   const {
     data, isErrorData, isLoadingData,
-    isLoadingMetadata, isErrorMetadata
+    isLoadingMetadata, isErrorMetadata,
   } = useGetDataMeta(mode);
 
   useEffect(() => {
@@ -30,19 +32,17 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
       setDates(data.map((d) => ({
         ...d,
         date: new Date(`${d.date} ${d.time}`),
-      })))
+      })));
     }
   }, [data]);
 
-  const getDayEventsInfo = (date: any) => {
-    return dates
-      .filter((event) => moment(event.date).format(DATE_FORMAT_DATE) === date.dateStr)
-      .sort(sortData('time', 'ascend'))
-      .map((event) => ({
-        title: moment(event.date).format(DATE_FORMAT_TIME),
-        description: event.result,
-      }))
-    }
+  const getDayEventsInfo = (date: any) => dates
+    .filter((event) => moment(event.date).format(DATE_FORMAT_DATE) === date.dateStr)
+    .sort(sortData('time', 'ascend'))
+    .map((event) => ({
+      title: moment(event.date).format(DATE_FORMAT_TIME),
+      description: event.result,
+    }));
 
   const handleDayClick = (day: any) => {
     ModalWithList({
@@ -57,7 +57,7 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
     const eventInfo = dates.find(
       (d) =>
         moment(event.event.start).toISOString() === moment(d.date).toISOString() &&
-        d.title === event.event.title
+        d.title === event.event.title,
     );
 
     return (
@@ -89,14 +89,14 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
           </Row>
         </>
       ) : 'Нет назначенных совещаний'
-    )
+    );
   };
 
   const handleEventClick = (event: any) => {
     Modal.info({
       title: 'Совещаниe',
       content: getDetailedEventInfo(event),
-      width: '600px'
+      width: '600px',
     });
   };
 
@@ -119,7 +119,7 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
           />
       )
     )
-  )
-}
+  );
+};
 
 export default DataCalendar;

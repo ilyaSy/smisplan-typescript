@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import TUser from "../types/TUser";
+import React, { useState } from 'react';
+
+import { TUser } from 'types';
 
 interface IUserContextProvider {
   user: TUser | undefined;
@@ -8,16 +9,16 @@ interface IUserContextProvider {
 
 export const UserContext = React.createContext<IUserContextProvider>({} as IUserContextProvider);
 
-export const UserContextProvider: React.FC = ({children}) => {
+export const UserContextProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<TUser>({
-    email: "puhskin@yandex.ru",
-    name: "Пушкин",
-    login: "pushkin"
+    email: 'puhskin@yandex.ru',
+    name: 'Пушкин',
+    login: 'pushkin',
   });
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
-  )
-}
+  );
+};

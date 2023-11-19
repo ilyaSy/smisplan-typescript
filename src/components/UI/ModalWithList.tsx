@@ -1,12 +1,12 @@
-import { List, Modal } from "antd";
+import { List, Modal } from 'antd';
 
 interface IModalWithList {
   title: string;
-  dataSource?: {title: string, description: string}[],
+  dataSource?: { title: string, description: string }[],
   noDataText?: string,
   avatar?: React.ReactNode,
   width?: number,
-};
+}
 
 const ModalWithList = ({
   title,
@@ -32,16 +32,16 @@ const ModalWithList = ({
           )}
         />
       ),
-      width: `${width}px`
+      width: `${width}px`,
     });
   } else {
     Modal.info({
       title,
       content: noDataText,
-      width: `${width}px`
+      width: `${width}px`,
     });
   }
 
-}
+};
 
 export default ModalWithList;

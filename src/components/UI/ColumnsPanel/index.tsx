@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { Button, Drawer, Tooltip, Form, Checkbox } from "antd";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Button, Drawer, Tooltip, Form, Checkbox } from 'antd';
 import { OrderedListOutlined } from '@ant-design/icons';
-import { TData } from "../../../types/TData";
-import { IFormItem } from "../../../types/IFormItem";
+
+import { TData, IFormItem } from 'types';
+
 import classes from './ColumnsPanel.module.scss';
 
 export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = false) => {
@@ -11,7 +12,7 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (metadata) setColumnsData(metadata)
+    if (metadata) setColumnsData(metadata);
   }, [metadata]);
 
   const openPanel = useCallback(() => setVisible(true), []);
@@ -19,21 +20,17 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
 
   const resetColumns = useCallback(() => {
     setColumnsData(metadata);
-    form.setFields(metadata.map(({dataIndex, showInTable}) => ({
+    form.setFields(metadata.map(({ dataIndex, showInTable }) => ({
       name: dataIndex,
       value: showInTable,
     })));
   }, [form, metadata]);
 
   const handleSubmit = useCallback((values: any) => {
-    setColumnsData((prev) => {
-      return prev.map((columnData) => {
-        return {
-          ...columnData,
-          showInTable: values[columnData.dataIndex] ?? false
-        }
-      })
-    });
+    setColumnsData((prev) => prev.map((columnData) => ({
+      ...columnData,
+      showInTable: values[columnData.dataIndex] ?? false,
+    })));
     closePanel();
   }, [closePanel]);
 
@@ -64,11 +61,11 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
         labelCol={{ span: 20 }}
         wrapperCol={{ span: 4 }}
         onFinish={handleSubmit}
-        onFinishFailed={console.log}
+        onFinishFailed={console.info}
         form={form}
       >
         <Form.Item wrapperCol={{ span: 24 }}>
-          <Button onClick={resetColumns} style={{width: '100%'}}>По умолчанию</Button>
+          <Button onClick={resetColumns} style={{ width: '100%' }}>По умолчанию</Button>
         </Form.Item>
 
         {
@@ -79,7 +76,7 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
                 label: columnData.title,
                 type: columnData.type,
                 disabled: false,
-              }
+              };
 
               return (
                 <Form.Item
@@ -88,7 +85,7 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
                   name={formItem.name}
                   valuePropName="checked"
                   initialValue={columnData.showInTable}
-                  style={{marginBottom: '12px'}}
+                  style={{ marginBottom: '12px' }}
                 >
                   <Checkbox value={true}/>
                 </Form.Item>
@@ -96,8 +93,8 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
             })
         }
 
-        <Form.Item wrapperCol={{ span: 24 }} style={{marginTop: '30px'}}>
-          <Button type="primary" htmlType="submit" style={{width: '100%'}}>Применить</Button>
+        <Form.Item wrapperCol={{ span: 24 }} style={{ marginTop: '30px' }}>
+          <Button type="primary" htmlType="submit" style={{ width: '100%' }}>Применить</Button>
         </Form.Item>
 
       </Form>
@@ -116,6 +113,6 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
   return {
     ColumnsPanelButtons,
     ColumnsPanel,
-    columnsData: data
+    columnsData: data,
   };
-}
+};

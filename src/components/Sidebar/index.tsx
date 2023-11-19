@@ -1,15 +1,17 @@
 import React, { memo, useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { Menu, Tooltip } from 'antd';
 import {
   SettingOutlined,
   PlusCircleTwoTone,
 } from '@ant-design/icons';
-import DataAddModal from '../Modals/DataAddModal';
-import {dataAddAction} from "../../storages/actions/data";
-import { useGetTablename } from "../../utils/hooks/useGetTablename";
-import { useDataSelector } from "../../storages/selectors/data";
-import { PrintPDF } from '../UI/PrintPDF';
+
+import { useGetTablename } from 'hooks';
+import { useDataSelector } from 'storages/selectors';
+import { dataAddAction } from 'storages/actions/data';
+import { PrintPDF } from 'components/UI/PrintPDF';
+import DataAddModal from 'components/Modals/DataAddModal';
+
 import classes from './Sidebar.module.scss';
 
 const Sidebar: React.FC = () => {
@@ -18,7 +20,7 @@ const Sidebar: React.FC = () => {
 
   const tablename = useGetTablename();
 
-  const {isError: isErrorData, isLoading: isLoadingData} = useDataSelector();
+  const { isError: isErrorData, isLoading: isLoadingData } = useDataSelector();
 
   const handleAddData = () => setSidebarAction('addData');
 
@@ -26,7 +28,7 @@ const Sidebar: React.FC = () => {
 
   useEffect(() => {
     if (!isErrorData && !isLoadingData) handleCloseModal();
-  }, [isErrorData, isLoadingData])
+  }, [isErrorData, isLoadingData]);
 
   return (
     <Menu

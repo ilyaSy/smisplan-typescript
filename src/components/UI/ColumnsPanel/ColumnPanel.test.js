@@ -18,14 +18,16 @@ const columns = [
     title: 'field2',
     showInTable: false,
     type: '',
-  }
-]
+  },
+];
 
 describe('Select column panel', () => {
   let result;
   let waitForValueToChange = () => {};
+
   beforeEach(() => {
     const hook = renderHook(() => useColumnsDrawer(columns, true));
+
     result = hook.result;
     waitForValueToChange = hook.waitForValueToChange;
 
@@ -49,7 +51,7 @@ describe('Select column panel', () => {
     act(() => {
       columns.forEach((column) => {
         fireEvent.click(screen.getByTestId(`basic_${column.dataIndex}`));
-      })
+      });
 
       fireEvent.click(screen.getByText('По умолчанию').closest('button'));
     });
@@ -66,7 +68,7 @@ describe('Select column panel', () => {
     act(() => {
       columns.forEach((column) => {
         fireEvent.click(screen.getByTestId(`basic_${column.dataIndex}`));
-      })
+      });
 
       fireEvent.click(screen.getByText('Применить').closest('button'));
     });

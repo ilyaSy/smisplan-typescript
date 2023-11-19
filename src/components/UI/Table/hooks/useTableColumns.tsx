@@ -1,16 +1,15 @@
-import { MouseEventHandler, useCallback, useState } from "react";
-import { Button, Tag, Tooltip } from "antd";
-import { SortOrder } from "antd/lib/table/interface";
-import { GroupOutlined } from "@ant-design/icons";
-import { TData } from "../../../../types/TData";
-import { TDictionary } from "../../../../types/TDictionary";
-import { TObject } from "../../../../types/TObject";
-import { TTableParameters } from "../../../../types/TTableParameters";
-import { addActionColumnInfo } from "../utils/addActionColumnInfo";
-import { updateTableColumnsWidth } from "../utils/updateTableColumnsWidth";
-import { getGroupColumnData } from "../utils/getGroupColumnData";
-import TableFilterIcon from "../../TableFilterIcon";
-import classes from "../Table.module.scss";
+import { MouseEventHandler, useCallback, useState } from 'react';
+import { Button, Tag, Tooltip } from 'antd';
+import { GroupOutlined } from '@ant-design/icons';
+import { SortOrder } from 'antd/lib/table/interface';
+
+import { TData, TTableParameters, TDictionary, TObject } from 'types';
+import { updateTableColumnsWidth } from '../utils/updateTableColumnsWidth';
+import { addActionColumnInfo } from '../utils/addActionColumnInfo';
+import { getGroupColumnData } from '../utils/getGroupColumnData';
+import TableFilterIcon from 'components/UI/TableFilterIcon';
+
+import classes from '../Table.module.scss';
 
 interface IUseTableColumns {
   columns: TData[],
@@ -19,7 +18,7 @@ interface IUseTableColumns {
   defaultSort: boolean,
   dictionary: TDictionary,
   invertDictionary: TObject<Record<string, string>>
-};
+}
 
 export const useTableColumns = ({
   columns,
@@ -27,7 +26,7 @@ export const useTableColumns = ({
   tableParameters,
   defaultSort,
   dictionary,
-  invertDictionary
+  invertDictionary,
 }: IUseTableColumns) => {
   const [groupField, setGroupField] = useState<string>();
 
@@ -39,6 +38,7 @@ export const useTableColumns = ({
         ? null
         : (tableParameters.defaultSortDirection as string[])[index];
     }
+
     return field === tableParameters.defaultSortField
       ? tableParameters.defaultSortDirection
       : null;
@@ -53,28 +53,33 @@ export const useTableColumns = ({
         filterIcon: TableFilterIcon,
       };
 
+      const groupByTooltip = columnId === groupField
+        ? 'Нажмите чтобы убрать группировку по полю'
+        : 'Нажмите для группировки по полю';
+
       if (!column.isInlineEditable) {
-        tableColumn.render = (text: string, record: TData, index: number) => {
+        tableColumn.render = (text: string, record: TData) => {
           if (column.isTagged) {
             const tableValue = record[columnId];
             const originalValue = invertDictionary[columnId] && invertDictionary[columnId][tableValue]
               ? invertDictionary[columnId][tableValue]
               : tableValue;
 
-            return <Tag color={dictionary[columnId][originalValue]?.tag}>{text}</Tag>
+            return <Tag color={dictionary[columnId][originalValue]?.tag}>{text}</Tag>;
           }
+
           return text;
-        }
+        };
 
         if (tableColumn.isGroup) {
           const handleGroup: MouseEventHandler<HTMLElement> = (event) => {
             event.stopPropagation();
             setGroupField((prev) => columnId === prev ? undefined : columnId);
-          }
+          };
 
           tableColumn.title = <div className={classes['table-header-group-cell']}>
             {column.title}
-            <Tooltip title={columnId === groupField ? 'Нажмите чтобы убрать группировку по полю' : 'Нажмите для группировки по полю'}>
+            <Tooltip title={groupByTooltip}>
               <Button
                 className={classes['table-header-group-button']}
                 icon={<GroupOutlined />}
@@ -88,13 +93,15 @@ export const useTableColumns = ({
             const groupColumnData = getGroupColumnData(dataRef, columnIndex);
 
             tableColumn.onCell = (record: TData, index: number) => {
-              if (index && groupColumnData[index-1] === '' + record[columnId]) {
+              if (index && groupColumnData[index - 1] === '' + record[columnId]) {
                 return { rowSpan: 0 };
               }
 
               let count = 0;
+
               for (let i = index; i < groupColumnData.length; i++) {
                 const cellGroupData = groupColumnData[i];
+
                 if ( cellGroupData !== '' + record[columnId] && count ) {
                   break;
                 } else if (cellGroupData === '' + record[columnId]) {
@@ -102,9 +109,9 @@ export const useTableColumns = ({
                 }
               }
 
-              return { rowSpan: count }
-            }
-          };
+              return { rowSpan: count };
+            };
+          }
         }
       } else {
         tableColumn.onCell = (record: TData) => ({
@@ -116,13 +123,14 @@ export const useTableColumns = ({
       }
 
       const sortOrder = (getDefaultSorter(column.dataIndex)) as SortOrder;
+
       if (sortOrder && defaultSort) tableColumn.sortOrder = sortOrder;
 
       return tableColumn;
-    })
+    });
 
   tableColumns = addActionColumnInfo(tableColumns, tableParameters.hasActionMenu);
   tableColumns = updateTableColumnsWidth(tableColumns);
 
   return tableColumns;
-}
+};

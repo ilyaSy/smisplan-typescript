@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { mapValues } from "lodash";
-import { useDispatch } from "react-redux";
-import { useDataSelector } from "../../storages/selectors/data";
-import { useMetadataSelector } from "../../storages/selectors/metadata";
-import { dataGetAction } from "../../storages/actions/data";
-import { metadataGetAction } from "../../storages/actions/metadata";
-import { useDictionaryContext } from "../../context/DictionaryContext";
-import { TData } from "../../types/TData";
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { mapValues } from 'lodash';
+
+import { TData } from 'types';
+import { useDictionaryContext } from 'context';
+import { useMetadataSelector, useDataSelector } from 'storages/selectors';
+import { metadataGetAction } from 'storages/actions/metadata';
+import { dataGetAction } from 'storages/actions/data';
 
 export const useGetDataMeta = (tablename: string) => {
   const [ data, setData ] = useState<TData[]>([]);
@@ -19,13 +19,17 @@ export const useGetDataMeta = (tablename: string) => {
 
   const mapDictionaryCb = useCallback((value: string, key: string) => {
     const metadataProperty = metadata?.find((property) => property.id === key);
-    if (metadataProperty && metadataProperty.type === 'multi-select' && dictionary[key]){
-      return value.split(',').map((v) => dictionary[key][v].text).join(', ')
-    } else if (metadataProperty && ['select', 'checkbox'].includes(metadataProperty.type)  && dictionary[key] && dictionary[key][value]) {
-      return dictionary[key][value].text
+
+    if (metadataProperty && dictionary[key]) {
+      if (metadataProperty.type === 'multi-select') {
+        return value.split(',').map((v) => dictionary[key][v].text).join(', ');
+      } else if (['select', 'checkbox'].includes(metadataProperty.type) && dictionary[key][value]) {
+        return dictionary[key][value].text;
+      }
     }
+
     return value;
-  }, [metadata, dictionary])
+  }, [metadata, dictionary]);
 
   useEffect(() => {
     dispatch(dataGetAction(tablename));
@@ -36,7 +40,7 @@ export const useGetDataMeta = (tablename: string) => {
     if (metadata) {
       metadata
         .filter((property) => ['select', 'multi-select', 'checkbox'].includes(property.type))
-        .forEach((property) => setDictionary(property.id, property.validValues))
+        .forEach((property) => setDictionary(property.id, property.validValues));
     }
   }, [metadata, setDictionary]);
 
@@ -48,6 +52,6 @@ export const useGetDataMeta = (tablename: string) => {
 
   return {
     data, isErrorData, isLoadingData,
-    metadata, isErrorMetadata, isLoadingMetadata
-  }
-}
+    metadata, isErrorMetadata, isLoadingMetadata,
+  };
+};

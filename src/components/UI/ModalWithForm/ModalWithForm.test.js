@@ -1,5 +1,5 @@
-import { fireEvent, render, screen, waitFor, configure } from "@testing-library/react";
-import { DictionaryContextProvider } from "../../../context/DictionaryContext";
+import { fireEvent, render, screen, waitFor, configure } from '@testing-library/react';
+import { DictionaryContextProvider } from 'context/DictionaryContext';
 import ModalWithForm from './index';
 
 configure({
@@ -12,85 +12,85 @@ const dummyData = {
   handleOk: jest.fn(),
   handleClose: jest.fn(),
   formItems: [{
-      disabled: false,
-      label: 'string',
-      type: 'string',
-      name: 'string',
-    },
-    {
-      disabled: true,
-      label: 'disabled',
-      type: 'string',
-      name: 'disabled',
-    },
-    {
-      disabled: false,
-      label: 'number',
-      type: 'number',
-      name: 'number',
-    },
-    {
-      disabled: false,
-      label: 'date',
-      type: 'date',
-      name: 'date',
-    },
-    {
-      disabled: false,
-      label: 'time',
-      type: 'time',
-      name: 'time',
-    },
-    // {
-    //   disabled: false,
-    //   label: 'select',
-    //   type: 'select',
-    //   name: 'select',
-    // },
-    // {
-    //   disabled: false,
-    //   label: 'multi-select',
-    //   type: 'multi-select',
-    //   name: 'multi-select',
-    // },
-    {
-      disabled: false,
-      label: 'fulltext',
-      type: 'fulltext',
-      name: 'fulltext',
-    },
+    disabled: false,
+    label: 'string',
+    type: 'string',
+    name: 'string',
+  },
+  {
+    disabled: true,
+    label: 'disabled',
+    type: 'string',
+    name: 'disabled',
+  },
+  {
+    disabled: false,
+    label: 'number',
+    type: 'number',
+    name: 'number',
+  },
+  {
+    disabled: false,
+    label: 'date',
+    type: 'date',
+    name: 'date',
+  },
+  {
+    disabled: false,
+    label: 'time',
+    type: 'time',
+    name: 'time',
+  },
+  // {
+  //   disabled: false,
+  //   label: 'select',
+  //   type: 'select',
+  //   name: 'select',
+  // },
+  // {
+  //   disabled: false,
+  //   label: 'multi-select',
+  //   type: 'multi-select',
+  //   name: 'multi-select',
+  // },
+  {
+    disabled: false,
+    label: 'fulltext',
+    type: 'fulltext',
+    name: 'fulltext',
+  },
   ],
   additionalButtons: [],
   initialValues: [],
-}
+};
 
 describe('ModalWithForm', () => {
   beforeEach(() => {
     render(
       <DictionaryContextProvider>
         <ModalWithForm {...dummyData} />
-      </DictionaryContextProvider>
+      </DictionaryContextProvider>,
     );
   });
 
   test('Click submit button', async () => {
-    fireEvent.click(screen.getByText(dummyData.okButtonTitle).closest('button'))
+    fireEvent.click(screen.getByText(dummyData.okButtonTitle).closest('button'));
     await screen.findByText(dummyData.okButtonTitle);
 
     expect(dummyData.handleOk).toBeCalled();
   });
 
   test('Click close button', async () => {
-    fireEvent.click(screen.getByLabelText('Close'))
-      await waitFor(() => {
-        screen.getByLabelText('Close');
-      });
+    fireEvent.click(screen.getByLabelText('Close'));
+    await waitFor(() => {
+      screen.getByLabelText('Close');
+    });
 
     expect(dummyData.handleClose).toBeCalled();
   });
 
   test('Click cancel button', async () => {
-    fireEvent.click(screen.getByText('Отмена').closest('button'))
+    fireEvent.click(screen.getByText('Отмена').closest('button'));
     await waitFor(() => {
       screen.getByText('Отмена');
     });
@@ -123,4 +123,4 @@ describe('ModalWithForm', () => {
   test('Fulltext input', async () => {
     expect(screen.getByTestId('basic_fulltext').closest('div').querySelector('textarea')).toBeInTheDocument();
   });
-})
+});

@@ -1,6 +1,8 @@
-import { useCallback } from "react";
-import { Pagination } from "antd";
-import { TData } from "../../../../types/TData";
+import { useCallback } from 'react';
+import { Pagination } from 'antd';
+
+import { TData } from 'types';
+
 import classes from '../Table.module.scss';
 
 interface IUseTableTitle {
@@ -42,8 +44,8 @@ export const useTableTitle = ({
     filterData,
     page,
     pageSize,
-    handleChangePage
+    handleChangePage,
   ]);
 
   return TableTitle;
-}
+};

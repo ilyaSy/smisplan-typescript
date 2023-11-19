@@ -1,4 +1,4 @@
-import { TDataTypes } from "./TDataTypes";
+import { TDataTypes } from './TDataTypes';
 
 export interface IFormItem {
   disabled: boolean;

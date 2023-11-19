@@ -1,39 +1,29 @@
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import { createContext, RefObject, useContext, useState } from 'react';
 
 export type TPrintMode = 'print' | 'all' | 'current' | undefined;
 
 interface IPrintPDFContext {
-  dataPrintMode: TPrintMode;
-  setDataPrintMode: (mode:TPrintMode) => void;
-  dataPrintRef: React.RefObject<HTMLDivElement> | undefined;
-  setDataPrintRef: (dataRef: React.RefObject<HTMLDivElement>) => void;
+  printMode: TPrintMode;
+  setPrintMode: (mode: TPrintMode) => void;
+  dataRef: RefObject<HTMLDivElement> | undefined;
+  setDataRef: (dataRef: RefObject<HTMLDivElement>) => void;
 }
 
-const PrintPDFContext = React.createContext<IPrintPDFContext>({} as IPrintPDFContext);
+const PrintPDFContext = createContext<IPrintPDFContext>({} as IPrintPDFContext);
 
 export const usePrintPDFContext = () => {
   const context = useContext(PrintPDFContext);
+
   return context;
-}
+};
 
 export const PrintPDFContextProvider: React.FC = ({ children }) => {
   const [printMode, setPrintMode] = useState<TPrintMode>();
-  const [dataRef, setDataRef] = useState<React.RefObject<HTMLDivElement>>();
-
-  const dataPrintRef = useMemo(() => dataRef, [dataRef]);
-  const setDataPrintRef = useCallback((refObject) => setDataRef(refObject), []);
-
-  const dataPrintMode = useMemo(() => printMode, [printMode]);
-  const setDataPrintMode = useCallback((mode: TPrintMode) => setPrintMode(mode), []);
+  const [dataRef, setDataRef] = useState<RefObject<HTMLDivElement>>();
 
   return (
-    <PrintPDFContext.Provider value={{
-      dataPrintMode,
-      setDataPrintMode,
-      dataPrintRef,
-      setDataPrintRef,
-    }}>
+    <PrintPDFContext.Provider value={{ printMode, setPrintMode, dataRef, setDataRef }}>
       {children}
     </PrintPDFContext.Provider>
   );
-}
+};

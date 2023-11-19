@@ -10,6 +10,7 @@ interface IEditableRowProps {
 
 const DataTableEditableRow: React.FC<IEditableRowProps> = ({ id, ...props }) => {
   const [form] = Form.useForm();
+
   return (
     <Form form={form} component={false}>
       <EditableContext.Provider value={form}>

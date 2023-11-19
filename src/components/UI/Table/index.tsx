@@ -1,13 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
-import { PAGE_SIZE } from '../../../constants/constants';
-import { TData } from '../../../types/TData';
-import { TDictionary } from '../../../types/TDictionary';
-import { TTableParameters } from '../../../types/TTableParameters';
-import { TObject } from '../../../types/TObject';
+
+import { TData, TDictionary, TTableParameters, TObject } from 'types';
+import { PAGE_SIZE } from 'consts';
 import TableEditableRow from '../TableEditableRow';
-import DataTableEditableCell from '../../TableEditableCell';
+import DataTableEditableCell from '../TableEditableCell';
 import TableExpandableRow from '../TableExpandableRow';
 import { useFilterDrawer } from '../FilterPanel';
 import { useColumnsDrawer } from '../ColumnsPanel';
@@ -16,6 +14,7 @@ import { useTableTitle } from './hooks/useTableTitle';
 import { useTableColumns } from './hooks/useTableColumns';
 import { useTableSourceData } from './hooks/useTableSourceData';
 import { useTablePrintRef } from './hooks/useTablePrintRef';
+
 import classes from './Table.module.scss';
 import './Table.css';
 
@@ -34,16 +33,16 @@ const DataTable: React.FC<TTableProps> = ({
   tableParameters,
   tablename,
   dictionary,
-  invertDictionary
+  invertDictionary,
 }) => {
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
   const [defaultSort, setDefaultSort] = useState<boolean>(true);
 
-  const handleChangePage = useCallback((nextPage: number, pageSize: number) => {
+  const handleChangePage = useCallback((nextPage: number, size: number) => {
     setPage(nextPage);
-    setPageSize(pageSize);
-  }, [])
+    setPageSize(size);
+  }, []);
 
   const sourceData = useTableSourceData(data, tablename, tableParameters);
 
@@ -59,7 +58,7 @@ const DataTable: React.FC<TTableProps> = ({
     tableParameters,
     defaultSort,
     dictionary,
-    invertDictionary
+    invertDictionary,
   });
 
   const TableTitle = useTableTitle({
@@ -68,7 +67,7 @@ const DataTable: React.FC<TTableProps> = ({
     filterData,
     page,
     pageSize,
-    handleChangePage
+    handleChangePage,
   });
 
   return (
@@ -86,7 +85,7 @@ const DataTable: React.FC<TTableProps> = ({
         components={{
           body: {
             row: TableEditableRow,
-            cell: DataTableEditableCell
+            cell: DataTableEditableCell,
           },
         }}
         rowClassName={() => 'editable-row'}
@@ -101,13 +100,13 @@ const DataTable: React.FC<TTableProps> = ({
           pageSize: pageSize,
           current: page,
           total: filterData.length,
-          className: classes['hidden-pagination']
+          className: classes['hidden-pagination'],
         }}
         className={ classes.table }
         onChange={() => setDefaultSort(false)}
       />
     </ConfigProvider>
   );
-}
+};
 
 export default DataTable;

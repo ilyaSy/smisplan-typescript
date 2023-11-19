@@ -1,1 +1,1 @@
-export type TSortDirection = "ascend" | "descend";
+export type TSortDirection = 'ascend' | 'descend';

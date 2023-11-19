@@ -1,4 +1,4 @@
-import { TSortDirection } from "./TSortDirection";
+import { TSortDirection } from './TSortDirection';
 
 export type TTableParameters = {
   tableName: string,
@@ -17,4 +17,4 @@ export type TTableParameters = {
   hasGoToDiscussion?: boolean,
   hasDiscussion?: boolean,
   hasNotificationButton?: boolean,
-}
+};

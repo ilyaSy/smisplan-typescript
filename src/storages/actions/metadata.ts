@@ -1,10 +1,9 @@
-import { urlApi } from "../../constants/constants";
-import { TApiAction } from "../../types/TApiAction";
+import { TApiAction } from 'types';
+import { urlApi } from 'consts';
 
-export const metadataGetAction: (tablename: string) => TApiAction = (tablename) => {
-  return {
-    type: "METADATA_REQUEST",
+export const metadataGetAction: (tablename: string) => TApiAction =
+  (tablename) => ({
+    type: 'METADATA/REQUEST',
     url: `${urlApi}/${tablename}-meta/`,
-    method: "GET",
-  }
-}
+    method: 'GET',
+  });
