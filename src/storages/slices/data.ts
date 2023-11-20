@@ -11,19 +11,20 @@ const initialState: TReduxData = {
   isError: false,
 };
 
-const data = createSlice({
+export const data = createSlice({
   name: 'DATA',
   initialState,
   reducers: {
-    REQUEST_LOADING: (state) => ({
+    REQUEST_LOADING: () => ({
       isLoading: true,
       isError: false,
-      data: state.data, // data: null,
+      // data: state.data,
+      data: null,
     }),
 
     REQUEST_RESPONSE: (state, { payload, method }: TApiReducerData) => ({
       isLoading: false,
-      data: crudReduxDataUpdater(method as THtmlMethod, state.data, payload),
+      data: crudReduxDataUpdater(state.data, payload, method as THtmlMethod),
       isError: false,
     }),
 

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MouseEventHandler, useCallback, useState } from 'react';
 import { Button, Tag, Tooltip } from 'antd';
 import { GroupOutlined } from '@ant-design/icons';
 import { SortOrder } from 'antd/lib/table/interface';
 
-import { TData, TTableParameters, TDictionary, TObject } from 'interfaces';
+import { TData, TTableParameters, TDictionary, TObject, IPage, TColumn } from 'interfaces';
 import { updateTableColumnsWidth } from '../utils/updateTableColumnsWidth';
 import { addActionColumnInfo } from '../utils/addActionColumnInfo';
 import { getGroupColumnData } from '../utils/getGroupColumnData';
@@ -12,40 +13,48 @@ import TableFilterIcon from 'components/UI/TableFilterIcon';
 import classes from '../index.module.scss';
 
 interface IUseTableColumns {
-  columns: TData[],
+  columns: TColumn<any>[],
   dataRef: React.RefObject<HTMLDivElement>,
-  tableParameters: TTableParameters,
+  // tableParameters: TTableParameters,
   defaultSort: boolean,
-  dictionary: TDictionary,
-  invertDictionary: TObject<Record<string, string>>
+  sortConfig?: IPage['parameters'];
+  // dictionary: TDictionary,
+  // invertDictionary: TObject<Record<string, string>>
 }
 
 export const useTableColumns = ({
-  columns,
   dataRef,
-  tableParameters,
+  columns,
+  // tableParameters,
   defaultSort,
-  dictionary,
-  invertDictionary,
+  sortConfig,
+  // dictionary,
+  // invertDictionary,
 }: IUseTableColumns) => {
   const [groupField, setGroupField] = useState<string>();
 
   const getDefaultSorter = useCallback((field: string) => {
-    if (Array.isArray(tableParameters.defaultSortField)) {
-      const index = tableParameters.defaultSortField.indexOf(field);
+    // columns.find[field].isSort
+
+    if (!sortConfig) return null;
+
+    if (Array.isArray(sortConfig.defaultSortField)) {
+      const index = sortConfig.defaultSortField.indexOf(field);
 
       return index < 0
         ? null
-        : (tableParameters.defaultSortDirection as string[])[index];
+        : (sortConfig.defaultSortDirection as string[])[index];
     }
 
-    return field === tableParameters.defaultSortField
-      ? tableParameters.defaultSortDirection
+    return field === sortConfig.defaultSortField
+      ? sortConfig.defaultSortDirection
       : null;
-  }, [tableParameters]);
+  }, [sortConfig]);
 
-  let tableColumns: TData[] = columns
-    .map((column: TData, columnIndex: number) => {
+  let tableColumns = columns
+    .map((column, columnIndex) => {
+      // console.info(column);
+
       const columnId = column.dataIndex;
       const tableColumn: TData = {
         ...column,
@@ -58,14 +67,9 @@ export const useTableColumns = ({
         : 'Нажмите для группировки по полю';
 
       if (!column.isInlineEditable) {
-        tableColumn.render = (text: string, record: TData) => {
-          if (column.isTagged) {
-            const tableValue = record[columnId];
-            const originalValue = invertDictionary[columnId] && invertDictionary[columnId][tableValue]
-              ? invertDictionary[columnId][tableValue]
-              : tableValue;
-
-            return <Tag color={dictionary[columnId][originalValue]?.tag}>{text}</Tag>;
+        tableColumn.render = (text: any, record: TData) => {
+          if (column.render) {
+            return column.render(record);
           }
 
           return text;
@@ -74,7 +78,7 @@ export const useTableColumns = ({
         if (tableColumn.isGroup) {
           const handleGroup: MouseEventHandler<HTMLElement> = (event) => {
             event.stopPropagation();
-            setGroupField((prev) => columnId === prev ? undefined : columnId);
+            setGroupField((prev) => columnId === prev ? undefined : columnId as string);
           };
 
           tableColumn.title = <div className={classes['table-header-group-cell']}>
@@ -122,14 +126,14 @@ export const useTableColumns = ({
         });
       }
 
-      const sortOrder = (getDefaultSorter(column.dataIndex)) as SortOrder;
+      const sortOrder = (getDefaultSorter(column.dataIndex as string)) as SortOrder;
 
       if (sortOrder && defaultSort) tableColumn.sortOrder = sortOrder;
 
       return tableColumn;
     });
 
-  tableColumns = addActionColumnInfo(tableColumns, tableParameters.hasActionMenu);
+  // tableColumns = addActionColumnInfo(tableColumns, tableParameters.hasActionMenu);
   tableColumns = updateTableColumnsWidth(tableColumns);
 
   return tableColumns;

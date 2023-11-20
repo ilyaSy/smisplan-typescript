@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, Drawer, Tooltip, Form, Checkbox } from 'antd';
 import { OrderedListOutlined } from '@ant-design/icons';
 
-import { TData, IFormItem } from 'interfaces';
+import { TData, IFormItem, TColumn } from 'interfaces';
 
 import classes from './index.module.scss';
 
-export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = false) => {
-  const [columnsData, setColumnsData] = useState<TData[]>([]);
+export const useColumnsDrawer = (metadata: TColumn<any>[], initialVisible: boolean = false) => {
+  const [columnsData, setColumnsData] = useState<TColumn<any>[]>([]);
   const [visible, setVisible] = useState<boolean>(initialVisible);
   const [form] = Form.useForm();
 
@@ -18,7 +18,7 @@ export const useColumnsDrawer = (metadata: TData[], initialVisible: boolean = fa
   const resetColumns = useCallback(() => {
     setColumnsData(metadata);
     form.setFields(metadata.map(({ dataIndex, showInTable }) => ({
-      name: dataIndex,
+      name: dataIndex as string,
       value: showInTable,
     })));
   }, [form, metadata]);

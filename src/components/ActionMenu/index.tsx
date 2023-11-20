@@ -9,9 +9,9 @@ import { createActions } from './utils';
 import { useMetadataSelector } from 'storages/selectors';
 import { useDictionaryContext } from 'context/DictionaryContext';
 import { dataAddAction, dataDeleteAction, dataUpdateAction } from 'storages/actions/data';
-import DropdownMenu from 'components/UI/DropdownMenu';
-import ModalWithList from 'components/UI/ModalWithList';
+import { ModalWithList } from 'components/UI/ModalWithList';
 import DataEditModal from 'components/Modals/DataEditModal';
+import DropdownMenu from 'components/UI/DropdownMenu';
 import DataAddModal from 'components/Modals/DataAddModal';
 
 type TModals = 'editItem' | 'addDiscussion' | 'deleteItem';

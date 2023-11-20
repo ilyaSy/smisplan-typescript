@@ -1,0 +1,39 @@
+.table {
+  width: calc(100% - 60px);
+
+  & .hidden-pagination {
+    display: none;
+  }
+
+  & .table-header-group-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  & .table-header-group-button {
+    background-color: transparent;
+    border: 0;
+  }
+
+  & .table-title {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .table-title > div:first-child {
+    display: flex;
+  }
+}
+
+$max-count: 20;
+@mixin table-title-row-x {
+  @for $i from 1 through $max-count {
+    .table-title-row-#{$i}0 {
+      min-width: $i*10px;
+    }
+  }
+}
+
+@include table-title-row-x;

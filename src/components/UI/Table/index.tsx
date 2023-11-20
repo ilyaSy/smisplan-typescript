@@ -1,64 +1,49 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from 'react';
 import { ConfigProvider, Table } from 'antd';
 import ruRU from 'antd/lib/locale/ru_RU';
 
-import { TData, TDictionary, TTableParameters, TObject } from 'interfaces';
+import { TData, IPage, TColumn } from 'interfaces';
 import { PAGE_SIZE } from 'consts';
 import TableEditableRow from '../TableEditableRow';
 import DataTableEditableCell from '../TableEditableCell';
-import TableExpandableRow from '../TableExpandableRow';
-import { useFilterDrawer } from '../FilterPanel';
 import { useColumnsDrawer } from '../ColumnsPanel';
-import { getTableWithPseudoFields } from './utils/getTableWithPseudoFields';
+import { useFilterDrawer } from '../FilterPanel';
+import { TableExpandableRow } from '../TableExpandableRow';
 import { useTableTitle } from './hooks/useTableTitle';
 import { useTableColumns } from './hooks/useTableColumns';
-import { useTableSourceData } from './hooks/useTableSourceData';
 import { useTablePrintRef } from './hooks/useTablePrintRef';
 
 import classes from './index.module.scss';
 import './index.css';
 
 type TTableProps = {
-  data: TData[],
-  columns: TData[],
-  tableParameters: TTableParameters,
-  tablename: string,
-  dictionary: TDictionary
-  invertDictionary: TObject<Record<string, string>>
+  data: TData[];
+  columns: TColumn<any>[];
+  parameters?: IPage['parameters'];
 };
 
-const DataTable: React.FC<TTableProps> = ({
-  data,
-  columns,
-  tableParameters,
-  tablename,
-  dictionary,
-  invertDictionary,
-}) => {
+const DataTable: React.FC<TTableProps> = ({ data, columns, parameters }) => {
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(PAGE_SIZE);
-  const [defaultSort, setDefaultSort] = useState<boolean>(true);
+  const [sort, setSort] = useState<boolean>(true);
 
   const handleChangePage = useCallback((nextPage: number, size: number) => {
     setPage(nextPage);
     setPageSize(size);
   }, []);
 
-  const sourceData = useTableSourceData(data, tablename, tableParameters);
-
   const { ColumnsPanelButtons, ColumnsPanel, columnsData } = useColumnsDrawer(columns);
 
-  const { FilterPanelButtons, FilterPanel, filterData } = useFilterDrawer(columnsData, sourceData);
+  const { FilterPanelButtons, FilterPanel, filterData } = useFilterDrawer(columnsData, data);
 
   const dataRef = useTablePrintRef({ filterData, pageSize, setPageSize });
 
   const tableColumns = useTableColumns({
     dataRef,
     columns: columnsData,
-    tableParameters,
-    defaultSort,
-    dictionary,
-    invertDictionary,
+    sortConfig: parameters,
+    defaultSort: sort,
   });
 
   const TableTitle = useTableTitle({
@@ -78,8 +63,8 @@ const DataTable: React.FC<TTableProps> = ({
 
       <Table
         ref={dataRef}
-        dataSource={ getTableWithPseudoFields(filterData, tableColumns) }
-        columns={ tableColumns }
+        dataSource={filterData}
+        columns={tableColumns}
         title={TableTitle}
         tableLayout='auto'
         components={{
@@ -89,10 +74,10 @@ const DataTable: React.FC<TTableProps> = ({
           },
         }}
         rowClassName={() => 'editable-row'}
-        bordered={ false }
-        loading={ false }
+        bordered={false}
+        loading={false}
         size='large'
-        expandable={ TableExpandableRow('description') }
+        expandable={TableExpandableRow('description')}
         // expandIcon
         sticky={ true }
         pagination={{
@@ -102,8 +87,8 @@ const DataTable: React.FC<TTableProps> = ({
           total: filterData.length,
           className: classes['hidden-pagination'],
         }}
-        className={ classes.table }
-        onChange={() => setDefaultSort(false)}
+        className={classes.table}
+        onChange={() => setSort(false)}
       />
     </ConfigProvider>
   );

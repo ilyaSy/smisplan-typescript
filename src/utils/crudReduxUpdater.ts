@@ -1,8 +1,8 @@
 import { TReduxData, TData, THtmlMethod } from 'interfaces';
 
 export const crudReduxDataUpdater:
-(method: THtmlMethod, stateData: TReduxData['data'], data: TData | TData[] | null) => TReduxData['data'] =
-  (method, stateData, data) => {
+(stateData: TReduxData['data'], data: TData | TData[], method?: THtmlMethod) => TReduxData['data'] =
+  (stateData, data, method) => {
     switch (method) {
       case 'POST':
       case 'PUT':

@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Menu, Tooltip } from 'antd';
 import {
   SettingOutlined,
@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 
 import { useGetTablename } from 'hooks';
-import { useDataSelector } from 'storages/selectors';
+import { dataSelector } from 'storages/selectors';
 import { dataAddAction } from 'storages/actions/data';
 import { PrintPDF } from 'components/UI/PrintPDF';
 import DataAddModal from 'components/Modals/DataAddModal';
@@ -20,15 +20,15 @@ const Sidebar: React.FC = () => {
 
   const tablename = useGetTablename();
 
-  const { isError: isErrorData, isLoading: isLoadingData } = useDataSelector();
+  const { isError, isLoading } = useSelector(dataSelector());
 
   const handleAddData = () => setSidebarAction('addData');
 
   const handleCloseModal = () => setSidebarAction('');
 
   useEffect(() => {
-    if (!isErrorData && !isLoadingData) handleCloseModal();
-  }, [isErrorData, isLoadingData]);
+    if (!isError && !isLoading) handleCloseModal();
+  }, [isError, isLoading]);
 
   return (
     <Menu

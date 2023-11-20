@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { UserContextProvider } from './context/UserContext';
-import { StorageProvider } from './storages/storage';
-import { DictionaryContextProvider } from './context/DictionaryContext';
-import { PrintPDFContextProvider } from './context/PrintPDFContext';
+import moment from 'moment';
+import 'moment/locale/ru';
+
+import { setMockAdapter } from './utils';
+import { StorageProvider } from 'storages/storage';
+import { UserContextProvider, DictionaryContextProvider, PrintPDFContextProvider } from './context';
 import App from './App';
+
 import './index.css';
 import 'antd/dist/antd.min.css';
+
+moment.locale('ru');
+
+setMockAdapter();
 
 const basename: string = document.location.hostname === 'ilyasy.github.io'
   ? '/smisplan-typescript/'

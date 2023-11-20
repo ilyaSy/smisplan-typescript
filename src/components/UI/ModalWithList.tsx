@@ -8,7 +8,7 @@ interface IModalWithList {
   width?: number,
 }
 
-const ModalWithList = ({
+export const ModalWithList = ({
   title,
   dataSource = [],
   noDataText = 'Нет данных',
@@ -43,5 +43,3 @@ const ModalWithList = ({
   }
 
 };
-
-export default ModalWithList;

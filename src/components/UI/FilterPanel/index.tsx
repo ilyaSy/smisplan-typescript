@@ -40,7 +40,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
         let value = dictionary && dictionary[key] ? dictionary[key][values[key]].text : values[key];
 
         if (typeof data[key] === 'number') value = +value;
-        if (typeof data[key] === 'boolean') value = !!value;
+        if (typeof data[key] === 'boolean') value = Boolean(value);
         if (value) setVisibleResetButton(true);
 
         return acc

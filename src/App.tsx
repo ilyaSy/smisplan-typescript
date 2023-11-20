@@ -3,12 +3,10 @@ import Content from './components/Content';
 
 import classes from './App.module.scss';
 
-import setMockAdapter from './utils/apiMockAdapter';
-setMockAdapter();
-
 const App: React.FC = () => (
   <div className={classes.main}>
     <Header />
+
     <Content />
   </div>
 );

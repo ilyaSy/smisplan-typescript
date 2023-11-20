@@ -44,7 +44,7 @@ const replyPostWithOK = (mode) => (mockResponseConfig) => {
   return [200, { id: dataCount[mode](), ...body }];
 };
 
-export default function setMockAdapter() {
+export function setMockAdapter() {
   // get basic information
   mock.onGet(`${urlApi}/user/`).reply(200, user);
   mock.onGet(`${urlApi}/developer/`).reply(200, developers);

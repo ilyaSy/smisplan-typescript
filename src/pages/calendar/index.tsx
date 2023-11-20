@@ -2,30 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { Col, Modal, Row, Typography } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import 'moment/locale/ru';
 
 import { TData } from 'interfaces';
 import { DATE_FORMAT_DATE, DATE_FORMAT_FULLDATE, DATE_FORMAT_TIME } from 'consts';
 import { sortData } from 'utils';
-import { useGetDataMeta } from 'hooks';
+import { useGetData } from 'hooks';
 import { LoadingComponent } from 'components/UI/LoadingComponent';
-import ModalWithList from 'components/UI/ModalWithList';
+import { ModalWithList } from 'components/UI/ModalWithList';
 import { Calendar } from 'components/UI/Calendar';
 
 import classes from './index.module.scss';
-
-moment.locale('ru');
 
 interface IDataCalendar {
   mode: string,
 }
 
-const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
+const Component: React.FC<IDataCalendar> = ({ mode }) => {
   const [dates, setDates] = useState<TData[]>([]);
-  const {
-    data, isErrorData, isLoadingData,
-    isLoadingMetadata, isErrorMetadata,
-  } = useGetDataMeta(mode);
+  const { data, isError, isLoading } = useGetData(mode);
 
   useEffect(() => {
     if (data && data.length) {
@@ -101,25 +95,27 @@ const DataCalendar: React.FC<IDataCalendar> = ({ mode }) => {
   };
 
   return (
-    isLoadingData || isLoadingMetadata ? (
-      <div className={classes.center}>
-        <LoadingComponent />
-      </div>
-    ) : (
-      (isErrorData || isErrorMetadata) && !dates ? (
+    <>
+      {isLoading &&
+        <div className={classes.center}>
+          <LoadingComponent />
+        </div>
+      }
+
+      {(isError && !dates) &&
         <div className={classes.center}>
           <Typography.Title level={3}>Ошибка получения данных</Typography.Title>
         </div>
-      ) : (
-        dates &&
-          <Calendar
-            dates={dates}
-            handleEventClick={handleEventClick}
-            handleDayClick={handleDayClick}
-          />
-      )
-    )
+      }
+
+      {dates &&
+        <Calendar
+          dates={dates}
+          handleEventClick={handleEventClick}
+          handleDayClick={handleDayClick}
+        />}
+    </>
   );
 };
 
-export default DataCalendar;
+export { Component as Calendar };

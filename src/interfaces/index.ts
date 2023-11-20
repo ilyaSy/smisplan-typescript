@@ -14,7 +14,13 @@ export type { TDictionaryInfo } from './TDictionaryInfo';
 export type { TDropdownMenu } from './TDropdownMenu';
 export type { THtmlMethod } from './THtmlMethod';
 export type { TObject } from './TObject';
+export type { IPage } from './IPage';
 export type { TReduxData } from './TReduxData';
 export type { TSortDirection } from './TSortDirection';
 export type { TTableParameters } from './TTableParameters';
 export type { TUser } from './TUser';
+
+export type { ITask } from './ITask';
+export type { IDiscussion } from './IDiscussion';
+export type { IEvent } from './IEvent';
+export type { ICalendarDate } from './ICalendarDate';

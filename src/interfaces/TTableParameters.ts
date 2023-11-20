@@ -2,7 +2,7 @@ import { TSortDirection } from './TSortDirection';
 
 export type TTableParameters = {
   tableName: string,
-  mainValue: string
+  mainValue: string,
   addMenuTitle?: string,
   defaultSortField?: string | string[],
   defaultSortDirection?: TSortDirection | TSortDirection[],

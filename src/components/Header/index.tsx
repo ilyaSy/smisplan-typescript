@@ -21,13 +21,11 @@ const Header: React.FC = () => {
           mode='horizontal'
           theme='dark'
         >
-          {
-            modes.map(({ id, value }) => (
-              <Menu.Item key={id}>
-                <NavLink to={`/${id}`}>{value}</NavLink>
-              </Menu.Item>
-            ))
-          }
+          {modes.map(({ id, value }) => (
+            <Menu.Item key={id}>
+              <NavLink to={`/${id}`}>{value}</NavLink>
+            </Menu.Item>
+          ))}
         </Menu>
       </nav>
 
