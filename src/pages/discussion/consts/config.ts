@@ -7,7 +7,7 @@ export const config: IPage = {
   order: 20,
 
   parameters: {
-    defaultSortField: ['week', 'date', 'time'],
-    defaultSortDirection: ['descend', 'ascend', 'ascend'],
+    defaultSortField: ['date', 'time'],
+    defaultSortDirection: ['ascend', 'ascend'],
   },
 };

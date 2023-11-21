@@ -10,6 +10,7 @@ export const getColumns = (): TColumn<ITask>[] => [
     dataIndex: 'id',
     title: 'ID',
     showInTable: true,
+    isSortable: true,
   },
   {
     dataIndex: 'project',
@@ -19,6 +20,7 @@ export const getColumns = (): TColumn<ITask>[] => [
     // validValues: {
     //   getDataUrl: '/smisplan-typescript/cgi/project/',
     // },
+    isSortable: true,
     // isFilter: true,
     isGroup: true,
     // defaultValue: 'otdel',
@@ -64,6 +66,7 @@ export const getColumns = (): TColumn<ITask>[] => [
     // isFilter: true,
     // type: 'select',
     // defaultValue: 'simple',
+    sorter: (a, b) => TaskPriorityMap[a.priority].order - TaskPriorityMap[b.priority].order,
     render: ({ priority }: ITask) => TaskPriorityMap[priority].title,
   },
   {
@@ -73,6 +76,7 @@ export const getColumns = (): TColumn<ITask>[] => [
     // type: 'select',
     // isFilter: true,
     // defaultValue: 'new',
+    sorter: (a, b) => TaskStatusMap[a.status].order - TaskStatusMap[b.status].order,
     render: ({ status }: ITask) =>
       <Tag color={TaskStatusMap[status].color}>{TaskStatusMap[status].title}</Tag>,
   },
@@ -87,7 +91,7 @@ export const getColumns = (): TColumn<ITask>[] => [
     // isFilter: true,
     // vocabulary: 'developer',
     isGroup: true,
-    isSort: true,
+    isSortable: true,
     // addMenuIndex: true,
     render: ({ developer }: ITask) => developer ?? null, // Dictionary
   },

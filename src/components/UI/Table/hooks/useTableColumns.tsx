@@ -2,18 +2,19 @@
 import { MouseEventHandler, useCallback, useState } from 'react';
 import { Button, Tag, Tooltip } from 'antd';
 import { GroupOutlined } from '@ant-design/icons';
-import { SortOrder } from 'antd/lib/table/interface';
+import { ColumnType, SortOrder } from 'antd/lib/table/interface';
 
 import { TData, TTableParameters, TDictionary, TObject, IPage, TColumn } from 'interfaces';
 import { updateTableColumnsWidth } from '../utils/updateTableColumnsWidth';
 import { addActionColumnInfo } from '../utils/addActionColumnInfo';
 import { getGroupColumnData } from '../utils/getGroupColumnData';
+import { getSorter } from 'utils';
 import TableFilterIcon from 'components/UI/TableFilterIcon';
 
 import classes from '../index.module.scss';
 
-interface IUseTableColumns {
-  columns: TColumn<any>[],
+interface IUseTableColumns<T> {
+  columns: TColumn<T>[],
   dataRef: React.RefObject<HTMLDivElement>,
   // tableParameters: TTableParameters,
   defaultSort: boolean,
@@ -22,7 +23,7 @@ interface IUseTableColumns {
   // invertDictionary: TObject<Record<string, string>>
 }
 
-export const useTableColumns = ({
+export const useTableColumns = <T extends TData>({
   dataRef,
   columns,
   // tableParameters,
@@ -30,12 +31,10 @@ export const useTableColumns = ({
   sortConfig,
   // dictionary,
   // invertDictionary,
-}: IUseTableColumns) => {
+}: IUseTableColumns<T>) => {
   const [groupField, setGroupField] = useState<string>();
 
-  const getDefaultSorter = useCallback((field: string) => {
-    // columns.find[field].isSort
-
+  const getDefaultSorter = (field: string) => {
     if (!sortConfig) return null;
 
     if (Array.isArray(sortConfig.defaultSortField)) {
@@ -49,15 +48,14 @@ export const useTableColumns = ({
     return field === sortConfig.defaultSortField
       ? sortConfig.defaultSortDirection
       : null;
-  }, [sortConfig]);
+  };
 
   let tableColumns = columns
     .map((column, columnIndex) => {
-      // console.info(column);
-
       const columnId = column.dataIndex;
-      const tableColumn: TData = {
+      const tableColumn: ColumnType<T> = {
         ...column,
+        key: column.dataIndex,
         className: `data-table-cell-${columnIndex}`,
         filterIcon: TableFilterIcon,
       };
@@ -75,7 +73,7 @@ export const useTableColumns = ({
           return text;
         };
 
-        if (tableColumn.isGroup) {
+        if (column.isGroup) {
           const handleGroup: MouseEventHandler<HTMLElement> = (event) => {
             event.stopPropagation();
             setGroupField((prev) => columnId === prev ? undefined : columnId as string);
@@ -96,7 +94,9 @@ export const useTableColumns = ({
           if (columnId === groupField) {
             const groupColumnData = getGroupColumnData(dataRef, columnIndex);
 
-            tableColumn.onCell = (record: TData, index: number) => {
+            tableColumn.onCell = (record: TData, index?: number) => {
+              if (!index) return { rowSpan: 1 };
+
               if (index && groupColumnData[index - 1] === '' + record[columnId]) {
                 return { rowSpan: 0 };
               }
@@ -126,6 +126,10 @@ export const useTableColumns = ({
         });
       }
 
+      if (column.isSortable) {
+        tableColumn.sorter = getSorter.bind(null, column.dataIndex);
+      }
+
       const sortOrder = (getDefaultSorter(column.dataIndex as string)) as SortOrder;
 
       if (sortOrder && defaultSort) tableColumn.sortOrder = sortOrder;
@@ -134,7 +138,7 @@ export const useTableColumns = ({
     });
 
   // tableColumns = addActionColumnInfo(tableColumns, tableParameters.hasActionMenu);
-  tableColumns = updateTableColumnsWidth(tableColumns);
+  tableColumns = updateTableColumnsWidth(tableColumns as TColumn<T>[]);
 
   return tableColumns;
 };

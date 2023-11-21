@@ -3,6 +3,7 @@ import { Tag } from 'antd';
 
 import { IDiscussion, TColumn } from 'interfaces';
 import { DATE_FORMAT_PRETTY, DiscussionStatusMap, DiscussionTypeMap } from 'consts';
+import { getSorter } from 'utils';
 
 export const getColumns = (): TColumn<IDiscussion>[] => [
   {
@@ -19,12 +20,20 @@ export const getColumns = (): TColumn<IDiscussion>[] => [
     // isGroup: true,
     // addMenuIndex: '3',
     // type: 'date',
+    sorter: {
+      compare: getSorter.bind(null, 'date'),
+      multiple: 2,
+    },
     render: ({ date }: IDiscussion) => date ? moment(date).format(DATE_FORMAT_PRETTY) : null,
   },
   {
     dataIndex: 'time',
     title: 'Время',
     showInTable: true,
+    sorter: {
+      compare: getSorter.bind(null, 'time'),
+      multiple: 1,
+    },
     // isEditable: true,
     // type: 'time',
     // addMenuIndex: '4',
@@ -131,6 +140,7 @@ export const getColumns = (): TColumn<IDiscussion>[] => [
     dataIndex: 'week',
     title: 'неделя',
     showInTable: false,
+    isSortable: true,
   },
   {
     dataIndex: 'type',

@@ -1,14 +1,17 @@
+import { ColumnFilterItem, ColumnType } from 'antd/lib/table/interface';
+
 export type TColumn<T> = {
-  dataIndex: keyof T;
+  dataIndex: string;
   title: string;
   // dataIndex: number;
   isInlineEditable?: boolean;
   showInTable: boolean;
   // type: string;
-  sorter?: Function;
+  isSortable?: boolean;
+  sorter?: ColumnType<T>['sorter'];
   isGroup?: boolean;
-  isSort?: boolean;
-  filters?: Record<string, { text: string, value: string }>[];
-  onFilter?: Function;
-  render?: (value: any, record?: any) => string | JSX.Element | null;
+  // filters?: Record<string, { text: string, value: string }>[];
+  filters?: ColumnFilterItem[];
+  onFilter?: (value: any, record?: T) => boolean;
+  render?: (value: any, record?: T) => string | JSX.Element | null;
 };

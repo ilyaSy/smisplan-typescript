@@ -50,34 +50,42 @@ export const TaskStatusMap = {
   new: {
     title: 'новая',
     color: 'gold',
+    order: 1,
   },
   accepted: {
     title: 'принята',
     color: 'blue',
+    order: 2,
   },
   work: {
     title: 'в работе',
     color: 'geekblue',
+    order: 3,
   },
   done: {
     title: 'выполнена',
     color: 'green',
+    order: 4,
   },
   postponed: {
     title: 'отложена',
     color: 'magenta',
+    order: 5,
   },
 };
 
 export const TaskPriorityMap = {
   simple: {
     title: 'низкий',
+    order: 1,
   },
   medium: {
     title: 'средний',
+    order: 2,
   },
   hard: {
     title: 'высокий',
+    order: 3,
   },
 };
 

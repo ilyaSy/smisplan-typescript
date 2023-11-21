@@ -79,7 +79,7 @@ export const getColumns = (): TColumn<IEvent>[] => [
     // isFilter: true,
     // vocabulary: 'developer',
     isGroup: true,
-    isSort: true,
+    isSortable: true,
     // addMenuIndex: true,
     render: ({ developer }: IEvent) => developer ?? null, // Dictionary
   },

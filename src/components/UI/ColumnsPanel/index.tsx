@@ -6,22 +6,22 @@ import { TData, IFormItem, TColumn } from 'interfaces';
 
 import classes from './index.module.scss';
 
-export const useColumnsDrawer = (metadata: TColumn<any>[], initialVisible: boolean = false) => {
-  const [columnsData, setColumnsData] = useState<TColumn<any>[]>([]);
+export const useColumnsDrawer = <T extends TData>(columns: TColumn<T>[], initialVisible: boolean = false) => {
+  const [columnsData, setColumnsData] = useState<TColumn<T>[]>([]);
   const [visible, setVisible] = useState<boolean>(initialVisible);
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (metadata) setColumnsData(metadata);
-  }, [metadata]);
+    if (columns) setColumnsData(columns);
+  }, [columns]);
 
   const resetColumns = useCallback(() => {
-    setColumnsData(metadata);
-    form.setFields(metadata.map(({ dataIndex, showInTable }) => ({
+    setColumnsData(columns);
+    form.setFields(columns.map(({ dataIndex, showInTable }) => ({
       name: dataIndex as string,
       value: showInTable,
     })));
-  }, [form, metadata]);
+  }, [form, columns]);
 
   const handleSubmit = useCallback((values: any) => {
     setColumnsData((prev) => prev.map((columnData) => ({
@@ -32,7 +32,7 @@ export const useColumnsDrawer = (metadata: TColumn<any>[], initialVisible: boole
     setVisible(false);
   }, []);
 
-  const ColumnsPanelButtons = useMemo<JSX.Element>(() => (
+  const ColumnsPanelButtons: React.FC = useCallback(() => (
     <Tooltip
       placement='topRight'
       title='Выбрать колонки'
@@ -45,7 +45,7 @@ export const useColumnsDrawer = (metadata: TColumn<any>[], initialVisible: boole
     </Tooltip>
   ), []);
 
-  const ColumnsPanel = useMemo(() => (
+  const ColumnsPanel: React.FC = useCallback(() => (
     <Drawer
       title='Колонки'
       placement='right'

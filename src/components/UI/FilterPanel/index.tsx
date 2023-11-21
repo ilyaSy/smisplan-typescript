@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   Button,
   Drawer,
@@ -14,16 +14,16 @@ import {
 } from 'antd';
 import { FilterOutlined, FilterFilled } from '@ant-design/icons';
 
-import { TData, IFormItem } from 'interfaces';
+import { TData, IFormItem, TColumn } from 'interfaces';
 import { useDictionaryContext } from 'context';
 
 import classes from './index.module.scss';
 
-export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], initialVisible = false) => {
+export const useFilterDrawer = <T extends TData>(tableColumns: TColumn<T>[], sourceData: T[], initialVisible = false) => {
   const { dictionary } = useDictionaryContext();
 
   const [visibleResetButton, setVisibleResetButton] = useState<boolean>(false);
-  const [filterData, setFilterData] = useState<TData[]>();
+  const [filterData, setFilterData] = useState<T[]>();
   const [visible, setVisible] = useState<boolean>(initialVisible);
   const [form] = Form.useForm();
 
@@ -36,7 +36,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
   const handleSubmit = useCallback((values: any) => {
     setVisibleResetButton(false);
     setFilterData(sourceData
-      .filter((data: TData) => Object.keys(data).reduce((acc, key) => {
+      .filter((data: T) => Object.keys(data).reduce((acc, key) => {
         let value = dictionary && dictionary[key] ? dictionary[key][values[key]].text : values[key];
 
         if (typeof data[key] === 'number') value = +value;
@@ -55,7 +55,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
     setVisible(false);
   }, [dictionary, sourceData]);
 
-  const FilterPanelButtons = useMemo<JSX.Element>(() => (
+  const FilterPanelButtons: React.FC = useCallback(() => (
     <div>
       <Tooltip
         placement='topRight'
@@ -82,7 +82,7 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
     </div>
   ), [handleReset, visibleResetButton]);
 
-  const FilterPanel = useMemo(() => (
+  const FilterPanel: React.FC = useCallback(() => (
     <Drawer
       title='Фильтры'
       placement="right"
@@ -101,12 +101,12 @@ export const useFilterDrawer = (tableColumns: TData[], sourceData: TData[], init
       >
         {
           tableColumns
-            .filter((tableColumn) => tableColumn.isFilter)
-            .map((tableColumn: TData) => {
+            // .filter((tableColumn) => tableColumn.isFilter)
+            .map((tableColumn: TColumn<T>) => {
               const formItem: IFormItem = {
                 name: tableColumn.dataIndex,
                 label: tableColumn.title,
-                type: tableColumn.type,
+                type: 'string',
                 disabled: false,
               };
 

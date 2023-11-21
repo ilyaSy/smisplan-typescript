@@ -1,5 +1,6 @@
 import { Typography } from 'antd';
 
+import { ITask } from 'interfaces';
 import { config, getColumns } from './consts';
 import { useGetData } from 'hooks';
 import { LoadingComponent } from 'components/UI/LoadingComponent';
@@ -10,7 +11,7 @@ import classes from './index.module.scss';
 const { Title } = Typography;
 
 export const Task: React.FC = () => {
-  const { data: sourceData, isError, isLoading } = useGetData(config.tableName);
+  const { data: sourceData, isError, isLoading } = useGetData<ITask>(config.tableName);
 
   const columns = getColumns();
 
