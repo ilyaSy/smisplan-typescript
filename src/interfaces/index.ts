@@ -7,6 +7,8 @@ export type { TActionBody } from './TApiActionBody';
 export type { TApiReducerData } from './TApiReducer';
 export type { TButton } from './TButton';
 export type { TColumn } from './TColumn';
+export type { ICommonModalProps } from './ICommonModalProps';
+
 export type { TData } from './TData';
 export type { TDataTypes } from './TDataTypes';
 export type { TDictionary } from './TDictionary';

@@ -1,9 +1,12 @@
+/* eslint-disable arrow-body-style */
+import React from 'react';
 import moment from 'moment';
-import { Tag } from 'antd';
+import { Dropdown, Tag, Tooltip } from 'antd';
 
 import { IDiscussion, TColumn } from 'interfaces';
 import { DATE_FORMAT_PRETTY, DiscussionStatusMap, DiscussionTypeMap } from 'consts';
 import { getSorter } from 'utils';
+import DropdownMenu from 'components/UI/DropdownMenu';
 
 export const getColumns = (): TColumn<IDiscussion>[] => [
   {
@@ -180,5 +183,30 @@ export const getColumns = (): TColumn<IDiscussion>[] => [
     title: 'Видеоконференция',
     showInTable: false,
     // isEditable: true,
+  },
+  {
+    dataIndex: 'action',
+    title: '',
+    showInTable: true,
+    render: () => {
+      return (
+        <Tooltip placement='topRight' title='Меню действий'>
+          <React.StrictMode> {/* fix for warning from AntDesign in console log */}
+            <Dropdown.Button
+              overlay={<DropdownMenu menuItems={[
+                {
+                  key: 'action',
+                  title: 'action',
+                  onClick: () => console.info('action'),
+                  type: 'item',
+                },
+              ]} />}
+              // overlay={<DropdownMenu menuItems={actions} />}
+              trigger={['click']}
+            />
+          </React.StrictMode>
+        </Tooltip>
+      );
+    },
   },
 ];

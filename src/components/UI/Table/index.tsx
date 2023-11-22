@@ -74,6 +74,7 @@ const DataTable = <T extends TData>({ data, columns, parameters }: TTableProps<T
             cell: DataTableEditableCell,
           },
         }}
+        rowKey={(record) => record.id}
         rowClassName={() => 'editable-row'}
         bordered={false}
         loading={false}

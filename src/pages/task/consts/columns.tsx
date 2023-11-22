@@ -1,9 +1,12 @@
-import { upperFirst } from 'lodash';
+/* eslint-disable arrow-body-style */
+import React from 'react';
 import moment from 'moment';
-import { Tag } from 'antd';
+import { upperFirst } from 'lodash';
+import { Dropdown, Tag, Tooltip } from 'antd';
 
 import { ITask, TColumn } from 'interfaces';
 import { DATE_FORMAT_FULLDATE, TaskPriorityMap, TaskStatusMap } from 'consts';
+import DropdownMenu from 'components/UI/DropdownMenu';
 
 export const getColumns = (): TColumn<ITask>[] => [
   {
@@ -132,11 +135,29 @@ export const getColumns = (): TColumn<ITask>[] => [
     render: ({ critical }: ITask) =>
       <Tag color={critical ? 'red' : 'white'}>{upperFirst(critical ? 'да' : 'нет')}</Tag>,
   },
-  // <ActionMenu
-  //     key={`action-menu-${dataItem.id}-${index}`}
-  //     title='Меню действий'
-  //     dataItem={dataItem}
-  //     tableParameters={tableParameters}
-  //     tablename={tablename}
-  //   />
+  {
+    dataIndex: 'action',
+    title: '',
+    showInTable: true,
+    render: () => {
+      return (
+        <Tooltip placement='topRight' title='Меню действий'>
+          <React.StrictMode> {/* fix for warning from AntDesign in console log */}
+            <Dropdown.Button
+              overlay={<DropdownMenu menuItems={[
+                {
+                  key: 'action',
+                  title: 'action',
+                  onClick: () => console.info('action'),
+                  type: 'item',
+                },
+              ]} />}
+              // overlay={<DropdownMenu menuItems={actions} />}
+              trigger={['click']}
+            />
+          </React.StrictMode>
+        </Tooltip>
+      );
+    },
+  },
 ];
